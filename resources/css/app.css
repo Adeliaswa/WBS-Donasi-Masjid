@@ -1,11 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
 @import 'tailwindcss';
 
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../storage/framework/views/*.php';
-@source '../**/*.blade.php';
-@source '../**/*.js';
+/* ========================================
+   DESIGN SYSTEM
+======================================== */
 
-@theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+:root {
+    /* Neutral */
+    --color-neutral-light: #f6f6f6;
+    --color-neutral-normal: #a8a8a8;
+    --color-neutral-dark: #7e7e7e;
+    --color-neutral-darker: #3b3b3b;
+
+    /* Green */
+    --color-green-light: #f6fff6;
+    --color-green-normal: #294236;
+    --color-green-dark: #1b2b23;
+
+    /* Blue */
+    --color-blue-light: #eaf2ff;
+    --color-blue-normal: #2856a6;
+    --color-blue-dark: #142b52;
+
+    /* Utility colors */
+    --color-white: #ffffff;
+    --color-danger: #b42318;
+    --color-danger-light: #fef3f2;
+    --color-success: #166534;
+    --color-success-light: #f0fdf4;
+
+    /* Border radius */
+    --radius-card: 20px;
+    --radius-input: 10px;
+    --radius-button: 10px;
+}
+
+/* ========================================
+   GLOBAL RESET
+======================================== */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    min-height: 100%;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+
+    font-family: 'Poppins', sans-serif;
+    color: var(--color-neutral-darker);
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+button,
+input,
+textarea,
+select {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+img,
+svg {
+    max-width: 100%;
+}
+
+img {
+    height: auto;
 }
