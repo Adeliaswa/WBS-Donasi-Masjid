@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DonationController;
+use App\Http\Controllers\DonationCategoryController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -30,3 +31,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/logout', [LoginController::class, 'logout'])
         ->name('logout');
 });
+
+Route::post('/donation-categories', [DonationCategoryController::class, 'store'])
+    ->name('donation-categories.store');

@@ -1,0 +1,711 @@
+/* =========================================
+   SABILILLAH ADMIN SIDEBAR
+   Mengikuti design system proyek
+   ========================================= */
+
+:root {
+    /* Sidebar Layout */
+    --sidebar-width: 225px;
+
+    /* Sidebar Background */
+    --sidebar-bg: var(--color-white);
+    --sidebar-page-bg: var(--color-neutral-light);
+
+    /* Sidebar Primary Colors */
+    --sidebar-primary: var(--color-green-normal);
+    --sidebar-primary-dark: var(--color-green-dark);
+    --sidebar-primary-soft: var(--color-green-light);
+
+    /* Sidebar Text Colors */
+    --sidebar-text: var(--color-neutral-darker);
+    --sidebar-text-secondary: var(--color-neutral-dark);
+
+    /* Sidebar Border */
+    --sidebar-border: #edf0ed;
+
+    /* Sidebar Border Radius */
+    --sidebar-radius: var(--radius-input);
+
+    /* Sidebar Transition */
+    --sidebar-transition: 0.22s ease;
+}
+
+
+/* Font mengikuti app.css */
+
+.admin-sidebar,
+.admin-sidebar *,
+.admin-mobile-header,
+.admin-mobile-header * {
+    font-family: inherit;
+    box-sizing: border-box;
+}
+
+/* =========================================
+   SIDEBAR UTAMA
+   ========================================= */
+
+.admin-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+
+    display: flex;
+    flex-direction: column;
+
+    width: var(--sidebar-width);
+    height: 100vh;
+    height: 100dvh;
+
+    padding: 25px 15px 14px;
+
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+
+    color: var(--sidebar-text);
+    background: var(--sidebar-bg);
+
+    border-right: 1px solid var(--sidebar-border);
+
+    transition:
+        transform 0.28s ease,
+        box-shadow 0.28s ease;
+}
+
+/* =========================================
+   BRAND
+   ========================================= */
+
+.admin-sidebar__brand {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    min-height: 43px;
+    margin-bottom: 34px;
+    padding: 0 4px;
+}
+
+.admin-sidebar__brand-link {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    min-width: 0;
+
+    color: inherit;
+    text-decoration: none;
+}
+
+.admin-sidebar__logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    width: 39px;
+    height: 39px;
+
+    color: var(--color-white, #ffffff);
+    background: var(--sidebar-primary);
+
+    border-radius: 12px;
+
+    box-shadow: 0 4px 10px rgba(41, 66, 54, 0.12);
+
+    transition:
+        transform var(--sidebar-transition),
+        box-shadow var(--sidebar-transition);
+}
+
+.admin-sidebar__logo svg {
+    width: 27px;
+    height: 27px;
+}
+
+.admin-sidebar__brand-link:hover .admin-sidebar__logo {
+    transform: translateY(-2px);
+    box-shadow: 0 7px 14px rgba(41, 66, 54, 0.17);
+}
+
+.admin-sidebar__brand-info {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+
+    min-width: 0;
+}
+
+.admin-sidebar__brand-name {
+    color: var(--sidebar-primary-dark);
+
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.4px;
+}
+
+.admin-sidebar__brand-caption {
+    color: var(--sidebar-text-secondary);
+
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 1.1px;
+}
+
+/* =========================================
+   NAVIGASI
+   ========================================= */
+
+.admin-sidebar__navigation {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.admin-sidebar__section {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.admin-sidebar__section-label {
+    display: block;
+
+    padding: 0 10px;
+    margin-bottom: 2px;
+
+    color: var(--sidebar-text-secondary);
+
+    font-size: 9px;
+    font-weight: 700;
+    line-height: 1.5;
+    letter-spacing: 1.1px;
+}
+
+.admin-sidebar__link {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    width: 100%;
+    min-height: 41px;
+    padding: 0 10px;
+
+    color: var(--sidebar-text-secondary);
+    background: transparent;
+
+    border: 1px solid transparent;
+    border-radius: var(--sidebar-radius);
+
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.5;
+
+    text-align: left;
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition:
+        color var(--sidebar-transition),
+        background var(--sidebar-transition),
+        border-color var(--sidebar-transition),
+        transform var(--sidebar-transition);
+}
+
+.admin-sidebar__link:hover:not(.admin-sidebar__link--disabled) {
+    color: var(--sidebar-primary);
+    background: var(--sidebar-primary-soft);
+}
+
+.admin-sidebar__link:active:not(.admin-sidebar__link--disabled) {
+    transform: scale(0.985);
+}
+
+.admin-sidebar__link:focus-visible {
+    outline: 3px solid rgba(41, 66, 54, 0.2);
+    outline-offset: 2px;
+}
+
+.admin-sidebar__link-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    width: 19px;
+    height: 19px;
+
+    color: inherit;
+
+    transition: transform var(--sidebar-transition);
+}
+
+.admin-sidebar__link-icon svg {
+    display: block;
+
+    width: 18px;
+    height: 18px;
+}
+
+.admin-sidebar__link:hover .admin-sidebar__link-icon {
+    transform: translateY(-1px);
+}
+
+.admin-sidebar__link-text {
+    flex: 1;
+    min-width: 0;
+}
+
+/* Menu aktif */
+
+.admin-sidebar__link--active {
+    color: var(--sidebar-primary);
+
+    background: var(--sidebar-primary-soft);
+
+    border-color: #e5eee5;
+
+    font-weight: 700;
+}
+
+.admin-sidebar__link--active:hover {
+    background: var(--color-green-light, #f6fff6);
+}
+
+.admin-sidebar__link-indicator {
+    position: absolute;
+    top: 50%;
+    right: 0;
+
+    width: 3px;
+    height: 21px;
+
+    background: var(--sidebar-primary);
+
+    border-radius: 5px 0 0 5px;
+
+    transform: translateY(-50%);
+}
+
+/* Menu belum tersedia */
+
+.admin-sidebar__link--disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+.admin-sidebar__link--disabled:hover {
+    background: transparent;
+}
+
+.admin-sidebar__coming-soon {
+    padding: 3px 5px;
+
+    color: var(--sidebar-text-secondary);
+    background: var(--color-neutral-light, #f6f6f6);
+
+    border-radius: 5px;
+
+    font-size: 9px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+/* =========================================
+   PROFIL ADMIN
+   ========================================= */
+
+.admin-sidebar__bottom {
+    margin-top: auto;
+    padding-top: 22px;
+}
+
+.admin-sidebar__profile {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    padding: 10px 8px;
+
+    background: var(--color-neutral-light, #f6f6f6);
+
+    border: 1px solid var(--sidebar-border);
+    border-radius: 11px;
+
+    transition:
+        background var(--sidebar-transition),
+        border-color var(--sidebar-transition);
+}
+
+.admin-sidebar__profile:hover {
+    background: var(--sidebar-primary-soft);
+    border-color: #e5ece5;
+}
+
+.admin-sidebar__avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    width: 33px;
+    height: 33px;
+
+    color: var(--color-white, #ffffff);
+    background: var(--sidebar-primary);
+
+    border-radius: 10px;
+
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.admin-sidebar__profile-info {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+
+    flex: 1;
+    min-width: 0;
+}
+
+.admin-sidebar__profile-name {
+    overflow: hidden;
+
+    color: var(--sidebar-text);
+
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.4;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.admin-sidebar__profile-role {
+    overflow: hidden;
+
+    color: var(--sidebar-text-secondary);
+
+    font-size: 10px;
+    line-height: 1.4;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.admin-sidebar__profile-status {
+    flex-shrink: 0;
+
+    width: 6px;
+    height: 6px;
+
+    background: var(--color-success, #166534);
+
+    border: 2px solid var(--color-success-light, #f0fdf4);
+    border-radius: 50%;
+
+    box-sizing: content-box;
+}
+
+.admin-sidebar__footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+
+    margin-top: 14px;
+
+    color: var(--sidebar-text-secondary);
+
+    font-size: 9px;
+    font-weight: 500;
+}
+
+.admin-sidebar__footer-dot {
+    width: 3px;
+    height: 3px;
+
+    background: var(--color-neutral-normal, #a8a8a8);
+
+    border-radius: 50%;
+}
+
+/* =========================================
+   TOMBOL TUTUP
+   ========================================= */
+
+.admin-sidebar__close {
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    width: 32px;
+    height: 32px;
+
+    color: var(--sidebar-text-secondary);
+    background: var(--color-neutral-light, #f6f6f6);
+
+    border: 1px solid var(--sidebar-border);
+    border-radius: var(--sidebar-radius);
+
+    cursor: pointer;
+}
+
+.admin-sidebar__close svg {
+    width: 17px;
+    height: 17px;
+}
+
+/* =========================================
+   LAYOUT KONTEN UTAMA
+   ========================================= */
+
+.admin-layout {
+    width: 100%;
+    min-height: 100vh;
+    margin: 0;
+
+    background: var(--sidebar-page-bg);
+
+    overflow-x: clip;
+}
+
+.admin-main {
+    width: calc(100% - var(--sidebar-width));
+    min-width: 0;
+    min-height: 100vh;
+
+    margin-left: var(--sidebar-width);
+
+    box-sizing: border-box;
+}
+
+.admin-main .donations-page {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+
+    margin: 0;
+    padding: 30px 30px 44px;
+
+    box-sizing: border-box;
+}
+
+.admin-main .donations-page__header {
+    width: 100%;
+    min-width: 0;
+}
+
+.admin-main .donations-page__heading {
+    flex: 1;
+    min-width: 0;
+}
+
+.admin-mobile-header {
+    display: none;
+}
+
+/* =========================================
+   LAPTOP DAN LAYAR MENENGAH
+   ========================================= */
+
+@media (min-width: 769px) and (max-width: 1200px) {
+    :root {
+        --sidebar-width: 215px;
+    }
+
+    .admin-sidebar {
+        padding-right: 13px;
+        padding-left: 13px;
+    }
+
+    .admin-main .donations-page {
+        padding: 25px 22px 36px;
+    }
+}
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 768px) {
+    .admin-sidebar {
+        width: min(285px, 86vw);
+
+        padding: 23px 17px 15px;
+
+        transform: translateX(-102%);
+        visibility: hidden;
+
+        box-shadow: none;
+    }
+
+    .admin-sidebar.is-open {
+        transform: translateX(0);
+        visibility: visible;
+
+        box-shadow: 15px 0 45px rgba(19, 39, 26, 0.12);
+    }
+
+    .admin-sidebar__close {
+        display: flex;
+    }
+
+    .admin-sidebar-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 999;
+
+        display: block;
+
+        background: rgba(23, 36, 27, 0.34);
+        backdrop-filter: blur(3px);
+
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+
+        transition:
+            opacity 0.25s ease,
+            visibility 0.25s ease;
+    }
+
+    .admin-sidebar-overlay.is-visible {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+    }
+
+    .admin-main {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .admin-mobile-header {
+        position: sticky;
+        top: 0;
+        z-index: 900;
+
+        display: flex;
+        align-items: center;
+        gap: 12px;
+
+        min-height: 64px;
+        padding: 10px 17px;
+
+        background: var(--color-white, #ffffff);
+
+        border-bottom: 1px solid var(--sidebar-border);
+    }
+
+    .admin-sidebar-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        flex-shrink: 0;
+
+        width: 39px;
+        height: 39px;
+
+        color: var(--sidebar-primary);
+        background: var(--sidebar-primary-soft);
+
+        border: 1px solid var(--sidebar-border);
+        border-radius: var(--sidebar-radius);
+
+        cursor: pointer;
+
+        transition:
+            background var(--sidebar-transition),
+            transform var(--sidebar-transition);
+    }
+
+    .admin-sidebar-toggle:hover {
+        background: var(--color-green-light, #f6fff6);
+    }
+
+    .admin-sidebar-toggle:active {
+        transform: scale(0.95);
+    }
+
+    .admin-sidebar-toggle svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .admin-mobile-header__identity {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+    }
+
+    .admin-mobile-header__title {
+        color: var(--sidebar-primary-dark);
+
+        font-size: 13px;
+        font-weight: 700;
+    }
+
+    .admin-mobile-header__subtitle {
+        color: var(--sidebar-text-secondary);
+
+        font-size: 10px;
+    }
+
+    .admin-main .donations-page {
+        padding: 23px 17px 30px;
+    }
+
+    body.sidebar-open {
+        overflow: hidden;
+    }
+}
+
+/* =========================================
+   MOBILE KECIL
+   ========================================= */
+
+@media (max-width: 480px) {
+    .admin-sidebar {
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+
+    .admin-mobile-header {
+        padding-right: 13px;
+        padding-left: 13px;
+    }
+
+    .admin-main .donations-page {
+        padding: 19px 13px 26px;
+    }
+}
+
+/* =========================================
+   AKSESIBILITAS
+   ========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+    .admin-sidebar,
+    .admin-sidebar *,
+    .admin-sidebar-overlay,
+    .admin-sidebar-toggle {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+    }
+}

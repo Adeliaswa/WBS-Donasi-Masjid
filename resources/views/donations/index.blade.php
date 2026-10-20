@@ -1,156 +1,263 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Donasi - Masjid Sabilillah</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 30px;
-            background-color: #f5f7fa;
-        }
 
-        h1 {
-            color: #245c46;
-        }
+    <meta name="theme-color" content="#294236">
 
-        .button {
-            display: inline-block;
-            padding: 9px 14px;
-            background-color: #245c46;
-            color: white;
-            text-decoration: none;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
+    <title>Data Donasi | Masjid Sabilillah</title>
 
-        table {
-            width: 100%;
-            margin-top: 20px;
-            border-collapse: collapse;
-            background-color: white;
-        }
-
-        th, td {
-            padding: 12px;
-            border: 1px solid #ddd;
-            text-align: left;
-        }
-
-        th {
-            background-color: #245c46;
-            color: white;
-        }
-
-        .message {
-            margin-top: 15px;
-            padding: 12px;
-            background-color: #d4edda;
-            color: #155724;
-        }
-
-        .actions {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-        }
-
-        .delete-button {
-            background-color: #b42318;
-        }
-
-        .empty {
-            text-align: center;
-        }
-    </style>
+    @vite([
+        'resources/css/app.css',
+        'resources/css/admin-sidebar.css',
+        'resources/css/admin-donations.css'
+    ])
 </head>
-<body>
-    <h1>Data Donasi Masjid Sabilillah</h1>
 
-    <a href="{{ route('dashboard') }}">Kembali ke Dashboard</a>
-    <br><br>
+<body class="admin-layout">
 
-    <a href="{{ route('donations.create') }}" class="button">
-        + Tambah Donasi
-    </a>
+    {{-- Sidebar navigasi admin --}}
+    @include('components.admin.sidebar')
 
-    @if (session('success'))
-        <div class="message">
-            {{ session('success') }}
+    {{-- Area utama halaman --}}
+    <div class="admin-main">
+
+        {{-- Header mobile --}}
+        <div class="admin-mobile-header">
+
+            <button
+                type="button"
+                class="admin-sidebar-toggle"
+                id="openSidebar"
+                aria-label="Buka menu navigasi"
+                aria-controls="adminSidebar"
+                aria-expanded="false"
+            >
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path
+                        d="M4 6H20M4 12H20M4 18H20"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                    />
+                </svg>
+            </button>
+
+            <div class="admin-mobile-header__identity">
+                <span class="admin-mobile-header__title">
+                    Masjid Sabilillah
+                </span>
+
+                <span class="admin-mobile-header__subtitle">
+                    Panel Administrasi
+                </span>
+            </div>
+
         </div>
-    @endif
 
-    @if ($errors->any())
-        <div class="message">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
 
-    <table>
-        <thead>
-            <tr>
-                <th>No.</th>
-                <th>Tanggal</th>
-                <th>Nama Donatur</th>
-                <th>Nominal</th>
-                <th>Kanal</th>
-                <th>Metode Pembayaran</th>
-                <th>Kategori</th>
-                <th>Status</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
+        <main class="donations-page">
 
-        <tbody>
-            @forelse ($donations as $donation)
-                <tr>
-                    <td>{{ $donations->firstItem() + $loop->index }}</td>
-                    <td>{{ $donation->donation_date->format('d-m-Y') }}</td>
-                    <td>{{ $donation->display_donor_name }}</td>
-                    <td>Rp {{ number_format((float) $donation->amount, 0, ',', '.') }}</td>
-                    <td>{{ $donation->channel }}</td>
-                    <td>{{ $donation->payment_method }}</td>
-                    <td>{{ $donation->category }}</td>
-                    <td>{{ $donation->verification_status }}</td>
-                    <td>
-                        <div class="actions">
-                            <a href="{{ route('donations.edit', $donation) }}">
-                                Ubah
-                            </a>
+            {{-- Header halaman --}}
+            <header class="donations-page__header">
 
-                            <form
-                                action="{{ route('donations.destroy', $donation) }}"
-                                method="POST"
-                                onsubmit="return confirm('Yakin ingin menghapus data donasi ini?')"
-                            >
-                                @csrf
-                                @method('DELETE')
+                <div class="donations-page__heading">
 
-                                <button type="submit" class="button delete-button">
-                                    Hapus
-                                </button>
-                            </form>
-                        </div>
-                    </td>
-                </tr>
-            @empty
-                <tr>
-                    <td colspan="9" class="empty">
-                        Belum ada data donasi.
-                    </td>
-                </tr>
-            @endforelse
-        </tbody>
-    </table>
+                    <div class="donations-page__identity">
 
-    <div>
-        {{ $donations->links() }}
+                        <span class="donations-page__eyebrow">
+                            MASJID SABILILLAH
+                        </span>
+
+                        <h1 class="donations-page__title">
+                            Data Donasi
+                        </h1>
+
+                        <p class="donations-page__description">
+                            Kelola dan pantau pencatatan donasi masjid
+                            dengan tertib, amanah, dan transparan.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <a
+                    href="{{ route('donations.create') }}"
+                    class="donations-button donations-button--primary"
+                >
+                    <span aria-hidden="true">+</span>
+                    Tambah Donasi
+                </a>
+
+            </header>
+
+
+            {{-- Notifikasi berhasil --}}
+            @if (session('success'))
+
+                <div
+                    class="donations-alert donations-alert--success"
+                    role="status"
+                >
+                    {{ session('success') }}
+                </div>
+
+            @endif
+
+
+            {{-- Notifikasi kesalahan --}}
+            @if ($errors->any())
+
+                <div
+                    class="donations-alert donations-alert--error"
+                    role="alert"
+                >
+
+                    <strong>
+                        Data belum dapat diproses.
+                    </strong>
+
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+
+                </div>
+
+            @endif
+
+
+            {{-- Ringkasan donasi --}}
+            @include('components.admin.donations.summary-cards')
+
+
+            {{-- Pencarian dan filter --}}
+            @include('components.admin.donations.filters')
+
+
+            {{-- Daftar donasi --}}
+            <section class="donations-section">
+
+                <div class="donations-section__header">
+
+                    <div>
+
+                        <h2 class="donations-section__title">
+                            Daftar Donasi
+                        </h2>
+
+                        <p class="donations-section__description">
+                            Pantau pencatatan dan status verifikasi donasi
+                            yang tersimpan dalam sistem.
+                        </p>
+
+                    </div>
+
+                    <span class="donations-section__count">
+                        {{ $donations->total() }} data
+                    </span>
+
+                </div>
+
+
+                {{-- Tabel donasi --}}
+                @include('components.admin.donations.table')
+
+
+                {{-- Navigasi halaman --}}
+                @include('components.admin.donations.pagination')
+
+            </section>
+
+        </main>
+
     </div>
+
+
+    {{-- Modal konfirmasi penghapusan --}}
+    <div
+        class="donations-modal"
+        id="deleteDonationModal"
+        aria-hidden="true"
+    >
+
+        <div
+            class="donations-modal__backdrop"
+            data-close-modal
+        ></div>
+
+        <div
+            class="donations-modal__dialog"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="deleteDonationTitle"
+        >
+
+            <div
+                class="donations-modal__icon"
+                aria-hidden="true"
+            >
+                !
+            </div>
+
+            <h2
+                class="donations-modal__title"
+                id="deleteDonationTitle"
+            >
+                Hapus Data Donasi?
+            </h2>
+
+            <p class="donations-modal__description">
+                Apakah kamu yakin ingin menghapus data donasi atas nama
+                <strong id="deleteDonationName">ini</strong>?
+                Periksa kembali sebelum melanjutkan.
+            </p>
+
+            <div class="donations-modal__actions">
+
+                <button
+                    type="button"
+                    class="donations-button donations-button--secondary"
+                    data-close-modal
+                >
+                    Batal
+                </button>
+
+                <form
+                    id="deleteDonationForm"
+                    method="POST"
+                    action=""
+                >
+
+                    @csrf
+                    @method('DELETE')
+
+                    <button
+                        type="submit"
+                        class="donations-button donations-button--danger"
+                    >
+                        Ya, Hapus
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    {{-- Interaksi sidebar dan halaman donasi --}}
+    @vite([
+        'resources/js/admin-sidebar.js',
+        'resources/js/admin-donations.js'
+    ])
+
 </body>
+
 </html>
