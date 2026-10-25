@@ -26,7 +26,7 @@
         </div>
 
         <p class="donations-summary__value">
-            {{ $donations->total() }}
+            {{ $totalDonasi }}
         </p>
 
         <p class="donations-summary__description">
@@ -58,7 +58,7 @@
         </div>
 
         <p class="donations-summary__value">
-            —
+            {{ $totalMenunggu }}
         </p>
 
         <p class="donations-summary__description">
@@ -90,7 +90,7 @@
         </div>
 
         <p class="donations-summary__value">
-            —
+            {{ $totalTerverifikasi }}
         </p>
 
         <p class="donations-summary__description">
@@ -123,7 +123,7 @@
         </div>
 
         <p class="donations-summary__value">
-            —
+            {{ $totalDitolak }}
         </p>
 
         <p class="donations-summary__description">

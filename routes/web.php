@@ -26,11 +26,12 @@ Route::middleware('auth')->group(function () {
     })->name('dashboard');
 
     // CRUD Donasi
-    Route::resource('donations', DonationController::class);
+    Route::resource('donations', DonationController::class)
+    ->whereNumber('donation');
+
+    Route::post('/donation-categories', [DonationCategoryController::class, 'store'])
+    ->name('donation-categories.store');
 
     Route::post('/logout', [LoginController::class, 'logout'])
         ->name('logout');
 });
-
-Route::post('/donation-categories', [DonationCategoryController::class, 'store'])
-    ->name('donation-categories.store');

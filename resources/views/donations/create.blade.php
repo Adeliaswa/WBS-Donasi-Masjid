@@ -400,9 +400,6 @@
                                 @enderror
                             </div>
 
-
-
-
                             {{-- Nominal donasi --}}
                             <div class="donation-field">
                                 <label for="amount">
@@ -410,27 +407,28 @@
                                     <span class="donation-field__required">*</span>
                                 </label>
 
-
-
-
                                 <div class="donation-field__control donation-field__control--amount">
                                     <span class="donation-field__prefix">Rp</span>
-
-
-
 
                                     <input
                                         type="number"
                                         id="amount"
                                         name="amount"
                                         value="{{ old('amount') }}"
-                                        placeholder="Contoh: 100000"
-                                        min="1"
+                                        placeholder="Minimal Rp1.000"
+                                        min="1000"
                                         step="1"
                                         inputmode="numeric"
+                                        oninvalid="this.setCustomValidity('Nominal donasi minimal Rp1.000.')"
+                                        oninput="this.setCustomValidity('')"
                                         required
                                     >
                                 </div>
+
+                                @error('amount')
+                                    <small class="donation-field__error">{{ $message }}</small>
+                                @enderror
+                            </div>
 
 
 

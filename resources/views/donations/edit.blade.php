@@ -358,16 +358,19 @@
                                 </span>
 
                                 <input
-                                    type="number"
-                                    id="amount"
-                                    name="amount"
-                                    value="{{ old('amount', $donation->amount) }}"
-                                    placeholder="Contoh: 100000"
-                                    min="1"
-                                    step="1"
-                                    inputmode="numeric"
-                                    required
-                                >
+                                type="number"
+                                id="amount"
+                                name="amount"
+                                value="{{ old('amount', (int) $donation->amount) }}"
+                                placeholder="Minimal Rp1.000"
+                                min="1000"
+                                step="1"
+                                inputmode="numeric"
+                                required
+                            >
+                            @error('amount')
+                                <small class="donation-field__error">{{ $message }}</small>
+                            @enderror
                             </div>
 
                             <small class="donation-field__help">

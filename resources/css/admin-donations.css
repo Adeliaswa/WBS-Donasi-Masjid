@@ -1560,6 +1560,14 @@
     overflow-wrap: break-word;
 }
 
+/* Nomor urut */
+.donations-table th:first-child,
+.donations-table td:first-child {
+    width: 65px;
+    min-width: 65px;
+    white-space: nowrap;
+}
+
 /* Header tabel */
 .donations-table th {
     white-space: nowrap;

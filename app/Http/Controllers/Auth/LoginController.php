@@ -55,7 +55,7 @@ class LoginController extends Controller
         // Membuat token CSRF baru
         $request->session()->regenerateToken();
 
-        return redirect('/')
+        return redirect('/login')
             ->with('success', 'Kamu berhasil logout.');
     }
 }

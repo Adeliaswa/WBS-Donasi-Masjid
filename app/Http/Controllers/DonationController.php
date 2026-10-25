@@ -39,6 +39,24 @@ class DonationController extends Controller
             );
         }
 
+        //Hitung seluruh donasi berdasarkan status verifikasi.
+        $totalDonasi = Donation::count();
+
+        $totalMenunggu = Donation::where(
+            'verification_status',
+            'pending'
+        )->count();
+
+        $totalTerverifikasi = Donation::where(
+            'verification_status',
+            'verified'
+        )->count();
+
+        $totalDitolak = Donation::where(
+            'verification_status',
+            'rejected'
+        )->count();
+
         // Urutkan dan tampilkan 10 data per halaman.
         $donations = $query
             ->latest('donation_date')
@@ -52,7 +70,11 @@ class DonationController extends Controller
 
         return view('donations.index', compact(
             'donations',
-            'categories'
+            'categories',
+            'totalDonasi',
+            'totalMenunggu',
+            'totalTerverifikasi',
+            'totalDitolak'
         ));
     }
 
@@ -86,9 +108,11 @@ class DonationController extends Controller
             ],
 
             'amount' => [
+                'bail',
                 'required',
-                'numeric',
-                'gt:0',
+                'regex:/^[0-9]+$/',
+                'integer',
+                'min:1000',
             ],
 
             'channel' => [
@@ -132,7 +156,12 @@ class DonationController extends Controller
                 'string',
                 'max:255',
             ],
-        ]);
+            ], [
+                'amount.required' => 'Nominal donasi wajib diisi.',
+                'amount.regex' => 'Nominal donasi harus berupa angka bulat tanpa tanda titik atau koma.',
+                'amount.integer' => 'Nominal donasi harus berupa bilangan bulat.',
+                'amount.min' => 'Nominal donasi minimal Rp1.000.',
+            ]);
 
         // Status default jika tidak dikirim dari form.
         $validated['verification_status'] =
@@ -232,9 +261,11 @@ class DonationController extends Controller
             ],
 
             'amount' => [
+                'bail',
                 'required',
-                'numeric',
-                'gt:0',
+                'regex:/^[0-9]+$/',
+                'integer',
+                'min:1000',
             ],
 
             'channel' => [
@@ -270,7 +301,12 @@ class DonationController extends Controller
                 'string',
                 'max:255',
             ],
-        ]);
+            ], [
+                'amount.required' => 'Nominal donasi wajib diisi.',
+                'amount.regex' => 'Nominal donasi harus berupa angka bulat tanpa tanda titik atau koma.',
+                'amount.integer' => 'Nominal donasi harus berupa bilangan bulat.',
+                'amount.min' => 'Nominal donasi minimal Rp1.000.',
+            ]);
 
         // Nama donatur boleh dikosongkan.
         if (
