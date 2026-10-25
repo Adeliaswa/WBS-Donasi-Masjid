@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DonationController;
 use App\Http\Controllers\DonationCategoryController;
+use App\Http\Controllers\BeneficiaryController;
+use App\Http\Controllers\BeneficiaryCategoryController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -31,6 +33,26 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/donation-categories', [DonationCategoryController::class, 'store'])
     ->name('donation-categories.store');
+
+    // CRUD Penerima Manfaat
+    Route::resource('beneficiaries', BeneficiaryController::class)
+        ->whereNumber('beneficiary');
+    
+    
+    // Pengelolaan Kategori Penerima Manfaat
+    Route::resource(
+        'beneficiary-categories',
+        BeneficiaryCategoryController::class
+    )->parameters([
+        'beneficiary-categories' => 'beneficiaryCategory',
+    ])->whereNumber('beneficiaryCategory');
+
+    Route::patch(
+        '/beneficiary-categories/{beneficiaryCategory}/toggle-status',
+        [BeneficiaryCategoryController::class, 'toggleStatus']
+    )
+        ->whereNumber('beneficiaryCategory')
+        ->name('beneficiary-categories.toggle-status');
 
     Route::post('/logout', [LoginController::class, 'logout'])
         ->name('logout');

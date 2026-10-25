@@ -18,7 +18,7 @@
 
         .menu {
             display: inline-block;
-            margin-top: 15px;
+            margin: 15px 10px 0 0;
             padding: 15px 20px;
             background-color: #245c46;
             color: white;
@@ -46,6 +46,14 @@
 
     <a href="{{ route('donations.index') }}" class="menu">
         Data Donasi
+    </a>
+
+    <a href="{{ route('beneficiaries.index') }}" class="menu">
+        Data Penerima Manfaat
+    </a>
+
+    <a href="{{ route('beneficiary-categories.index') }}" class="menu">
+        Kategori Penerima
     </a>
 
     <div class="logout">
