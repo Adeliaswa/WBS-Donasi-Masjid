@@ -6,6 +6,7 @@ use App\Http\Controllers\DonationController;
 use App\Http\Controllers\DonationCategoryController;
 use App\Http\Controllers\BeneficiaryController;
 use App\Http\Controllers\BeneficiaryCategoryController;
+use App\Http\Controllers\DistributionController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -38,7 +39,15 @@ Route::middleware('auth')->group(function () {
     Route::resource('beneficiaries', BeneficiaryController::class)
         ->whereNumber('beneficiary');
     
-    
+    // CRUD Penyaluran Bantuan
+    Route::post(
+        '/distributions/check-duplicates',
+        [DistributionController::class, 'checkDuplicates']
+    )->name('distributions.check-duplicates');
+
+    Route::resource('distributions', DistributionController::class)
+        ->whereNumber('distribution');
+
     // Pengelolaan Kategori Penerima Manfaat
     Route::resource(
         'beneficiary-categories',

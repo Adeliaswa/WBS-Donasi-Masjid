@@ -137,8 +137,10 @@
             {{-- Data Donasi --}}
             <a
                 href="{{ route('donations.index') }}"
-                class="admin-sidebar__link admin-sidebar__link--active"
-                aria-current="page"
+                class="admin-sidebar__link {{ request()->routeIs('donations.*') ? 'admin-sidebar__link--active' : '' }}"
+                @if (request()->routeIs('donations.*'))
+                    aria-current="page"
+                @endif
                 data-menu-name="data donasi"
             >
                 <span class="admin-sidebar__link-icon" aria-hidden="true">
@@ -164,6 +166,92 @@
                 </span>
 
                 <span class="admin-sidebar__link-indicator"></span>
+            </a>
+
+            {{-- Data Penerima Manfaat --}}
+            <a
+                href="{{ route('beneficiaries.index') }}"
+                class="admin-sidebar__link {{ request()->routeIs('beneficiaries.*') ? 'admin-sidebar__link--active' : '' }}"
+                @if (request()->routeIs('beneficiaries.*'))
+                    aria-current="page"
+                @endif
+                data-menu-name="data penerima manfaat"
+            >
+                <span class="admin-sidebar__link-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none">
+                        <circle cx="9" cy="8" r="3" stroke="currentColor" stroke-width="1.8"/>
+                        <path d="M3.5 19V17.5C3.5 14.739 5.739 12.5 8.5 12.5H9.5C12.261 12.5 14.5 14.739 14.5 17.5V19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                        <path d="M16 5.5C18.071 5.5 19.5 6.929 19.5 9S18.071 12.5 16 12.5M17 14.5C19.209 14.5 21 16.291 21 18.5V19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                    </svg>
+                </span>
+
+                <span class="admin-sidebar__link-text">
+                    Data Penerima Manfaat
+                </span>
+
+                @if (request()->routeIs('beneficiaries.*'))
+                    <span class="admin-sidebar__link-indicator"></span>
+                @endif
+            </a>
+            
+            {{-- Kategori Penerima Manfaat --}}
+            <a
+                href="{{ route('beneficiary-categories.index') }}"
+                class="admin-sidebar__link {{ request()->routeIs('beneficiary-categories.*') ? 'admin-sidebar__link--active' : '' }}"
+                @if (request()->routeIs('beneficiary-categories.*'))
+                    aria-current="page"
+                @endif
+                data-menu-name="kategori penerima manfaat"
+            >
+                <span class="admin-sidebar__link-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none">
+                        <rect x="4" y="4" width="16" height="16" rx="2" stroke="currentColor" stroke-width="1.8"/>
+                        <path d="M8 9H16M8 12.5H16M8 16H13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                    </svg>
+                </span>
+
+                <span class="admin-sidebar__link-text">
+                    Kategori Penerima Manfaat
+                </span>
+
+                @if (request()->routeIs('beneficiary-categories.*'))
+                    <span class="admin-sidebar__link-indicator"></span>
+                @endif
+            </a>
+
+            {{-- Data Penyaluran --}}
+            <a
+                href="{{ route('distributions.index') }}"
+                class="admin-sidebar__link {{ request()->routeIs('distributions.*') ? 'admin-sidebar__link--active' : '' }}"
+                @if (request()->routeIs('distributions.*'))
+                    aria-current="page"
+                @endif
+                data-menu-name="data penyaluran"
+            >
+                <span class="admin-sidebar__link-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none">
+                        <path
+                            d="M4 5H20V19H4Z"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linejoin="round"
+                        />
+                        <path
+                            d="M8 9H16M8 13H16M8 17H13"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                        />
+                    </svg>
+                </span>
+
+                <span class="admin-sidebar__link-text">
+                    Data Penyaluran
+                </span>
+
+                @if (request()->routeIs('distributions.*'))
+                    <span class="admin-sidebar__link-indicator"></span>
+                @endif
             </a>
 
         </div>

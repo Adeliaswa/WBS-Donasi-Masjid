@@ -56,6 +56,13 @@
         Kategori Penerima
     </a>
 
+    <a href="{{ route('distributions.index') }}"
+    style="display: inline-block; background-color: #245d49; color: white;
+            padding: 18px 25px; margin-right: 14px; border-radius: 6px;
+            text-decoration: none; font-size: 20px;">
+        Data Penyaluran
+    </a>
+
     <div class="logout">
         <form action="{{ route('logout') }}" method="POST">
             @csrf
