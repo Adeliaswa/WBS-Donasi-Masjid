@@ -18,11 +18,14 @@
 
 <body class="admin-layout">
 
+    {{-- Sidebar navigasi admin --}}
     @include('components.admin.sidebar')
 
     <div class="admin-main">
 
+        {{-- Header mobile --}}
         <div class="admin-mobile-header">
+
             <button
                 type="button"
                 class="admin-sidebar-toggle"
@@ -45,17 +48,22 @@
                 <span class="admin-mobile-header__title">
                     Masjid Sabilillah
                 </span>
+
                 <span class="admin-mobile-header__subtitle">
                     Panel Administrasi
                 </span>
             </div>
+
         </div>
 
-        <main class="donations-page">
+        <main class="donations-page donation-detail-page">
 
+            {{-- Header halaman --}}
             <header class="donations-page__header">
+
                 <div class="donations-page__heading">
                     <div class="donations-page__identity">
+
                         <span class="donations-page__eyebrow">
                             MASJID SABILILLAH
                         </span>
@@ -65,104 +73,203 @@
                         </h1>
 
                         <p class="donations-page__description">
-                            Informasi lengkap pencatatan donasi masjid.
+                            Informasi lengkap pencatatan donasi masjid
+                            yang tersimpan dalam sistem.
                         </p>
+
                     </div>
                 </div>
 
-                <a
-                    href="{{ route('donations.index') }}"
-                    class="donations-button donations-button--secondary"
-                >
-                    Kembali
-                </a>
-            </header>
+                <div class="donation-detail-page__actions">
 
-            <section class="donations-section">
-                <div class="donations-section__header">
-                    <div>
-                        <h2 class="donations-section__title">
-                            Informasi Donasi
-                        </h2>
-                        <p class="donations-section__description">
-                            Rincian data donasi yang tersimpan dalam sistem.
-                        </p>
-                    </div>
-                </div>
+                    <a
+                        href="{{ route('donations.index') }}"
+                        class="donations-button donations-button--secondary"
+                    >
+                        Kembali
+                    </a>
 
-                <div class="donations-table-wrapper">
-                    <table class="donations-table">
-                        <tbody>
-                            <tr>
-                                <th scope="row">Nama Donatur</th>
-                                <td>{{ $donation->display_donor_name }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Tanggal Donasi</th>
-                                <td>{{ $donation->donation_date->format('d-m-Y') }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Nominal Donasi</th>
-                                <td>Rp {{ number_format((float) $donation->amount, 0, ',', '.') }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Kanal</th>
-                                <td>{{ $donation->channel }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Metode Pembayaran</th>
-                                <td>{{ $donation->payment_method }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Kategori</th>
-                                <td>{{ $donation->category }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Status Verifikasi</th>
-                                <td>
-                                    @switch(strtolower($donation->verification_status))
-                                        @case('pending')
-                                            Menunggu Verifikasi
-                                            @break
-                                        @case('verified')
-                                            Terverifikasi
-                                            @break
-                                        @case('rejected')
-                                            Ditolak
-                                            @break
-                                        @default
-                                            {{ $donation->verification_status }}
-                                    @endswitch
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Catatan</th>
-                                <td>{{ $donation->notes ?: '-' }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Bukti Donasi</th>
-                                <td>{{ $donation->proof_path ?: '-' }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div style="padding: 20px 24px;">
                     <a
                         href="{{ route('donations.edit', $donation) }}"
                         class="donations-button donations-button--primary"
                     >
                         Ubah Donasi
                     </a>
+
                 </div>
+
+            </header>
+
+            {{-- Notifikasi berhasil --}}
+            @if (session('success'))
+                <div
+                    class="donations-alert donations-alert--success"
+                    role="status"
+                >
+                    {{ session('success') }}
+                </div>
+            @endif
+
+            {{-- Status donasi --}}
+            @php
+                $status = strtolower(
+                    (string) $donation->verification_status
+                );
+
+                $statusClass = match ($status) {
+                    'pending' => 'pending',
+                    'verified' => 'verified',
+                    'rejected' => 'rejected',
+                    default => 'unknown',
+                };
+
+                $statusLabel = match ($status) {
+                    'pending' => 'Menunggu Verifikasi',
+                    'verified' => 'Terverifikasi',
+                    'rejected' => 'Ditolak',
+                    default => ucfirst(
+                        (string) $donation->verification_status
+                    ),
+                };
+            @endphp
+
+            {{-- Kartu detail donasi --}}
+            <section
+                class="donation-detail-card"
+                aria-labelledby="donationDetailTitle"
+            >
+
+                <div class="donation-detail-card__header">
+
+                    <div>
+                        <h2
+                            class="donations-section__title"
+                            id="donationDetailTitle"
+                        >
+                            Informasi Donasi
+                        </h2>
+
+                        <p class="donations-section__description">
+                            Rincian donasi untuk membantu proses
+                            pencatatan dan verifikasi.
+                        </p>
+                    </div>
+
+                    <span class="donation-detail-card__label">
+                        Detail transaksi
+                    </span>
+
+                </div>
+
+                <div class="donation-detail-card__body">
+
+                    {{-- Ringkasan nominal dan status --}}
+                    <div class="donation-detail-summary">
+
+                        <div class="donation-detail-summary__amount">
+                            <span class="donation-detail-summary__label">
+                                Nominal Donasi
+                            </span>
+
+                            <strong>
+                                Rp {{ number_format(
+                                    (float) $donation->amount,
+                                    0,
+                                    ',',
+                                    '.'
+                                ) }}
+                            </strong>
+                        </div>
+
+                        <div class="donation-detail-summary__status">
+                            <span class="donation-detail-summary__label">
+                                Status Verifikasi
+                            </span>
+
+                            <span
+                                class="donations-status donations-status--{{ $statusClass }}"
+                            >
+                                {{ $statusLabel }}
+                            </span>
+                        </div>
+
+                    </div>
+
+                    {{-- Rincian informasi donasi --}}
+                    <dl class="donation-detail-grid">
+
+                        <div class="donation-detail-item">
+                            <dt>Nama Donatur</dt>
+                            <dd>
+                                {{ $donation->display_donor_name }}
+                            </dd>
+                        </div>
+
+                        <div class="donation-detail-item">
+                            <dt>Tanggal Donasi</dt>
+                            <dd>
+                                {{ $donation->donation_date?->format('d-m-Y') ?? '-' }}
+                            </dd>
+                        </div>
+
+                        <div class="donation-detail-item">
+                            <dt>Kanal Donasi</dt>
+                            <dd>
+                                {{ $donation->channel ?: '-' }}
+                            </dd>
+                        </div>
+
+                        <div class="donation-detail-item">
+                            <dt>Metode Pembayaran</dt>
+                            <dd>
+                                {{ $donation->payment_method ?: '-' }}
+                            </dd>
+                        </div>
+
+                        <div class="donation-detail-item">
+                            <dt>Kategori Donasi</dt>
+                            <dd>
+                                {{ $donation->category ?: '-' }}
+                            </dd>
+                        </div>
+
+                        <div class="donation-detail-item donation-detail-item--full">
+                            <dt>Catatan</dt>
+                            <dd class="donation-detail-item__notes">
+                                {{ $donation->notes ?: '-' }}
+                            </dd>
+                        </div>
+
+                    </dl>
+
+                </div>
+
+                {{-- Footer kartu --}}
+                <div class="donation-detail-card__footer">
+
+                    <p>
+                        Pastikan informasi donasi sesuai dengan
+                        catatan penerimaan yang tersimpan.
+                    </p>
+
+                    <a
+                        href="{{ route('donations.edit', $donation) }}"
+                        class="donations-button donations-button--primary"
+                    >
+                        Ubah Data Donasi
+                    </a>
+
+                </div>
+
             </section>
 
         </main>
+
     </div>
 
+    {{-- JavaScript navigasi sidebar --}}
     @vite([
-        'resources/js/admin-sidebar.js',
-        'resources/js/admin-donations.js'
+        'resources/js/admin-sidebar.js'
     ])
 
 </body>

@@ -168,56 +168,88 @@
                 <span class="admin-sidebar__link-indicator"></span>
             </a>
 
-            {{-- Data Penerima Manfaat --}}
-            <a
-                href="{{ route('beneficiaries.index') }}"
-                class="admin-sidebar__link {{ request()->routeIs('beneficiaries.*') ? 'admin-sidebar__link--active' : '' }}"
-                @if (request()->routeIs('beneficiaries.*'))
-                    aria-current="page"
-                @endif
-                data-menu-name="data penerima manfaat"
-            >
-                <span class="admin-sidebar__link-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none">
-                        <circle cx="9" cy="8" r="3" stroke="currentColor" stroke-width="1.8"/>
-                        <path d="M3.5 19V17.5C3.5 14.739 5.739 12.5 8.5 12.5H9.5C12.261 12.5 14.5 14.739 14.5 17.5V19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-                        <path d="M16 5.5C18.071 5.5 19.5 6.929 19.5 9S18.071 12.5 16 12.5M17 14.5C19.209 14.5 21 16.291 21 18.5V19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-                    </svg>
-                </span>
-
-                <span class="admin-sidebar__link-text">
-                    Data Penerima Manfaat
-                </span>
-
-                @if (request()->routeIs('beneficiaries.*'))
-                    <span class="admin-sidebar__link-indicator"></span>
-                @endif
-            </a>
             
-            {{-- Kategori Penerima Manfaat --}}
-            <a
-                href="{{ route('beneficiary-categories.index') }}"
-                class="admin-sidebar__link {{ request()->routeIs('beneficiary-categories.*') ? 'admin-sidebar__link--active' : '' }}"
-                @if (request()->routeIs('beneficiary-categories.*'))
-                    aria-current="page"
-                @endif
-                data-menu-name="kategori penerima manfaat"
+                            
+            {{-- Data Penerima Manfaat --}}
+            <details
+                class="admin-sidebar__menu-group"
+                {{ request()->routeIs('beneficiaries.*', 'beneficiary-categories.*') ? 'open' : '' }}
             >
-                <span class="admin-sidebar__link-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none">
-                        <rect x="4" y="4" width="16" height="16" rx="2" stroke="currentColor" stroke-width="1.8"/>
-                        <path d="M8 9H16M8 12.5H16M8 16H13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-                    </svg>
-                </span>
+                <summary
+                    class="admin-sidebar__link admin-sidebar__link--group {{ request()->routeIs('beneficiaries.*', 'beneficiary-categories.*') ? 'admin-sidebar__link--active' : '' }}"
+                    data-menu-name="data penerima manfaat"
+                >
+                    <span class="admin-sidebar__link-icon" aria-hidden="true">
+                        {{-- Ikon pengguna sederhana --}}
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <circle
+                                cx="9"
+                                cy="8"
+                                r="3"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                            />
+                            <path
+                                d="M3.5 19v-1.5a5.5 5.5 0 0 1 11 0V19"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                                stroke-linecap="round"
+                            />
+                            <path
+                                d="M16 5.5a3 3 0 0 1 0 5.8M17 14a5 5 0 0 1 3.5 4.8V19"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                                stroke-linecap="round"
+                            />
+                        </svg>
+                    </span>
 
-                <span class="admin-sidebar__link-text">
-                    Kategori Penerima Manfaat
-                </span>
+                    <span class="admin-sidebar__link-text">
+                        Data Penerima Manfaat
+                    </span>
 
-                @if (request()->routeIs('beneficiary-categories.*'))
-                    <span class="admin-sidebar__link-indicator"></span>
-                @endif
-            </a>
+                    <span class="admin-sidebar__menu-chevron" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path
+                                d="m7 10 5 5 5-5"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            />
+                        </svg>
+                    </span>
+
+                    @if (request()->routeIs('beneficiaries.*', 'beneficiary-categories.*'))
+                        <span class="admin-sidebar__link-indicator"></span>
+                    @endif
+                </summary>
+
+                <div class="admin-sidebar__submenu">
+
+                    <a
+                        href="{{ route('beneficiaries.index') }}"
+                        class="admin-sidebar__submenu-link {{ request()->routeIs('beneficiaries.*') ? 'is-active' : '' }}"
+                        @if (request()->routeIs('beneficiaries.*'))
+                            aria-current="page"
+                        @endif
+                    >
+                        Daftar Penerima
+                    </a>
+
+                    <a
+                        href="{{ route('beneficiary-categories.index') }}"
+                        class="admin-sidebar__submenu-link {{ request()->routeIs('beneficiary-categories.*') ? 'is-active' : '' }}"
+                        @if (request()->routeIs('beneficiary-categories.*'))
+                            aria-current="page"
+                        @endif
+                    >
+                        Kategori Penerima
+                    </a>
+
+                </div>
+            </details>
+
 
             {{-- Data Penyaluran --}}
             <a

@@ -13,11 +13,25 @@ export default defineConfig({
                 // CSS halaman login
                 'resources/css/auth.css',
 
+                // CSS sidebar admin
+                'resources/css/admin-sidebar.css',
+
                 // CSS halaman donasi
                 'resources/css/admin-donations.css',
 
                 // CSS halaman tambah donasi
                 'resources/css/admin-donation-form.css',
+
+                // CSS halaman penerima manfaat
+                'resources/css/beneficiaries.css',
+
+                // CSS halaman menampilkan penerima manfaat
+                'resources/css/admin-beneficiaries-show.css',
+
+                'resources/css/beneficiary-categories.css',
+
+                'resources/css/beneficiary-category-form.css',
+
 
                 // JavaScript utama
                 'resources/js/app.js',
@@ -25,11 +39,23 @@ export default defineConfig({
                 // JavaScript halaman login
                 'resources/js/auth.js',
 
+                // JavaScript sidebar admin
+                'resources/js/admin-sidebar.js',
+
                 // JavaScript halaman donasi
                 'resources/js/admin-donations.js',
+
+                'resources/js/admin-beneficiaries-show.js',
+
+                'resources/js/admin-beneficiaries-form.js',
+
+                'resources/js/beneficiary-categories.js',
+        
+                'resources/js/beneficiary-category-form.js',
             ],
             refresh: true,
         }),
+
         tailwindcss(),
     ],
 

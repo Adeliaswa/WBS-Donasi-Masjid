@@ -518,6 +518,131 @@
     display: none;
 }
 
+
+/* =====================================================
+   DATA PENERIMA MANFAAT — SUBMENU
+   ===================================================== */
+
+.admin-sidebar__menu-group {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.admin-sidebar__menu-group > summary {
+    list-style: none;
+    cursor: pointer;
+}
+
+.admin-sidebar__menu-group > summary::-webkit-details-marker {
+    display: none;
+}
+
+.admin-sidebar__menu-group > summary::marker {
+    content: "";
+}
+
+/* Ikon dan panah submenu */
+
+.admin-sidebar__link--group .admin-sidebar__link-icon svg {
+    width: 18px;
+    height: 18px;
+}
+
+.admin-sidebar__menu-chevron {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    width: 17px;
+    height: 17px;
+    margin-left: auto;
+
+    color: var(--sidebar-text-secondary);
+
+    transition: transform var(--sidebar-transition);
+}
+
+.admin-sidebar__menu-chevron svg {
+    width: 15px;
+    height: 15px;
+}
+
+.admin-sidebar__menu-group[open] .admin-sidebar__menu-chevron {
+    transform: rotate(180deg);
+}
+
+/* Area submenu */
+
+.admin-sidebar__submenu {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+
+    margin: 5px 0 8px 19px;
+    padding: 3px 0 3px 12px;
+
+    border-left: 1px solid var(--sidebar-border);
+}
+
+/* Tautan submenu */
+
+.admin-sidebar__submenu-link {
+    display: flex;
+    align-items: center;
+
+    min-height: 35px;
+    padding: 8px 10px;
+
+    color: var(--sidebar-text-secondary);
+    background: transparent;
+
+    border: 1px solid transparent;
+    border-radius: 7px;
+
+    font-family: inherit;
+    font-size: 11.5px;
+    font-weight: 500;
+    line-height: 1.5;
+    text-decoration: none;
+
+    transition:
+        color var(--sidebar-transition),
+        background var(--sidebar-transition);
+}
+
+.admin-sidebar__submenu-link:hover {
+    color: var(--sidebar-primary);
+    background: var(--sidebar-primary-soft);
+}
+
+.admin-sidebar__submenu-link.is-active {
+    color: var(--sidebar-primary-dark);
+    background: var(--sidebar-primary-soft);
+    font-weight: 650;
+}
+
+.admin-sidebar__submenu-link:focus-visible {
+    outline: 2px solid rgba(41, 66, 54, 0.25);
+    outline-offset: 2px;
+}
+
+/* Mobile */
+
+@media (max-width: 768px) {
+    .admin-sidebar__submenu {
+        margin-left: 19px;
+        padding-left: 12px;
+    }
+
+    .admin-sidebar__submenu-link {
+        min-height: 38px;
+        font-size: 12px;
+    }
+}
+
+
 /* =========================================
    LAPTOP DAN LAYAR MENENGAH
    ========================================= */

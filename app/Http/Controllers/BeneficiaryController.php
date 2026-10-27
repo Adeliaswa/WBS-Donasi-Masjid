@@ -31,25 +31,56 @@ class BeneficiaryController extends Controller
             $query->where('status', $request->status);
         }
 
+        // Daftar penerima manfaat dengan pagination
         $beneficiaries = $query
             ->orderByDesc('registered_at')
             ->orderByDesc('id')
             ->paginate(10)
             ->withQueryString();
 
+        // Kategori aktif untuk filter
+        // Kategori "Lainnya" selalu berada paling bawah
         $categories = BeneficiaryCategory::where('is_active', true)
+            ->orderByRaw(
+                "CASE WHEN LOWER(name) = 'lainnya' THEN 1 ELSE 0 END"
+            )
             ->orderBy('name')
             ->get();
 
+        // Ringkasan seluruh data penerima manfaat
+        // Tidak mengikuti filter pencarian dan pagination
+        $summary = [
+            'total' => Beneficiary::count(),
+
+            'active' => Beneficiary::where('status', 'Aktif')
+                ->count(),
+
+            'new_this_month' => Beneficiary::whereBetween(
+                'registered_at',
+                [
+                    now()->startOfMonth()->toDateString(),
+                    now()->endOfMonth()->toDateString(),
+                ]
+            )->count(),
+
+            'inactive' => Beneficiary::where('status', 'Tidak Aktif')
+                ->count(),
+        ];
+
         return view('beneficiaries.index', compact(
             'beneficiaries',
-            'categories'
+            'categories',
+            'summary'
         ));
     }
 
     public function create()
     {
+        // Kategori aktif dengan "Lainnya" di urutan terakhir
         $categories = BeneficiaryCategory::where('is_active', true)
+            ->orderByRaw(
+                "CASE WHEN LOWER(name) = 'lainnya' THEN 1 ELSE 0 END"
+            )
             ->orderBy('name')
             ->get();
 
@@ -60,20 +91,24 @@ class BeneficiaryController extends Controller
     {
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
+
             'nik' => [
                 'required',
                 'string',
                 'max:32',
                 'unique:beneficiaries,nik',
             ],
+
             'address' => ['required', 'string'],
             'contact' => ['nullable', 'string', 'max:255'],
+
             'category_id' => [
                 'required',
                 'integer',
                 Rule::exists('beneficiary_categories', 'id')
                     ->where('is_active', true),
             ],
+
             'other_category' => ['nullable', 'string', 'max:255'],
             'condition' => ['nullable', 'string'],
             'status' => ['required', Rule::in(['Aktif', 'Tidak Aktif'])],
@@ -86,7 +121,11 @@ class BeneficiaryController extends Controller
 
         if (strtolower($category->name) === 'lainnya') {
             $request->validate([
-                'other_category' => ['required', 'string', 'max:255'],
+                'other_category' => [
+                    'required',
+                    'string',
+                    'max:255',
+                ],
             ]);
         } else {
             $validated['other_category'] = null;
@@ -100,7 +139,10 @@ class BeneficiaryController extends Controller
 
         return redirect()
             ->route('beneficiaries.index')
-            ->with('success', 'Data penerima manfaat berhasil ditambahkan.');
+            ->with(
+                'success',
+                'Data penerima manfaat berhasil ditambahkan.'
+            );
     }
 
     public function show(Beneficiary $beneficiary)
@@ -112,8 +154,13 @@ class BeneficiaryController extends Controller
 
     public function edit(Beneficiary $beneficiary)
     {
+        // Tampilkan kategori aktif dan kategori milik data saat ini.
+        // "Lainnya" tetap berada di urutan terakhir.
         $categories = BeneficiaryCategory::where('is_active', true)
             ->orWhere('id', $beneficiary->category_id)
+            ->orderByRaw(
+                "CASE WHEN LOWER(name) = 'lainnya' THEN 1 ELSE 0 END"
+            )
             ->orderBy('name')
             ->get();
 
@@ -127,24 +174,30 @@ class BeneficiaryController extends Controller
     {
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
+
             'nik' => [
                 'required',
                 'string',
-                'max:32',
                 Rule::unique('beneficiaries', 'nik')
                     ->ignore($beneficiary->id),
             ],
+
             'address' => ['required', 'string'],
             'contact' => ['nullable', 'string', 'max:255'],
+
             'category_id' => [
                 'required',
                 'integer',
                 Rule::exists('beneficiary_categories', 'id')
                     ->where(function ($query) use ($beneficiary) {
                         $query->where('is_active', true)
-                            ->orWhere('id', $beneficiary->category_id);
+                            ->orWhere(
+                                'id',
+                                $beneficiary->category_id
+                            );
                     }),
             ],
+
             'other_category' => ['nullable', 'string', 'max:255'],
             'condition' => ['nullable', 'string', 'max:255'],
             'status' => ['required', Rule::in(['Aktif', 'Tidak Aktif'])],
@@ -157,7 +210,11 @@ class BeneficiaryController extends Controller
 
         if (strtolower($category->name) === 'lainnya') {
             $request->validate([
-                'other_category' => ['required', 'string', 'max:255'],
+                'other_category' => [
+                    'required',
+                    'string',
+                    'max:255',
+                ],
             ]);
         } else {
             $validated['other_category'] = null;
@@ -169,7 +226,10 @@ class BeneficiaryController extends Controller
 
         return redirect()
             ->route('beneficiaries.show', $beneficiary)
-            ->with('success', 'Data penerima manfaat berhasil diperbarui.');
+            ->with(
+                'success',
+                'Data penerima manfaat berhasil diperbarui.'
+            );
     }
 
     public function destroy(Beneficiary $beneficiary)
@@ -178,6 +238,9 @@ class BeneficiaryController extends Controller
 
         return redirect()
             ->route('beneficiaries.index')
-            ->with('success', 'Data penerima manfaat berhasil dihapus.');
+            ->with(
+                'success',
+                'Data penerima manfaat berhasil dihapus.'
+            );
     }
 }

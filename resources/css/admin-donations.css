@@ -1,47 +1,36 @@
-/* =========================================================
-   MASJID SABILILLAH
-   DATA DONASI — MODERN ISLAMIC ADMIN PANEL
-   ========================================================= */
 
 /* ---------------------------------------------------------
    1. DESIGN TOKENS
    --------------------------------------------------------- */
+
 :root {
-    /* Donations Primary Colors */
-    --donations-primary: var(--color-green-normal);
-    --donations-primary-dark: var(--color-green-dark);
-    --donations-primary-light: var(--color-green-light);
+    --donations-primary: var(--color-green-normal, #315b43);
+    --donations-primary-dark: var(--color-green-dark, #244633);
+    --donations-primary-light: var(--color-green-light, #edf5ee);
 
-    /* Donations Background */
-    --donations-background: var(--color-neutral-light);
-    --donations-white: var(--color-white);
+    --donations-background: var(--color-neutral-light, #f7f9f7);
+    --donations-white: var(--color-white, #ffffff);
 
-    /* Donations Text Colors */
-    --donations-text: var(--color-neutral-darker);
-    --donations-muted: var(--color-neutral-dark);
+    --donations-text: var(--color-neutral-darker, #26352b);
+    --donations-muted: var(--color-neutral-dark, #6d786f);
     --donations-border: #e6ebe6;
 
-    /* Donations Blue */
-    --donations-blue: var(--color-blue-normal);
-    --donations-blue-light: var(--color-blue-light);
+    --donations-blue: var(--color-blue-normal, #3269b1);
+    --donations-blue-light: var(--color-blue-light, #edf4ff);
 
-    /* Donations Status Colors */
-    --donations-success: var(--color-success);
-    --donations-success-light: var(--color-success-light);
+    --donations-success: var(--color-success, #287a43);
+    --donations-success-light: var(--color-success-light, #effaf1);
 
-    --donations-danger: var(--color-danger);
-    --donations-danger-light: var(--color-danger-light);
+    --donations-danger: var(--color-danger, #c5221f);
+    --donations-danger-light: var(--color-danger-light, #fff1f0);
 
-    /* Donations Border Radius */
-    --donations-radius-card: var(--radius-card);
-    --donations-radius-input: var(--radius-input);
-    --donations-radius-button: var(--radius-button);
+    --donations-radius-card: var(--radius-card, 18px);
+    --donations-radius-input: var(--radius-input, 11px);
+    --donations-radius-button: var(--radius-button, 10px);
 
-    /* Donations Shadow */
     --donations-shadow: 0 3px 15px rgba(27, 43, 35, 0.025);
     --donations-shadow-hover: 0 10px 28px rgba(27, 43, 35, 0.07);
 
-    /* Donations Transition */
     --donations-transition: 0.22s ease;
 }
 
@@ -92,6 +81,7 @@
 .donations-page button:focus-visible,
 .donations-page input:focus-visible,
 .donations-page select:focus-visible,
+.donations-page textarea:focus-visible,
 .donations-modal button:focus-visible {
     outline: 3px solid rgba(41, 66, 54, 0.2);
     outline-offset: 3px;
@@ -134,12 +124,10 @@
 
     border: 1px solid var(--donations-border);
     border-radius: var(--donations-radius-card);
-
     box-shadow: var(--donations-shadow);
 }
 
 /* Ornamen geometris Islami yang lembut */
-
 .donations-page__header::before,
 .donations-page__header::after {
     position: absolute;
@@ -187,7 +175,6 @@
     color: var(--donations-muted);
     font-size: 12px;
     font-weight: 500;
-
     text-decoration: none;
 
     transition:
@@ -212,7 +199,6 @@
     margin-bottom: 8px;
 
     color: var(--donations-primary);
-
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 1.6px;
@@ -225,7 +211,6 @@
 
     background: var(--donations-primary);
     border-radius: 10px;
-
     content: "";
 }
 
@@ -233,7 +218,6 @@
     margin: 0;
 
     color: var(--donations-primary-dark);
-
     font-size: clamp(25px, 2vw, 31px);
     font-weight: 700;
     letter-spacing: -0.7px;
@@ -242,11 +226,9 @@
 
 .donations-page__description {
     max-width: 570px;
-
     margin: 10px 0 0;
 
     color: var(--donations-muted);
-
     font-size: 13px;
     line-height: 1.8;
 }
@@ -301,9 +283,7 @@
 
     color: #ffffff;
     background: var(--donations-primary);
-
     border-color: var(--donations-primary);
-
     box-shadow: 0 5px 12px rgba(41, 66, 54, 0.11);
 }
 
@@ -311,9 +291,7 @@
     color: #ffffff;
     background: var(--donations-primary-dark);
     border-color: var(--donations-primary-dark);
-
     box-shadow: 0 8px 17px rgba(41, 66, 54, 0.15);
-
     transform: translateY(-1px);
 }
 
@@ -427,14 +405,11 @@
     min-height: 177px;
 
     padding: 22px 21px 19px;
-
     overflow: hidden;
 
     background: #ffffff;
-
     border: 1px solid var(--donations-border);
     border-radius: var(--donations-radius-card);
-
     box-shadow: var(--donations-shadow);
 
     transition:
@@ -453,7 +428,6 @@
     display: flex;
     align-items: center;
     gap: 12px;
-
     min-width: 0;
 }
 
@@ -461,7 +435,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
     flex-shrink: 0;
 
     width: 45px;
@@ -469,7 +442,6 @@
 
     color: var(--donations-primary);
     background: #edf5ee;
-
     border: 1px solid #e5eee6;
     border-radius: 14px;
 
@@ -510,7 +482,6 @@
     min-width: 0;
 
     color: var(--donations-muted);
-
     font-size: 12px;
     font-weight: 500;
     line-height: 1.6;
@@ -518,11 +489,9 @@
 
 .donations-summary__value {
     display: block;
-
     margin: 18px 0 0;
 
     color: var(--donations-primary-dark);
-
     font-size: clamp(26px, 2vw, 32px);
     font-weight: 700;
     letter-spacing: -0.7px;
@@ -536,7 +505,6 @@
     padding-top: 11px;
 
     color: var(--donations-muted);
-
     font-size: 11px;
     line-height: 1.7;
 }
@@ -544,12 +512,10 @@
 
 /* ---------------------------------------------------------
    7. FILTER PANEL
-   Sesuai dengan filters.blade.php
    --------------------------------------------------------- */
 
 .donations-filters {
     display: grid;
-
     grid-template-columns:
         minmax(0, 1.15fr)
         minmax(0, 0.9fr)
@@ -566,10 +532,8 @@
     padding: 22px 23px;
 
     background: #ffffff;
-
     border: 1px solid var(--donations-border);
     border-radius: var(--donations-radius-card);
-
     box-shadow: var(--donations-shadow);
 }
 
@@ -577,13 +541,11 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
-
     min-width: 0;
 }
 
 .donations-filters__label {
     color: var(--donations-text);
-
     font-size: 11px;
     font-weight: 600;
     line-height: 1.5;
@@ -603,7 +565,6 @@
     height: 18px;
 
     color: var(--donations-muted);
-
     pointer-events: none;
     transform: translateY(-50%);
 }
@@ -653,7 +614,6 @@
 .donations-filters__select:focus {
     border-color: var(--donations-primary);
     background: #ffffff;
-
     box-shadow: 0 0 0 3px rgba(41, 66, 54, 0.08);
 }
 
@@ -665,7 +625,6 @@
     display: flex;
     align-items: center;
     gap: 9px;
-
     min-width: 0;
 }
 
@@ -687,14 +646,11 @@
 .donations-section {
     width: 100%;
     min-width: 0;
-
     overflow: hidden;
 
     background: #ffffff;
-
     border: 1px solid var(--donations-border);
     border-radius: var(--donations-radius-card);
-
     box-shadow: var(--donations-shadow);
 }
 
@@ -715,7 +671,6 @@
     margin: 0;
 
     color: var(--donations-primary-dark);
-
     font-size: 19px;
     font-weight: 700;
     letter-spacing: -0.35px;
@@ -726,7 +681,6 @@
     margin: 7px 0 0;
 
     color: var(--donations-muted);
-
     font-size: 12px;
     line-height: 1.8;
 }
@@ -735,7 +689,6 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-
     flex-shrink: 0;
 
     min-height: 34px;
@@ -743,7 +696,6 @@
 
     color: var(--donations-primary);
     background: var(--donations-primary-light);
-
     border: 1px solid #dfebdf;
     border-radius: 10px;
 
@@ -755,7 +707,8 @@
 
 /* ---------------------------------------------------------
    9. TABLE WRAPPER AND TABLE
-   Sesuai dengan table.blade.php
+   Mengikuti ukuran font dan layout tabel utama:
+   header 11px, isi 12px, aksi 11px, min-width 900px.
    --------------------------------------------------------- */
 
 .donations-table-wrapper {
@@ -790,7 +743,6 @@
     border-spacing: 0;
 
     color: var(--donations-text);
-
     font-family: inherit;
     font-size: 12px;
 }
@@ -830,7 +782,6 @@
 
     font-size: 12px;
     line-height: 1.7;
-
     vertical-align: middle;
 }
 
@@ -840,6 +791,16 @@
 
 .donations-table tbody td:last-child {
     padding-right: 25px;
+}
+
+/* Kolom tanggal: cegah tanggal terpotong menjadi dua baris */
+.donations-table thead th:nth-child(2),
+.donations-table tbody td:nth-child(2) {
+    width: 125px;
+    min-width: 125px;
+    white-space: nowrap;
+    word-break: keep-all;
+    overflow-wrap: normal;
 }
 
 .donations-table tbody tr:last-child td {
@@ -871,7 +832,6 @@
 
     font-weight: 700;
     white-space: nowrap;
-
     font-variant-numeric: tabular-nums;
 }
 
@@ -895,7 +855,6 @@
     font-size: 10px;
     font-weight: 600;
     line-height: 1.5;
-
     white-space: nowrap;
 }
 
@@ -908,7 +867,6 @@
 
     background: currentColor;
     border-radius: 50%;
-
     content: "";
 }
 
@@ -939,12 +897,14 @@
 
 /* ---------------------------------------------------------
    11. TABLE ACTIONS
+   Ukuran mengikuti stylesheet tabel utama, bukan override besar.
    --------------------------------------------------------- */
 
 .donations-table__actions {
     display: flex;
     align-items: center;
     justify-content: flex-start;
+    flex-wrap: nowrap;
     gap: 7px;
 }
 
@@ -952,6 +912,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
 
     min-height: 32px;
     padding: 6px 10px;
@@ -965,10 +926,10 @@
     font-family: inherit;
     font-size: 11px;
     font-weight: 600;
+    line-height: 1.4;
 
     text-decoration: none;
     white-space: nowrap;
-
     cursor: pointer;
 
     transition:
@@ -977,7 +938,9 @@
         border-color var(--donations-transition);
 }
 
-.donations-table__action:hover {
+.donations-table__action:hover,
+.donations-table__action--detail:hover,
+.donations-table__action--edit:hover {
     color: var(--donations-primary-dark);
     background: var(--donations-primary-light);
     border-color: #d4e3d5;
@@ -991,6 +954,11 @@
     color: var(--donations-danger);
     background: var(--donations-danger-light);
     border-color: #f0d3d0;
+}
+
+.donations-table__action:focus-visible {
+    outline: 3px solid rgba(41, 66, 54, 0.18);
+    outline-offset: 2px;
 }
 
 
@@ -1035,7 +1003,6 @@
     margin: 0;
 
     color: var(--donations-primary-dark);
-
     font-size: 15px;
     font-weight: 700;
     line-height: 1.5;
@@ -1043,11 +1010,9 @@
 
 .donations-table__empty-description {
     max-width: 350px;
-
     margin: 7px 0 20px;
 
     color: var(--donations-muted);
-
     font-size: 12px;
     line-height: 1.8;
 }
@@ -1101,7 +1066,6 @@
 
     font-family: inherit;
     font-size: 11px;
-
     text-decoration: none;
 
     transition:
@@ -1184,7 +1148,6 @@
     box-shadow: 0 25px 75px rgba(15, 31, 20, 0.19);
 
     transform: translateY(10px) scale(0.98);
-
     transition: transform 0.22s ease;
 }
 
@@ -1218,7 +1181,6 @@
     margin: 0;
 
     color: var(--donations-primary-dark);
-
     font-size: 21px;
     font-weight: 700;
     letter-spacing: -0.4px;
@@ -1229,7 +1191,6 @@
     margin: 10px 0 24px;
 
     color: var(--donations-muted);
-
     font-size: 13px;
     line-height: 1.8;
 }
@@ -1461,6 +1422,16 @@
         font-size: 11px;
     }
 
+    .donations-table__actions {
+        gap: 6px;
+    }
+
+    .donations-table__action {
+        min-height: 30px;
+        padding: 5px 8px;
+        font-size: 10px;
+    }
+
     .donations-table__empty-content {
         padding: 38px 16px;
     }
@@ -1527,126 +1498,288 @@
     }
 }
 
-/* =========================================
-   PERBAIKAN STRUKTUR TABEL DONASI
-========================================= */
 
-/* Pembungkus tabel */
-.donations-table-wrapper {
+/* =========================================================
+   DETAIL DONASI
+   Layout informasi yang rapi dan responsif
+   ========================================================= */
+
+.donation-detail-page,
+.donation-detail-page * {
+    box-sizing: border-box;
+}
+
+/* Aksi pada header */
+.donation-detail-page__actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+/* Kartu utama */
+.donation-detail-card {
     width: 100%;
-    max-width: 100%;
-    overflow-x: auto;
-    overflow-y: hidden;
-    border-radius: 0 0 24px 24px;
-    scrollbar-width: thin;
-    scrollbar-color: #cbd8ce transparent;
+    min-width: 0;
+    overflow: hidden;
+
+    background: #ffffff;
+    border: 1px solid var(--donations-border);
+    border-radius: var(--donations-radius-card);
+    box-shadow: var(--donations-shadow);
 }
 
-/* Struktur tabel */
-.donations-table {
-    width: 100%;
-    min-width: 1000px;
-    border-collapse: separate;
-    border-spacing: 0;
-    table-layout: fixed;
+/* Header kartu */
+.donation-detail-card__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+
+    padding: 25px 26px 23px;
+    border-bottom: 1px solid #edf0ed;
 }
 
-/* Sel tabel */
-.donations-table th,
-.donations-table td {
-    padding: 20px 16px;
-    vertical-align: middle;
-    text-align: left;
-    overflow-wrap: break-word;
+.donation-detail-card__header > div {
+    min-width: 0;
 }
 
-/* Nomor urut */
-.donations-table th:first-child,
-.donations-table td:first-child {
-    width: 65px;
-    min-width: 65px;
-    white-space: nowrap;
-}
-
-/* Header tabel */
-.donations-table th {
-    white-space: nowrap;
-    font-size: 14px;
-    font-weight: 700;
-}
-
-/* Tanggal jangan dipotong sembarangan */
-.donations-table th:nth-child(2),
-.donations-table td:nth-child(2) {
-    width: 115px;
-    white-space: nowrap;
-}
-
-/* Nama donatur */
-.donations-table th:nth-child(3),
-.donations-table td:nth-child(3) {
-    width: 155px;
-}
-
-/* Nominal donasi */
-.donations-table th:nth-child(4),
-.donations-table td:nth-child(4) {
-    width: 155px;
-    white-space: nowrap;
-}
-
-/* Kanal */
-.donations-table th:nth-child(5),
-.donations-table td:nth-child(5) {
-    width: 120px;
-}
-
-/* Metode pembayaran */
-.donations-table th:nth-child(6),
-.donations-table td:nth-child(6) {
-    width: 165px;
-}
-
-/* Kategori */
-.donations-table th:nth-child(7),
-.donations-table td:nth-child(7) {
-    width: 180px;
-    overflow-wrap: anywhere;
-}
-
-/* Status */
-.donations-table th:nth-child(8),
-.donations-table td:nth-child(8) {
-    width: 170px;
-}
-
-/* Aksi */
-.donations-table th:last-child,
-.donations-table td:last-child {
-    width: 165px;
-    white-space: nowrap;
-}
-
-/* Tombol aksi tetap sejajar */
-.donations-table td:last-child {
-    white-space: nowrap;
-}
-
-.donations-table td:last-child .donations-button {
+.donation-detail-card__label {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    margin-right: 4px;
+    flex-shrink: 0;
+
+    padding: 7px 11px;
+
+    color: var(--donations-primary);
+    background: #f0f6f0;
+    border: 1px solid #e2ebe2;
+    border-radius: 8px;
+
+    font-size: 11px;
+    font-weight: 600;
 }
 
-/* Ukuran layar lebih kecil */
-@media (max-width: 768px) {
-    .donations-table {
-        min-width: 1000px;
+/* Isi kartu */
+.donation-detail-card__body {
+    padding: 25px 26px 28px;
+}
+
+/* Ringkasan nominal dan status */
+.donation-detail-summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 22px;
+
+    margin-bottom: 24px;
+    padding: 23px 24px;
+
+    background: linear-gradient(
+        120deg,
+        #f5f9f5 0%,
+        #edf5ee 100%
+    );
+
+    border: 1px solid #e0eae0;
+    border-radius: 13px;
+}
+
+.donation-detail-summary__amount,
+.donation-detail-summary__status {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 9px;
+
+    min-width: 0;
+}
+
+.donation-detail-summary__label {
+    color: var(--donations-muted);
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.6;
+}
+
+.donation-detail-summary__amount strong {
+    color: var(--donations-primary-dark);
+    font-size: clamp(22px, 2.5vw, 28px);
+    font-weight: 700;
+    line-height: 1.35;
+    letter-spacing: -0.5px;
+    overflow-wrap: anywhere;
+}
+
+/* Grid informasi */
+.donation-detail-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.donation-detail-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+
+    min-width: 0;
+    padding: 17px 19px;
+
+    background: #ffffff;
+    border: 1px solid #e9eee9;
+    border-radius: 11px;
+
+    transition:
+        background var(--donations-transition),
+        border-color var(--donations-transition);
+}
+
+.donation-detail-item:hover {
+    background: #fcfdfc;
+    border-color: #dce6dc;
+}
+
+/* Catatan menggunakan lebar penuh */
+.donation-detail-item--full {
+    grid-column: 1 / -1;
+}
+
+.donation-detail-item dt {
+    margin: 0;
+
+    color: var(--donations-muted);
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.6;
+}
+
+.donation-detail-item dd {
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+
+    color: var(--donations-text);
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.75;
+
+    overflow-wrap: anywhere;
+    word-break: normal;
+}
+
+/* Tampilan catatan */
+.donation-detail-item__notes {
+    white-space: pre-wrap;
+    font-weight: 400 !important;
+}
+
+/* Footer kartu */
+.donation-detail-card__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+
+    padding: 19px 26px;
+
+    background: #fbfcfb;
+    border-top: 1px solid #edf0ed;
+}
+
+.donation-detail-card__footer p {
+    max-width: 580px;
+    margin: 0;
+
+    color: var(--donations-muted);
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+/* Fokus keyboard */
+.donation-detail-page a:focus-visible {
+    outline: 3px solid rgb(41 66 54 / 20%);
+    outline-offset: 3px;
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+    .donation-detail-card__body {
+        padding: 21px;
     }
 
-    .donations-table th,
-    .donations-table td {
-        padding: 16px 12px;
+    .donation-detail-grid {
+        gap: 12px;
+    }
+
+    .donation-detail-item {
+        padding: 16px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+    .donation-detail-page__actions {
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .donation-detail-page__actions .donations-button {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .donation-detail-card__header {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 12px;
+
+        padding: 21px 18px;
+    }
+
+    .donation-detail-card__body {
+        padding: 17px;
+    }
+
+    .donation-detail-summary {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 19px;
+
+        margin-bottom: 17px;
+        padding: 19px;
+    }
+
+    .donation-detail-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 10px;
+    }
+
+    .donation-detail-item,
+    .donation-detail-item--full {
+        grid-column: auto;
+        padding: 15px 16px;
+    }
+
+    .donation-detail-card__footer {
+        align-items: stretch;
+        flex-direction: column;
+        gap: 15px;
+
+        padding: 18px;
+    }
+
+    .donation-detail-card__footer .donations-button {
+        width: 100%;
     }
 }

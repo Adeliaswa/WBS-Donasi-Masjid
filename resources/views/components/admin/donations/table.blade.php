@@ -1,3 +1,4 @@
+
 {{-- Tabel Data Donasi --}}
 <div class="donations-table-wrapper">
     <table class="donations-table">
@@ -81,31 +82,50 @@
                     {{-- Aksi --}}
                     <td>
                         <div class="donations-table__actions">
+
+                            {{-- Detail --}}
+                            <a
+                                href="{{ route('donations.show', $donation) }}"
+                                class="donations-table__action donations-table__action--detail"
+                                aria-label="Lihat detail donasi {{ $donation->display_donor_name }}"
+                            >
+                                Detail
+                            </a>
+
+                            {{-- Ubah --}}
                             <a
                                 href="{{ route('donations.edit', $donation) }}"
-                                class="donations-table__action"
+                                class="donations-table__action donations-table__action--edit"
                                 aria-label="Ubah donasi {{ $donation->display_donor_name }}"
                             >
                                 Ubah
                             </a>
 
+                            {{-- Hapus --}}
                             <button
                                 type="button"
                                 class="donations-table__action donations-table__action--delete"
                                 data-delete-trigger
                                 data-donation-name="{{ $donation->display_donor_name }}"
                                 data-delete-url="{{ route('donations.destroy', $donation) }}"
+                                aria-label="Hapus donasi {{ $donation->display_donor_name }}"
                             >
                                 Hapus
                             </button>
+
                         </div>
                     </td>
                 </tr>
+
             @empty
                 <tr>
                     <td colspan="9" class="donations-table__empty">
                         <div class="donations-table__empty-content">
-                            <span class="donations-table__empty-icon" aria-hidden="true">
+
+                            <span
+                                class="donations-table__empty-icon"
+                                aria-hidden="true"
+                            >
                                 ♧
                             </span>
 
@@ -123,6 +143,7 @@
                             >
                                 + Tambah Donasi
                             </a>
+
                         </div>
                     </td>
                 </tr>

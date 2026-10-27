@@ -10,7 +10,8 @@
 
     @vite([
         'resources/css/app.css',
-        'resources/css/admin-donation-form.css'
+        'resources/css/admin-donation-form.css',
+        'resources/js/admin-donation.js',
     ])
 
     <style>

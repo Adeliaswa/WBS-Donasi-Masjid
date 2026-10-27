@@ -1,0 +1,1013 @@
+
+/* =========================================================
+   MASJID SABILILLAH
+   KATEGORI PENERIMA MANFAAT
+   Typography dan header mengikuti Data Penerima Manfaat
+   ========================================================= */
+
+.beneficiary-categories-page {
+    --bc-primary: var(--color-green-normal, #294236);
+    --bc-primary-dark: var(--color-green-dark, #1b2b23);
+    --bc-primary-light: var(--color-green-light, #edf5ee);
+    --bc-text: var(--color-neutral-darker, #26372d);
+    --bc-muted: var(--color-neutral-dark, #747b75);
+    --bc-border: #e6ebe6;
+    --bc-radius: 12px;
+    --bc-transition: 0.22s ease;
+
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    margin: 0 auto;
+    padding: 28px 30px 35px;
+
+    color: var(--bc-text);
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 1.6;
+
+    overflow-wrap: break-word;
+}
+
+.beneficiary-categories-page *,
+.beneficiary-categories-page *::before,
+.beneficiary-categories-page *::after {
+    box-sizing: border-box;
+}
+
+.beneficiary-categories-page a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+.beneficiary-categories-page button,
+.beneficiary-categories-page input,
+.beneficiary-categories-page select {
+    font-family: inherit;
+}
+
+/* =========================================================
+   1. HEADER
+   Mengikuti header Data Penerima Manfaat
+   ========================================================= */
+
+.beneficiary-categories-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+
+    width: 100%;
+    min-width: 0;
+
+    margin-bottom: 24px;
+    padding: 5px 0 25px;
+
+    border-bottom: 1px solid var(--bc-border);
+}
+
+.beneficiary-categories-header__content {
+    flex: 1;
+    min-width: 0;
+}
+
+.beneficiary-categories-header__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    margin-bottom: 8px;
+
+    color: var(--bc-primary);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.6px;
+    line-height: 1.5;
+    text-transform: uppercase;
+}
+
+.beneficiary-categories-header__eyebrow::before {
+    display: inline-block;
+    flex-shrink: 0;
+
+    width: 19px;
+    height: 2px;
+
+    background: var(--bc-primary);
+    border-radius: 10px;
+
+    content: "";
+}
+
+.beneficiary-categories-header__title {
+    margin: 0;
+
+    color: var(--bc-primary-dark);
+    font-size: clamp(25px, 2vw, 31px);
+    font-weight: 700;
+    letter-spacing: -0.7px;
+    line-height: 1.3;
+}
+
+.beneficiary-categories-header__description {
+    max-width: 650px;
+    margin: 10px 0 0;
+
+    color: var(--bc-muted);
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.8;
+}
+
+/* =========================================================
+   2. BUTTONS
+   ========================================================= */
+
+.beneficiary-categories-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+
+    flex-shrink: 0;
+    min-height: 43px;
+    padding: 10px 17px;
+
+    color: var(--bc-text);
+    background: #ffffff;
+    border: 1px solid var(--bc-border);
+    border-radius: 10px;
+
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.4;
+    text-align: center;
+    text-decoration: none;
+    white-space: nowrap;
+
+    cursor: pointer;
+
+    transition:
+        color var(--bc-transition),
+        background var(--bc-transition),
+        border-color var(--bc-transition),
+        box-shadow var(--bc-transition),
+        transform var(--bc-transition);
+}
+
+.beneficiary-categories-button:hover {
+    color: var(--bc-primary);
+    background: var(--bc-primary-light);
+    border-color: #d5e3d6;
+}
+
+.beneficiary-categories-button:active {
+    transform: translateY(1px);
+}
+
+.beneficiary-categories-button:focus-visible {
+    outline: 3px solid rgba(41, 66, 54, 0.2);
+    outline-offset: 3px;
+}
+
+.beneficiary-categories-button--primary {
+    color: #ffffff;
+    background: var(--bc-primary);
+    border-color: var(--bc-primary);
+    box-shadow: 0 5px 12px rgba(41, 66, 54, 0.1);
+}
+
+.beneficiary-categories-button--primary:hover {
+    color: #ffffff;
+    background: var(--bc-primary-dark);
+    border-color: var(--bc-primary-dark);
+    box-shadow: 0 8px 17px rgba(41, 66, 54, 0.14);
+    transform: translateY(-1px);
+}
+
+.beneficiary-categories-button > span {
+    font-size: 19px;
+    font-weight: 400;
+    line-height: 1;
+}
+
+/* =========================================================
+   3. ALERT / NOTIFIKASI
+   ========================================================= */
+
+.beneficiary-categories-alert {
+    margin-bottom: 20px;
+    padding: 14px 17px;
+
+    border: 1px solid transparent;
+    border-radius: 10px;
+
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.beneficiary-categories-alert strong {
+    display: block;
+    margin-bottom: 3px;
+    font-weight: 700;
+}
+
+.beneficiary-categories-alert ul {
+    margin: 6px 0 0;
+    padding-left: 20px;
+}
+
+.beneficiary-categories-alert--success {
+    color: #166534;
+    background: #effaf1;
+    border-color: #d8f0df;
+}
+
+.beneficiary-categories-alert--error {
+    color: #b42318;
+    background: #fff1f0;
+    border-color: #f7d8d5;
+}
+
+/* =========================================================
+   4. SUMMARY CARDS
+   ========================================================= */
+
+.beneficiary-categories-summary {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+
+    width: 100%;
+    min-width: 0;
+    margin-bottom: 24px;
+}
+
+.beneficiary-categories-summary__card {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+
+    min-width: 0;
+    min-height: 150px;
+    padding: 22px 22px 20px 24px;
+
+    overflow: hidden;
+
+    background: #ffffff;
+    border: 1px solid var(--bc-border);
+    border-radius: 16px;
+
+    box-shadow: 0 3px 15px rgba(27, 43, 35, 0.025);
+
+    transition:
+        border-color var(--bc-transition),
+        box-shadow var(--bc-transition),
+        transform var(--bc-transition);
+}
+
+.beneficiary-categories-summary__card::before {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+
+    width: 3px;
+
+    background: #789382;
+    content: "";
+}
+
+.beneficiary-categories-summary__card:hover {
+    border-color: #dce6dc;
+    box-shadow: 0 10px 28px rgba(27, 43, 35, 0.07);
+    transform: translateY(-2px);
+}
+
+.beneficiary-categories-summary__label {
+    margin-bottom: 12px;
+
+    color: var(--bc-muted);
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.6;
+}
+
+.beneficiary-categories-summary__value {
+    display: block;
+    margin: 0;
+
+    color: var(--bc-primary-dark);
+    font-size: clamp(26px, 2vw, 32px);
+    font-weight: 700;
+    letter-spacing: -0.7px;
+    line-height: 1.25;
+    font-variant-numeric: tabular-nums;
+
+    overflow-wrap: anywhere;
+}
+
+.beneficiary-categories-summary__note {
+    margin: auto 0 0;
+    padding-top: 11px;
+
+    color: var(--bc-muted);
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+/* =========================================================
+   5. SECTION DAFTAR KATEGORI
+   ========================================================= */
+
+.beneficiary-categories-section {
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+
+    background: #ffffff;
+    border: 1px solid var(--bc-border);
+    border-radius: 16px;
+
+    box-shadow: 0 3px 15px rgba(27, 43, 35, 0.025);
+}
+
+.beneficiary-categories-section__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+
+    padding: 25px 26px 23px;
+}
+
+.beneficiary-categories-section__header > div {
+    min-width: 0;
+}
+
+.beneficiary-categories-section__title {
+    margin: 0;
+
+    color: var(--bc-primary-dark);
+    font-size: 19px;
+    font-weight: 700;
+    letter-spacing: -0.35px;
+    line-height: 1.4;
+}
+
+.beneficiary-categories-section__description {
+    margin: 7px 0 0;
+
+    color: var(--bc-muted);
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+.beneficiary-categories-section__count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+    min-height: 34px;
+    padding: 6px 12px;
+
+    color: var(--bc-primary);
+    background: var(--bc-primary-light);
+    border: 1px solid #dfebdf;
+    border-radius: 9px;
+
+    font-size: 11px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+/* =========================================================
+   6. TABLE WRAPPER
+   ========================================================= */
+
+.beneficiary-categories-table-wrap {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    scrollbar-width: thin;
+    scrollbar-color: #cbd7cc transparent;
+}
+
+.beneficiary-categories-table-wrap::-webkit-scrollbar {
+    height: 7px;
+}
+
+.beneficiary-categories-table-wrap::-webkit-scrollbar-track {
+    background: #f7f9f7;
+}
+
+.beneficiary-categories-table-wrap::-webkit-scrollbar-thumb {
+    background: #cbd7cc;
+    border-radius: 10px;
+}
+
+/* =========================================================
+   7. TABLE
+   ========================================================= */
+
+.beneficiary-categories-table {
+    width: 100%;
+    min-width: 950px;
+
+    border-collapse: separate;
+    border-spacing: 0;
+
+    color: var(--bc-text);
+    font-family: inherit;
+    font-size: 12px;
+}
+
+/* Header tabel */
+
+.beneficiary-categories-table thead th {
+    padding: 15px 16px;
+
+    color: #5f6c61;
+    background: #f4f7f4;
+
+    border-top: 1px solid #edf0ed;
+    border-bottom: 1px solid #e5ebe5;
+
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.6;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.beneficiary-categories-table thead th:first-child,
+.beneficiary-categories-table tbody td:first-child {
+    padding-left: 25px;
+}
+
+.beneficiary-categories-table thead th:last-child,
+.beneficiary-categories-table tbody td:last-child {
+    padding-right: 25px;
+}
+
+/* Isi tabel */
+
+.beneficiary-categories-table tbody td {
+    padding: 16px;
+
+    color: var(--bc-text);
+    background: #ffffff;
+    border-bottom: 1px solid #eff2ef;
+
+    font-size: 12px;
+    line-height: 1.7;
+    vertical-align: middle;
+}
+
+.beneficiary-categories-table tbody tr {
+    transition: background var(--bc-transition);
+}
+
+.beneficiary-categories-table tbody tr:hover td {
+    background: #fbfdfb;
+}
+
+.beneficiary-categories-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Nomor urut */
+
+.beneficiary-categories-table__number {
+    width: 65px;
+
+    color: var(--bc-muted) !important;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Nama kategori */
+
+.beneficiary-categories-table__name {
+    display: inline-block;
+    min-width: 120px;
+
+    color: var(--bc-primary-dark);
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.7;
+}
+
+/* Deskripsi */
+
+.beneficiary-categories-table__description {
+    display: block;
+
+    max-width: 300px;
+
+    color: var(--bc-muted);
+    font-size: 12px;
+    line-height: 1.8;
+
+    overflow-wrap: anywhere;
+}
+
+/* Jumlah penerima */
+
+.beneficiary-categories-table__count {
+    color: var(--bc-primary);
+    font-size: 12px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+.beneficiary-categories-table__count-label {
+    margin-left: 3px;
+
+    color: var(--bc-muted);
+    font-size: 11px;
+}
+
+/* =========================================================
+   8. STATUS BADGE
+   ========================================================= */
+
+.beneficiary-categories-status {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+    min-height: 27px;
+    padding: 5px 10px;
+
+    border: 1px solid transparent;
+    border-radius: 8px;
+
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 1.5;
+    white-space: nowrap;
+}
+
+.beneficiary-categories-status::before {
+    display: inline-block;
+    flex-shrink: 0;
+
+    width: 5px;
+    height: 5px;
+
+    background: currentColor;
+    border-radius: 50%;
+    content: "";
+}
+
+.beneficiary-categories-status--active {
+    color: #16803d;
+    background: #effaf1;
+    border-color: #dcefe0;
+}
+
+.beneficiary-categories-status--inactive {
+    color: #747b84;
+    background: #f4f5f4;
+    border-color: #e7e9e7;
+}
+
+/* =========================================================
+   9. AKSI TABEL
+   ========================================================= */
+
+.beneficiary-categories-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 9px;
+
+    min-width: 190px;
+}
+
+.beneficiary-categories-action-form {
+    display: inline-flex;
+    align-items: center;
+    margin: 0;
+}
+
+.beneficiary-categories-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 32px;
+    padding: 6px 10px;
+
+    color: var(--bc-primary);
+    background: #ffffff;
+    border: 1px solid #e6ebe6;
+    border-radius: 8px;
+
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.4;
+    text-align: center;
+    text-decoration: none;
+    white-space: nowrap;
+
+    cursor: pointer;
+
+    transition:
+        color var(--bc-transition),
+        background var(--bc-transition),
+        border-color var(--bc-transition);
+}
+
+.beneficiary-categories-action:hover {
+    color: var(--bc-primary-dark);
+    background: var(--bc-primary-light);
+    border-color: #d4e3d5;
+}
+
+.beneficiary-categories-action--status {
+    color: #657267;
+}
+
+.beneficiary-categories-action--status:hover {
+    color: var(--bc-primary);
+}
+
+.beneficiary-categories-action--delete {
+    color: #b42318;
+}
+
+.beneficiary-categories-action--delete:hover {
+    color: #b42318;
+    background: #fff1f0;
+    border-color: #f0d3d0;
+}
+
+.beneficiary-categories-action:focus-visible {
+    outline: 3px solid rgba(41, 66, 54, 0.2);
+    outline-offset: 2px;
+}
+
+.beneficiary-categories-action:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+/* =========================================================
+   10. EMPTY STATE
+   ========================================================= */
+
+.beneficiary-categories-empty {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+
+    min-height: 230px;
+    padding: 48px 20px;
+
+    text-align: center;
+}
+
+.beneficiary-categories-empty strong {
+    margin: 0;
+
+    color: var(--bc-primary-dark);
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.5;
+}
+
+.beneficiary-categories-empty p {
+    max-width: 350px;
+    margin: 7px 0 20px;
+
+    color: var(--bc-muted);
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+/* =========================================================
+   11. PAGINATION
+   ========================================================= */
+
+.beneficiary-categories-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+
+    padding: 19px 25px;
+
+    background: #ffffff;
+    border-top: 1px solid #edf0ed;
+}
+
+.beneficiary-categories-pagination__info {
+    color: var(--bc-muted);
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+.beneficiary-categories-pagination__info strong {
+    color: var(--bc-text);
+    font-weight: 600;
+}
+
+.beneficiary-categories-pagination__navigation {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.beneficiary-categories-pagination__button,
+.beneficiary-categories-pagination__number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 33px;
+    min-height: 33px;
+    padding: 5px 9px;
+
+    color: var(--bc-text);
+    background: #ffffff;
+    border: 1px solid var(--bc-border);
+    border-radius: 8px;
+
+    font-family: inherit;
+    font-size: 11px;
+    line-height: 1.4;
+    text-align: center;
+    text-decoration: none;
+    white-space: nowrap;
+
+    transition:
+        color var(--bc-transition),
+        background var(--bc-transition),
+        border-color var(--bc-transition);
+}
+
+.beneficiary-categories-pagination__button:hover,
+.beneficiary-categories-pagination__number:hover {
+    color: var(--bc-primary);
+    background: var(--bc-primary-light);
+    border-color: #d4e3d5;
+}
+
+.beneficiary-categories-pagination__number.is-active {
+    color: #ffffff;
+    background: var(--bc-primary);
+    border-color: var(--bc-primary);
+    font-weight: 600;
+}
+
+.beneficiary-categories-pagination__button.is-disabled {
+    color: #a8a8a8;
+    background: #ffffff;
+    border-color: #e1e8e1;
+    cursor: not-allowed;
+}
+
+.beneficiary-categories-pagination__button:focus-visible,
+.beneficiary-categories-pagination__number:focus-visible {
+    outline: 2px solid rgba(41, 66, 54, 0.3);
+    outline-offset: 2px;
+}
+
+/* =========================================================
+   12. TABLET
+   ========================================================= */
+
+@media (max-width: 1200px) {
+    .beneficiary-categories-page {
+        padding: 25px 24px 32px;
+    }
+
+    .beneficiary-categories-summary {
+        gap: 13px;
+    }
+
+    .beneficiary-categories-summary__card {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 900px) {
+    .beneficiary-categories-summary {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .beneficiary-categories-summary__card:last-child {
+        grid-column: 1 / -1;
+    }
+
+    .beneficiary-categories-section__header {
+        padding: 22px;
+    }
+
+    .beneficiary-categories-table {
+        min-width: 900px;
+    }
+}
+
+/* =========================================================
+   13. MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+    .beneficiary-categories-page {
+        padding: 21px 16px 28px;
+    }
+
+    .beneficiary-categories-header {
+        align-items: stretch;
+        flex-direction: column;
+        gap: 17px;
+
+        margin-bottom: 20px;
+        padding: 5px 0 21px;
+    }
+
+    .beneficiary-categories-header__eyebrow {
+        font-size: 9px;
+        letter-spacing: 1.3px;
+    }
+
+    .beneficiary-categories-header__title {
+        font-size: 25px;
+        letter-spacing: -0.5px;
+    }
+
+    .beneficiary-categories-header__description {
+        margin-top: 8px;
+        font-size: 12px;
+    }
+
+    .beneficiary-categories-header > .beneficiary-categories-button {
+        width: 100%;
+    }
+
+    .beneficiary-categories-summary {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 11px;
+        margin-bottom: 19px;
+    }
+
+    .beneficiary-categories-summary__card {
+        min-height: 140px;
+        padding: 17px 15px 16px 18px;
+    }
+
+    .beneficiary-categories-summary__card:last-child {
+        grid-column: 1 / -1;
+        min-height: 125px;
+    }
+
+    .beneficiary-categories-summary__label {
+        font-size: 11px;
+    }
+
+    .beneficiary-categories-summary__value {
+        font-size: 25px;
+    }
+
+    .beneficiary-categories-summary__note {
+        font-size: 10px;
+    }
+
+    .beneficiary-categories-section {
+        border-radius: 15px;
+    }
+
+    .beneficiary-categories-section__header {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 12px;
+        padding: 19px 16px;
+    }
+
+    .beneficiary-categories-section__title {
+        font-size: 17px;
+    }
+
+    .beneficiary-categories-section__description {
+        font-size: 11px;
+    }
+
+    .beneficiary-categories-section__count {
+        min-height: 30px;
+        padding: 5px 9px;
+        font-size: 10px;
+    }
+
+    .beneficiary-categories-table {
+        min-width: 900px;
+    }
+
+    .beneficiary-categories-table thead th {
+        padding: 13px;
+        font-size: 10px;
+    }
+
+    .beneficiary-categories-table tbody td {
+        padding: 13px;
+        font-size: 11px;
+    }
+
+    .beneficiary-categories-table thead th:first-child,
+    .beneficiary-categories-table tbody td:first-child {
+        padding-left: 16px;
+    }
+
+    .beneficiary-categories-table thead th:last-child,
+    .beneficiary-categories-table tbody td:last-child {
+        padding-right: 16px;
+    }
+
+    .beneficiary-categories-actions {
+        gap: 7px;
+    }
+
+    .beneficiary-categories-action {
+        min-height: 31px;
+        padding: 5px 9px;
+        font-size: 11px;
+    }
+
+    .beneficiary-categories-pagination {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 12px;
+        padding: 16px;
+    }
+
+    .beneficiary-categories-pagination__navigation {
+        justify-content: flex-start;
+        width: 100%;
+    }
+}
+
+/* =========================================================
+   14. MOBILE KECIL
+   ========================================================= */
+
+@media (max-width: 380px) {
+    .beneficiary-categories-page {
+        padding: 18px 12px 24px;
+    }
+
+    .beneficiary-categories-header__title {
+        font-size: 23px;
+    }
+
+    .beneficiary-categories-summary {
+        gap: 9px;
+    }
+
+    .beneficiary-categories-summary__card {
+        padding: 15px 12px 14px 15px;
+    }
+
+    .beneficiary-categories-summary__value {
+        font-size: 23px;
+    }
+
+    .beneficiary-categories-section__header {
+        padding: 17px 14px;
+    }
+
+    .beneficiary-categories-pagination__navigation {
+        gap: 4px;
+    }
+
+    .beneficiary-categories-pagination__button,
+    .beneficiary-categories-pagination__number {
+        min-width: 30px;
+        padding: 5px 7px;
+        font-size: 10px;
+    }
+}
+
+/* =========================================================
+   15. ACCESSIBILITY
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+    .beneficiary-categories-page *,
+    .beneficiary-categories-page *::before,
+    .beneficiary-categories-page *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+    }
+}

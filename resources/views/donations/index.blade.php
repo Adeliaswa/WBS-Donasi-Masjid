@@ -12,8 +12,10 @@
     @vite([
         'resources/css/app.css',
         'resources/css/admin-sidebar.css',
-        'resources/css/admin-donations.css'
+        'resources/css/admin-donations.css',
+        'resources/js/admin-donation.js',
     ])
+
 </head>
 
 <body class="admin-layout">

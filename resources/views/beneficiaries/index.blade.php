@@ -3,119 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Penerima Manfaat</title>
+    <meta name="theme-color" content="#294236">
+
+    <title>Data Penerima Manfaat | Masjid Sabilillah</title>
+
+    @vite([
+        'resources/css/app.css',
+        'resources/css/admin-sidebar.css',
+        'resources/css/admin-beneficiaries.css',
+        'resources/js/app.js',
+        'resources/js/admin-sidebar.js',
+        'resources/js/beneficiary-categories.js',
+    ])
+    
 </head>
-<body>
-    <h1>Data Penerima Manfaat</h1>
 
-    <p><a href="{{ route('dashboard') }}">Kembali ke Dashboard</a></p>
+<body class="admin-layout">
 
-    @if (session('success'))
-        <p style="color: green;">{{ session('success') }}</p>
-    @endif
+    {{-- Sidebar Admin --}}
+    @include('components.admin.sidebar')
 
-    @if (session('error'))
-        <p style="color: red;">{{ session('error') }}</p>
-    @endif
+    {{-- Konten Utama --}}
+    <div class="admin-main">
+        <main class="beneficiaries-page">
 
-    <p>
-        <a href="{{ route('beneficiaries.create') }}">Tambah Penerima</a>
-    </p>
+            {{-- Header Halaman --}}
+            <header class="beneficiaries-header">
+                <div class="beneficiaries-header__content">
+                    <span class="beneficiaries-header__eyebrow">
+                        MASJID SABILILLAH
+                    </span>
 
-    <form method="GET" action="{{ route('beneficiaries.index') }}">
-        <input
-            type="text"
-            name="search"
-            placeholder="Cari nama, NIK, atau alamat"
-            value="{{ request('search') }}"
-        >
+                    <h1 class="beneficiaries-header__title">
+                        Data Penerima Manfaat
+                    </h1>
 
-        <select name="category_id">
-            <option value="">Semua Kategori</option>
-            @foreach ($categories as $category)
-                <option
-                    value="{{ $category->id }}"
-                    @selected(request('category_id') == $category->id)
+                    <p class="beneficiaries-header__description">
+                        Kelola dan pantau data penerima bantuan masjid
+                        dengan tertib dan terstruktur.
+                    </p>
+                </div>
+
+                <a
+                    href="{{ route('beneficiaries.create') }}"
+                    class="beneficiaries-button beneficiaries-button--primary"
                 >
-                    {{ $category->name }}
-                </option>
-            @endforeach
-        </select>
+                    <span aria-hidden="true">+</span>
+                    Tambah Penerima
+                </a>
+            </header>
 
-        <select name="status">
-            <option value="">Semua Status</option>
-            <option value="Aktif" @selected(request('status') === 'Aktif')>
-                Aktif
-            </option>
-            <option value="Tidak Aktif" @selected(request('status') === 'Tidak Aktif')>
-                Tidak Aktif
-            </option>
-        </select>
+            {{-- Notifikasi Berhasil --}}
+            @if (session('success'))
+                <div
+                    class="beneficiaries-alert beneficiaries-alert--success"
+                    role="status"
+                >
+                    {{ session('success') }}
+                </div>
+            @endif
 
-        <button type="submit">Cari / Filter</button>
-        <a href="{{ route('beneficiaries.index') }}">Reset</a>
-    </form>
+            {{-- Notifikasi Error --}}
+            @if (session('error'))
+                <div
+                    class="beneficiaries-alert beneficiaries-alert--error"
+                    role="alert"
+                >
+                    {{ session('error') }}
+                </div>
+            @endif
 
-    <p>Total data pada halaman ini: {{ $beneficiaries->count() }}</p>
+            {{-- Notifikasi Validasi --}}
+            @if ($errors->any())
+                <div
+                    class="beneficiaries-alert beneficiaries-alert--error"
+                    role="alert"
+                >
+                    <strong>
+                        Data belum dapat diproses. Periksa kembali:
+                    </strong>
 
-    <table border="1" cellpadding="8" cellspacing="0">
-        <thead>
-            <tr>
-                <th>No.</th>
-                <th>Nama</th>
-                <th>NIK</th>
-                <th>Kategori</th>
-                <th>Alamat</th>
-                <th>Status</th>
-                <th>Tanggal Terdaftar</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            @forelse ($beneficiaries as $beneficiary)
-                <tr>
-                    <td>{{ $beneficiaries->firstItem() + $loop->index }}</td>
-                    <td>{{ $beneficiary->name }}</td>
-                    <td>{{ $beneficiary->nik }}</td>
-                    <td>
-                        {{ $beneficiary->beneficiaryCategory?->name ?? '-' }}
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
-                        @if (strtolower($beneficiary->beneficiaryCategory?->name ?? '') === 'lainnya')
-                            @if ($beneficiary->other_category)
-                                ({{ $beneficiary->other_category }})
-                            @endif
-                        @endif
-                    </td>
-                    <td>{{ $beneficiary->address }}</td>
-                    <td>{{ $beneficiary->status }}</td>
-                    <td>{{ $beneficiary->registered_at?->format('d-m-Y') }}</td>
-                    <td>
-                        <a href="{{ route('beneficiaries.show', $beneficiary) }}">Detail</a>
-                        |
-                        <a href="{{ route('beneficiaries.edit', $beneficiary) }}">Edit</a>
-                        |
-                        <form
-                            action="{{ route('beneficiaries.destroy', $beneficiary) }}"
-                            method="POST"
-                            style="display: inline;"
-                            onsubmit="return confirm('Yakin ingin menghapus penerima ini?')"
+            {{-- Ringkasan Penerima Manfaat --}}
+            @include('components.admin.beneficiaries.summary-cards')
+
+            {{-- Pencarian dan Filter --}}
+            @include('components.admin.beneficiaries.filters')
+
+            {{-- Daftar Penerima Manfaat --}}
+            <section
+                class="beneficiaries-section"
+                aria-labelledby="beneficiaries-list-title"
+            >
+                <div class="beneficiaries-section__header">
+                    <div>
+                        <h2
+                            id="beneficiaries-list-title"
+                            class="beneficiaries-section__title"
                         >
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit">Hapus</button>
-                        </form>
-                    </td>
-                </tr>
-            @empty
-                <tr>
-                    <td colspan="8">Belum ada data penerima manfaat.</td>
-                </tr>
-            @endforelse
-        </tbody>
-    </table>
+                            Daftar Penerima
+                        </h2>
 
-    <div>
-        {{ $beneficiaries->links() }}
+                        <p class="beneficiaries-section__description">
+                            Informasi penerima manfaat yang tercatat
+                            dalam sistem.
+                        </p>
+                    </div>
+
+                    <span class="beneficiaries-section__count">
+                        {{ number_format($beneficiaries->total(), 0, ',', '.') }}
+                        data
+                    </span>
+                </div>
+
+                {{-- Tabel Data --}}
+                @include('components.admin.beneficiaries.table')
+
+                {{-- Navigasi Halaman --}}
+                @include('components.admin.beneficiaries.pagination')
+            </section>
+
+        </main>
     </div>
+
 </body>
 </html>
