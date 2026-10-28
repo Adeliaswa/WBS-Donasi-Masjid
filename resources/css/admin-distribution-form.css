@@ -1,0 +1,1682 @@
+
+/* =========================================================
+   MASJID SABILILLAH
+   EDIT PENYALURAN BANTUAN
+   Design system: Edit Penerima Manfaat
+   ========================================================= */
+
+
+/* =========================================================
+   1. DESIGN TOKENS
+   ========================================================= */
+
+body.distribution-form-body {
+    --distribution-green: #294236;
+    --distribution-green-dark: #20372a;
+    --distribution-green-light: #e8f0e8;
+    --distribution-green-soft: #f3f7f3;
+
+    --distribution-text: #2d382f;
+    --distribution-muted: #788078;
+
+    --distribution-border: #e0e8e0;
+    --distribution-border-soft: #edf1ed;
+
+    --distribution-white: #ffffff;
+    --distribution-background: #f6f7f5;
+
+    --distribution-danger: #c75c4b;
+    --distribution-danger-bg: #fff7f5;
+    --distribution-danger-border: #efd5cf;
+
+    --distribution-success: #247449;
+    --distribution-success-bg: #edf7f0;
+
+    --distribution-radius-card: 18px;
+    --distribution-radius-input: 10px;
+    --distribution-radius-button: 10px;
+
+    --distribution-shadow:
+        0 5px 20px rgb(34 58 42 / 4%);
+
+    margin: 0;
+    padding: 0;
+
+    min-width: 320px;
+    min-height: 100vh;
+
+    color: var(--distribution-text);
+    background: var(--distribution-background);
+
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body.distribution-form-body *,
+body.distribution-form-body *::before,
+body.distribution-form-body *::after {
+    box-sizing: border-box;
+}
+
+body.distribution-form-body button,
+body.distribution-form-body input,
+body.distribution-form-body select,
+body.distribution-form-body textarea {
+    font: inherit;
+}
+
+body.distribution-form-body button {
+    cursor: pointer;
+}
+
+body.distribution-form-body a {
+    color: inherit;
+    text-decoration: none;
+}
+
+body.distribution-form-body svg {
+    display: block;
+    max-width: 100%;
+}
+
+body.distribution-form-body [hidden] {
+    display: none !important;
+}
+
+body.distribution-form-body
+:where(button, input, select, textarea, a):focus-visible {
+    outline: 3px solid rgb(41 66 54 / 18%);
+    outline-offset: 3px;
+}
+
+
+/* =========================================================
+   2. LAYOUT HALAMAN TANPA SIDEBAR
+   ========================================================= */
+
+body.distribution-form-body .admin-sidebar,
+body.distribution-form-body #adminSidebar,
+body.distribution-form-body .admin-mobile-header,
+body.distribution-form-body .admin-sidebar-overlay,
+body.distribution-form-body #sidebarOverlay {
+    display: none !important;
+}
+
+body.distribution-form-body .admin-main {
+    display: block;
+
+    width: 100%;
+    max-width: none;
+    min-width: 0;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    background: var(--distribution-background);
+}
+
+body.distribution-form-body .beneficiary-form-page {
+    width: min(1120px, calc(100% - 64px));
+    max-width: 1120px;
+    min-width: 0;
+
+    margin: 0 auto;
+    padding: 32px 0 42px;
+}
+
+
+/* =========================================================
+   3. BREADCRUMB
+   ========================================================= */
+
+body.distribution-form-body .beneficiary-form__breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+
+    margin: 0 0 24px;
+
+    color: var(--distribution-muted);
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+body.distribution-form-body .beneficiary-form__breadcrumb a {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+
+    color: var(--distribution-green);
+    font-weight: 600;
+
+    transition: color 0.2s ease;
+}
+
+body.distribution-form-body .beneficiary-form__breadcrumb a:hover {
+    color: var(--distribution-green-dark);
+}
+
+body.distribution-form-body
+.beneficiary-form__breadcrumb
+a span[aria-hidden="true"] {
+    display: inline-block;
+
+    color: var(--distribution-green);
+
+    font-family: Arial, sans-serif;
+    font-size: 21px;
+    font-weight: 400;
+    line-height: 1;
+
+    transition: transform 0.2s ease;
+}
+
+body.distribution-form-body
+.beneficiary-form__breadcrumb
+a:hover span[aria-hidden="true"] {
+    transform: translateX(-3px);
+}
+
+body.distribution-form-body
+.beneficiary-form__breadcrumb
+[aria-current="page"] {
+    color: var(--distribution-muted);
+    font-weight: 400;
+}
+
+body.distribution-form-body
+.beneficiary-form__breadcrumb-separator {
+    color: #aab2ab;
+}
+
+
+/* =========================================================
+   4. HEADER EDIT PENYALURAN
+   ========================================================= */
+
+body.distribution-form-body .beneficiary-form__header {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    gap: 22px;
+
+    width: 100%;
+    min-width: 0;
+
+    margin: 0 0 27px;
+    padding: 28px 30px;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 94% 8%,
+            rgb(41 66 54 / 7%),
+            transparent 32%
+        ),
+        linear-gradient(
+            120deg,
+            #ffffff 0%,
+            #f4f8f4 100%
+        );
+
+    border: 1px solid #e0e9e1;
+    border-radius: 20px;
+
+    box-shadow: var(--distribution-shadow);
+}
+
+body.distribution-form-body
+.beneficiary-form__header-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex: 0 0 62px;
+    width: 62px;
+    height: 62px;
+
+    padding: 14px;
+
+    color: var(--distribution-green);
+    background: var(--distribution-green-light);
+
+    border: 1px solid #dce8dd;
+    border-radius: 16px;
+}
+
+body.distribution-form-body
+.beneficiary-form__header-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+body.distribution-form-body
+.beneficiary-form__heading {
+    flex: 1;
+    min-width: 0;
+}
+
+body.distribution-form-body
+.beneficiary-form__eyebrow {
+    display: block;
+
+    margin: 0 0 7px;
+
+    color: var(--distribution-green);
+
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    line-height: 1.5;
+}
+
+body.distribution-form-body
+.beneficiary-form__heading h1 {
+    margin: 0;
+
+    color: var(--distribution-green-dark);
+
+    font-size: clamp(25px, 3vw, 32px);
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.6px;
+
+    overflow-wrap: anywhere;
+}
+
+body.distribution-form-body
+.beneficiary-form__heading p {
+    max-width: 760px;
+
+    margin: 9px 0 0;
+
+    color: var(--distribution-muted);
+
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   5. KETERANGAN KOLOM WAJIB
+   ========================================================= */
+
+body.distribution-form-body
+.beneficiary-form__required-note {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    width: 100%;
+
+    margin: 0 0 19px;
+
+    color: var(--distribution-muted);
+
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+body.distribution-form-body
+.beneficiary-form__required-note > span {
+    flex-shrink: 0;
+
+    color: var(--distribution-danger);
+
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+
+/* =========================================================
+   6. PESAN VALIDASI
+   ========================================================= */
+
+body.distribution-form-body
+.distribution-edit-alert,
+body.distribution-form-body
+.beneficiary-form__alert {
+    width: 100%;
+    min-width: 0;
+
+    margin: 0 0 20px;
+    padding: 16px 19px;
+
+    border: 1px solid transparent;
+    border-radius: 12px;
+
+    overflow-wrap: anywhere;
+}
+
+body.distribution-form-body
+.distribution-edit-alert strong,
+body.distribution-form-body
+.beneficiary-form__alert strong {
+    display: block;
+    margin-bottom: 5px;
+
+    font-size: 13px;
+    font-weight: 700;
+}
+
+body.distribution-form-body
+.distribution-edit-alert p,
+body.distribution-form-body
+.beneficiary-form__alert p {
+    margin: 0;
+
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+body.distribution-form-body
+.distribution-edit-alert ul,
+body.distribution-form-body
+.beneficiary-form__alert ul {
+    margin: 8px 0 0;
+    padding-left: 20px;
+}
+
+body.distribution-form-body
+.distribution-edit-alert li,
+body.distribution-form-body
+.beneficiary-form__alert li {
+    margin: 4px 0;
+    font-size: 12px;
+}
+
+body.distribution-form-body
+.distribution-edit-alert--success {
+    color: #286744;
+    background: #f0f8f2;
+    border-color: #d5ead9;
+    border-left: 4px solid #4d9464;
+}
+
+body.distribution-form-body
+.distribution-edit-alert--error,
+body.distribution-form-body
+.beneficiary-form__alert {
+    color: #783c32;
+    background: var(--distribution-danger-bg);
+    border-color: var(--distribution-danger-border);
+    border-left: 4px solid var(--distribution-danger);
+}
+
+body.distribution-form-body
+.distribution-edit-alert--info {
+    color: #365d48;
+    background: var(--distribution-green-soft);
+    border-color: #dce9dd;
+}
+
+
+/* =========================================================
+   7. KARTU FORM UTAMA
+   ========================================================= */
+
+body.distribution-form-body
+.beneficiary-form.distribution-form {
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    min-width: 0;
+
+    margin: 0;
+    padding: 30px;
+
+    color: var(--distribution-text);
+    background: #ffffff;
+
+    border: 1px solid var(--distribution-border);
+    border-radius: 20px;
+
+    box-shadow: var(--distribution-shadow);
+}
+
+
+/* =========================================================
+   8. PERBAIKAN UTAMA: KARTU SETIAP BAGIAN FORM
+
+   Padding wajib supaya ikon, judul, label, dan input
+   tidak menempel pada garis tepi kartu.
+   ========================================================= */
+
+body.distribution-form-body.beneficiary-form-body
+.beneficiary-form__section,
+body.distribution-form-body
+.beneficiary-form__section {
+    display: block;
+
+    position: relative;
+
+    width: 100%;
+    min-width: 0;
+
+    margin: 0 0 25px !important;
+
+    /* JARAK DALAM KARTU */
+    padding: 24px 25px 26px !important;
+
+    background: #ffffff !important;
+
+    border: 1px solid var(--distribution-border) !important;
+    border-radius: 17px !important;
+
+    box-shadow: 0 3px 14px rgb(35 54 40 / 2.5%);
+
+    overflow: visible;
+}
+
+/* Jarak kartu terakhir */
+
+body.distribution-form-body.beneficiary-form-body
+.beneficiary-form__section:last-of-type,
+body.distribution-form-body
+.beneficiary-form__section:last-of-type {
+    margin-bottom: 0 !important;
+}
+
+/* Jangan biarkan konten membuat kartu melebar */
+
+body.distribution-form-body
+.beneficiary-form__section > * {
+    min-width: 0;
+    max-width: 100%;
+}
+
+/* Grid dan panduan mengikuti lebar bagian */
+
+body.distribution-form-body
+.beneficiary-form__section > .beneficiary-form__grid,
+body.distribution-form-body
+.beneficiary-form__section > .distribution-edit-guidance,
+body.distribution-form-body
+.beneficiary-form__section > .distribution-edit-duplicate,
+body.distribution-form-body
+.beneficiary-form__section > .distribution-edit-duplicate-result {
+    width: 100%;
+    min-width: 0;
+}
+
+
+/* =========================================================
+   9. HEADER BAGIAN FORM
+
+   Garis pemisah berada di dalam padding kartu,
+   tidak menempel ke tepi kartu.
+   ========================================================= */
+
+body.distribution-form-body.beneficiary-form-body
+.beneficiary-form__section-header,
+body.distribution-form-body
+.beneficiary-form__section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    width: 100%;
+    min-width: 0;
+
+    margin: 0 0 24px !important;
+    padding: 0 0 22px !important;
+
+    border: 0 !important;
+    border-bottom: 1px solid var(--distribution-border-soft) !important;
+
+    border-radius: 0 !important;
+    background: transparent !important;
+
+    box-shadow: none !important;
+}
+
+body.distribution-form-body
+.beneficiary-form__section-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex: 0 0 46px;
+    width: 46px;
+    height: 46px;
+
+    padding: 11px;
+
+    color: var(--distribution-green);
+    background: #f1f8f1;
+
+    border: 1px solid #dcebdd;
+    border-radius: 12px;
+}
+
+body.distribution-form-body
+.beneficiary-form__section-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+body.distribution-form-body
+.beneficiary-form__section-heading {
+    flex: 1;
+    min-width: 0;
+}
+
+body.distribution-form-body
+.beneficiary-form__section-heading h2 {
+    margin: 0;
+
+    color: var(--distribution-green-dark);
+
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.45;
+}
+
+body.distribution-form-body
+.beneficiary-form__section-heading p {
+    margin: 4px 0 0;
+
+    color: var(--distribution-muted);
+
+    font-size: 13px;
+    line-height: 1.65;
+}
+
+body.distribution-form-body
+.beneficiary-form__step {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    min-height: 34px;
+    padding: 7px 12px;
+
+    color: var(--distribution-green);
+    background: #f1f6f1;
+
+    border: 1px solid #e2ebe2;
+    border-radius: 8px;
+
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    line-height: 1.4;
+}
+
+
+/* =========================================================
+   10. GRID FORM
+
+   Kedua kolom tetap berada di dalam kartu.
+   ========================================================= */
+
+body.distribution-form-body.beneficiary-form-body
+.beneficiary-form__grid,
+body.distribution-form-body
+.beneficiary-form__grid {
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 23px 22px;
+
+    width: 100%;
+    min-width: 0;
+
+    margin: 0;
+    padding: 0;
+}
+
+body.distribution-form-body
+.beneficiary-form__field {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+}
+
+body.distribution-form-body
+.beneficiary-form__field--full {
+    grid-column: 1 / -1;
+}
+
+/* Antisipasi elemen form yang punya lebar tetap */
+
+body.distribution-form-body
+.beneficiary-form__field > *,
+body.distribution-form-body
+.beneficiary-form__field > div {
+    min-width: 0;
+    max-width: 100%;
+}
+
+
+/* =========================================================
+   11. LABEL FORM
+   ========================================================= */
+
+body.distribution-form-body
+.beneficiary-form__field > label {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 7px;
+
+    margin: 0 0 9px;
+
+    color: #344138;
+
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+body.distribution-form-body
+.beneficiary-form__field .required {
+    color: var(--distribution-danger);
+
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+body.distribution-form-body
+.beneficiary-form__optional {
+    display: inline-flex;
+    align-items: center;
+
+    padding: 3px 7px;
+
+    color: #737c74;
+    background: #f2f4f2;
+
+    border: 1px solid #e9ede9;
+    border-radius: 5px;
+
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   12. INPUT, SELECT, TEXTAREA
+   ========================================================= */
+
+body.distribution-form-body
+.beneficiary-form__field > input,
+body.distribution-form-body
+.beneficiary-form__field > select,
+body.distribution-form-body
+.beneficiary-form__field > textarea,
+body.distribution-form-body
+.distribution-edit-input-group input {
+    display: block;
+
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    min-height: 48px;
+
+    margin: 0;
+    padding: 12px 14px;
+
+    color: var(--distribution-text);
+    background: #ffffff;
+
+    border: 1px solid #dce5dc;
+    border-radius: var(--distribution-radius-input);
+
+    outline: none;
+    box-shadow: none;
+
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.5;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background-color 0.2s ease;
+}
+
+body.distribution-form-body
+.beneficiary-form__field > input:hover,
+body.distribution-form-body
+.beneficiary-form__field > select:hover,
+body.distribution-form-body
+.beneficiary-form__field > textarea:hover,
+body.distribution-form-body
+.distribution-edit-input-group input:hover {
+    border-color: #bdcdbf;
+}
+
+body.distribution-form-body
+.beneficiary-form__field > input:focus,
+body.distribution-form-body
+.beneficiary-form__field > select:focus,
+body.distribution-form-body
+.beneficiary-form__field > textarea:focus,
+body.distribution-form-body
+.distribution-edit-input-group input:focus {
+    color: var(--distribution-text);
+    background: #ffffff;
+
+    border-color: var(--distribution-green);
+
+    outline: none;
+    box-shadow: 0 0 0 3px rgb(41 66 54 / 9%);
+}
+
+body.distribution-form-body
+.beneficiary-form__field > input::placeholder,
+body.distribution-form-body
+.beneficiary-form__field > textarea::placeholder,
+body.distribution-form-body
+.distribution-edit-input-group input::placeholder {
+    color: #a0a8a1;
+    opacity: 1;
+}
+
+body.distribution-form-body
+.beneficiary-form__field > select {
+    cursor: pointer;
+}
+
+body.distribution-form-body
+.beneficiary-form__field > textarea {
+    min-height: 112px;
+    resize: vertical;
+}
+
+body.distribution-form-body
+.beneficiary-form__field > input:disabled,
+body.distribution-form-body
+.beneficiary-form__field > select:disabled,
+body.distribution-form-body
+.beneficiary-form__field > textarea:disabled {
+    color: #7c857d;
+    background: #f3f5f3;
+
+    cursor: not-allowed;
+}
+
+body.distribution-form-body
+.beneficiary-form__field .is-invalid {
+    border-color: var(--distribution-danger);
+    background: #fffafa;
+}
+
+
+/* =========================================================
+   13. INPUT NOMINAL / RUPIAH
+   ========================================================= */
+
+body.distribution-form-body
+.distribution-edit-input-group {
+    display: flex;
+    align-items: stretch;
+
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+}
+
+body.distribution-form-body
+.distribution-edit-input-prefix {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex: 0 0 48px;
+    min-width: 48px;
+
+    padding: 0 12px;
+
+    color: var(--distribution-green);
+    background: #f1f6f1;
+
+    border: 1px solid #dce5dc;
+    border-right: 0;
+
+    border-radius:
+        var(--distribution-radius-input) 0 0
+        var(--distribution-radius-input);
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+body.distribution-form-body
+.distribution-edit-input-group input {
+    flex: 1 1 0;
+
+    width: 1%;
+    min-width: 0;
+    max-width: 100%;
+
+    border-radius:
+        0 var(--distribution-radius-input)
+        var(--distribution-radius-input) 0;
+}
+
+
+/* =========================================================
+   14. PETUNJUK DAN ERROR
+   ========================================================= */
+
+body.distribution-form-body
+.beneficiary-form__hint {
+    display: block;
+
+    margin: 8px 0 0;
+
+    color: #7b847d;
+
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 1.7;
+
+    overflow-wrap: anywhere;
+}
+
+body.distribution-form-body
+.beneficiary-form__error {
+    display: block;
+
+    margin: 7px 0 0;
+
+    color: var(--distribution-danger);
+
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.6;
+
+    overflow-wrap: anywhere;
+}
+
+body.distribution-form-body
+.distribution-edit-field__bottom {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+
+    width: 100%;
+    min-width: 0;
+}
+
+body.distribution-form-body
+.distribution-edit-field__bottom small:last-child {
+    flex-shrink: 0;
+    text-align: right;
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   15. PANDUAN PENCEGAHAN PENYALURAN GANDA
+   ========================================================= */
+
+body.distribution-form-body
+.distribution-edit-guidance {
+    display: flex;
+    align-items: flex-start;
+    gap: 13px;
+
+    width: 100%;
+    min-width: 0;
+
+    margin: 0 0 23px;
+    padding: 17px 18px;
+
+    color: #365744;
+    background: #f3f7f3;
+
+    border: 1px solid #e0e9e0;
+    border-radius: 12px;
+}
+
+body.distribution-form-body
+.distribution-edit-guidance__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex: 0 0 35px;
+    width: 35px;
+    height: 35px;
+
+    padding: 8px;
+
+    color: var(--distribution-green);
+    background: #e6efe6;
+
+    border-radius: 9px;
+}
+
+body.distribution-form-body
+.distribution-edit-guidance__icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+body.distribution-form-body
+.distribution-edit-guidance > div {
+    flex: 1;
+    min-width: 0;
+}
+
+body.distribution-form-body
+.distribution-edit-guidance strong {
+    display: block;
+
+    margin: 0 0 5px;
+
+    color: var(--distribution-green-dark);
+
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.6;
+}
+
+body.distribution-form-body
+.distribution-edit-guidance p {
+    margin: 0;
+
+    color: #68766b;
+
+    font-size: 12px;
+    line-height: 1.75;
+}
+
+
+/* =========================================================
+   16. PERINGATAN DUPLIKASI
+   ========================================================= */
+
+body.distribution-form-body
+.distribution-edit-duplicate-result {
+    width: 100%;
+    min-width: 0;
+}
+
+body.distribution-form-body
+.distribution-edit-duplicate-result:empty {
+    display: none;
+}
+
+body.distribution-form-body
+.distribution-edit-duplicate {
+    width: 100%;
+    min-width: 0;
+
+    margin: 0 0 22px;
+    padding: 18px;
+
+    color: #783c32;
+    background: var(--distribution-danger-bg);
+
+    border: 1px solid var(--distribution-danger-border);
+    border-left: 4px solid var(--distribution-danger);
+    border-radius: 12px;
+
+    overflow-wrap: anywhere;
+}
+
+body.distribution-form-body
+.distribution-edit-duplicate__heading {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+
+    margin: 0 0 15px;
+}
+
+body.distribution-form-body
+.distribution-edit-duplicate__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex: 0 0 33px;
+    width: 33px;
+    height: 33px;
+
+    color: #a34135;
+    background: #f8e6e2;
+
+    border: 1px solid #efd0c9;
+    border-radius: 9px;
+
+    font-size: 16px;
+    font-weight: 700;
+}
+
+body.distribution-form-body
+.distribution-edit-duplicate__heading > div {
+    flex: 1;
+    min-width: 0;
+}
+
+body.distribution-form-body
+.distribution-edit-duplicate__heading h2,
+body.distribution-form-body
+.distribution-edit-duplicate__heading h3 {
+    margin: 0;
+
+    color: #793d32;
+
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.5;
+}
+
+body.distribution-form-body
+.distribution-edit-duplicate__heading p {
+    margin: 5px 0 0;
+
+    color: #875a50;
+
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+body.distribution-form-body
+.distribution-edit-duplicate__list-wrapper {
+    width: 100%;
+    min-width: 0;
+    margin-bottom: 14px;
+
+    overflow-x: auto;
+}
+
+body.distribution-form-body
+.distribution-edit-duplicate__list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+}
+
+body.distribution-form-body
+.distribution-edit-duplicate__list li {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    padding: 12px 14px;
+
+    color: #644a43;
+    background: #ffffff;
+
+    border: 1px solid #f0dcd7;
+    border-radius: 8px;
+
+    font-size: 12px;
+    line-height: 1.7;
+
+    overflow-wrap: anywhere;
+}
+
+body.distribution-form-body
+.distribution-edit-duplicate__note {
+    margin: 0;
+
+    color: #875a50;
+
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+body.distribution-form-body
+.distribution-edit-duplicate__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+
+    margin-top: 17px;
+}
+
+body.distribution-form-body
+.distribution-edit-duplicate__actions form {
+    margin: 0;
+}
+
+
+/* =========================================================
+   17. TOMBOL
+   ========================================================= */
+
+body.distribution-form-body
+.beneficiary-form__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+
+    min-height: 46px;
+    padding: 12px 20px;
+
+    border: 1px solid transparent;
+    border-radius: var(--distribution-radius-button);
+
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.4;
+
+    text-align: center;
+    white-space: normal;
+
+    transition:
+        color 0.2s ease,
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+}
+
+body.distribution-form-body
+.beneficiary-form__button--secondary {
+    color: #526056;
+    background: #ffffff;
+
+    border-color: #d6e2d6;
+}
+
+body.distribution-form-body
+.beneficiary-form__button--secondary:hover {
+    color: var(--distribution-green);
+    background: #f5f8f5;
+
+    border-color: #bdcdbf;
+}
+
+body.distribution-form-body
+.beneficiary-form__button--primary {
+    color: #ffffff;
+    background: var(--distribution-green);
+
+    border-color: var(--distribution-green);
+
+    box-shadow: 0 4px 10px rgb(41 66 54 / 12%);
+}
+
+body.distribution-form-body
+.beneficiary-form__button--primary:hover {
+    color: #ffffff;
+    background: var(--distribution-green-dark);
+
+    border-color: var(--distribution-green-dark);
+
+    box-shadow: 0 5px 12px rgb(41 66 54 / 15%);
+}
+
+body.distribution-form-body
+.beneficiary-form__button--primary:active {
+    transform: translateY(1px);
+}
+
+body.distribution-form-body
+.beneficiary-form__button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+
+    transform: none;
+    box-shadow: none;
+}
+
+body.distribution-form-body
+.distribution-edit-button--warning {
+    color: #ffffff;
+    background: #9b503e;
+    border-color: #9b503e;
+}
+
+body.distribution-form-body
+.distribution-edit-button--warning:hover {
+    color: #ffffff;
+    background: #813e30;
+    border-color: #813e30;
+}
+
+
+/* =========================================================
+   18. FOOTER FORM
+   ========================================================= */
+
+body.distribution-form-body
+.beneficiary-form__footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+
+    width: 100%;
+    min-width: 0;
+
+    margin-top: 24px;
+    padding-top: 22px;
+
+    border-top: 1px solid var(--distribution-border-soft);
+}
+
+body.distribution-form-body
+.beneficiary-form__footer
+.beneficiary-form__button--primary {
+    min-width: 210px;
+}
+
+body.distribution-form-body
+.beneficiary-form__footer-note {
+    margin: 20px 0 0;
+
+    color: #8a938b;
+
+    font-size: 11px;
+    line-height: 1.6;
+    text-align: center;
+}
+
+
+/* =========================================================
+   19. TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+    body.distribution-form-body .beneficiary-form-page {
+        width: calc(100% - 44px);
+
+        padding-top: 26px;
+        padding-bottom: 32px;
+    }
+
+    body.distribution-form-body
+    .beneficiary-form__header {
+        gap: 17px;
+        padding: 25px;
+    }
+
+    body.distribution-form-body
+    .beneficiary-form__header-icon {
+        flex-basis: 57px;
+        width: 57px;
+        height: 57px;
+        padding: 13px;
+    }
+
+    body.distribution-form-body
+    .beneficiary-form.distribution-form {
+        padding: 24px;
+    }
+
+    body.distribution-form-body.beneficiary-form-body
+    .beneficiary-form__section,
+    body.distribution-form-body
+    .beneficiary-form__section {
+        padding: 22px !important;
+    }
+
+    body.distribution-form-body
+    .beneficiary-form__grid {
+        gap: 21px 18px;
+    }
+}
+
+
+/* =========================================================
+   20. MOBILE
+   ========================================================= */
+
+@media (max-width: 640px) {
+    body.distribution-form-body .beneficiary-form-page {
+        width: calc(100% - 28px);
+
+        padding: 20px 0 25px;
+    }
+
+    body.distribution-form-body
+    .beneficiary-form__breadcrumb {
+        gap: 8px;
+        margin-bottom: 18px;
+
+        font-size: 12px;
+    }
+
+    /* Header */
+
+    body.distribution-form-body
+    .beneficiary-form__header {
+        align-items: flex-start;
+        gap: 13px;
+
+        margin-bottom: 21px;
+        padding: 20px 17px;
+
+        border-radius: 15px;
+    }
+
+    body.distribution-form-body
+    .beneficiary-form__header-icon {
+        flex: 0 0 44px;
+        width: 44px;
+        height: 44px;
+
+        padding: 10px;
+        border-radius: 11px;
+    }
+
+    body.distribution-form-body
+    .beneficiary-form__eyebrow {
+        margin-bottom: 5px;
+
+        font-size: 8px;
+        letter-spacing: 0.8px;
+    }
+
+    body.distribution-form-body
+    .beneficiary-form__heading h1 {
+        font-size: 22px;
+        line-height: 1.3;
+        letter-spacing: -0.3px;
+    }
+
+    body.distribution-form-body
+    .beneficiary-form__heading p {
+        margin-top: 7px;
+
+        font-size: 12px;
+        line-height: 1.7;
+    }
+
+    /* Kartu form utama */
+
+    body.distribution-form-body
+    .beneficiary-form.distribution-form {
+        padding: 16px;
+
+        border-radius: 15px;
+    }
+
+    /* Kartu tiap bagian */
+
+    body.distribution-form-body.beneficiary-form-body
+    .beneficiary-form__section,
+    body.distribution-form-body
+    .beneficiary-form__section {
+        margin-bottom: 17px !important;
+
+        padding: 17px 15px 19px !important;
+
+        border-radius: 13px !important;
+    }
+
+    /* Header tiap bagian */
+
+    body.distribution-form-body
+    .beneficiary-form__section-header {
+        flex-wrap: wrap;
+        gap: 10px;
+
+        margin-bottom: 19px !important;
+        padding-bottom: 17px !important;
+    }
+
+    body.distribution-form-body
+    .beneficiary-form__section-icon {
+        flex: 0 0 38px;
+        width: 38px;
+        height: 38px;
+
+        padding: 9px;
+        border-radius: 10px;
+    }
+
+    body.distribution-form-body
+    .beneficiary-form__section-heading {
+        flex: 1 1 calc(100% - 50px);
+    }
+
+    body.distribution-form-body
+    .beneficiary-form__section-heading h2 {
+        font-size: 15px;
+    }
+
+    body.distribution-form-body
+    .beneficiary-form__section-heading p {
+        font-size: 11px;
+    }
+
+    body.distribution-form-body
+    .beneficiary-form__step {
+        min-height: 27px;
+        padding: 5px 8px;
+
+        font-size: 9px;
+    }
+
+    /* Satu kolom di HP */
+
+    body.distribution-form-body
+    .beneficiary-form__grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 18px;
+
+        width: 100%;
+    }
+
+    body.distribution-form-body
+    .beneficiary-form__field--full {
+        grid-column: auto;
+    }
+
+    body.distribution-form-body
+    .beneficiary-form__field > label {
+        margin-bottom: 7px;
+        font-size: 12px;
+    }
+
+    body.distribution-form-body
+    .beneficiary-form__field > input,
+    body.distribution-form-body
+    .beneficiary-form__field > select,
+    body.distribution-form-body
+    .beneficiary-form__field > textarea,
+    body.distribution-form-body
+    .distribution-edit-input-group input {
+        min-height: 45px;
+        padding: 11px 12px;
+
+        font-size: 12px;
+    }
+
+    body.distribution-form-body
+    .beneficiary-form__field > textarea {
+        min-height: 96px;
+    }
+
+    body.distribution-form-body
+    .distribution-edit-input-prefix {
+        flex-basis: 41px;
+        min-width: 41px;
+
+        font-size: 12px;
+    }
+
+    body.distribution-form-body
+    .beneficiary-form__hint,
+    body.distribution-form-body
+    .beneficiary-form__error {
+        font-size: 10px;
+    }
+
+    /* Panduan duplikasi */
+
+    body.distribution-form-body
+    .distribution-edit-guidance {
+        gap: 10px;
+
+        padding: 13px;
+        margin-bottom: 18px;
+    }
+
+    body.distribution-form-body
+    .distribution-edit-guidance__icon {
+        flex-basis: 29px;
+        width: 29px;
+        height: 29px;
+
+        padding: 6px;
+    }
+
+    body.distribution-form-body
+    .distribution-edit-guidance strong {
+        font-size: 11px;
+    }
+
+    body.distribution-form-body
+    .distribution-edit-guidance p {
+        font-size: 11px;
+    }
+
+    /* Peringatan duplikasi */
+
+    body.distribution-form-body
+    .distribution-edit-duplicate {
+        padding: 14px;
+    }
+
+    body.distribution-form-body
+    .distribution-edit-duplicate__actions {
+        flex-direction: column-reverse;
+        align-items: stretch;
+    }
+
+    body.distribution-form-body
+    .distribution-edit-duplicate__actions form {
+        width: 100%;
+    }
+
+    body.distribution-form-body
+    .distribution-edit-duplicate__actions
+    .beneficiary-form__button {
+        width: 100%;
+    }
+
+    /* Tombol footer */
+
+    body.distribution-form-body
+    .beneficiary-form__footer {
+        flex-direction: column-reverse;
+        align-items: stretch;
+        gap: 10px;
+
+        margin-top: 20px;
+        padding-top: 17px;
+    }
+
+    body.distribution-form-body
+    .beneficiary-form__footer
+    .beneficiary-form__button {
+        width: 100%;
+        min-width: 0;
+        min-height: 45px;
+
+        padding: 12px 15px;
+    }
+
+    body.distribution-form-body
+    .beneficiary-form__footer-note {
+        margin-top: 16px;
+    }
+}
+
+
+/* =========================================================
+   21. HP KECIL
+   ========================================================= */
+
+@media (max-width: 380px) {
+    body.distribution-form-body .beneficiary-form-page {
+        width: calc(100% - 22px);
+    }
+
+    body.distribution-form-body
+    .beneficiary-form__header {
+        gap: 10px;
+        padding: 17px 13px;
+    }
+
+    body.distribution-form-body
+    .beneficiary-form__header-icon {
+        flex-basis: 38px;
+        width: 38px;
+        height: 38px;
+        padding: 9px;
+    }
+
+    body.distribution-form-body
+    .beneficiary-form__heading h1 {
+        font-size: 20px;
+    }
+
+    body.distribution-form-body
+    .beneficiary-form.distribution-form {
+        padding: 12px;
+    }
+
+    body.distribution-form-body.beneficiary-form-body
+    .beneficiary-form__section,
+    body.distribution-form-body
+    .beneficiary-form__section {
+        padding: 14px 12px 16px !important;
+    }
+
+    body.distribution-form-body
+    .beneficiary-form__section-header {
+        align-items: flex-start;
+    }
+
+    body.distribution-form-body
+    .distribution-edit-field__bottom {
+        flex-wrap: wrap;
+    }
+}
+
+
+/* =========================================================
+   22. AKSESIBILITAS
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+    body.distribution-form-body *,
+    body.distribution-form-body *::before,
+    body.distribution-form-body *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+    }
+}

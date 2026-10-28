@@ -32,6 +32,9 @@ export default defineConfig({
 
                 'resources/css/beneficiary-category-form.css',
 
+                'resources/css/admin-distributions.css',
+
+                'resources/css/admin-distribution-form.css',
 
                 // JavaScript utama
                 'resources/js/app.js',
@@ -52,6 +55,8 @@ export default defineConfig({
                 'resources/js/beneficiary-categories.js',
         
                 'resources/js/beneficiary-category-form.js',
+                
+                'resources/js/admin-distributions.js'
             ],
             refresh: true,
         }),

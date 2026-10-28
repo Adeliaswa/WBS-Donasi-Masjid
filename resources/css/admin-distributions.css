@@ -1,0 +1,2602 @@
+
+/* =========================================================
+   MASJID SABILILLAH
+   ADMIN — PENYALURAN BANTUAN
+   File: resources/css/admin-distributions.css
+   ========================================================= */
+
+/* =========================================================
+   1. DESIGN SYSTEM
+   ========================================================= */
+
+:root {
+    --distribution-primary: #294236;
+    --distribution-primary-hover: #1f3529;
+    --distribution-primary-soft: #edf3ee;
+
+    --distribution-background: #f5f7f5;
+    --distribution-surface: #ffffff;
+
+    --distribution-text: #26372c;
+    --distribution-text-secondary: #657268;
+    --distribution-text-muted: #849087;
+
+    --distribution-border: #e1e8e1;
+    --distribution-border-hover: #c8d5ca;
+
+    --distribution-success: #287548;
+    --distribution-success-bg: #eaf6ed;
+
+    --distribution-warning: #a76b1b;
+    --distribution-warning-bg: #fff5e5;
+
+    --distribution-danger: #c34343;
+    --distribution-danger-bg: #fff0ef;
+
+    --distribution-info: #376eb5;
+    --distribution-info-bg: #edf4ff;
+
+    --distribution-radius-sm: 8px;
+    --distribution-radius-md: 11px;
+    --distribution-radius-lg: 15px;
+    --distribution-radius-xl: 19px;
+
+    --distribution-shadow:
+        0 2px 10px rgba(35, 55, 41, 0.035);
+
+    --distribution-shadow-hover:
+        0 6px 20px rgba(35, 55, 41, 0.075);
+
+    --distribution-transition: 0.2s ease;
+}
+
+
+/* =========================================================
+   2. BASE
+   ========================================================= */
+
+.distribution-index-page,
+.distribution-index-page *,
+.distribution-index-page *::before,
+.distribution-index-page *::after {
+    box-sizing: border-box;
+}
+
+.distribution-index-page {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+
+    margin: 0 auto;
+    padding: 28px clamp(18px, 2vw, 32px) 42px;
+
+    color: var(--distribution-text);
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 1.6;
+
+    overflow-wrap: break-word;
+}
+
+.distribution-index-page h1,
+.distribution-index-page h2,
+.distribution-index-page h3,
+.distribution-index-page p {
+    margin-top: 0;
+}
+
+.distribution-index-page button,
+.distribution-index-page input,
+.distribution-index-page select,
+.distribution-index-page textarea {
+    font-family: inherit;
+}
+
+.distribution-index-page svg {
+    display: block;
+    flex-shrink: 0;
+}
+
+.distribution-index-page a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.distribution-index-page button:focus-visible,
+.distribution-index-page a:focus-visible,
+.distribution-index-page input:focus-visible,
+.distribution-index-page select:focus-visible,
+.distribution-index-page textarea:focus-visible {
+    outline: 3px solid rgba(41, 66, 54, 0.2);
+    outline-offset: 3px;
+}
+
+
+/* =========================================================
+   3. PAGE HEADER
+   ========================================================= */
+
+.distribution-index-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+
+    margin-bottom: 27px;
+}
+
+.distribution-index-header__content {
+    position: relative;
+    min-width: 0;
+    padding-left: 17px;
+}
+
+.distribution-index-header__content::before {
+    position: absolute;
+    top: 3px;
+    left: 0;
+
+    width: 4px;
+    height: 34px;
+
+    background: var(--distribution-primary);
+    border-radius: 4px;
+
+    content: "";
+}
+
+.distribution-index-header__eyebrow {
+    display: block;
+    margin-bottom: 6px;
+
+    color: var(--distribution-primary);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.7px;
+    line-height: 1.5;
+}
+
+.distribution-index-header__title {
+    margin: 0 0 7px;
+
+    color: var(--distribution-text);
+    font-size: clamp(25px, 2vw, 30px);
+    font-weight: 750;
+    letter-spacing: -0.8px;
+    line-height: 1.3;
+}
+
+.distribution-index-header__description {
+    max-width: 650px;
+    margin: 0;
+
+    color: var(--distribution-text-secondary);
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.distribution-index-header > .distribution-button {
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   4. BUTTON SYSTEM
+   Kontras tombol dipastikan agar mudah dibaca.
+   ========================================================= */
+
+.distribution-index-page .distribution-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+
+    min-height: 42px;
+    padding: 10px 17px;
+
+    border: 1px solid transparent;
+    border-radius: 10px;
+
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.4;
+    text-align: center;
+    white-space: nowrap;
+
+    cursor: pointer;
+
+    transition:
+        background-color var(--distribution-transition),
+        border-color var(--distribution-transition),
+        color var(--distribution-transition),
+        box-shadow var(--distribution-transition),
+        transform var(--distribution-transition);
+}
+
+.distribution-index-page .distribution-button svg {
+    width: 17px;
+    height: 17px;
+}
+
+.distribution-index-page .distribution-button--primary {
+    color: #ffffff !important;
+    background-color: var(--distribution-primary) !important;
+    border-color: var(--distribution-primary) !important;
+
+    box-shadow: 0 3px 8px rgba(41, 66, 54, 0.12);
+}
+
+.distribution-index-page .distribution-button--primary:hover {
+    color: #ffffff !important;
+    background-color: var(--distribution-primary-hover) !important;
+    border-color: var(--distribution-primary-hover) !important;
+
+    box-shadow: 0 5px 13px rgba(41, 66, 54, 0.17);
+    transform: translateY(-1px);
+}
+
+.distribution-index-page .distribution-button--secondary {
+    color: var(--distribution-primary) !important;
+    background-color: #ffffff !important;
+    border-color: #d5e0d6 !important;
+}
+
+.distribution-index-page .distribution-button--secondary:hover {
+    color: var(--distribution-primary) !important;
+    background-color: #f0f5f0 !important;
+    border-color: #bdcdbf !important;
+}
+
+.distribution-index-page .distribution-button--warning {
+    color: #ffffff !important;
+    background-color: #a76b1b !important;
+    border-color: #a76b1b !important;
+}
+
+.distribution-index-page .distribution-button--warning:hover {
+    color: #ffffff !important;
+    background-color: #895516 !important;
+    border-color: #895516 !important;
+}
+
+.distribution-index-page .distribution-button:active {
+    transform: translateY(0);
+}
+
+.distribution-index-page .distribution-button:disabled {
+    color: #ffffff !important;
+    background-color: #a6b1a8 !important;
+    border-color: #a6b1a8 !important;
+    box-shadow: none;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.distribution-index-header > .distribution-button {
+    min-height: 46px;
+    padding: 12px 20px;
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   5. ALERTS
+   Peringatan umum: sukses, warning, dan error
+   ========================================================= */
+
+.distribution-alert {
+    box-sizing: border-box;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+
+    width: 100%;
+    min-width: 0;
+    margin: 0 0 20px;
+    padding: 15px 17px;
+
+    border: 1px solid transparent;
+    border-radius: 12px;
+
+    font-size: 13px;
+    line-height: 1.65;
+    overflow-wrap: anywhere;
+}
+
+.distribution-alert strong {
+    font-weight: 700;
+}
+
+.distribution-alert ul {
+    margin: 10px 0 0;
+    padding-left: 20px;
+}
+
+.distribution-alert li + li {
+    margin-top: 5px;
+}
+
+.distribution-alert--success {
+    color: #246a43;
+    background: #edf8f0;
+    border-color: #cce9d4;
+}
+
+.distribution-alert--warning {
+    color: #854d0e;
+    background: #fff8eb;
+    border-color: #f3d5a2;
+}
+
+.distribution-alert--error {
+    color: #a33636;
+    background: #fff0ef;
+    border-color: #f1cfcc;
+}
+
+
+/* =========================================================
+   6. DUPLICATE WARNING
+   Peringatan otomatis saat memilih tanggal dan penerima
+   ========================================================= */
+
+/* Area hasil pemeriksaan duplikasi */
+
+#duplicate-check-result {
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    margin: 0 0 18px;
+}
+
+/* Kartu peringatan utama */
+
+#duplicate-check-result .distribution-duplicate-warning {
+    box-sizing: border-box;
+    position: relative;
+
+    width: 100%;
+    min-width: 0;
+    margin: 0 0 18px;
+    padding: 18px 20px;
+
+    color: #713f12;
+    background: #fff8eb;
+
+    border: 1px solid #f3d5a2;
+    border-left: 4px solid #d97706;
+    border-radius: 12px;
+
+    box-shadow: 0 3px 10px rgba(124, 45, 18, 0.045);
+
+    font-size: 13px;
+    line-height: 1.65;
+
+    overflow-wrap: anywhere;
+    word-break: normal;
+}
+
+/* Judul peringatan dan ikon */
+
+#duplicate-check-result .distribution-duplicate-warning > strong {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    margin: 0 0 10px;
+
+    color: #9a3412;
+    font-size: 15px;
+    font-weight: 750;
+    line-height: 1.5;
+}
+
+/* Ikon tanda seru */
+
+#duplicate-check-result .distribution-duplicate-warning > strong::before {
+    content: "!";
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 28px;
+    height: 28px;
+    flex: 0 0 28px;
+
+    color: #ffffff;
+    background: #c2410c;
+    border-radius: 50%;
+
+    font-size: 17px;
+    font-weight: 800;
+    line-height: 1;
+}
+
+/* Penjelasan jumlah catatan */
+
+#duplicate-check-result .distribution-duplicate-warning > p:first-of-type {
+    margin: 0 0 13px;
+
+    color: #854d0e;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+/* Daftar penyaluran yang berpotensi duplikat */
+
+#duplicate-check-result .distribution-duplicate-warning > ul {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+
+    margin: 0 0 13px;
+    padding: 0;
+
+    list-style: none;
+}
+
+/* Kartu informasi setiap penyaluran */
+
+#duplicate-check-result .distribution-duplicate-warning > ul > li {
+    position: relative;
+    box-sizing: border-box;
+
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+    padding: 11px 14px 11px 32px;
+
+    color: #334155;
+    background: #ffffff;
+
+    border: 1px solid #f0d8b5;
+    border-radius: 9px;
+
+    font-size: 13px;
+    line-height: 1.7;
+
+    overflow-wrap: anywhere;
+    word-break: normal;
+}
+
+/* Penanda informasi */
+
+#duplicate-check-result .distribution-duplicate-warning > ul > li::before {
+    content: "";
+
+    position: absolute;
+    top: 17px;
+    left: 13px;
+
+    width: 8px;
+    height: 8px;
+
+    background: #d97706;
+    border-radius: 50%;
+}
+
+/* Pesan konfirmasi sebelum menyimpan */
+
+#duplicate-check-result .distribution-duplicate-warning > p:last-of-type {
+    box-sizing: border-box;
+
+    margin: 0;
+    padding: 11px 13px;
+
+    color: #854d0e;
+    background: #fff0d5;
+
+    border: 1px solid #f3d19b;
+    border-radius: 9px;
+
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   6A. DUPLICATE CONFIRMATION
+   Konfirmasi ketika pengguna melanjutkan penyimpanan
+   ========================================================= */
+
+.distribution-duplicate-confirmation {
+    box-sizing: border-box;
+
+    width: 100%;
+    min-width: 0;
+
+    margin: 0 0 24px;
+    padding: 22px;
+
+    color: var(--distribution-text, #294236);
+    background: #fffaf2;
+
+    border: 1px solid #f1d5a6;
+    border-left: 4px solid #d97706;
+    border-radius: var(--distribution-radius-lg, 14px);
+
+    box-shadow: 0 4px 14px rgba(124, 45, 18, 0.05);
+}
+
+/* Header konfirmasi */
+
+.distribution-duplicate-confirmation__header {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+
+    min-width: 0;
+    margin-bottom: 18px;
+}
+
+/* Ikon peringatan */
+
+.distribution-duplicate-confirmation__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 38px;
+    height: 38px;
+    flex: 0 0 38px;
+
+    color: #ffffff;
+    background: #c2410c;
+    border: 1px solid #c2410c;
+    border-radius: 50%;
+
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 1;
+}
+
+/* Judul konfirmasi */
+
+.distribution-duplicate-confirmation__header h2 {
+    margin: 0 0 6px;
+
+    color: #9a3412;
+    font-size: 16px;
+    font-weight: 750;
+    line-height: 1.45;
+
+    overflow-wrap: anywhere;
+}
+
+/* Deskripsi konfirmasi */
+
+.distribution-duplicate-confirmation__header p {
+    margin: 0;
+
+    color: #854d0e;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+/* Tabel informasi duplikasi */
+
+.distribution-duplicate-confirmation__table-wrap {
+    box-sizing: border-box;
+
+    width: 100%;
+    min-width: 0;
+    margin: 0 0 18px;
+
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+
+    background: #ffffff;
+    border: 1px solid #ead9bd;
+    border-radius: 10px;
+}
+
+.distribution-duplicate-confirmation__table {
+    width: 100%;
+    min-width: 560px;
+
+    border-collapse: separate;
+    border-spacing: 0;
+    text-align: left;
+}
+
+/* Sel tabel */
+
+.distribution-duplicate-confirmation__table th,
+.distribution-duplicate-confirmation__table td {
+    padding: 12px 14px;
+
+    border-bottom: 1px solid #f0e6d7;
+
+    font-size: 13px;
+    line-height: 1.6;
+    vertical-align: middle;
+}
+
+/* Header tabel */
+
+.distribution-duplicate-confirmation__table th {
+    color: #79532b;
+    background: #faf2e5;
+
+    font-size: 12px;
+    font-weight: 750;
+    white-space: nowrap;
+}
+
+/* Baris terakhir */
+
+.distribution-duplicate-confirmation__table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Hover baris */
+
+.distribution-duplicate-confirmation__table tbody tr:hover td {
+    background: #fffcf7;
+}
+
+/* Pertanyaan konfirmasi: dibuat lebih tegas sebagai warning */
+
+.distribution-duplicate-confirmation .distribution-duplicate-confirmation__question {
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: flex-start;
+    gap: 11px;
+
+    width: 100%;
+    min-width: 0;
+
+    margin: 0 0 18px;
+    padding: 14px 16px;
+
+    color: #9a3412;
+    background: #fff0d9;
+
+    border: 1px solid #fdba74;
+    border-left: 4px solid #c2410c;
+    border-radius: 10px;
+
+    font-size: 14px;
+    font-weight: 750;
+    line-height: 1.65;
+
+    overflow-wrap: anywhere;
+}
+
+/* Ikon tanda seru pada pertanyaan */
+
+.distribution-duplicate-confirmation .distribution-duplicate-confirmation__question::before {
+    content: "!";
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 25px;
+    height: 25px;
+    flex: 0 0 25px;
+
+    margin-top: 1px;
+
+    color: #ffffff;
+    background: #c2410c;
+    border-radius: 50%;
+
+    font-size: 15px;
+    font-weight: 800;
+    line-height: 1;
+}
+
+/* Tombol aksi */
+
+.distribution-duplicate-confirmation__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+
+    min-width: 0;
+    margin-top: 18px;
+}
+
+/* Ukuran target interaksi tombol */
+
+.distribution-duplicate-confirmation__actions > button,
+.distribution-duplicate-confirmation__actions > a {
+    box-sizing: border-box;
+
+    min-height: 44px;
+    max-width: 100%;
+    padding: 11px 18px;
+
+    border-radius: 10px;
+
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.4;
+    text-align: center;
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.distribution-duplicate-confirmation__actions > button:focus-visible,
+.distribution-duplicate-confirmation__actions > a:focus-visible {
+    outline: 3px solid rgba(217, 119, 6, 0.3);
+    outline-offset: 3px;
+}
+
+
+/* =========================================================
+   7. SUMMARY CARDS
+   Ringkasan statistik penyaluran bantuan
+   ========================================================= */
+
+.distribution-summary {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+
+    width: 100%;
+    min-width: 0;
+    margin-bottom: 25px;
+}
+
+/* Kartu statistik */
+
+.distribution-summary__card {
+    box-sizing: border-box;
+
+    min-width: 0;
+    padding: 19px 19px 17px;
+
+    background: var(--distribution-surface, #ffffff);
+    border: 1px solid var(--distribution-border, #dfe8df);
+    border-radius: var(--distribution-radius-lg, 14px);
+
+    box-shadow: var(--distribution-shadow, 0 3px 12px rgba(25, 55, 39, 0.04));
+
+    transition:
+        box-shadow var(--distribution-transition, 0.2s ease),
+        border-color var(--distribution-transition, 0.2s ease),
+        transform var(--distribution-transition, 0.2s ease);
+}
+
+.distribution-summary__card:hover {
+    border-color: #cbd9cd;
+
+    box-shadow: var(
+        --distribution-shadow-hover,
+        0 7px 18px rgba(25, 55, 39, 0.07)
+    );
+
+    transform: translateY(-2px);
+}
+
+/* Baris ikon dan label */
+
+.distribution-summary__top {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+
+    min-width: 0;
+    margin-bottom: 17px;
+}
+
+/* Wadah ikon */
+
+.distribution-summary__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 40px;
+    height: 40px;
+    flex: 0 0 40px;
+
+    color: var(--distribution-primary, #294236);
+    background: #eef3ef;
+    border: 1px solid #e0e9e1;
+    border-radius: 11px;
+}
+
+.distribution-summary__icon svg {
+    display: block;
+
+    width: 20px;
+    height: 20px;
+}
+
+/* Variasi warna ikon */
+
+.distribution-summary__icon--green {
+    color: #267547;
+    background: #edf7ef;
+    border-color: #d7eadb;
+}
+
+.distribution-summary__icon--blue {
+    color: #376eb5;
+    background: #edf4ff;
+    border-color: #dce8ff;
+}
+
+.distribution-summary__icon--orange {
+    color: #a86618;
+    background: #fff5e8;
+    border-color: #f4e0bf;
+}
+
+/* Label statistik */
+
+.distribution-summary__label {
+    min-width: 0;
+    margin: 0;
+
+    color: var(--distribution-text-secondary, #68766c);
+
+    font-size: 12px;
+    font-weight: 650;
+    line-height: 1.55;
+
+    overflow-wrap: anywhere;
+}
+
+/* Angka utama */
+
+.distribution-summary__value {
+    display: block;
+
+    margin: 0 0 7px;
+
+    color: var(--distribution-text, #294236);
+
+    font-size: clamp(24px, 2vw, 29px);
+    font-weight: 800;
+    letter-spacing: -0.6px;
+    line-height: 1.3;
+
+    overflow-wrap: anywhere;
+    word-break: normal;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Nilai mata uang */
+
+.distribution-summary__value--currency {
+    font-size: clamp(19px, 1.7vw, 25px);
+    letter-spacing: -0.4px;
+}
+
+/* Keterangan statistik */
+
+.distribution-summary__description {
+    margin: 0;
+
+    color: var(--distribution-text-muted, #78847b);
+
+    font-size: 12px;
+    line-height: 1.65;
+}
+
+
+/* =========================================================
+   8. RESPONSIVE
+   Tablet
+   ========================================================= */
+
+@media (max-width: 1100px) {
+    .distribution-summary {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+    }
+
+    .distribution-summary__card {
+        padding: 17px;
+    }
+
+    .distribution-duplicate-confirmation {
+        padding: 19px;
+    }
+}
+
+
+/* =========================================================
+   9. RESPONSIVE
+   Mobile
+   ========================================================= */
+
+@media (max-width: 600px) {
+    /* Peringatan otomatis */
+
+    #duplicate-check-result .distribution-duplicate-warning {
+        padding: 15px;
+        border-radius: 10px;
+    }
+
+    #duplicate-check-result .distribution-duplicate-warning > strong {
+        gap: 9px;
+        margin-bottom: 9px;
+        font-size: 14px;
+    }
+
+    #duplicate-check-result .distribution-duplicate-warning > strong::before {
+        width: 26px;
+        height: 26px;
+        flex-basis: 26px;
+        font-size: 16px;
+    }
+
+    #duplicate-check-result .distribution-duplicate-warning > p:first-of-type {
+        font-size: 12px;
+    }
+
+    #duplicate-check-result .distribution-duplicate-warning > ul > li {
+        padding: 10px 11px 10px 28px;
+        font-size: 12px;
+    }
+
+    #duplicate-check-result .distribution-duplicate-warning > ul > li::before {
+        top: 16px;
+        left: 11px;
+
+        width: 7px;
+        height: 7px;
+    }
+
+    #duplicate-check-result .distribution-duplicate-warning > p:last-of-type {
+        padding: 10px 11px;
+        font-size: 12px;
+    }
+
+    /* Kartu konfirmasi */
+
+    .distribution-duplicate-confirmation {
+        padding: 15px;
+        border-radius: 12px;
+    }
+
+    .distribution-duplicate-confirmation__header {
+        gap: 10px;
+        margin-bottom: 14px;
+    }
+
+    .distribution-duplicate-confirmation__icon {
+        width: 32px;
+        height: 32px;
+        flex-basis: 32px;
+        font-size: 16px;
+    }
+
+    .distribution-duplicate-confirmation__header h2 {
+        font-size: 14px;
+    }
+
+    .distribution-duplicate-confirmation__header p {
+        font-size: 12px;
+    }
+
+    /* Tabel tetap dapat digulir secara horizontal */
+
+    .distribution-duplicate-confirmation__table th,
+    .distribution-duplicate-confirmation__table td {
+        padding: 10px 11px;
+        font-size: 12px;
+    }
+
+    /* Pertanyaan konfirmasi */
+
+    .distribution-duplicate-confirmation .distribution-duplicate-confirmation__question {
+        gap: 9px;
+
+        margin-bottom: 15px;
+        padding: 11px 12px;
+
+        font-size: 13px;
+        line-height: 1.6;
+    }
+
+    .distribution-duplicate-confirmation .distribution-duplicate-confirmation__question::before {
+        width: 23px;
+        height: 23px;
+        flex-basis: 23px;
+
+        font-size: 14px;
+    }
+
+    /* Tombol tersusun vertikal agar mudah ditekan */
+
+    .distribution-duplicate-confirmation__actions {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 9px;
+    }
+
+    .distribution-duplicate-confirmation__actions > button,
+    .distribution-duplicate-confirmation__actions > a {
+        width: 100%;
+        min-height: 44px;
+        padding: 11px 14px;
+    }
+
+    /* Ringkasan statistik */
+
+    .distribution-summary {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+
+    .distribution-summary__card {
+        padding: 16px;
+    }
+
+    .distribution-summary__top {
+        margin-bottom: 13px;
+    }
+
+    .distribution-summary__value {
+        font-size: 25px;
+    }
+
+    .distribution-summary__value--currency {
+        font-size: 21px;
+    }
+}
+
+
+/* =========================================================
+   10. ACCESSIBILITY
+   Menghormati preferensi reduced motion
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+    .distribution-summary__card,
+    .distribution-duplicate-confirmation__actions > button,
+    .distribution-duplicate-confirmation__actions > a {
+        transition: none;
+    }
+
+    .distribution-summary__card:hover {
+        transform: none;
+    }
+}
+
+
+/* =========================================================
+   8. MAIN LAYOUT
+   ========================================================= */
+
+.distribution-layout {
+    display: grid;
+    grid-template-columns:
+        minmax(0, 1.7fr)
+        minmax(315px, 0.95fr);
+
+    align-items: start;
+    gap: 22px;
+
+    width: 100%;
+    min-width: 0;
+}
+
+.distribution-list-panel,
+.distribution-create-panel {
+    min-width: 0;
+
+    background: var(--distribution-surface);
+    border: 1px solid var(--distribution-border);
+    border-radius: var(--distribution-radius-xl);
+
+    box-shadow: var(--distribution-shadow);
+}
+
+
+/* =========================================================
+   9. PANEL HEADER
+   ========================================================= */
+
+.distribution-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+
+    padding: 22px 22px 18px;
+}
+
+.distribution-panel-title {
+    margin: 0 0 5px;
+
+    color: var(--distribution-text);
+    font-size: 18px;
+    font-weight: 750;
+    letter-spacing: -0.3px;
+    line-height: 1.4;
+}
+
+.distribution-panel-description {
+    margin: 0;
+
+    color: var(--distribution-text-secondary);
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.distribution-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+    padding: 7px 11px;
+
+    color: var(--distribution-primary);
+    background: #edf3ee;
+    border: 1px solid #e0e9e1;
+    border-radius: 8px;
+
+    font-size: 12px;
+    font-weight: 750;
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   10. FILTER PANEL
+   ========================================================= */
+
+.distribution-filters {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+
+    margin: 0 22px 19px;
+    padding: 17px;
+
+    background: #f8faf8;
+    border: 1px solid #edf1ed;
+    border-radius: 13px;
+}
+
+.distribution-filter-field {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+
+    min-width: 0;
+}
+
+.distribution-filter-field--search {
+    grid-column: 1 / -1;
+}
+
+.distribution-filter-field label {
+    color: #4d5b51;
+    font-size: 12px;
+    font-weight: 750;
+    line-height: 1.5;
+}
+
+.distribution-search-wrapper {
+    position: relative;
+    width: 100%;
+    min-width: 0;
+}
+
+.distribution-search-icon {
+    position: absolute;
+    top: 50%;
+    left: 13px;
+
+    width: 18px;
+    height: 18px;
+
+    color: #89948b;
+    pointer-events: none;
+    transform: translateY(-50%);
+}
+
+.distribution-index-page .distribution-input,
+.distribution-index-page .distribution-select {
+    display: block;
+
+    width: 100%;
+    min-width: 0;
+    height: 44px;
+    padding: 10px 12px;
+
+    color: var(--distribution-text);
+    background: #ffffff;
+    border: 1px solid #dfe6df;
+    border-radius: 9px;
+
+    font-size: 13px;
+    line-height: 1.5;
+
+    transition:
+        border-color var(--distribution-transition),
+        box-shadow var(--distribution-transition),
+        background var(--distribution-transition);
+}
+
+.distribution-index-page .distribution-input--search {
+    padding-left: 40px;
+}
+
+.distribution-index-page .distribution-input::placeholder {
+    color: #98a39a;
+    opacity: 1;
+}
+
+.distribution-index-page .distribution-input:hover,
+.distribution-index-page .distribution-select:hover {
+    border-color: #bdcbbf;
+}
+
+.distribution-index-page .distribution-input:focus,
+.distribution-index-page .distribution-select:focus {
+    outline: none;
+    border-color: var(--distribution-primary);
+    box-shadow: 0 0 0 3px rgba(41, 66, 54, 0.08);
+}
+
+.distribution-index-page .distribution-select {
+    cursor: pointer;
+}
+
+.distribution-filter-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    grid-column: 1 / -1;
+    padding-top: 2px;
+}
+
+.distribution-index-page .distribution-filter-actions .distribution-button {
+    min-height: 40px;
+    padding: 9px 17px;
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   11. TABLE — FONT DIPERBESAR
+   ========================================================= */
+
+.distribution-table-wrapper {
+    width: 100%;
+    min-width: 0;
+    overflow-x: auto;
+
+    border-top: 1px solid #edf0ed;
+
+    scrollbar-width: thin;
+    scrollbar-color: #c7d2c9 #f3f6f3;
+}
+
+.distribution-table-wrapper::-webkit-scrollbar,
+.distribution-duplicate-confirmation__table-wrap::-webkit-scrollbar {
+    height: 8px;
+}
+
+.distribution-table-wrapper::-webkit-scrollbar-track,
+.distribution-duplicate-confirmation__table-wrap::-webkit-scrollbar-track {
+    background: #f3f6f3;
+    border-radius: 20px;
+}
+
+.distribution-table-wrapper::-webkit-scrollbar-thumb,
+.distribution-duplicate-confirmation__table-wrap::-webkit-scrollbar-thumb {
+    background: #c7d2c9;
+    border-radius: 20px;
+}
+
+.distribution-table-wrapper::-webkit-scrollbar-thumb:hover {
+    background: #aab9ad;
+}
+
+.distribution-table {
+    width: 100%;
+    min-width: 850px;
+
+    border-collapse: separate;
+    border-spacing: 0;
+
+    color: var(--distribution-text);
+    text-align: left;
+}
+
+/* Header tabel */
+
+.distribution-index-page .distribution-table thead th {
+    padding: 15px 14px;
+
+    color: #58675c;
+    background: #f6f9f6;
+    border-bottom: 1px solid #e3eae3;
+
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.1px;
+    line-height: 1.5;
+    white-space: nowrap;
+}
+
+/* Isi tabel */
+
+.distribution-index-page .distribution-table tbody td {
+    padding: 17px 14px;
+
+    color: #526156;
+    background: #ffffff;
+    border-bottom: 1px solid #e8ede8;
+
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.6;
+    vertical-align: middle;
+}
+
+.distribution-index-page .distribution-table tbody tr {
+    transition: background-color var(--distribution-transition);
+}
+
+.distribution-index-page .distribution-table tbody tr:hover td {
+    background: #f9fbf9;
+}
+
+.distribution-index-page .distribution-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.distribution-table__number {
+    width: 48px;
+
+    color: #657268 !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+}
+
+.distribution-table__date {
+    color: #657268 !important;
+    font-size: 13px !important;
+    white-space: nowrap;
+}
+
+.distribution-table__person {
+    min-width: 145px;
+}
+
+.distribution-table__name {
+    display: block;
+    max-width: 190px;
+
+    color: #34483a !important;
+    font-size: 13px !important;
+    font-weight: 750 !important;
+    line-height: 1.55;
+}
+
+.distribution-table__type {
+    display: inline-block;
+    max-width: 180px;
+    padding: 6px 10px;
+
+    color: #47624e;
+    background: #eff5ef;
+    border: 1px solid #e1ebe1;
+    border-radius: 7px;
+
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.45;
+
+    overflow-wrap: anywhere;
+}
+
+.distribution-table__amount {
+    color: #344e39 !important;
+    font-size: 13px !important;
+    font-weight: 800 !important;
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   12. STATUS BADGES
+   ========================================================= */
+
+.distribution-status {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+
+    padding: 7px 11px;
+
+    border: 1px solid transparent;
+    border-radius: 30px;
+
+    font-size: 12px;
+    font-weight: 750;
+    line-height: 1.4;
+    white-space: nowrap;
+}
+
+.distribution-status::before {
+    width: 7px;
+    height: 7px;
+    flex: 0 0 7px;
+
+    background: currentColor;
+    border-radius: 50%;
+
+    content: "";
+}
+
+.distribution-status--disalurkan {
+    color: #267348;
+    background: #eaf7ed;
+    border-color: #d3ecd9;
+}
+
+.distribution-status--diproses {
+    color: #996319;
+    background: #fff5e5;
+    border-color: #f4e4c1;
+}
+
+.distribution-status--dibatalkan {
+    color: #b03f3f;
+    background: #fff0ef;
+    border-color: #f4d8d5;
+}
+
+
+/* =========================================================
+   13. ACTION BUTTONS — DETAIL, EDIT, HAPUS
+   ========================================================= */
+
+.distribution-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    gap: 7px;
+
+    min-width: 175px;
+}
+
+.distribution-delete-form {
+    display: inline-flex;
+    flex-shrink: 0;
+    margin: 0;
+}
+
+/* Ukuran dan keterbacaan semua tombol aksi */
+
+.distribution-index-page .distribution-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 35px;
+    padding: 7px 11px;
+
+    border: 1px solid transparent;
+    border-radius: 8px;
+
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 750;
+    line-height: 1.4;
+    text-align: center;
+    white-space: nowrap;
+
+    cursor: pointer;
+
+    transition:
+        color var(--distribution-transition),
+        background-color var(--distribution-transition),
+        border-color var(--distribution-transition),
+        box-shadow var(--distribution-transition);
+}
+
+/* Detail */
+
+.distribution-index-page .distribution-action--detail {
+    color: #285da1 !important;
+    background-color: #edf4ff !important;
+    border-color: #d8e6fc !important;
+}
+
+.distribution-index-page .distribution-action--detail:hover {
+    color: #ffffff !important;
+    background-color: #376eb5 !important;
+    border-color: #376eb5 !important;
+}
+
+/* Edit */
+
+.distribution-index-page .distribution-action--edit {
+    color: #8b5a19 !important;
+    background-color: #fff5e7 !important;
+    border-color: #f0dfc3 !important;
+}
+
+.distribution-index-page .distribution-action--edit:hover {
+    color: #ffffff !important;
+    background-color: #a76b1b !important;
+    border-color: #a76b1b !important;
+}
+
+/* Hapus */
+
+.distribution-index-page .distribution-action--delete {
+    color: #b33e3e !important;
+    background-color: #fff0ef !important;
+    border-color: #f1d5d2 !important;
+}
+
+.distribution-index-page .distribution-action--delete:hover {
+    color: #ffffff !important;
+    background-color: #c34343 !important;
+    border-color: #c34343 !important;
+}
+
+.distribution-index-page .distribution-action:focus-visible {
+    outline: 3px solid rgba(41, 66, 54, 0.18);
+    outline-offset: 2px;
+}
+
+.distribution-index-page .distribution-action:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+
+/* =========================================================
+   14. EMPTY STATE
+   ========================================================= */
+
+.distribution-empty {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+
+    min-height: 260px;
+    padding: 38px 22px;
+
+    text-align: center;
+}
+
+.distribution-empty__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 58px;
+    height: 58px;
+    margin-bottom: 16px;
+
+    color: var(--distribution-primary);
+    background: #edf3ee;
+    border: 1px solid #e2ebe3;
+    border-radius: 16px;
+}
+
+.distribution-empty__icon svg {
+    width: 27px;
+    height: 27px;
+}
+
+.distribution-empty strong {
+    display: block;
+    margin-bottom: 7px;
+
+    color: #35473a;
+    font-size: 15px;
+    font-weight: 750;
+}
+
+.distribution-empty p {
+    max-width: 300px;
+    margin: 0 0 18px;
+
+    color: var(--distribution-text-secondary);
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   15. PAGINATION
+   ========================================================= */
+
+.distribution-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    padding: 19px 18px;
+    border-top: 1px solid #edf0ed;
+}
+
+.distribution-pagination nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 7px;
+
+    width: 100%;
+}
+
+.distribution-pagination nav > div {
+    max-width: 100%;
+}
+
+.distribution-pagination nav svg {
+    width: 16px;
+    height: 16px;
+}
+
+.distribution-pagination nav a,
+.distribution-pagination nav span[aria-current],
+.distribution-pagination nav span[aria-disabled] {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 36px;
+    min-height: 36px;
+    padding: 7px 11px;
+
+    color: #58675c;
+    background: #ffffff;
+    border: 1px solid var(--distribution-border);
+    border-radius: 8px;
+
+    font-size: 12px;
+    line-height: 1.4;
+    text-decoration: none;
+
+    transition:
+        color var(--distribution-transition),
+        background-color var(--distribution-transition),
+        border-color var(--distribution-transition);
+}
+
+.distribution-pagination nav a:hover {
+    color: var(--distribution-primary);
+    background: #f0f5f0;
+    border-color: #cad9cc;
+}
+
+.distribution-pagination nav span[aria-current] {
+    color: #ffffff;
+    background: var(--distribution-primary);
+    border-color: var(--distribution-primary);
+    font-weight: 750;
+}
+
+.distribution-pagination nav span[aria-disabled] {
+    color: #aeb8af;
+    background: #f8faf8;
+    cursor: not-allowed;
+}
+
+
+/* =========================================================
+   16. CREATE FORM PANEL
+   ========================================================= */
+
+.distribution-create-panel {
+    position: relative;
+    min-width: 0;
+    padding: 22px;
+
+    scroll-margin-top: 24px;
+}
+
+.distribution-create-panel__header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    margin-bottom: 23px;
+    padding-bottom: 18px;
+
+    border-bottom: 1px solid #edf0ed;
+}
+
+.distribution-create-panel__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 40px;
+    height: 40px;
+    flex: 0 0 40px;
+
+    color: var(--distribution-primary);
+    background: #edf3ee;
+    border: 1px solid #e1eae2;
+    border-radius: 11px;
+}
+
+.distribution-create-panel__icon svg {
+    width: 20px;
+    height: 20px;
+}
+
+.distribution-create-panel__header > div {
+    min-width: 0;
+}
+
+.distribution-create-panel__header .distribution-panel-title {
+    margin-bottom: 4px;
+    font-size: 16px;
+}
+
+.distribution-create-panel__header .distribution-panel-description {
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   17. FORM FIELDS
+   ========================================================= */
+
+.distribution-form {
+    display: flex;
+    flex-direction: column;
+    gap: 17px;
+}
+
+.distribution-field {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+
+    min-width: 0;
+}
+
+.distribution-field label {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 5px;
+
+    color: #435247;
+    font-size: 12px;
+    font-weight: 750;
+    line-height: 1.5;
+}
+
+.distribution-required {
+    color: #c94b4b;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.distribution-optional {
+    color: #8a958c;
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.distribution-index-page .distribution-field input,
+.distribution-index-page .distribution-field select,
+.distribution-index-page .distribution-field textarea {
+    display: block;
+
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+
+    color: var(--distribution-text);
+    background: #ffffff;
+    border: 1px solid #dfe6df;
+    border-radius: 9px;
+
+    font-family: inherit;
+    font-size: 13px;
+    line-height: 1.5;
+
+    transition:
+        border-color var(--distribution-transition),
+        box-shadow var(--distribution-transition),
+        background-color var(--distribution-transition);
+}
+
+.distribution-index-page .distribution-field input,
+.distribution-index-page .distribution-field select {
+    min-height: 44px;
+    padding: 10px 12px;
+}
+
+.distribution-index-page .distribution-field textarea {
+    min-height: 95px;
+    padding: 11px 12px;
+    line-height: 1.65;
+    resize: vertical;
+}
+
+.distribution-index-page .distribution-field input::placeholder,
+.distribution-index-page .distribution-field textarea::placeholder {
+    color: #98a39a;
+    opacity: 1;
+}
+
+.distribution-index-page .distribution-field input:hover,
+.distribution-index-page .distribution-field select:hover,
+.distribution-index-page .distribution-field textarea:hover {
+    border-color: #bdcbbf;
+}
+
+.distribution-index-page .distribution-field input:focus,
+.distribution-index-page .distribution-field select:focus,
+.distribution-index-page .distribution-field textarea:focus {
+    outline: none;
+    border-color: var(--distribution-primary);
+    box-shadow: 0 0 0 3px rgba(41, 66, 54, 0.08);
+}
+
+.distribution-index-page .distribution-field select {
+    cursor: pointer;
+}
+
+.distribution-index-page .distribution-field input:disabled,
+.distribution-index-page .distribution-field select:disabled,
+.distribution-index-page .distribution-field textarea:disabled {
+    color: #89948b;
+    background: #f3f5f3;
+    cursor: not-allowed;
+}
+
+.distribution-index-page .distribution-field input[type="date"] {
+    min-height: 44px;
+}
+
+.distribution-index-page .distribution-field input[type="number"] {
+    appearance: textfield;
+    -moz-appearance: textfield;
+}
+
+.distribution-index-page .distribution-field input[type="number"]::-webkit-inner-spin-button,
+.distribution-index-page .distribution-field input[type="number"]::-webkit-outer-spin-button {
+    margin: 0;
+    -webkit-appearance: none;
+}
+
+.distribution-field__error {
+    display: block;
+    margin-top: 1px;
+
+    color: #bf4141;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.55;
+}
+
+
+/* =========================================================
+   18. AMOUNT INPUT
+   ========================================================= */
+
+.distribution-amount-wrapper {
+    display: flex;
+    align-items: stretch;
+
+    width: 100%;
+    min-width: 0;
+}
+
+.distribution-amount-prefix {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 48px;
+    padding: 0 12px;
+
+    color: #526456;
+    background: #f1f5f1;
+    border: 1px solid #dfe6df;
+    border-right: none;
+    border-radius: 9px 0 0 9px;
+
+    font-size: 13px;
+    font-weight: 750;
+}
+
+.distribution-amount-wrapper input {
+    flex: 1;
+    width: 100%;
+    min-width: 0;
+
+    border-radius: 0 9px 9px 0 !important;
+}
+
+
+/* =========================================================
+   19. DUPLICATE CHECK RESULT
+   ========================================================= */
+
+.distribution-duplicate-result {
+    width: 100%;
+    min-width: 0;
+}
+
+.distribution-duplicate-result:empty {
+    display: none;
+}
+
+.distribution-duplicate-result:not(:empty) {
+    margin-bottom: 18px;
+}
+
+.distribution-duplicate-warning {
+    padding: 14px;
+
+    color: #80571e;
+    background: #fff8eb;
+    border: 1px solid #f0dfb9;
+    border-radius: 11px;
+
+    font-size: 12px;
+    line-height: 1.7;
+
+    overflow-wrap: anywhere;
+}
+
+.distribution-duplicate-warning strong {
+    display: block;
+    margin-bottom: 5px;
+
+    color: #8d5b17;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.distribution-duplicate-warning p {
+    margin: 5px 0;
+}
+
+.distribution-duplicate-warning ul {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+
+    margin: 10px 0;
+    padding-left: 18px;
+}
+
+
+/* =========================================================
+   20. INFORMATION / GUIDANCE
+   ========================================================= */
+
+.distribution-guidance {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+
+    padding: 13px;
+
+    color: #526957;
+    background: #f0f6f0;
+    border: 1px solid #e0ebe1;
+    border-radius: 10px;
+}
+
+.distribution-guidance__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 30px;
+    height: 30px;
+    flex: 0 0 30px;
+
+    color: var(--distribution-primary);
+    background: #e2eee3;
+    border-radius: 8px;
+}
+
+.distribution-guidance__icon svg {
+    width: 17px;
+    height: 17px;
+}
+
+.distribution-guidance p {
+    margin: 0;
+    padding-top: 2px;
+
+    color: #536b58;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   21. FORM ACTION BUTTONS
+   ========================================================= */
+
+.distribution-form-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    padding-top: 5px;
+}
+
+.distribution-index-page .distribution-form-actions .distribution-button {
+    min-height: 44px;
+    padding: 11px 17px;
+    font-size: 13px;
+}
+
+.distribution-index-page .distribution-form-actions .distribution-button--secondary {
+    min-width: 86px;
+}
+
+.distribution-index-page .distribution-form-actions .distribution-button--primary {
+    flex: 1;
+    min-width: 160px;
+}
+
+
+/* =========================================================
+   22. PAGINATION / TABLE CONSISTENCY
+   ========================================================= */
+
+.distribution-index-page .distribution-table td[colspan] {
+    padding: 0;
+}
+
+.distribution-index-page ::selection {
+    color: #ffffff;
+    background: var(--distribution-primary);
+}
+
+
+/* =========================================================
+   23. RESPONSIVE — LAPTOP
+   ========================================================= */
+
+@media (max-width: 1350px) {
+    .distribution-index-page {
+        padding-right: 22px;
+        padding-left: 22px;
+    }
+
+    .distribution-layout {
+        grid-template-columns:
+            minmax(0, 1.5fr)
+            minmax(300px, 0.95fr);
+        gap: 17px;
+    }
+
+    .distribution-summary {
+        gap: 12px;
+    }
+
+    .distribution-summary__card {
+        padding: 17px 15px;
+    }
+
+    .distribution-panel-header {
+        padding-right: 18px;
+        padding-left: 18px;
+    }
+
+    .distribution-filters {
+        margin-right: 18px;
+        margin-left: 18px;
+        padding: 14px;
+    }
+
+    .distribution-create-panel {
+        padding: 19px;
+    }
+}
+
+
+/* =========================================================
+   24. RESPONSIVE — TABLET
+   ========================================================= */
+
+@media (max-width: 1100px) {
+    .distribution-summary {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .distribution-layout {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .distribution-list-panel,
+    .distribution-create-panel {
+        width: 100%;
+    }
+
+    .distribution-create-panel {
+        scroll-margin-top: 20px;
+    }
+
+    .distribution-summary__value {
+        font-size: 27px;
+    }
+
+    .distribution-summary__value--currency {
+        font-size: 24px;
+    }
+
+    .distribution-table {
+        min-width: 850px;
+    }
+}
+
+
+/* =========================================================
+   25. RESPONSIVE — SMALL TABLET
+   ========================================================= */
+
+@media (max-width: 768px) {
+    .distribution-index-page {
+        padding: 23px 17px 34px;
+    }
+
+    .distribution-index-header {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 17px;
+        margin-bottom: 22px;
+    }
+
+    .distribution-index-header__content {
+        padding-left: 14px;
+    }
+
+    .distribution-index-header__content::before {
+        top: 2px;
+        width: 3px;
+        height: 30px;
+    }
+
+    .distribution-index-header__title {
+        font-size: 25px;
+        letter-spacing: -0.6px;
+    }
+
+    .distribution-index-header__description {
+        font-size: 12px;
+    }
+
+    .distribution-index-header > .distribution-button {
+        width: 100%;
+    }
+
+    .distribution-summary {
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+
+    .distribution-summary__card {
+        padding: 16px;
+    }
+
+    .distribution-summary__top {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 9px;
+        margin-bottom: 13px;
+    }
+
+    .distribution-summary__icon {
+        width: 36px;
+        height: 36px;
+        flex-basis: 36px;
+    }
+
+    .distribution-summary__label {
+        font-size: 12px;
+    }
+
+    .distribution-summary__value {
+        font-size: 25px;
+    }
+
+    .distribution-summary__value--currency {
+        font-size: 21px;
+    }
+
+    .distribution-summary__description {
+        font-size: 11px;
+    }
+
+    .distribution-layout {
+        gap: 18px;
+    }
+
+    .distribution-panel-header {
+        align-items: flex-start;
+        gap: 10px;
+        padding: 18px 16px 15px;
+    }
+
+    .distribution-panel-title {
+        font-size: 17px;
+    }
+
+    .distribution-panel-description {
+        font-size: 12px;
+    }
+
+    .distribution-count {
+        padding: 6px 9px;
+        font-size: 11px;
+    }
+
+    .distribution-filters {
+        gap: 12px;
+        margin: 0 14px 16px;
+        padding: 13px;
+    }
+
+    .distribution-filter-field label {
+        font-size: 11px;
+    }
+
+    .distribution-index-page .distribution-input,
+    .distribution-index-page .distribution-select {
+        height: 42px;
+        font-size: 12px;
+    }
+
+    .distribution-filter-actions .distribution-button {
+        min-height: 39px;
+        padding: 9px 13px;
+    }
+
+    .distribution-index-page .distribution-table thead th {
+        padding: 14px 12px;
+        font-size: 12px;
+    }
+
+    .distribution-index-page .distribution-table tbody td {
+        padding: 15px 12px;
+        font-size: 12px;
+    }
+
+    .distribution-table__name,
+    .distribution-table__date,
+    .distribution-table__amount {
+        font-size: 12px !important;
+    }
+
+    .distribution-index-page .distribution-action {
+        min-height: 33px;
+        padding: 6px 10px;
+        font-size: 11px;
+    }
+
+    .distribution-create-panel {
+        padding: 18px;
+    }
+
+    .distribution-create-panel__header {
+        gap: 11px;
+        margin-bottom: 20px;
+        padding-bottom: 16px;
+    }
+
+    .distribution-create-panel__header .distribution-panel-title {
+        font-size: 15px;
+    }
+
+    .distribution-create-panel__header .distribution-panel-description {
+        font-size: 11px;
+    }
+
+    .distribution-form {
+        gap: 16px;
+    }
+
+    .distribution-field label {
+        font-size: 12px;
+    }
+
+    .distribution-index-page .distribution-field input,
+    .distribution-index-page .distribution-field select {
+        min-height: 43px;
+        font-size: 12px;
+    }
+
+    .distribution-guidance {
+        padding: 11px;
+    }
+
+    .distribution-guidance p {
+        font-size: 11px;
+    }
+
+    .distribution-duplicate-confirmation {
+        padding: 17px;
+    }
+}
+
+
+/* =========================================================
+   26. RESPONSIVE — MOBILE
+   ========================================================= */
+
+@media (max-width: 480px) {
+    .distribution-index-page {
+        padding: 19px 12px 28px;
+        font-size: 13px;
+    }
+
+    .distribution-index-header {
+        gap: 15px;
+    }
+
+    .distribution-index-header__eyebrow {
+        font-size: 9px;
+        letter-spacing: 1.4px;
+    }
+
+    .distribution-index-header__title {
+        font-size: 23px;
+    }
+
+    .distribution-index-header__description {
+        font-size: 11px;
+        line-height: 1.7;
+    }
+
+    .distribution-index-page .distribution-button {
+        min-height: 41px;
+        padding: 10px 13px;
+        font-size: 12px;
+    }
+
+    .distribution-summary {
+        gap: 9px;
+    }
+
+    .distribution-summary__card {
+        padding: 13px 11px;
+        border-radius: 13px;
+    }
+
+    .distribution-summary__top {
+        gap: 8px;
+        margin-bottom: 12px;
+    }
+
+    .distribution-summary__icon {
+        width: 33px;
+        height: 33px;
+        flex-basis: 33px;
+        border-radius: 9px;
+    }
+
+    .distribution-summary__label {
+        font-size: 11px;
+    }
+
+    .distribution-summary__value {
+        font-size: 23px;
+        letter-spacing: -0.6px;
+    }
+
+    .distribution-summary__value--currency {
+        font-size: 18px;
+        letter-spacing: -0.5px;
+    }
+
+    .distribution-summary__description {
+        font-size: 10px;
+        line-height: 1.6;
+    }
+
+    .distribution-list-panel,
+    .distribution-create-panel {
+        border-radius: 15px;
+    }
+
+    .distribution-panel-header {
+        padding: 16px 13px 14px;
+    }
+
+    .distribution-panel-title {
+        font-size: 16px;
+    }
+
+    .distribution-panel-description {
+        font-size: 11px;
+    }
+
+    .distribution-count {
+        font-size: 10px;
+    }
+
+    .distribution-filters {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 12px;
+        margin: 0 11px 14px;
+        padding: 12px;
+    }
+
+    .distribution-filter-field--search {
+        grid-column: auto;
+    }
+
+    .distribution-filter-actions {
+        grid-column: auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+    }
+
+    .distribution-index-page .distribution-filter-actions .distribution-button {
+        width: 100%;
+        min-height: 40px;
+        padding: 9px;
+        font-size: 12px;
+    }
+
+    /* Tabel tetap dapat digeser pada layar kecil. */
+
+    .distribution-table {
+        min-width: 850px;
+    }
+
+    .distribution-index-page .distribution-table thead th {
+        padding: 13px 11px;
+        font-size: 11px;
+    }
+
+    .distribution-index-page .distribution-table tbody td {
+        padding: 14px 11px;
+        font-size: 12px;
+    }
+
+    .distribution-index-page .distribution-action {
+        min-height: 33px;
+        padding: 6px 10px;
+        font-size: 11px;
+    }
+
+    .distribution-pagination {
+        padding: 15px 10px;
+    }
+
+    .distribution-pagination nav a,
+    .distribution-pagination nav span[aria-current],
+    .distribution-pagination nav span[aria-disabled] {
+        min-width: 31px;
+        min-height: 31px;
+        padding: 6px 8px;
+        font-size: 11px;
+    }
+
+    .distribution-create-panel {
+        padding: 15px;
+    }
+
+    .distribution-create-panel__header {
+        gap: 10px;
+        margin-bottom: 18px;
+    }
+
+    .distribution-create-panel__header .distribution-panel-title {
+        font-size: 14px;
+    }
+
+    .distribution-create-panel__header .distribution-panel-description {
+        font-size: 11px;
+    }
+
+    .distribution-form {
+        gap: 15px;
+    }
+
+    .distribution-index-page .distribution-field input,
+    .distribution-index-page .distribution-field select {
+        min-height: 42px;
+        font-size: 12px;
+    }
+
+    .distribution-index-page .distribution-field textarea {
+        font-size: 12px;
+    }
+
+    .distribution-form-actions {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 9px;
+    }
+
+    .distribution-index-page .distribution-form-actions .distribution-button,
+    .distribution-index-page .distribution-form-actions .distribution-button--primary {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .distribution-duplicate-confirmation {
+        padding: 13px;
+        border-radius: 13px;
+    }
+
+    .distribution-duplicate-confirmation__header {
+        gap: 10px;
+    }
+
+    .distribution-duplicate-confirmation__header h2 {
+        font-size: 14px;
+    }
+
+    .distribution-duplicate-confirmation__header p {
+        font-size: 11px;
+    }
+
+    .distribution-duplicate-confirmation__actions {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+    .distribution-duplicate-confirmation__actions .distribution-button {
+        width: 100%;
+    }
+
+    .distribution-empty {
+        min-height: 220px;
+        padding: 30px 15px;
+    }
+}
+
+
+/* =========================================================
+   27. REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+    .distribution-index-page *,
+    .distribution-index-page *::before,
+    .distribution-index-page *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
