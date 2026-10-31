@@ -3,24 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#294236">
 
     <title>@yield('title', 'Admin Masjid Sabilillah')</title>
 
-    {{-- Favicon --}}
     <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
 
-    {{-- Font --}}
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    {{-- Poppins dimuat melalui @import di resources/css/app.css. --}}
 
-    {{-- CSS dan JS Laravel --}}
     @vite([
         'resources/css/app.css',
-        'resources/css/admin-donation-form.css',
+        'resources/css/admin-sidebar.css',
+        'resources/css/admin-header.css',
+        'resources/css/admin-footer.css',
+        'resources/css/admin-layout.css',
         'resources/js/app.js'
     ])
+
+    @stack('styles')
 </head>
-<body>
-    @yield('content')
+<body class="admin-layout">
+
+    @include('components.admin.sidebar')
+
+    <div class="admin-main">
+        @include('components.admin.header')
+
+        <main class="admin-main__content">
+            @yield('content')
+        </main>
+
+        @include('components.admin.footer')
+    </div>
+
+    @stack('scripts')
 </body>
 </html>

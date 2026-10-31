@@ -1,49 +1,35 @@
+
 /* =========================================
    SABILILLAH ADMIN SIDEBAR
-   Mengikuti design system proyek
-   ========================================= */
+========================================= */
 
 :root {
-    /* Sidebar Layout */
     --sidebar-width: 225px;
-
-    /* Sidebar Background */
-    --sidebar-bg: var(--color-white);
+    --sidebar-bg: #ffffff;
     --sidebar-page-bg: var(--color-neutral-light);
 
-    /* Sidebar Primary Colors */
-    --sidebar-primary: var(--color-green-normal);
-    --sidebar-primary-dark: var(--color-green-dark);
-    --sidebar-primary-soft: var(--color-green-light);
+    --sidebar-primary: #294236;
+    --sidebar-primary-dark: #1b2b23;
+    --sidebar-primary-soft: #f2f5f2;
 
-    /* Sidebar Text Colors */
-    --sidebar-text: var(--color-neutral-darker);
-    --sidebar-text-secondary: var(--color-neutral-dark);
+    --sidebar-text: #3b3b3b;
+    --sidebar-text-secondary: #858b86;
 
-    /* Sidebar Border */
     --sidebar-border: #edf0ed;
+    --sidebar-radius: 9px;
 
-    /* Sidebar Border Radius */
-    --sidebar-radius: var(--radius-input);
-
-    /* Sidebar Transition */
-    --sidebar-transition: 0.22s ease;
+    --sidebar-transition: 0.2s ease;
 }
 
-
-/* Font mengikuti app.css */
+/* =========================================
+   BASE
+========================================= */
 
 .admin-sidebar,
 .admin-sidebar *,
-.admin-mobile-header,
-.admin-mobile-header * {
-    font-family: inherit;
+.admin-sidebar-overlay {
     box-sizing: border-box;
 }
-
-/* =========================================
-   SIDEBAR UTAMA
-   ========================================= */
 
 .admin-sidebar {
     position: fixed;
@@ -58,7 +44,7 @@
     height: 100vh;
     height: 100dvh;
 
-    padding: 25px 15px 14px;
+    padding: 23px 13px 15px;
 
     overflow-x: hidden;
     overflow-y: auto;
@@ -69,14 +55,16 @@
 
     border-right: 1px solid var(--sidebar-border);
 
+    font-family: inherit;
+
     transition:
-        transform 0.28s ease,
-        box-shadow 0.28s ease;
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
 }
 
 /* =========================================
    BRAND
-   ========================================= */
+========================================= */
 
 .admin-sidebar__brand {
     display: flex;
@@ -85,13 +73,13 @@
 
     min-height: 43px;
     margin-bottom: 34px;
-    padding: 0 4px;
+    padding: 0 5px;
 }
 
 .admin-sidebar__brand-link {
     display: flex;
     align-items: center;
-    gap: 9px;
+    gap: 10px;
 
     min-width: 0;
 
@@ -104,86 +92,57 @@
     align-items: center;
     justify-content: center;
 
+    width: 38px;
+    height: 38px;
     flex-shrink: 0;
 
-    width: 39px;
-    height: 39px;
-
-    color: var(--color-white, #ffffff);
+    color: #ffffff;
     background: var(--sidebar-primary);
 
-    border-radius: 12px;
-
-    box-shadow: 0 4px 10px rgba(41, 66, 54, 0.12);
-
-    transition:
-        transform var(--sidebar-transition),
-        box-shadow var(--sidebar-transition);
+    border-radius: 10px;
 }
 
 .admin-sidebar__logo svg {
-    width: 27px;
-    height: 27px;
-}
-
-.admin-sidebar__brand-link:hover .admin-sidebar__logo {
-    transform: translateY(-2px);
-    box-shadow: 0 7px 14px rgba(41, 66, 54, 0.17);
+    width: 25px;
+    height: 25px;
 }
 
 .admin-sidebar__brand-info {
     display: flex;
     flex-direction: column;
     gap: 3px;
-
     min-width: 0;
 }
 
 .admin-sidebar__brand-name {
     color: var(--sidebar-primary-dark);
-
-    font-size: 18px;
+    font-size: 17px;
     font-weight: 700;
     line-height: 1.2;
     letter-spacing: -0.4px;
 }
 
 .admin-sidebar__brand-caption {
-    color: var(--sidebar-text-secondary);
-
+    color: #999e99;
     font-size: 9px;
     font-weight: 600;
     letter-spacing: 1.1px;
 }
 
 /* =========================================
-   NAVIGASI
-   ========================================= */
+   NAVIGATION
+========================================= */
 
 .admin-sidebar__navigation {
     display: flex;
     flex-direction: column;
-    gap: 28px;
+    gap: 8px;
 }
 
 .admin-sidebar__section {
     display: flex;
     flex-direction: column;
-    gap: 9px;
-}
-
-.admin-sidebar__section-label {
-    display: block;
-
-    padding: 0 10px;
-    margin-bottom: 2px;
-
-    color: var(--sidebar-text-secondary);
-
-    font-size: 9px;
-    font-weight: 700;
-    line-height: 1.5;
-    letter-spacing: 1.1px;
+    gap: 4px;
 }
 
 .admin-sidebar__link {
@@ -191,13 +150,13 @@
 
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 11px;
 
     width: 100%;
-    min-height: 41px;
+    min-height: 39px;
     padding: 0 10px;
 
-    color: var(--sidebar-text-secondary);
+    color: #666e68;
     background: transparent;
 
     border: 1px solid transparent;
@@ -206,7 +165,7 @@
     font-family: inherit;
     font-size: 12px;
     font-weight: 500;
-    line-height: 1.5;
+    line-height: 1.45;
 
     text-align: left;
     text-decoration: none;
@@ -215,22 +174,16 @@
 
     transition:
         color var(--sidebar-transition),
-        background var(--sidebar-transition),
-        border-color var(--sidebar-transition),
-        transform var(--sidebar-transition);
+        background var(--sidebar-transition);
 }
 
-.admin-sidebar__link:hover:not(.admin-sidebar__link--disabled) {
+.admin-sidebar__link:hover {
     color: var(--sidebar-primary);
-    background: var(--sidebar-primary-soft);
-}
-
-.admin-sidebar__link:active:not(.admin-sidebar__link--disabled) {
-    transform: scale(0.985);
+    background: #f6f7f6;
 }
 
 .admin-sidebar__link:focus-visible {
-    outline: 3px solid rgba(41, 66, 54, 0.2);
+    outline: 2px solid rgba(41, 66, 54, 0.25);
     outline-offset: 2px;
 }
 
@@ -239,25 +192,17 @@
     align-items: center;
     justify-content: center;
 
+    width: 18px;
+    height: 18px;
     flex-shrink: 0;
 
-    width: 19px;
-    height: 19px;
-
     color: inherit;
-
-    transition: transform var(--sidebar-transition);
 }
 
 .admin-sidebar__link-icon svg {
     display: block;
-
-    width: 18px;
-    height: 18px;
-}
-
-.admin-sidebar__link:hover .admin-sidebar__link-icon {
-    transform: translateY(-1px);
+    width: 17px;
+    height: 17px;
 }
 
 .admin-sidebar__link-text {
@@ -265,213 +210,297 @@
     min-width: 0;
 }
 
-/* Menu aktif */
+/* =========================================
+   ACTIVE MENU
+========================================= */
 
 .admin-sidebar__link--active {
-    color: var(--sidebar-primary);
+    color: #222d26;
+    background: #f1f3f1;
+    font-weight: 600;
+}
 
-    background: var(--sidebar-primary-soft);
+.admin-sidebar__link--active::before {
+    content: "";
 
-    border-color: #e5eee5;
+    position: absolute;
+    top: 8px;
+    bottom: 8px;
+    left: 0;
 
-    font-weight: 700;
+    width: 3px;
+
+    background: var(--sidebar-primary);
+    border-radius: 0 3px 3px 0;
 }
 
 .admin-sidebar__link--active:hover {
-    background: var(--color-green-light, #f6fff6);
-}
-
-.admin-sidebar__link-indicator {
-    position: absolute;
-    top: 50%;
-    right: 0;
-
-    width: 3px;
-    height: 21px;
-
-    background: var(--sidebar-primary);
-
-    border-radius: 5px 0 0 5px;
-
-    transform: translateY(-50%);
-}
-
-/* Menu belum tersedia */
-
-.admin-sidebar__link--disabled {
-    opacity: 0.65;
-    cursor: not-allowed;
-}
-
-.admin-sidebar__link--disabled:hover {
-    background: transparent;
-}
-
-.admin-sidebar__coming-soon {
-    padding: 3px 5px;
-
-    color: var(--sidebar-text-secondary);
-    background: var(--color-neutral-light, #f6f6f6);
-
-    border-radius: 5px;
-
-    font-size: 9px;
-    font-weight: 500;
-    white-space: nowrap;
+    background: #edf1ed;
 }
 
 /* =========================================
-   PROFIL ADMIN
-   ========================================= */
+   SUBMENU
+========================================= */
+
+.admin-sidebar__menu-group {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.admin-sidebar__menu-group > summary {
+    list-style: none;
+    cursor: pointer;
+}
+
+.admin-sidebar__menu-group > summary::-webkit-details-marker {
+    display: none;
+}
+
+.admin-sidebar__menu-group > summary::marker {
+    content: "";
+}
+
+.admin-sidebar__link--group {
+    width: 100%;
+}
+
+.admin-sidebar__menu-chevron {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+
+    color: #858b86;
+
+    transition: transform var(--sidebar-transition);
+}
+
+.admin-sidebar__menu-chevron svg {
+    width: 14px;
+    height: 14px;
+}
+
+.admin-sidebar__menu-group[open]
+.admin-sidebar__menu-chevron {
+    transform: rotate(180deg);
+}
+
+.admin-sidebar__submenu {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+
+    margin: 3px 0 7px 19px;
+    padding: 2px 0 2px 12px;
+
+    border-left: 1px solid #e5e9e5;
+}
+
+.admin-sidebar__submenu-link {
+    display: flex;
+    align-items: center;
+
+    min-height: 30px;
+    padding: 5px 9px;
+
+    color: #858b86;
+    background: transparent;
+
+    border-radius: 6px;
+
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 1.4;
+
+    text-decoration: none;
+
+    transition:
+        color var(--sidebar-transition),
+        background var(--sidebar-transition);
+}
+
+.admin-sidebar__submenu-link:hover {
+    color: var(--sidebar-primary);
+    background: #f6f7f6;
+}
+
+.admin-sidebar__submenu-link.is-active {
+    color: var(--sidebar-primary);
+    background: #f1f4f1;
+    font-weight: 600;
+}
+
+/* =========================================
+   ADMIN PROFILE
+========================================= */
 
 .admin-sidebar__bottom {
+    width: 100%;
+    min-width: 0;
+
     margin-top: auto;
-    padding-top: 22px;
+    padding-top: 18px;
 }
+
+/* PROFILE CARD */
 
 .admin-sidebar__profile {
     display: flex;
     align-items: center;
     gap: 9px;
 
-    padding: 10px 8px;
+    width: 100%;
+    min-width: 0;
+    min-height: 58px;
 
-    background: var(--color-neutral-light, #f6f6f6);
+    padding: 9px 10px;
 
-    border: 1px solid var(--sidebar-border);
+    background: #f7f8f7;
+    border: 1px solid #eef0ee;
     border-radius: 11px;
-
-    transition:
-        background var(--sidebar-transition),
-        border-color var(--sidebar-transition);
 }
 
-.admin-sidebar__profile:hover {
-    background: var(--sidebar-primary-soft);
-    border-color: #e5ece5;
-}
+/* AVATAR */
 
 .admin-sidebar__avatar {
     display: flex;
     align-items: center;
     justify-content: center;
 
-    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    flex: 0 0 36px;
 
-    width: 33px;
-    height: 33px;
-
-    color: var(--color-white, #ffffff);
+    color: #ffffff;
     background: var(--sidebar-primary);
 
     border-radius: 10px;
 
     font-size: 13px;
-    font-weight: 700;
+    font-weight: 600;
 }
+
+/* PROFILE TEXT */
 
 .admin-sidebar__profile-info {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: 3px;
 
-    flex: 1;
+    flex: 1 1 0;
     min-width: 0;
+    overflow: hidden;
 }
 
 .admin-sidebar__profile-name {
+    display: block;
+
+    width: 100%;
     overflow: hidden;
 
-    color: var(--sidebar-text);
+    color: #3b3b3b;
 
     font-size: 11px;
-    font-weight: 700;
+    font-weight: 600;
     line-height: 1.4;
 
-    text-overflow: ellipsis;
     white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .admin-sidebar__profile-role {
+    display: block;
+
+    width: 100%;
     overflow: hidden;
 
-    color: var(--sidebar-text-secondary);
+    color: #929792;
 
     font-size: 10px;
+    font-weight: 400;
     line-height: 1.4;
 
-    text-overflow: ellipsis;
     white-space: nowrap;
+    text-overflow: ellipsis;
 }
+
+/* ONLINE STATUS */
 
 .admin-sidebar__profile-status {
-    flex-shrink: 0;
+    display: block;
 
-    width: 6px;
-    height: 6px;
+    width: 7px;
+    height: 7px;
+    flex: 0 0 7px;
 
-    background: var(--color-success, #166534);
+    margin-left: 2px;
 
-    border: 2px solid var(--color-success-light, #f0fdf4);
+    background: #26834b;
     border-radius: 50%;
-
-    box-sizing: content-box;
 }
+
+/* SIDEBAR FOOTER */
 
 .admin-sidebar__footer {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 5px;
+    gap: 6px;
 
-    margin-top: 14px;
+    margin-top: 13px;
 
-    color: var(--sidebar-text-secondary);
+    color: #929792;
 
     font-size: 9px;
-    font-weight: 500;
+    font-weight: 400;
+    white-space: nowrap;
 }
 
 .admin-sidebar__footer-dot {
     width: 3px;
     height: 3px;
+    flex-shrink: 0;
 
-    background: var(--color-neutral-normal, #a8a8a8);
-
+    background: #a8a8a8;
     border-radius: 50%;
 }
 
 /* =========================================
-   TOMBOL TUTUP
-   ========================================= */
+   MOBILE CLOSE BUTTON
+========================================= */
 
 .admin-sidebar__close {
     display: none;
     align-items: center;
     justify-content: center;
 
-    flex-shrink: 0;
-
     width: 32px;
     height: 32px;
+    flex-shrink: 0;
 
-    color: var(--sidebar-text-secondary);
-    background: var(--color-neutral-light, #f6f6f6);
+    color: #66716a;
+    background: #f5f6f5;
 
     border: 1px solid var(--sidebar-border);
-    border-radius: var(--sidebar-radius);
+    border-radius: 8px;
 
     cursor: pointer;
 }
 
 .admin-sidebar__close svg {
-    width: 17px;
-    height: 17px;
+    width: 16px;
+    height: 16px;
 }
 
 /* =========================================
-   LAYOUT KONTEN UTAMA
-   ========================================= */
+   MAIN LAYOUT
+========================================= */
 
 .admin-layout {
     width: 100%;
@@ -518,155 +547,37 @@
     display: none;
 }
 
-
-/* =====================================================
-   DATA PENERIMA MANFAAT — SUBMENU
-   ===================================================== */
-
-.admin-sidebar__menu-group {
-    width: 100%;
-    margin: 0;
-    padding: 0;
-}
-
-.admin-sidebar__menu-group > summary {
-    list-style: none;
-    cursor: pointer;
-}
-
-.admin-sidebar__menu-group > summary::-webkit-details-marker {
-    display: none;
-}
-
-.admin-sidebar__menu-group > summary::marker {
-    content: "";
-}
-
-/* Ikon dan panah submenu */
-
-.admin-sidebar__link--group .admin-sidebar__link-icon svg {
-    width: 18px;
-    height: 18px;
-}
-
-.admin-sidebar__menu-chevron {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-
-    width: 17px;
-    height: 17px;
-    margin-left: auto;
-
-    color: var(--sidebar-text-secondary);
-
-    transition: transform var(--sidebar-transition);
-}
-
-.admin-sidebar__menu-chevron svg {
-    width: 15px;
-    height: 15px;
-}
-
-.admin-sidebar__menu-group[open] .admin-sidebar__menu-chevron {
-    transform: rotate(180deg);
-}
-
-/* Area submenu */
-
-.admin-sidebar__submenu {
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-
-    margin: 5px 0 8px 19px;
-    padding: 3px 0 3px 12px;
-
-    border-left: 1px solid var(--sidebar-border);
-}
-
-/* Tautan submenu */
-
-.admin-sidebar__submenu-link {
-    display: flex;
-    align-items: center;
-
-    min-height: 35px;
-    padding: 8px 10px;
-
-    color: var(--sidebar-text-secondary);
-    background: transparent;
-
-    border: 1px solid transparent;
-    border-radius: 7px;
-
-    font-family: inherit;
-    font-size: 11.5px;
-    font-weight: 500;
-    line-height: 1.5;
-    text-decoration: none;
-
-    transition:
-        color var(--sidebar-transition),
-        background var(--sidebar-transition);
-}
-
-.admin-sidebar__submenu-link:hover {
-    color: var(--sidebar-primary);
-    background: var(--sidebar-primary-soft);
-}
-
-.admin-sidebar__submenu-link.is-active {
-    color: var(--sidebar-primary-dark);
-    background: var(--sidebar-primary-soft);
-    font-weight: 650;
-}
-
-.admin-sidebar__submenu-link:focus-visible {
-    outline: 2px solid rgba(41, 66, 54, 0.25);
-    outline-offset: 2px;
-}
-
-/* Mobile */
-
-@media (max-width: 768px) {
-    .admin-sidebar__submenu {
-        margin-left: 19px;
-        padding-left: 12px;
-    }
-
-    .admin-sidebar__submenu-link {
-        min-height: 38px;
-        font-size: 12px;
-    }
-}
-
-
 /* =========================================
-   LAPTOP DAN LAYAR MENENGAH
-   ========================================= */
+   TABLET
+========================================= */
 
 @media (min-width: 769px) and (max-width: 1200px) {
+
     :root {
         --sidebar-width: 215px;
     }
 
     .admin-sidebar {
-        padding-right: 13px;
-        padding-left: 13px;
+        padding-right: 12px;
+        padding-left: 12px;
     }
 
     .admin-main .donations-page {
         padding: 25px 22px 36px;
     }
+
 }
 
 /* =========================================
    MOBILE
-   ========================================= */
+========================================= */
+
+.admin-sidebar-overlay {
+    display: none;
+}
 
 @media (max-width: 768px) {
+
     .admin-sidebar {
         width: min(285px, 86vw);
 
@@ -682,7 +593,7 @@
         transform: translateX(0);
         visibility: visible;
 
-        box-shadow: 15px 0 45px rgba(19, 39, 26, 0.12);
+        box-shadow: 12px 0 35px rgba(19, 39, 26, 0.12);
     }
 
     .admin-sidebar__close {
@@ -696,8 +607,8 @@
 
         display: block;
 
-        background: rgba(23, 36, 27, 0.34);
-        backdrop-filter: blur(3px);
+        background: rgba(23, 36, 27, 0.32);
+        backdrop-filter: blur(2px);
 
         opacity: 0;
         visibility: hidden;
@@ -731,8 +642,7 @@
         min-height: 64px;
         padding: 10px 17px;
 
-        background: var(--color-white, #ffffff);
-
+        background: #ffffff;
         border-bottom: 1px solid var(--sidebar-border);
     }
 
@@ -741,30 +651,17 @@
         align-items: center;
         justify-content: center;
 
-        flex-shrink: 0;
-
         width: 39px;
         height: 39px;
+        flex-shrink: 0;
 
         color: var(--sidebar-primary);
         background: var(--sidebar-primary-soft);
 
         border: 1px solid var(--sidebar-border);
-        border-radius: var(--sidebar-radius);
+        border-radius: 9px;
 
         cursor: pointer;
-
-        transition:
-            background var(--sidebar-transition),
-            transform var(--sidebar-transition);
-    }
-
-    .admin-sidebar-toggle:hover {
-        background: var(--color-green-light, #f6fff6);
-    }
-
-    .admin-sidebar-toggle:active {
-        transform: scale(0.95);
     }
 
     .admin-sidebar-toggle svg {
@@ -780,14 +677,12 @@
 
     .admin-mobile-header__title {
         color: var(--sidebar-primary-dark);
-
         font-size: 13px;
         font-weight: 700;
     }
 
     .admin-mobile-header__subtitle {
         color: var(--sidebar-text-secondary);
-
         font-size: 10px;
     }
 
@@ -798,13 +693,15 @@
     body.sidebar-open {
         overflow: hidden;
     }
+
 }
 
 /* =========================================
-   MOBILE KECIL
-   ========================================= */
+   SMALL MOBILE
+========================================= */
 
 @media (max-width: 480px) {
+
     .admin-sidebar {
         padding-right: 15px;
         padding-left: 15px;
@@ -818,19 +715,20 @@
     .admin-main .donations-page {
         padding: 19px 13px 26px;
     }
+
 }
 
 /* =========================================
-   AKSESIBILITAS
-   ========================================= */
+   ACCESSIBILITY
+========================================= */
 
 @media (prefers-reduced-motion: reduce) {
+
     .admin-sidebar,
     .admin-sidebar *,
-    .admin-sidebar-overlay,
-    .admin-sidebar-toggle {
-        scroll-behavior: auto !important;
+    .admin-sidebar-overlay {
         transition-duration: 0.01ms !important;
         animation-duration: 0.01ms !important;
     }
+
 }

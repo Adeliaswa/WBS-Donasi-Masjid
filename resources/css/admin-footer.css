@@ -1,0 +1,153 @@
+
+/* =========================================
+   ADMIN FOOTER
+========================================= */
+
+.admin-footer {
+    width: 100%;
+    padding: 17px 30px;
+
+    background: #ffffff;
+    border-top: 1px solid #e9ede9;
+
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Main container */
+
+.admin-footer__content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+
+    width: 100%;
+}
+
+/* Brand */
+
+.admin-footer__brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    min-width: 0;
+}
+
+/* Mosque icon */
+
+.admin-footer__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 29px;
+    height: 29px;
+    flex-shrink: 0;
+
+    color: #294236;
+    background: #edf4ed;
+    border-radius: 8px;
+}
+
+.admin-footer__icon svg {
+    width: 18px;
+    height: 18px;
+}
+
+/* Brand name */
+
+.admin-footer__name {
+    color: #68736b;
+
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+/* Right information */
+
+.admin-footer__info {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+
+    flex-shrink: 0;
+
+    color: #858d86;
+
+    font-size: 10px;
+    font-weight: 400;
+}
+
+/* Separator */
+
+.admin-footer__separator {
+    width: 4px;
+    height: 4px;
+    flex-shrink: 0;
+
+    background: #294236;
+    border-radius: 50%;
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 900px) {
+
+    .admin-footer {
+        padding: 16px 23px;
+    }
+
+    .admin-footer__name {
+        font-size: 10px;
+    }
+
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+    .admin-footer {
+        padding: 15px 17px;
+    }
+
+    .admin-footer__content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 9px;
+    }
+
+    .admin-footer__name {
+        font-size: 10px;
+    }
+
+    .admin-footer__info {
+        padding-left: 39px;
+        font-size: 9px;
+    }
+
+}
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 360px) {
+
+    .admin-footer__name {
+        font-size: 9px;
+    }
+
+    .admin-footer__info {
+        font-size: 8px;
+        gap: 7px;
+    }
+
+}

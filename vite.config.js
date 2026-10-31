@@ -15,6 +15,10 @@ export default defineConfig({
 
                 // CSS sidebar admin
                 'resources/css/admin-sidebar.css',
+                
+                'resources/css/admin-dashboard.css',
+
+                'resources/css/admin-layout.css',
 
                 // CSS halaman donasi
                 'resources/css/admin-donations.css',
@@ -35,6 +39,7 @@ export default defineConfig({
                 'resources/css/admin-distributions.css',
 
                 'resources/css/admin-distribution-form.css',
+                'resources/css/admin-footer.css',
 
                 // JavaScript utama
                 'resources/js/app.js',
@@ -44,6 +49,8 @@ export default defineConfig({
 
                 // JavaScript sidebar admin
                 'resources/js/admin-sidebar.js',
+
+                'resources/js/admin-dashboard.js',
 
                 // JavaScript halaman donasi
                 'resources/js/admin-donations.js',
@@ -57,6 +64,8 @@ export default defineConfig({
                 'resources/js/beneficiary-category-form.js',
                 
                 'resources/js/admin-distributions.js'
+                
+                
             ],
             refresh: true,
         }),

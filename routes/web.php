@@ -2,44 +2,82 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DonationController;
 use App\Http\Controllers\DonationCategoryController;
 use App\Http\Controllers\BeneficiaryController;
 use App\Http\Controllers\BeneficiaryCategoryController;
 use App\Http\Controllers\DistributionController;
 
+
+// ==================================================
+// HALAMAN UTAMA
+// ==================================================
+
 Route::get('/', function () {
     return view('welcome');
 });
 
-// Halaman login hanya untuk pengguna yang belum login
+
+// ==================================================
+// AUTENTIKASI
+// Hanya untuk pengguna yang belum login
+// ==================================================
+
 Route::middleware('guest')->group(function () {
+
     Route::get('/login', [LoginController::class, 'showLoginForm'])
         ->name('login');
 
     Route::post('/login', [LoginController::class, 'login'])
         ->middleware('throttle:5,1')
         ->name('login.process');
+
 });
 
-// Halaman internal hanya bisa diakses setelah login
+
+// ==================================================
+// HALAMAN INTERNAL
+// Hanya dapat diakses setelah login
+// ==================================================
+
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
 
-    // CRUD Donasi
+
+    // ==============================================
+    // DASHBOARD
+    // ==============================================
+
+    Route::get('/dashboard', [DashboardController::class, 'index'])
+        ->name('dashboard');
+
+
+    // ==============================================
+    // CRUD DONASI
+    // ==============================================
+
     Route::resource('donations', DonationController::class)
-    ->whereNumber('donation');
+        ->whereNumber('donation');
 
-    Route::post('/donation-categories', [DonationCategoryController::class, 'store'])
-    ->name('donation-categories.store');
+    Route::post(
+        '/donation-categories',
+        [DonationCategoryController::class, 'store']
+    )->name('donation-categories.store');
 
-    // CRUD Penerima Manfaat
+
+    // ==============================================
+    // CRUD PENERIMA MANFAAT
+    // ==============================================
+
     Route::resource('beneficiaries', BeneficiaryController::class)
         ->whereNumber('beneficiary');
-    
-    // CRUD Penyaluran Bantuan
+
+
+    // ==============================================
+    // CRUD PENYALURAN BANTUAN
+    // ==============================================
+
+    // Pemeriksaan duplikasi penyaluran
     Route::post(
         '/distributions/check-duplicates',
         [DistributionController::class, 'checkDuplicates']
@@ -48,7 +86,11 @@ Route::middleware('auth')->group(function () {
     Route::resource('distributions', DistributionController::class)
         ->whereNumber('distribution');
 
-    // Pengelolaan Kategori Penerima Manfaat
+
+    // ==============================================
+    // PENGELOLAAN KATEGORI PENERIMA MANFAAT
+    // ==============================================
+
     Route::resource(
         'beneficiary-categories',
         BeneficiaryCategoryController::class
@@ -56,6 +98,7 @@ Route::middleware('auth')->group(function () {
         'beneficiary-categories' => 'beneficiaryCategory',
     ])->whereNumber('beneficiaryCategory');
 
+    // Mengubah status kategori
     Route::patch(
         '/beneficiary-categories/{beneficiaryCategory}/toggle-status',
         [BeneficiaryCategoryController::class, 'toggleStatus']
@@ -63,6 +106,12 @@ Route::middleware('auth')->group(function () {
         ->whereNumber('beneficiaryCategory')
         ->name('beneficiary-categories.toggle-status');
 
+
+    // ==============================================
+    // LOGOUT
+    // ==============================================
+
     Route::post('/logout', [LoginController::class, 'logout'])
         ->name('logout');
+
 });
