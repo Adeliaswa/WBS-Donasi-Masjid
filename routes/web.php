@@ -8,6 +8,7 @@ use App\Http\Controllers\DonationCategoryController;
 use App\Http\Controllers\BeneficiaryController;
 use App\Http\Controllers\BeneficiaryCategoryController;
 use App\Http\Controllers\DistributionController;
+use App\Http\Controllers\ReportController;
 
 
 // ==================================================
@@ -51,6 +52,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])
         ->name('dashboard');
 
+    // ==============================================
+    // LAPORAN DONASI DAN PENYALURAN
+    // ==============================================
+
+    Route::get('/reports', [ReportController::class, 'index'])
+        ->name('reports.index');
 
     // ==============================================
     // CRUD DONASI
