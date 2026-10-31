@@ -12,25 +12,16 @@ class PublicReportPdfController extends Controller
 {
     public function donations(Request $request)
     {
-        $startDate = $request->input(
-            'start_date',
-            now()->startOfYear()->toDateString()
-        );
-
-        $endDate = $request->input(
-            'end_date',
-            now()->endOfYear()->toDateString()
-        );
-
-        $request->merge([
-            'start_date' => $startDate,
-            'end_date' => $endDate,
+        $validated = $request->validate([
+            'start_date' => ['nullable', 'date', 'before_or_equal:end_date'],
+            'end_date' => ['nullable', 'date', 'after_or_equal:start_date'],
         ]);
 
-        $request->validate([
-            'start_date' => ['required', 'date', 'before_or_equal:end_date'],
-            'end_date' => ['required', 'date', 'after_or_equal:start_date'],
-        ]);
+        $startDate = $validated['start_date']
+            ?? now()->startOfYear()->toDateString();
+
+        $endDate = $validated['end_date']
+            ?? now()->endOfYear()->toDateString();
 
         $donations = Donation::query()
             ->where('verification_status', 'verified')
@@ -53,30 +44,25 @@ class PublicReportPdfController extends Controller
             'total'
         ));
 
+        $pdf->getDomPDF()->add_info('Title', 'Laporan Transparansi Donasi');
+        $pdf->getDomPDF()->add_info('Author', 'Sistem Informasi Donasi Masjid');
+        $pdf->getDomPDF()->add_info('Subject', 'Rekap Donasi');
+
         return $pdf->download('rekap-donasi.pdf');
     }
 
     public function distributions(Request $request)
     {
-        $startDate = $request->input(
-            'start_date',
-            now()->startOfYear()->toDateString()
-        );
-
-        $endDate = $request->input(
-            'end_date',
-            now()->endOfYear()->toDateString()
-        );
-
-        $request->merge([
-            'start_date' => $startDate,
-            'end_date' => $endDate,
+        $validated = $request->validate([
+            'start_date' => ['nullable', 'date', 'before_or_equal:end_date'],
+            'end_date' => ['nullable', 'date', 'after_or_equal:start_date'],
         ]);
 
-        $request->validate([
-            'start_date' => ['required', 'date', 'before_or_equal:end_date'],
-            'end_date' => ['required', 'date', 'after_or_equal:start_date'],
-        ]);
+        $startDate = $validated['start_date']
+            ?? now()->startOfYear()->toDateString();
+
+        $endDate = $validated['end_date']
+            ?? now()->endOfYear()->toDateString();
 
         $distributions = Distribution::query()
             ->where('status', 'Disalurkan')
@@ -112,6 +98,10 @@ class PublicReportPdfController extends Controller
             'endDate',
             'total'
         ));
+
+        $pdf->getDomPDF()->add_info('Title', 'Laporan Transparansi Penyaluran');
+        $pdf->getDomPDF()->add_info('Author', 'Sistem Informasi Donasi Masjid');
+        $pdf->getDomPDF()->add_info('Subject', 'Rekap Penyaluran');
 
         return $pdf->download('rekap-penyaluran.pdf');
     }

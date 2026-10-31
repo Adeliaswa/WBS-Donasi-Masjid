@@ -127,7 +127,6 @@
                 <tr>
                     <th>Tanggal</th>
                     <th>Kategori Bantuan</th>
-                    <th>Jumlah Penerima</th>
                     <th>Nominal</th>
                     <th>Keterangan</th>
                 </tr>
@@ -137,13 +136,12 @@
                     <tr>
                         <td>{{ $distribution->distribution_date->format('d-m-Y') }}</td>
                         <td>{{ $distribution->assistance_type }}</td>
-                        <td>{{ $distribution->recipient_count }}</td>
                         <td>Rp {{ number_format($distribution->amount, 0, ',', '.') }}</td>
                         <td>-</td>
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="5">Belum ada data penyaluran.</td>
+                        <td colspan="4">Belum ada data penyaluran.</td>
                     </tr>
                 @endforelse
             </tbody>
