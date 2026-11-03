@@ -1,4 +1,3 @@
-
 <aside class="admin-sidebar" id="adminSidebar">
 
     {{-- BRAND --}}
@@ -189,6 +188,48 @@
                     </svg>
                 </span>
                 <span class="admin-sidebar__link-text">Data Penyaluran</span>
+            </a>
+
+
+            {{-- LAPORAN DONASI DAN PENYALURAN --}}
+            <a
+                href="{{ route('reports.index') }}"
+                class="admin-sidebar__link {{ request()->routeIs('reports.*') ? 'admin-sidebar__link--active' : '' }}"
+                @if(request()->routeIs('reports.*')) aria-current="page" @endif
+            >
+                <span class="admin-sidebar__link-icon">
+                    <svg viewBox="0 0 24 24" fill="none">
+                        <path
+                            d="M4 19V5"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                        />
+                        <path
+                            d="M4 19H21"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                        />
+                        <rect
+                            x="7" y="11" width="3.5" height="8" rx="1"
+                            stroke="currentColor"
+                            stroke-width="1.7"
+                        />
+                        <rect
+                            x="13" y="7" width="3.5" height="12" rx="1"
+                            stroke="currentColor"
+                            stroke-width="1.7"
+                        />
+                        <rect
+                            x="19" y="3" width="2" height="16" rx="1"
+                            stroke="currentColor"
+                            stroke-width="1.7"
+                        />
+                    </svg>
+                </span>
+
+                <span class="admin-sidebar__link-text">Laporan</span>
             </a>
 
         </div>

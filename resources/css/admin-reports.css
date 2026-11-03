@@ -1,0 +1,1793 @@
+
+/* =========================================================
+   ADMIN REPORT
+   Masjid Sabilillah
+   Dashboard Design Reference
+========================================================= */
+
+
+/* =========================================================
+   1. ROOT & BASE
+========================================================= */
+
+.report-page {
+
+    --report-green: var(--color-green-normal, #294236);
+    --report-green-dark: #1b2b23;
+    --report-green-light: #edf4ee;
+
+    --report-text: #242a26;
+    --report-muted: #90958f;
+
+    --report-border: #eceeeb;
+    --report-background: #f6f6f6;
+
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+
+    padding: 4px 2px 24px;
+
+    color: var(--report-text);
+
+    font-family: var(--font-primary, "Poppins"), sans-serif;
+}
+
+.report-page *,
+.report-page *::before,
+.report-page *::after {
+    box-sizing: border-box;
+}
+
+.report-page button,
+.report-page input,
+.report-page select {
+    font-family: inherit;
+}
+
+
+/* =========================================================
+   2. PAGE HEADER
+   Menggunakan admin-page-header dari Dashboard
+========================================================= */
+
+.report-page .admin-page-header {
+
+    margin-top: 0;
+    margin-bottom: 22px;
+
+}
+
+.report-page .admin-page-header__description {
+
+    max-width: 760px;
+
+}
+
+.report-page .admin-page-header,
+.report-page .admin-page-header * {
+
+    font-family: var(--font-primary, "Poppins"), sans-serif;
+
+}
+
+
+/* =========================================================
+   3. ERROR ALERT
+========================================================= */
+
+.report-alert {
+
+    display: flex;
+    align-items: flex-start;
+
+    gap: 12px;
+
+    padding: 15px 17px;
+
+    margin-bottom: 18px;
+
+    border: 1px solid transparent;
+    border-radius: 12px;
+
+}
+
+.report-alert--danger {
+
+    background: #fff5f3;
+    border-color: #f4dfdb;
+
+    color: #b85b51;
+
+}
+
+.report-alert__icon {
+
+    display: grid;
+    place-items: center;
+
+    width: 34px;
+    height: 34px;
+
+    flex-shrink: 0;
+
+    border-radius: 9px;
+
+    background: #fde9e5;
+
+}
+
+.report-alert__icon svg {
+
+    width: 18px;
+    height: 18px;
+
+}
+
+.report-alert__content {
+
+    min-width: 0;
+
+}
+
+.report-alert__content strong {
+
+    display: block;
+
+    font-size: 11px;
+    font-weight: 600;
+
+    margin-bottom: 5px;
+
+}
+
+.report-alert__content ul {
+
+    padding-left: 17px;
+    margin: 0;
+
+}
+
+.report-alert__content li {
+
+    font-size: 10px;
+    line-height: 1.7;
+
+}
+
+
+/* =========================================================
+   4. GENERAL PANEL
+========================================================= */
+
+.report-panel {
+
+    min-width: 0;
+
+    background: #ffffff;
+
+    border: 1px solid var(--report-border);
+
+    border-radius: 16px;
+
+    padding: 19px;
+
+    box-shadow: 0 3px 12px rgba(29, 46, 33, 0.025);
+
+}
+
+.report-filter-panel {
+
+    margin-bottom: 22px;
+
+}
+
+
+/* =========================================================
+   5. SECTION HEADING
+========================================================= */
+
+.report-section-heading {
+
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    margin-bottom: 21px;
+
+}
+
+.report-section-heading__icon {
+
+    width: 39px;
+    height: 39px;
+
+    display: grid;
+    place-items: center;
+
+    flex-shrink: 0;
+
+    background: #edf4ee;
+
+    color: var(--report-green);
+
+    border-radius: 11px;
+
+}
+
+.report-section-heading__icon svg {
+
+    width: 20px;
+    height: 20px;
+
+}
+
+.report-eyebrow {
+
+    display: block;
+
+    color: #a1a79f;
+
+    font-size: 9px;
+    font-weight: 600;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 5px;
+
+}
+
+.report-section-heading h2,
+.report-main-heading h2,
+.report-table-heading h2 {
+
+    color: #263027;
+
+    font-size: 15px;
+    line-height: 1.4;
+
+    font-weight: 600;
+
+    margin: 0;
+
+}
+
+.report-section-heading p,
+.report-main-heading p,
+.report-table-heading p {
+
+    color: #a0a49e;
+
+    font-size: 10px;
+
+    line-height: 1.6;
+
+    margin: 4px 0 0;
+
+}
+
+
+/* =========================================================
+   6. FILTER FORM
+========================================================= */
+
+.report-filter-form {
+
+    width: 100%;
+
+}
+
+.report-filter-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 14px;
+
+}
+
+.report-form-group {
+
+    display: flex;
+    flex-direction: column;
+
+    min-width: 0;
+
+    gap: 7px;
+
+}
+
+.report-form-group label {
+
+    color: #596259;
+
+    font-size: 10px;
+    font-weight: 500;
+
+}
+
+.report-input-wrapper {
+
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+    min-width: 0;
+
+    height: 42px;
+
+    background: #fafbf9;
+
+    border: 1px solid #e9ede7;
+
+    border-radius: 8px;
+
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+
+}
+
+.report-input-wrapper:focus-within {
+
+    background: #ffffff;
+
+    border-color: #9aaf9d;
+
+    box-shadow: 0 0 0 3px rgba(41, 66, 54, 0.06);
+
+}
+
+.report-input-wrapper select,
+.report-input-wrapper input {
+
+    width: 100%;
+    height: 100%;
+
+    min-width: 0;
+
+    padding: 0 12px;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    color: #404a40;
+
+    font-size: 10px;
+    font-weight: 500;
+
+}
+
+.report-input-wrapper select {
+
+    appearance: none;
+
+    padding-right: 32px;
+
+    cursor: pointer;
+
+}
+
+.report-input-wrapper select option {
+
+    color: #303831;
+
+}
+
+.report-input-wrapper svg {
+
+    position: absolute;
+
+    right: 11px;
+
+    width: 13px;
+    height: 13px;
+
+    color: #92988f;
+
+    pointer-events: none;
+
+}
+
+.report-input-wrapper--date input {
+
+    color-scheme: light;
+
+    cursor: pointer;
+
+}
+
+.report-input-wrapper--date input::-webkit-calendar-picker-indicator {
+
+    cursor: pointer;
+
+    opacity: 0.65;
+
+}
+
+
+/* =========================================================
+   7. FILTER BUTTONS
+========================================================= */
+
+.report-filter-actions {
+
+    display: flex;
+
+    justify-content: flex-end;
+    align-items: center;
+
+    gap: 9px;
+
+    margin-top: 20px;
+
+    padding-top: 16px;
+
+    border-top: 1px solid #f0f1ef;
+
+}
+
+.report-button {
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    min-height: 37px;
+
+    padding: 0 15px;
+
+    border-radius: 8px;
+
+    font-size: 10px;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+
+}
+
+.report-button svg {
+
+    width: 14px;
+    height: 14px;
+
+    flex-shrink: 0;
+
+}
+
+.report-button--primary {
+
+    background: var(--report-green);
+
+    color: #ffffff;
+
+    border: 1px solid var(--report-green);
+
+}
+
+.report-button--primary:hover {
+
+    background: var(--report-green-dark);
+
+    border-color: var(--report-green-dark);
+
+    transform: translateY(-1px);
+
+}
+
+.report-button--reset {
+
+    background: #ffffff;
+
+    color: #737d73;
+
+    border: 1px solid #e7ebe5;
+
+}
+
+.report-button--reset:hover {
+
+    background: #f7f9f6;
+
+    color: var(--report-green);
+
+    border-color: #cbd7ca;
+
+}
+
+
+/* =========================================================
+   8. SUMMARY SECTION
+========================================================= */
+
+.report-summary-section {
+
+    margin-bottom: 22px;
+
+}
+
+.report-main-heading {
+
+    display: flex;
+
+    justify-content: space-between;
+    align-items: flex-end;
+
+    margin-bottom: 14px;
+
+}
+
+.report-main-heading h2 {
+
+    font-size: 17px;
+
+    color: #263027;
+
+}
+
+.report-summary-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 15px;
+
+}
+
+
+/* =========================================================
+   9. SUMMARY CARD
+   Mengikuti proporsi summary-card Dashboard
+========================================================= */
+
+.report-summary-card {
+
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: space-between;
+
+    min-width: 0;
+    min-height: 151px;
+
+    overflow: hidden;
+
+    padding: 17px 18px 16px;
+
+    background: #ffffff;
+
+    border: 1px solid #eceeeb;
+
+    border-radius: 16px;
+
+    box-shadow: 0 3px 12px rgba(29, 46, 33, 0.025);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+
+}
+
+.report-summary-card:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 7px 18px rgba(29, 46, 33, 0.06);
+
+}
+
+.report-summary-card__top {
+
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    position: relative;
+    z-index: 1;
+
+}
+
+.report-summary-card__icon {
+
+    display: grid;
+
+    place-items: center;
+
+    width: 37px;
+    height: 37px;
+
+    border-radius: 11px;
+
+    background: #edf4ee;
+
+    color: var(--report-green);
+
+}
+
+.report-summary-card__icon svg {
+
+    width: 20px;
+    height: 20px;
+
+}
+
+.report-summary-card__number {
+
+    color: #c4cbc2;
+
+    font-size: 9px;
+    font-weight: 600;
+
+    letter-spacing: 0.5px;
+
+}
+
+.report-summary-card__body {
+
+    position: relative;
+    z-index: 1;
+
+    margin-top: 14px;
+
+    min-width: 0;
+
+}
+
+.report-summary-card__body > span {
+
+    display: block;
+
+    color: #888e88;
+
+    font-size: 11px;
+    font-weight: 500;
+
+    margin-bottom: 5px;
+
+}
+
+.report-summary-card__body h3 {
+
+    color: #252d26;
+
+    font-size: clamp(16px, 1.55vw, 21px);
+
+    line-height: 1.4;
+
+    font-weight: 600;
+
+    letter-spacing: -0.6px;
+
+    margin: 0;
+
+    overflow-wrap: anywhere;
+
+}
+
+.report-summary-card__body h3 small {
+
+    font-size: 10px;
+
+    color: #92988f;
+
+    font-weight: 500;
+
+    letter-spacing: 0;
+
+}
+
+.report-summary-card__decoration {
+
+    position: absolute;
+
+    width: 85px;
+    height: 85px;
+
+    border-radius: 50%;
+
+    right: -42px;
+    top: -45px;
+
+    background: rgba(131, 184, 77, 0.055);
+
+    pointer-events: none;
+
+}
+
+
+/* CARD VARIANTS */
+
+.report-summary-card--green .report-summary-card__icon {
+
+    background: #edf4ee;
+    color: #426747;
+
+}
+
+.report-summary-card--green .report-summary-card__decoration {
+
+    background: rgba(131, 184, 77, 0.075);
+
+}
+
+
+.report-summary-card--blue .report-summary-card__icon {
+
+    background: #eef3fa;
+    color: #5576a5;
+
+}
+
+.report-summary-card--blue .report-summary-card__decoration {
+
+    background: rgba(85, 118, 165, 0.06);
+
+}
+
+
+.report-summary-card--gold .report-summary-card__icon {
+
+    background: #f5f2e9;
+    color: #a28a48;
+
+}
+
+.report-summary-card--gold .report-summary-card__decoration {
+
+    background: rgba(162, 138, 72, 0.065);
+
+}
+
+
+.report-summary-card--purple .report-summary-card__icon {
+
+    background: #f1eff8;
+    color: #8272a7;
+
+}
+
+.report-summary-card--purple .report-summary-card__decoration {
+
+    background: rgba(130, 114, 167, 0.06);
+
+}
+
+
+/* =========================================================
+   10. TABLE PANEL
+========================================================= */
+
+.report-table-panel {
+
+    padding: 19px 0 0;
+
+    margin-bottom: 18px;
+
+    overflow: hidden;
+
+}
+
+.report-table-heading {
+
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 0 19px 17px;
+
+}
+
+.report-table-heading__content {
+
+    min-width: 0;
+
+}
+
+.report-table-heading h2 {
+
+    font-size: 15px;
+
+}
+
+.report-table-heading__icon {
+
+    display: grid;
+
+    place-items: center;
+
+    width: 39px;
+    height: 39px;
+
+    flex-shrink: 0;
+
+    border-radius: 11px;
+
+}
+
+.report-table-heading__icon svg {
+
+    width: 20px;
+    height: 20px;
+
+}
+
+.report-table-heading__icon--green {
+
+    color: #426747;
+    background: #edf4ee;
+
+}
+
+.report-table-heading__icon--blue {
+
+    color: #5576a5;
+    background: #eef3fa;
+
+}
+
+
+/* =========================================================
+   11. TABLE WRAPPER
+========================================================= */
+
+.report-table-wrapper {
+
+    width: 100%;
+
+    overflow-x: auto;
+
+    scrollbar-width: thin;
+
+    scrollbar-color: #d9ded8 transparent;
+
+}
+
+.report-table-wrapper::-webkit-scrollbar {
+
+    height: 5px;
+
+}
+
+.report-table-wrapper::-webkit-scrollbar-thumb {
+
+    background: #d9ded8;
+
+    border-radius: 10px;
+
+}
+
+
+/* =========================================================
+   12. TABLE
+========================================================= */
+
+.report-table {
+
+    width: 100%;
+
+    min-width: 690px;
+
+    border-collapse: collapse;
+
+    text-align: left;
+
+    white-space: nowrap;
+
+}
+
+.report-table thead {
+
+    background: #f8f9f7;
+
+}
+
+.report-table th {
+
+    color: #92988f;
+
+    font-size: 9px;
+
+    font-weight: 500;
+
+    padding: 12px 12px;
+
+    border-top: 1px solid #f0f1ef;
+    border-bottom: 1px solid #f0f1ef;
+
+}
+
+.report-table th:first-child,
+.report-table td:first-child {
+
+    padding-left: 19px;
+
+}
+
+.report-table th:last-child,
+.report-table td:last-child {
+
+    padding-right: 19px;
+
+}
+
+.report-table td {
+
+    padding: 12px;
+
+    border-bottom: 1px solid #f2f3f1;
+
+    color: #596259;
+
+    font-size: 10px;
+
+    vertical-align: middle;
+
+}
+
+.report-table tbody tr {
+
+    transition: background 0.15s ease;
+
+}
+
+.report-table tbody tr:hover {
+
+    background: #fafbf9;
+
+}
+
+.report-table tbody tr:last-child td {
+
+    border-bottom: none;
+
+}
+
+.report-table__number {
+
+    color: #92988f !important;
+
+    font-size: 9px !important;
+
+}
+
+.report-table__date {
+
+    color: #91978f !important;
+
+    font-size: 9px !important;
+
+}
+
+.report-table__amount {
+
+    color: #344235 !important;
+
+    font-size: 10px !important;
+
+    font-weight: 600;
+
+}
+
+
+/* =========================================================
+   13. CATEGORY BADGE
+========================================================= */
+
+.report-category {
+
+    display: inline-block;
+
+    padding: 5px 8px;
+
+    border-radius: 5px;
+
+    background: #f5f7f3;
+
+    color: #727c70;
+
+    font-size: 9px;
+    font-weight: 500;
+
+}
+
+.report-category--blue {
+
+    background: #eef3fa;
+
+    color: #5576a5;
+
+}
+
+.report-recipient-count {
+
+    color: #727c70;
+
+    font-size: 10px;
+    font-weight: 500;
+
+}
+
+
+/* =========================================================
+   14. STATUS BADGE
+   Mengikuti Dashboard
+========================================================= */
+
+.report-status {
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 6px;
+
+    padding: 5px 9px;
+
+    border-radius: 20px;
+
+    font-size: 8px;
+    font-weight: 600;
+
+    white-space: nowrap;
+
+}
+
+.report-status > span {
+
+    width: 5px;
+    height: 5px;
+
+    border-radius: 50%;
+
+    flex-shrink: 0;
+
+}
+
+.report-status--success {
+
+    background: #edf7ed;
+
+    color: #43864c;
+
+}
+
+.report-status--success > span {
+
+    background: #5ba768;
+
+}
+
+.report-status--warning {
+
+    background: #fff5e7;
+
+    color: #b17c2f;
+
+}
+
+.report-status--warning > span {
+
+    background: #d5a14f;
+
+}
+
+.report-status--danger {
+
+    background: #fff0ee;
+
+    color: #bf5b51;
+
+}
+
+.report-status--danger > span {
+
+    background: #cc7065;
+
+}
+
+
+/* =========================================================
+   15. EMPTY STATE
+========================================================= */
+
+.report-table__empty {
+
+    padding: 0 !important;
+
+}
+
+.report-empty {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    min-height: 190px;
+
+    padding: 25px 15px;
+
+}
+
+.report-empty__icon {
+
+    display: grid;
+
+    place-items: center;
+
+    width: 39px;
+    height: 39px;
+
+    margin-bottom: 10px;
+
+    border-radius: 12px;
+
+    background: #f2f5f0;
+
+    color: #82947d;
+
+}
+
+.report-empty__icon svg {
+
+    width: 20px;
+    height: 20px;
+
+}
+
+.report-empty strong {
+
+    color: #5e695e;
+
+    font-size: 11px;
+    font-weight: 600;
+
+}
+
+.report-empty > span {
+
+    color: #a0a69e;
+
+    font-size: 9px;
+
+    line-height: 1.6;
+
+    margin-top: 5px;
+
+    max-width: 280px;
+
+}
+
+
+/* =========================================================
+   16. PAGINATION
+========================================================= */
+
+.report-pagination {
+
+    display: flex;
+
+    justify-content: flex-end;
+    align-items: center;
+
+    padding: 14px 19px;
+
+    border-top: 1px solid #f0f1ef;
+
+}
+
+.report-pagination nav {
+
+    display: flex;
+    align-items: center;
+
+    gap: 4px;
+
+}
+
+.report-pagination nav > div:first-child {
+
+    display: none;
+
+}
+
+.report-pagination nav > div:last-child {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 4px;
+
+}
+
+.report-pagination a,
+.report-pagination span[aria-current="page"] span,
+.report-pagination button {
+
+    display: inline-flex;
+
+    justify-content: center;
+    align-items: center;
+
+    min-width: 29px;
+    height: 29px;
+
+    padding: 0 8px;
+
+    border-radius: 7px;
+
+    border: 1px solid #eceeeb;
+
+    background: #ffffff;
+
+    color: #7e887e;
+
+    font-size: 10px;
+
+    text-decoration: none;
+
+}
+
+.report-pagination span[aria-current="page"] span {
+
+    background: var(--report-green);
+
+    color: #ffffff;
+
+    border-color: var(--report-green);
+
+}
+
+.report-pagination a:hover {
+
+    background: #edf4ee;
+
+    color: var(--report-green);
+
+    border-color: #dce6dc;
+
+}
+
+.report-pagination [aria-disabled="true"] span {
+
+    opacity: 0.4;
+
+}
+
+
+/* =========================================================
+   17. LAPTOP RESPONSIVE
+========================================================= */
+
+@media (max-width: 1200px) {
+
+    .report-summary-grid {
+
+        gap: 11px;
+
+    }
+
+    .report-summary-card {
+
+        padding: 15px 13px;
+
+    }
+
+    .report-summary-card__body h3 {
+
+        font-size: 17px;
+
+    }
+
+    .report-panel {
+
+        padding: 16px;
+
+    }
+
+    .report-table-panel {
+
+        padding: 17px 0 0;
+
+    }
+
+    .report-table-heading {
+
+        padding: 0 16px 15px;
+
+    }
+
+    .report-table th,
+    .report-table td {
+
+        padding-left: 9px;
+        padding-right: 9px;
+
+    }
+
+    .report-filter-grid {
+
+        gap: 11px;
+
+    }
+
+}
+
+
+/* =========================================================
+   18. TABLET RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .report-summary-grid {
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+    }
+
+    .report-filter-grid {
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+    }
+
+    .report-panel {
+
+        border-radius: 14px;
+
+    }
+
+    .report-summary-card__body h3 {
+
+        font-size: 19px;
+
+    }
+
+}
+
+
+/* =========================================================
+   19. MOBILE RESPONSIVE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .report-page {
+
+        padding: 0 0 20px;
+
+    }
+
+
+    /* HEADER */
+
+    .report-page .admin-page-header {
+
+        margin-bottom: 17px;
+
+    }
+
+
+    /* GENERAL PANEL */
+
+    .report-panel {
+
+        padding: 15px;
+
+        border-radius: 13px;
+
+    }
+
+    .report-filter-panel {
+
+        margin-bottom: 17px;
+
+    }
+
+
+    /* FILTER */
+
+    .report-section-heading {
+
+        gap: 10px;
+
+        margin-bottom: 17px;
+
+    }
+
+    .report-section-heading__icon {
+
+        width: 35px;
+        height: 35px;
+
+        border-radius: 10px;
+
+    }
+
+    .report-section-heading__icon svg {
+
+        width: 18px;
+        height: 18px;
+
+    }
+
+    .report-section-heading h2,
+    .report-table-heading h2 {
+
+        font-size: 14px;
+
+    }
+
+    .report-section-heading p,
+    .report-table-heading p {
+
+        font-size: 9px;
+
+    }
+
+    .report-filter-grid {
+
+        grid-template-columns: 1fr;
+
+        gap: 12px;
+
+    }
+
+    .report-form-group label {
+
+        font-size: 10px;
+
+    }
+
+    .report-input-wrapper {
+
+        height: 41px;
+
+    }
+
+    .report-input-wrapper select,
+    .report-input-wrapper input {
+
+        font-size: 10px;
+
+    }
+
+    .report-filter-actions {
+
+        flex-direction: column-reverse;
+
+        align-items: stretch;
+
+        gap: 8px;
+
+        margin-top: 16px;
+
+        padding-top: 14px;
+
+    }
+
+    .report-button {
+
+        width: 100%;
+
+        min-height: 39px;
+
+        font-size: 10px;
+
+    }
+
+
+    /* SUMMARY */
+
+    .report-summary-section {
+
+        margin-bottom: 17px;
+
+    }
+
+    .report-main-heading {
+
+        margin-bottom: 12px;
+
+    }
+
+    .report-main-heading h2 {
+
+        font-size: 15px;
+
+    }
+
+    .report-summary-grid {
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 10px;
+
+    }
+
+    .report-summary-card {
+
+        min-height: 140px;
+
+        padding: 13px;
+
+        border-radius: 13px;
+
+    }
+
+    .report-summary-card__icon {
+
+        width: 33px;
+        height: 33px;
+
+        border-radius: 9px;
+
+    }
+
+    .report-summary-card__icon svg {
+
+        width: 18px;
+        height: 18px;
+
+    }
+
+    .report-summary-card__body {
+
+        margin-top: 12px;
+
+    }
+
+    .report-summary-card__body > span {
+
+        font-size: 9px;
+
+    }
+
+    .report-summary-card__body h3 {
+
+        font-size: clamp(13px, 3.7vw, 17px);
+
+        letter-spacing: -0.4px;
+
+    }
+
+    .report-summary-card__number {
+
+        font-size: 8px;
+
+    }
+
+
+    /* TABLE */
+
+    .report-table-panel {
+
+        padding: 15px 0 0;
+
+        margin-bottom: 13px;
+
+    }
+
+    .report-table-heading {
+
+        padding: 0 15px 14px;
+
+    }
+
+    .report-table-heading__icon {
+
+        width: 34px;
+        height: 34px;
+
+    }
+
+    .report-table-heading__icon svg {
+
+        width: 18px;
+        height: 18px;
+
+    }
+
+    .report-table th:first-child,
+    .report-table td:first-child {
+
+        padding-left: 15px;
+
+    }
+
+    .report-table th:last-child,
+    .report-table td:last-child {
+
+        padding-right: 15px;
+
+    }
+
+    .report-table th {
+
+        font-size: 8px;
+
+        padding-top: 11px;
+        padding-bottom: 11px;
+
+    }
+
+    .report-table td {
+
+        font-size: 9px;
+
+        padding-top: 11px;
+        padding-bottom: 11px;
+
+    }
+
+    .report-pagination {
+
+        padding: 12px 15px;
+
+    }
+
+    .report-empty {
+
+        min-height: 170px;
+
+    }
+
+}
+
+
+/* =========================================================
+   20. SMALL MOBILE
+========================================================= */
+
+@media (max-width: 360px) {
+
+    .report-summary-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .report-summary-card {
+
+        min-height: 125px;
+
+    }
+
+    .report-summary-card__body h3 {
+
+        font-size: 19px;
+
+    }
+
+}
+
+
+/* =========================================================
+   21. FONT CONSISTENCY
+   Memastikan seluruh halaman menggunakan Poppins
+========================================================= */
+
+.report-page,
+.report-page *,
+.report-page *::before,
+.report-page *::after {
+
+    font-family: var(--font-primary, "Poppins"), sans-serif;
+
+}
+
+
+/* =========================================================
+   22. ACCESSIBILITY & INTERACTION
+========================================================= */
+
+.report-page button:focus-visible,
+.report-page a:focus-visible,
+.report-page input:focus-visible,
+.report-page select:focus-visible {
+
+    outline: 2px solid rgba(41, 66, 54, 0.4);
+
+    outline-offset: 3px;
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .report-page *,
+    .report-page *::before,
+    .report-page *::after {
+
+        transition-duration: 0.01ms !important;
+
+        animation-duration: 0.01ms !important;
+
+    }
+
+}
+
+
+/* =====================================================
+   DATE VALIDATION ERROR
+===================================================== */
+
+.report-date-error {
+    display: none;
+    align-items: center;
+
+    padding: 11px 14px;
+    margin-top: 15px;
+
+    background: #fff5f3;
+    border: 1px solid #f4dfdb;
+    border-radius: 9px;
+
+    color: #b85b51;
+
+    font-size: 10px;
+    font-weight: 500;
+
+    line-height: 1.6;
+}
+
+.report-date-error::before {
+    content: "!";
+
+    display: grid;
+    place-items: center;
+
+    width: 19px;
+    height: 19px;
+
+    flex-shrink: 0;
+
+    margin-right: 9px;
+
+    border-radius: 50%;
+
+    background: #fde9e5;
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.report-date-error span {
+    display: block;
+}
