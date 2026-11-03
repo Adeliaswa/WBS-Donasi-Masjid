@@ -11,20 +11,6 @@ class PublicReportController extends Controller
 {
     public function index(Request $request)
     {
-        // Periode default Januari sampai Desember tahun berjalan.
-        $startDate = $request->input(
-            'start_date',
-            now()->startOfYear()->toDateString()
-        );
-
-        $endDate = $request->input(
-            'end_date',
-            now()->endOfYear()->toDateString()
-        );
-
-        $reportType = $request->input('report_type', 'semua');
-        $tab = $request->input('tab', 'donasi');
-
         // Validasi filter laporan.
         $validated = $request->validate([
             'start_date' => ['nullable', 'date', 'before_or_equal:end_date'],
@@ -32,6 +18,16 @@ class PublicReportController extends Controller
             'report_type' => ['nullable', 'in:semua,donasi,penyaluran'],
             'tab' => ['nullable', 'in:donasi,penyaluran,kategori,bulanan'],
         ]);
+
+        // Periode default Januari sampai Desember tahun berjalan.
+        $startDate = $validated['start_date']
+            ?? now()->startOfYear()->toDateString();
+
+        $endDate = $validated['end_date']
+            ?? now()->endOfYear()->toDateString();
+
+        $reportType = $validated['report_type'] ?? 'semua';
+        $tab = $validated['tab'] ?? 'donasi';
 
         // Query dasar donasi publik.
         $donationQuery = Donation::query()
@@ -44,7 +40,7 @@ class PublicReportController extends Controller
             ->whereHas('beneficiary')
             ->whereBetween('distribution_date', [$startDate, $endDate]);
 
-        // Ringkasan mengikuti periode, tetapi tidak dipengaruhi tab.
+        // Ringkasan mengikuti periode.
         $totalDonation = (clone $donationQuery)->sum('amount');
         $totalDistribution = (clone $distributionQuery)->sum('amount');
 
@@ -75,15 +71,14 @@ class PublicReportController extends Controller
 
         // Rekap penyaluran: tanpa identitas penerima.
         $distributions = (clone $distributionQuery)
-        ->select([
-            'distribution_date',
-            'assistance_type',
-            'amount',
-        ])
-        ->selectRaw('1 AS recipient_count')
-        ->orderByDesc('distribution_date')
-        ->paginate(5, ['*'], 'distributions_page')
-        ->withQueryString();
+            ->select([
+                'distribution_date',
+                'assistance_type',
+                'amount',
+            ])
+            ->orderByDesc('distribution_date')
+            ->paginate(5, ['*'], 'distributions_page')
+            ->withQueryString();
 
         // Rekap kategori penyaluran.
         $categoryMapping = [

@@ -1,0 +1,853 @@
+/* =====================================================
+   ADMIN ACTIVITIES
+   MASJID SABILILLAH
+   Consistent with Admin Donations & Dashboard
+===================================================== */
+
+
+/* =====================================================
+   1. GLOBAL
+===================================================== */
+
+.activities-page,
+.activities-page *,
+.activities-page *::before,
+.activities-page *::after {
+    box-sizing: border-box;
+}
+
+.activities-page {
+    --activities-green: #294236;
+    --activities-green-dark: #1b2b23;
+    --activities-green-light: #edf4ee;
+
+    --activities-text: #263027;
+    --activities-muted: #90958f;
+    --activities-border: #eceeeb;
+    --activities-background: #ffffff;
+
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+
+    margin: 0;
+    padding: 0 0 24px;
+
+    color: var(--activities-text);
+    font-family: var(--font-primary, "Poppins"), sans-serif;
+}
+
+.activities-page *,
+.activities-page *::before,
+.activities-page *::after {
+    font-family: var(--font-primary, "Poppins"), sans-serif;
+}
+
+.activities-page button,
+.activities-page input,
+.activities-page select,
+.activities-page textarea {
+    font-family: inherit;
+}
+
+.activities-page a {
+    text-decoration: none;
+}
+
+.activities-page img,
+.activities-page svg {
+    max-width: 100%;
+}
+
+
+/* =====================================================
+   2. PAGE HEADER
+   Menggunakan admin-page-header global.
+   Styling header tidak diulang di sini.
+===================================================== */
+
+.activities-page .admin-page-header {
+    width: 100%;
+    margin: 0 0 24px;
+}
+
+.activities-page .admin-page-header__content {
+    min-width: 0;
+}
+
+.activities-page .admin-page-header__description {
+    max-width: 760px;
+}
+
+.activities-page .admin-page-header__action {
+    flex-shrink: 0;
+}
+
+.activities-add-button {
+    min-height: 43px;
+    white-space: nowrap;
+}
+
+
+/* =====================================================
+   3. BUTTONS
+===================================================== */
+
+.activities-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    min-height: 40px;
+    padding: 10px 17px;
+
+    border: 1px solid transparent;
+    border-radius: 9px;
+
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.4;
+
+    cursor: pointer;
+    white-space: nowrap;
+
+    transition:
+        background .2s ease,
+        border-color .2s ease,
+        color .2s ease,
+        transform .2s ease;
+}
+
+.activities-button svg {
+    display: block;
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+}
+
+.activities-button--primary {
+    color: #ffffff;
+    background: var(--activities-green);
+    border-color: var(--activities-green);
+}
+
+.activities-button--primary:hover {
+    color: #ffffff;
+    background: var(--activities-green-dark);
+    border-color: var(--activities-green-dark);
+}
+
+.activities-button--secondary {
+    color: #626b62;
+    background: #ffffff;
+    border-color: #e7eae5;
+}
+
+.activities-button--secondary:hover {
+    color: var(--activities-green);
+    background: #f7faf6;
+    border-color: #cbd8cb;
+}
+
+.activities-button:active {
+    transform: scale(.98);
+}
+
+.activities-button:focus-visible {
+    outline: 3px solid rgba(41, 66, 54, .18);
+    outline-offset: 2px;
+}
+
+
+/* =====================================================
+   4. FLASH MESSAGE
+===================================================== */
+
+.activities-alert {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    width: 100%;
+    margin-bottom: 18px;
+    padding: 13px 16px;
+
+    border: 1px solid transparent;
+    border-radius: 12px;
+
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.activities-alert svg {
+    display: block;
+    width: 17px;
+    height: 17px;
+    flex: 0 0 17px;
+}
+
+.activities-alert--success {
+    color: #3f7d47;
+    background: #edf7ed;
+    border-color: #d8ebd8;
+}
+
+
+/* =====================================================
+   5. ACTIVITY SECTION
+===================================================== */
+
+.activities-section {
+    width: 100%;
+    min-width: 0;
+}
+
+
+/* =====================================================
+   6. TABLE CARD
+===================================================== */
+
+.activities-table-card {
+    width: 100%;
+    min-width: 0;
+
+    overflow: hidden;
+
+    background: #ffffff;
+    border: 1px solid #eceeeb;
+    border-radius: 16px;
+
+    box-shadow: 0 3px 12px rgba(29, 46, 33, .025);
+}
+
+.activities-table-card__heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 12px;
+
+    padding: 19px;
+}
+
+.activities-table-card__heading > div {
+    min-width: 0;
+}
+
+.activities-table-card__heading h3 {
+    margin: 0;
+
+    color: #263027;
+
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.activities-table-card__heading p {
+    margin: 4px 0 0;
+
+    color: #a0a49e;
+
+    font-size: 10px;
+    line-height: 1.5;
+}
+
+.activities-table-card__count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    padding: 7px 11px;
+
+    color: #527052;
+    background: #f0f6ef;
+
+    border-radius: 7px;
+
+    font-size: 9px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+
+/* =====================================================
+   7. TABLE
+   Mengikuti visual tabel Donasi & Dashboard.
+===================================================== */
+
+.activities-table-wrapper {
+    width: 100%;
+    min-width: 0;
+
+    overflow-x: auto;
+
+    scrollbar-width: thin;
+    scrollbar-color: #d9ded8 transparent;
+}
+
+.activities-table-wrapper::-webkit-scrollbar {
+    height: 6px;
+}
+
+.activities-table-wrapper::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.activities-table-wrapper::-webkit-scrollbar-thumb {
+    background: #d9ded8;
+    border-radius: 10px;
+}
+
+.activities-table {
+    width: 100%;
+    min-width: 900px;
+
+    border-collapse: collapse;
+
+    text-align: left;
+    white-space: nowrap;
+}
+
+.activities-table thead {
+    background: #f8f9f7;
+}
+
+.activities-table th {
+    padding: 11px 12px;
+
+    color: #92988f;
+
+    font-size: 9px;
+    font-weight: 500;
+    line-height: 1.5;
+
+    border-top: 1px solid #f0f1ef;
+    border-bottom: 1px solid #f0f1ef;
+}
+
+.activities-table th:first-child,
+.activities-table td:first-child {
+    padding-left: 19px;
+}
+
+.activities-table th:last-child,
+.activities-table td:last-child {
+    padding-right: 19px;
+}
+
+.activities-table td {
+    padding: 12px;
+
+    color: #596259;
+
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 1.5;
+
+    vertical-align: middle;
+
+    border-bottom: 1px solid #f2f3f1;
+}
+
+.activities-table tbody tr {
+    transition: background .15s ease;
+}
+
+.activities-table tbody tr:hover {
+    background: #fafbf9;
+}
+
+.activities-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.activities-table__number {
+    color: #969e95 !important;
+    font-size: 9px !important;
+}
+
+.activities-table__title {
+    display: flex;
+    align-items: center;
+
+    gap: 7px;
+
+    color: #3d483e;
+
+    font-size: 10px;
+    font-weight: 500;
+}
+
+.activities-table__avatar {
+    display: grid;
+    place-items: center;
+
+    width: 27px;
+    height: 27px;
+
+    flex: 0 0 27px;
+
+    color: #426747;
+    background: #edf3eb;
+
+    border-radius: 8px;
+
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.activities-table__title-text {
+    display: block;
+
+    max-width: 240px;
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.activities-table__description {
+    display: block;
+
+    max-width: 300px;
+    overflow: hidden;
+
+    color: #7a837a;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+/* =====================================================
+   8. PUBLICATION STATUS
+===================================================== */
+
+.activities-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    padding: 5px 8px;
+
+    border-radius: 20px;
+
+    font-size: 8px;
+    font-weight: 600;
+
+    white-space: nowrap;
+}
+
+.activities-status__dot {
+    width: 6px;
+    height: 6px;
+
+    flex: 0 0 6px;
+
+    border-radius: 50%;
+    background: currentColor;
+}
+
+.activities-status--published {
+    color: #43864c;
+    background: #edf7ed;
+}
+
+.activities-status--draft {
+    color: #b17c2f;
+    background: #fff5e7;
+}
+
+
+/* =====================================================
+   9. TABLE ACTIONS
+===================================================== */
+
+.activities-table__actions {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.activities-table__actions form {
+    display: inline-flex;
+    margin: 0;
+}
+
+.activities-table__action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 28px;
+    padding: 5px 9px;
+
+    border: 1px solid transparent;
+    border-radius: 6px;
+
+    font-size: 9px;
+    font-weight: 600;
+    line-height: 1.4;
+
+    cursor: pointer;
+    white-space: nowrap;
+
+    transition:
+        background .2s ease,
+        color .2s ease,
+        border-color .2s ease;
+}
+
+.activities-table__action--detail {
+    color: #55749c;
+    background: #f0f4fa;
+}
+
+.activities-table__action--detail:hover {
+    color: #ffffff;
+    background: #55749c;
+}
+
+.activities-table__action--edit {
+    color: #a07c3f;
+    background: #faf5e9;
+}
+
+.activities-table__action--edit:hover {
+    color: #ffffff;
+    background: #a07c3f;
+}
+
+.activities-table__action--delete {
+    color: #bd6158;
+    background: #fff1ef;
+}
+
+.activities-table__action--delete:hover {
+    color: #ffffff;
+    background: #bd6158;
+}
+
+.activities-table__action:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+}
+
+
+/* =====================================================
+   10. EMPTY STATE
+===================================================== */
+
+.activities-table__empty {
+    padding: 40px 20px !important;
+
+    text-align: center;
+    white-space: normal;
+}
+
+.activities-table__empty-icon {
+    display: grid;
+    place-items: center;
+
+    width: 45px;
+    height: 45px;
+
+    margin: 0 auto 12px;
+
+    color: #82947d;
+    background: #f2f5f0;
+
+    border-radius: 12px;
+}
+
+.activities-table__empty-icon svg {
+    width: 21px;
+    height: 21px;
+}
+
+.activities-table__empty h3 {
+    margin: 0;
+
+    color: #5e695e;
+
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.activities-table__empty p {
+    max-width: 260px;
+
+    margin: 5px auto 15px;
+
+    color: #a0a69e;
+
+    font-size: 9px;
+    line-height: 1.6;
+}
+
+
+/* =====================================================
+   11. PAGINATION
+===================================================== */
+
+.activities-pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 15px 19px;
+
+    border-top: 1px solid #f0f1ef;
+}
+
+.activities-pagination__info {
+    color: #969e95;
+
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+.activities-pagination__info strong {
+    color: #596359;
+    font-weight: 600;
+}
+
+.activities-pagination__navigation {
+    display: flex;
+    align-items: center;
+
+    gap: 5px;
+}
+
+.activities-pagination__button,
+.activities-pagination__number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 30px;
+    min-height: 30px;
+
+    padding: 0 9px;
+
+    color: #727c72;
+    background: #ffffff;
+
+    border: 1px solid #e9ece7;
+    border-radius: 7px;
+
+    font-size: 9px;
+    font-weight: 500;
+    line-height: 1.4;
+
+    white-space: nowrap;
+
+    transition:
+        color .2s ease,
+        background .2s ease,
+        border-color .2s ease;
+}
+
+.activities-pagination__button:hover,
+.activities-pagination__number:hover {
+    color: var(--activities-green);
+    background: #f2f6f0;
+    border-color: #d5e1d2;
+}
+
+.activities-pagination__number.is-active {
+    color: #ffffff;
+    background: var(--activities-green);
+    border-color: var(--activities-green);
+}
+
+.activities-pagination__button.is-disabled {
+    color: #bdc2bb;
+    background: #fafbf9;
+
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+
+/* =====================================================
+   12. LAPTOP
+===================================================== */
+
+@media (max-width: 1200px) {
+
+    .activities-table__title-text {
+        max-width: 200px;
+    }
+
+    .activities-table__description {
+        max-width: 240px;
+    }
+
+}
+
+
+/* =====================================================
+   13. TABLET
+===================================================== */
+
+@media (max-width: 900px) {
+
+    .activities-table-card {
+        border-radius: 14px;
+    }
+
+}
+
+
+/* =====================================================
+   14. MOBILE
+===================================================== */
+
+@media (max-width: 768px) {
+
+    .activities-page {
+        padding-bottom: 20px;
+    }
+
+    .activities-table-card {
+        border-radius: 14px;
+    }
+
+    .activities-pagination {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+}
+
+
+/* =====================================================
+   15. SMALL MOBILE
+===================================================== */
+
+@media (max-width: 480px) {
+
+    .activities-alert {
+        margin-bottom: 14px;
+        padding: 12px 14px;
+        border-radius: 11px;
+    }
+
+    .activities-table-card {
+        border-radius: 13px;
+    }
+
+    .activities-table-card__heading {
+        padding: 15px;
+    }
+
+    .activities-table-card__heading h3 {
+        font-size: 13px;
+    }
+
+    .activities-table-card__heading p {
+        font-size: 9px;
+    }
+
+    .activities-table-card__count {
+        padding: 6px 8px;
+        font-size: 8px;
+    }
+
+    .activities-table {
+        min-width: 900px;
+    }
+
+    .activities-table th:first-child,
+    .activities-table td:first-child {
+        padding-left: 15px;
+    }
+
+    .activities-table th:last-child,
+    .activities-table td:last-child {
+        padding-right: 15px;
+    }
+
+    .activities-pagination {
+        gap: 12px;
+        padding: 14px 15px;
+    }
+
+    .activities-pagination__info {
+        font-size: 9px;
+    }
+
+    .activities-pagination__navigation {
+        width: 100%;
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+
+    .activities-pagination__button,
+    .activities-pagination__number {
+        min-height: 32px;
+    }
+
+}
+
+
+/* =====================================================
+   16. ACCESSIBILITY
+===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .activities-page *,
+    .activities-page *::before,
+    .activities-page *::after {
+
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+
+    }
+
+}
+
+
+/* =====================================================
+   ALIGNMENT FIX
+   Mengikuti posisi Dashboard & Donasi
+===================================================== */
+
+.admin-main__content > .activities-page {
+    display: block;
+
+    width: 100%;
+    max-width: none;
+    min-width: 0;
+
+    margin: 0;
+    padding: 0 0 24px;
+}
+
+.activities-page {
+    position: relative;
+
+    width: 100%;
+    max-width: none;
+    min-width: 0;
+
+    margin: 0;
+    padding: 0 0 24px;
+}
+
+.activities-page .admin-page-header {
+    width: 100%;
+    max-width: none;
+
+    margin: 0 0 24px;
+}

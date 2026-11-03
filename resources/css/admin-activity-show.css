@@ -1,0 +1,962 @@
+/* =========================================================
+   MASJID SABILILLAH
+   ADMIN - DETAIL KEGIATAN
+   Consistent with Admin Donation Detail
+   (self-contained, tidak bergantung pada admin-donations.css)
+========================================================= */
+
+
+/* =========================================================
+   1. DESIGN TOKENS
+========================================================= */
+
+.activity-detail-page {
+    --show-primary: var(--color-green-normal, #315b43);
+    --show-primary-dark: var(--color-green-dark, #244633);
+    --show-primary-light: #edf5ee;
+
+    --show-background: #ffffff;
+    --show-text: #26352b;
+    --show-muted: #758078;
+    --show-border: #e7ece7;
+
+    --show-success: #287a43;
+    --show-success-light: #effaf1;
+
+    --show-warning: #a7792f;
+    --show-warning-light: #fff7e9;
+
+    --show-radius: 15px;
+    --show-shadow: 0 3px 15px rgba(27, 43, 35, .025);
+    --show-transition: .22s ease;
+
+    width: 100%;
+    min-width: 0;
+    padding-bottom: 25px;
+
+    color: var(--show-text);
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.activity-detail-page *,
+.activity-detail-page *::before,
+.activity-detail-page *::after {
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   2. PAGE HEADER
+   (memakai komponen .admin-page-header dari admin-donations.css,
+    sama persis dengan halaman Detail Donasi)
+========================================================= */
+
+.activity-detail-page .admin-page-header {
+    width: 100%;
+    min-width: 0;
+    margin-bottom: 25px;
+}
+
+.activity-detail-page .admin-page-header__content {
+    min-width: 0;
+}
+
+.activity-detail-page .admin-page-header__description {
+    max-width: 760px;
+}
+
+.activity-detail-page .admin-page-header__action {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   3. HEADER BUTTONS
+========================================================= */
+
+.activity-detail-page .donations-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    min-height: 43px;
+    padding: 10px 16px;
+
+    border: 1px solid transparent;
+    border-radius: 10px;
+
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.4;
+
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+
+    transition:
+        color var(--show-transition),
+        background var(--show-transition),
+        border-color var(--show-transition),
+        box-shadow var(--show-transition),
+        transform var(--show-transition);
+}
+
+.activity-detail-page .donations-button svg {
+    display: block;
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+}
+
+.activity-detail-page .donations-button:active {
+    transform: translateY(1px);
+}
+
+.activity-detail-page .donations-button--primary {
+    color: #ffffff;
+    background: var(--show-primary);
+    border-color: var(--show-primary);
+    box-shadow: 0 4px 10px rgba(41, 66, 54, .08);
+}
+
+.activity-detail-page .donations-button--primary:hover {
+    color: #ffffff;
+    background: var(--show-primary-dark);
+    border-color: var(--show-primary-dark);
+}
+
+.activity-detail-page .donations-button--secondary {
+    color: var(--show-text);
+    background: #ffffff;
+    border-color: var(--show-border);
+}
+
+.activity-detail-page .donations-button--secondary:hover {
+    color: var(--show-primary);
+    background: var(--show-primary-light);
+    border-color: #d5e3d6;
+}
+
+
+/* =========================================================
+   4. SUCCESS ALERT
+========================================================= */
+
+.activity-show-alert {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 14px 17px;
+
+    color: var(--show-success);
+    background: var(--show-success-light);
+
+    border: 1px solid #d8f0df;
+    border-radius: 11px;
+
+    font-size: 12px;
+    line-height: 1.6;
+
+    animation: activity-show-enter .25s ease both;
+}
+
+.activity-show-alert svg {
+    width: 19px;
+    height: 19px;
+    flex-shrink: 0;
+}
+
+@keyframes activity-show-enter {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* =========================================================
+   5. DETAIL CARD
+========================================================= */
+
+.activity-show-card {
+    width: 100%;
+    min-width: 0;
+
+    overflow: hidden;
+
+    background: var(--show-background);
+    border: 1px solid var(--show-border);
+    border-radius: var(--show-radius);
+
+    box-shadow: var(--show-shadow);
+}
+
+
+/* =========================================================
+   6. CARD HEADER
+========================================================= */
+
+.activity-show-card__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+
+    padding: 24px 27px;
+
+    border-bottom: 1px solid #edf0ed;
+}
+
+.activity-show-card__heading {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+
+    min-width: 0;
+}
+
+.activity-show-card__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    width: 44px;
+    height: 44px;
+
+    color: var(--show-primary);
+    background: var(--show-primary-light);
+
+    border: 1px solid #e5eee6;
+    border-radius: 13px;
+}
+
+.activity-show-card__icon svg {
+    width: 22px;
+    height: 22px;
+}
+
+.activity-show-card__heading > div:last-child {
+    min-width: 0;
+}
+
+.activity-show-card__heading h2 {
+    margin: 0;
+
+    color: var(--show-primary-dark);
+
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.5;
+}
+
+.activity-show-card__heading p {
+    margin: 5px 0 0;
+
+    color: var(--show-muted);
+
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+.activity-show-card__reference {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    min-height: 32px;
+    padding: 6px 11px;
+
+    color: var(--show-primary);
+    background: var(--show-primary-light);
+
+    border: 1px solid #dfebdf;
+    border-radius: 9px;
+
+    font-size: 10px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   7. CARD BODY
+========================================================= */
+
+.activity-show-card__body {
+    padding: 25px 27px;
+}
+
+
+/* =========================================================
+   8. HIGHLIGHT
+========================================================= */
+
+.activity-show-highlight {
+    display: grid;
+    grid-template-columns: 1fr 1px 1fr;
+
+    align-items: center;
+    gap: 28px;
+
+    width: 100%;
+    min-width: 0;
+
+    margin-bottom: 30px;
+    padding: 25px 27px;
+
+    background: #f7faf7;
+
+    border: 1px solid #e8efe8;
+    border-radius: 13px;
+}
+
+.activity-show-highlight__date,
+.activity-show-highlight__status {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    min-width: 0;
+}
+
+.activity-show-label {
+    display: block;
+
+    margin-bottom: 9px;
+
+    color: var(--show-muted);
+
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.activity-show-highlight__date strong {
+    display: block;
+
+    max-width: 100%;
+
+    color: var(--show-primary-dark);
+
+    font-size: clamp(25px, 2.5vw, 32px);
+    font-weight: 700;
+    letter-spacing: -.8px;
+    line-height: 1.3;
+
+    overflow-wrap: anywhere;
+    font-variant-numeric: tabular-nums;
+}
+
+.activity-show-highlight__caption {
+    display: block;
+
+    margin-top: 8px;
+
+    color: #929b92;
+
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+.activity-show-highlight__divider {
+    width: 1px;
+    height: 72px;
+
+    background: #e2eae2;
+}
+
+
+/* =========================================================
+   9. PUBLICATION STATUS
+========================================================= */
+
+.activity-show-status {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    min-height: 32px;
+    padding: 7px 12px;
+
+    border: 1px solid transparent;
+    border-radius: 8px;
+
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.5;
+
+    white-space: nowrap;
+}
+
+.activity-show-status__dot {
+    display: inline-block;
+    flex: 0 0 7px;
+
+    width: 7px;
+    height: 7px;
+
+    background: currentColor;
+    border-radius: 50%;
+}
+
+.activity-show-status--published {
+    color: var(--show-success);
+    background: var(--show-success-light);
+    border-color: #dcefe0;
+}
+
+.activity-show-status--draft {
+    color: var(--show-warning);
+    background: var(--show-warning-light);
+    border-color: #f1e4c9;
+}
+
+
+/* =========================================================
+   10. INFORMATION SECTION
+========================================================= */
+
+.activity-show-section {
+    width: 100%;
+    min-width: 0;
+}
+
+.activity-show-section__heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 19px;
+}
+
+.activity-show-section__eyebrow {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: var(--show-primary);
+
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    line-height: 1.5;
+}
+
+.activity-show-section__heading h3 {
+    margin: 0;
+
+    color: var(--show-primary-dark);
+
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   11. INFORMATION GRID
+========================================================= */
+
+.activity-show-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 0 22px;
+
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.activity-show-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    min-width: 0;
+    min-height: 83px;
+
+    padding: 15px 0;
+
+    border-bottom: 1px solid #edf0ed;
+}
+
+.activity-show-item--full {
+    grid-column: 1 / -1;
+}
+
+.activity-show-item dt {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: var(--show-muted);
+
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.activity-show-item dd {
+    display: block;
+
+    margin: 0;
+
+    color: var(--show-text);
+
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.7;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* =========================================================
+   12. IMAGE SECTION
+========================================================= */
+
+.activity-show-section--image {
+    margin-top: 27px;
+}
+
+.activity-show-section--image
+.activity-show-section__heading {
+    margin-bottom: 13px;
+}
+
+.activity-show-image {
+    width: 100%;
+    min-width: 0;
+
+    overflow: hidden;
+
+    background: #f8faf8;
+
+    border: 1px solid #e9eee9;
+    border-radius: 12px;
+}
+
+.activity-show-image img {
+    display: block;
+
+    width: 100%;
+    max-height: 420px;
+
+    object-fit: cover;
+}
+
+
+/* =========================================================
+   13. NOTES / DESCRIPTION SECTION
+========================================================= */
+
+.activity-show-section--notes {
+    margin-top: 27px;
+}
+
+.activity-show-section--notes
+.activity-show-section__heading {
+    margin-bottom: 13px;
+}
+
+.activity-show-notes {
+    display: block;
+
+    width: 100%;
+    min-width: 0;
+    min-height: 76px;
+
+    padding: 15px 18px;
+
+    background: #f8faf8;
+
+    border: 1px solid #e9eee9;
+    border-radius: 10px;
+
+    text-align: left;
+}
+
+.activity-show-notes p {
+    display: block;
+
+    width: 100%;
+    margin: 0;
+    padding: 0;
+
+    color: #59665c;
+
+    font-family: inherit;
+    font-size: 12px !important;
+    font-weight: 400 !important;
+    line-height: 1.7 !important;
+
+    text-align: left !important;
+    letter-spacing: normal !important;
+
+    white-space: pre-line;
+    overflow-wrap: anywhere;
+}
+
+
+/* =========================================================
+   14. CARD FOOTER
+========================================================= */
+
+.activity-show-card__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+
+    padding: 20px 27px;
+
+    background: #fbfcfb;
+    border-top: 1px solid #edf0ed;
+}
+
+.activity-show-card__footer-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    min-width: 0;
+}
+
+.activity-show-card__footer-info svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+
+    color: var(--show-muted);
+}
+
+.activity-show-card__footer-info p {
+    margin: 0;
+
+    color: var(--show-muted);
+
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+.activity-show-edit-button {
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   15. FOCUS ACCESSIBILITY
+========================================================= */
+
+.activity-detail-page a:focus-visible {
+    outline: 3px solid rgba(41, 66, 54, .2);
+    outline-offset: 3px;
+}
+
+
+/* =========================================================
+   16. TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .activity-show-card__header {
+        padding: 22px;
+    }
+
+    .activity-show-card__body {
+        padding: 22px;
+    }
+
+    .activity-show-highlight {
+        gap: 20px;
+        padding: 22px;
+    }
+
+    .activity-show-card__footer {
+        padding: 19px 22px;
+    }
+
+}
+
+
+/* =========================================================
+   17. MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .activity-detail-page {
+        padding-bottom: 20px;
+    }
+
+    /* PAGE HEADER */
+
+    .activity-detail-page .admin-page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 17px;
+
+        margin-bottom: 20px;
+    }
+
+    .activity-detail-page .admin-page-header__content {
+        width: 100%;
+    }
+
+    .activity-detail-page .admin-page-header__action {
+        justify-content: flex-start;
+
+        width: 100%;
+        gap: 8px;
+    }
+
+    .activity-detail-page .admin-page-header__action .donations-button {
+        flex: 1;
+    }
+
+    /* ALERT */
+
+    .activity-show-alert {
+        align-items: flex-start;
+        padding: 12px 14px;
+        font-size: 11px;
+    }
+
+    /* CARD */
+
+    .activity-show-card {
+        border-radius: 13px;
+    }
+
+    .activity-show-card__header {
+        align-items: flex-start;
+        padding: 18px 16px;
+        gap: 12px;
+    }
+
+    .activity-show-card__heading {
+        gap: 10px;
+    }
+
+    .activity-show-card__icon {
+        width: 38px;
+        height: 38px;
+        border-radius: 11px;
+    }
+
+    .activity-show-card__icon svg {
+        width: 19px;
+        height: 19px;
+    }
+
+    .activity-show-card__heading h2 {
+        font-size: 14px;
+    }
+
+    .activity-show-card__heading p {
+        font-size: 10px;
+    }
+
+    .activity-show-card__reference {
+        min-height: 27px;
+        padding: 5px 8px;
+        font-size: 9px;
+    }
+
+    .activity-show-card__body {
+        padding: 18px 16px;
+    }
+
+    /* HIGHLIGHT */
+
+    .activity-show-highlight {
+        grid-template-columns: 1fr;
+        gap: 16px;
+
+        margin-bottom: 25px;
+        padding: 18px 16px;
+
+        border-radius: 11px;
+    }
+
+    .activity-show-highlight__date strong {
+        font-size: 25px;
+    }
+
+    .activity-show-highlight__divider {
+        width: 100%;
+        height: 1px;
+    }
+
+    .activity-show-label {
+        margin-bottom: 7px;
+        font-size: 10px;
+    }
+
+    .activity-show-highlight__caption {
+        font-size: 9px;
+    }
+
+    .activity-show-status {
+        min-height: 29px;
+        font-size: 10px;
+    }
+
+    /* INFORMATION */
+
+    .activity-show-section__heading {
+        margin-bottom: 13px;
+    }
+
+    .activity-show-section__eyebrow {
+        font-size: 8px;
+    }
+
+    .activity-show-section__heading h3 {
+        font-size: 14px;
+    }
+
+    .activity-show-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 0;
+    }
+
+    .activity-show-item {
+        min-height: 70px;
+        padding: 12px 0;
+    }
+
+    .activity-show-item dt {
+        margin-bottom: 5px;
+        font-size: 10px;
+    }
+
+    .activity-show-item dd {
+        font-size: 11px;
+    }
+
+    .activity-show-item--full {
+        grid-column: auto;
+    }
+
+    /* IMAGE */
+
+    .activity-show-section--image {
+        margin-top: 22px;
+    }
+
+    .activity-show-image img {
+        max-height: 260px;
+    }
+
+    /* NOTES */
+
+    .activity-show-section--notes {
+        margin-top: 22px;
+    }
+
+    .activity-show-notes {
+        min-height: 65px;
+        padding: 13px 14px;
+    }
+
+    .activity-show-notes p {
+        font-size: 11px !important;
+        line-height: 1.7 !important;
+    }
+
+    /* FOOTER */
+
+    .activity-show-card__footer {
+        align-items: stretch;
+        flex-direction: column;
+
+        gap: 15px;
+        padding: 17px 16px;
+    }
+
+    .activity-show-card__footer-info p {
+        font-size: 10px;
+    }
+
+    .activity-show-edit-button {
+        width: 100%;
+        min-height: 42px;
+    }
+
+}
+
+
+/* =========================================================
+   18. SMALL MOBILE
+========================================================= */
+
+@media (max-width: 380px) {
+
+    .activity-detail-page .admin-page-header__action {
+        flex-direction: column;
+    }
+
+    .activity-detail-page .admin-page-header__action .donations-button {
+        width: 100%;
+        flex: none;
+    }
+
+    .activity-show-card__header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .activity-show-card__reference {
+        align-self: flex-start;
+    }
+
+    .activity-show-highlight__date strong {
+        font-size: 22px;
+    }
+
+}
+
+
+/* =========================================================
+   19. REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .activity-detail-page *,
+    .activity-detail-page *::before,
+    .activity-detail-page *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+    }
+
+}
+
+
+/* =========================================================
+   END OF ADMIN ACTIVITY SHOW CSS
+========================================================= */

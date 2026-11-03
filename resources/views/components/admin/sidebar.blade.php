@@ -191,6 +191,29 @@
             </a>
 
 
+            {{-- KEGIATAN --}}
+            <a
+                href="{{ route('activities.index') }}"
+                class="admin-sidebar__link {{ request()->routeIs('activities.*') ? 'admin-sidebar__link--active' : '' }}"
+                @if(request()->routeIs('activities.*')) aria-current="page" @endif
+            >
+                <span class="admin-sidebar__link-icon">
+                    <svg viewBox="0 0 24 24" fill="none">
+                        <rect
+                            x="3.5" y="5" width="17" height="15.5" rx="2"
+                            stroke="currentColor" stroke-width="1.8"
+                        />
+                        <path
+                            d="M3.5 10H20.5M8 3V6.5M16 3V6.5"
+                            stroke="currentColor" stroke-width="1.8"
+                            stroke-linecap="round"
+                        />
+                    </svg>
+                </span>
+                <span class="admin-sidebar__link-text">Kegiatan</span>
+            </a>
+
+
             {{-- LAPORAN DONASI DAN PENYALURAN --}}
             <a
                 href="{{ route('reports.index') }}"

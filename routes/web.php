@@ -12,6 +12,7 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\Public\PublicHomeController;
 use App\Http\Controllers\Public\PublicReportController;
 use App\Http\Controllers\Public\PublicReportPdfController;
+use App\Http\Controllers\ActivityController;
 
 
 // ==================================================
@@ -127,6 +128,13 @@ Route::middleware('auth')->group(function () {
         ->whereNumber('beneficiaryCategory')
         ->name('beneficiary-categories.toggle-status');
 
+
+        // ==============================================
+        // CRUD KEGIATAN
+        // ==============================================
+
+        Route::resource('activities', ActivityController::class)
+            ->whereNumber('activity');
 
     // ==============================================
     // LOGOUT

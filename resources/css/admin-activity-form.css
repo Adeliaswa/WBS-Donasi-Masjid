@@ -1,0 +1,1043 @@
+/* =========================================================
+   MASJID SABILILLAH
+   ADMIN — CREATE & EDIT KEGIATAN
+   Clean Form Design
+   Reference: Create Donasi
+   ========================================================= */
+
+
+/* =========================================================
+   1. DESIGN SYSTEM
+   ========================================================= */
+
+.activity-form-body,
+.activity-form-body *,
+.activity-form-body *::before,
+.activity-form-body *::after {
+    box-sizing: border-box;
+}
+
+.activity-form-body {
+    --activity-primary: #294236;
+    --activity-primary-dark: #20372a;
+    --activity-primary-soft: #edf3ee;
+
+    --activity-background: #f5f7f5;
+    --activity-surface: #ffffff;
+
+    --activity-text: #29382e;
+    --activity-secondary: #69766c;
+    --activity-muted: #929c94;
+
+    --activity-border: #e3e9e3;
+    --activity-border-hover: #c7d4c8;
+
+    --activity-danger: #c34e43;
+    --activity-danger-soft: #fff5f3;
+
+    --activity-radius: 14px;
+    --activity-radius-input: 9px;
+
+    display: block !important;
+
+    width: 100%;
+    min-width: 320px;
+    min-height: 100vh;
+
+    margin: 0;
+    padding: 0;
+
+    overflow-x: hidden;
+
+    background: var(--activity-background);
+    color: var(--activity-text);
+
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.activity-form-body button,
+.activity-form-body input,
+.activity-form-body select,
+.activity-form-body textarea {
+    font: inherit;
+}
+
+.activity-form-body button {
+    cursor: pointer;
+}
+
+.activity-form-body a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.activity-form-body svg {
+    display: block;
+}
+
+.activity-form-body [hidden] {
+    display: none !important;
+}
+
+.activity-form-body :focus-visible {
+    outline: 3px solid rgb(41 66 54 / 14%);
+    outline-offset: 3px;
+}
+
+
+/* =========================================================
+   2. MAIN PAGE
+   ========================================================= */
+
+.activity-form-page {
+    width: min(1120px, calc(100% - 64px));
+    max-width: 1120px;
+    min-width: 0;
+
+    margin: 0 auto;
+    padding: 30px 0 48px;
+}
+
+
+/* =========================================================
+   3. BREADCRUMB
+   ========================================================= */
+
+.activity-form__breadcrumb {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 11px;
+
+    width: 100%;
+    margin: 0 0 25px;
+
+    color: var(--activity-muted);
+
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+.activity-form__breadcrumb-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+
+    color: var(--activity-primary);
+
+    font-weight: 600;
+
+    transition: color .2s ease;
+}
+
+.activity-form__breadcrumb-link:hover {
+    color: #50715b;
+}
+
+.activity-form__breadcrumb-link svg {
+    width: 18px;
+    height: 18px;
+
+    flex-shrink: 0;
+
+    transition: transform .2s ease;
+}
+
+.activity-form__breadcrumb-link:hover svg {
+    transform: translateX(-2px);
+}
+
+.activity-form__breadcrumb-separator {
+    width: 14px;
+    height: 14px;
+
+    flex-shrink: 0;
+
+    color: #b5beb6;
+}
+
+.activity-form__breadcrumb-current {
+    color: #849087;
+    font-weight: 400;
+}
+
+
+/* =========================================================
+   4. PAGE HEADER
+   ========================================================= */
+
+.activity-form__header {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+
+    width: 100%;
+    min-width: 0;
+
+    margin: 0 0 25px;
+    padding: 25px 27px;
+
+    background: var(--activity-surface);
+
+    border: 1px solid var(--activity-border);
+    border-radius: var(--activity-radius);
+
+    box-shadow: 0 2px 8px rgb(34 58 42 / 2%);
+}
+
+.activity-form__header-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex: 0 0 54px;
+
+    width: 54px;
+    height: 54px;
+
+    padding: 13px;
+
+    color: var(--activity-primary);
+    background: var(--activity-primary-soft);
+
+    border-radius: 12px;
+}
+
+.activity-form__header-icon svg {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+}
+
+.activity-form__heading {
+    flex: 1;
+    min-width: 0;
+}
+
+.activity-form__eyebrow {
+    display: block;
+
+    margin: 0 0 5px;
+
+    color: #718174;
+
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.1px;
+    line-height: 1.5;
+    text-transform: uppercase;
+}
+
+.activity-form__heading h1 {
+    margin: 0;
+
+    color: var(--activity-primary);
+
+    font-size: 25px;
+    font-weight: 700;
+    line-height: 1.35;
+    letter-spacing: -.4px;
+}
+
+.activity-form__heading p {
+    max-width: 650px;
+
+    margin: 6px 0 0;
+
+    color: var(--activity-secondary);
+
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   5. REQUIRED NOTE
+   ========================================================= */
+
+.activity-form__required-note {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+
+    margin: 0 0 13px;
+
+    color: var(--activity-secondary);
+
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+.activity-form__required-symbol {
+    color: var(--activity-danger);
+
+    font-size: 16px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   6. FORM LAYOUT
+   ========================================================= */
+
+.activity-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+
+    width: 100%;
+    min-width: 0;
+}
+
+.activity-form__section {
+    width: 100%;
+    min-width: 0;
+
+    padding: 25px 27px;
+
+    background: var(--activity-surface);
+
+    border: 1px solid var(--activity-border);
+    border-radius: var(--activity-radius);
+
+    box-shadow: 0 2px 8px rgb(34 58 42 / 2%);
+}
+
+
+/* =========================================================
+   7. SECTION HEADER
+   ========================================================= */
+
+.activity-form__section-header {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+
+    padding-bottom: 19px;
+    margin-bottom: 23px;
+
+    border-bottom: 1px solid #edf0ed;
+}
+
+.activity-form__section-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex: 0 0 40px;
+
+    width: 40px;
+    height: 40px;
+
+    padding: 10px;
+
+    color: var(--activity-primary);
+    background: var(--activity-primary-soft);
+
+    border-radius: 10px;
+}
+
+.activity-form__section-icon svg {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+}
+
+.activity-form__section-heading {
+    flex: 1;
+    min-width: 0;
+}
+
+.activity-form__section-heading h2 {
+    margin: 0;
+
+    color: var(--activity-text);
+
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.45;
+}
+
+.activity-form__section-heading p {
+    margin: 3px 0 0;
+
+    color: var(--activity-secondary);
+
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 1.6;
+}
+
+.activity-form__step {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    width: 31px;
+    height: 31px;
+
+    color: var(--activity-primary);
+
+    background: #f4f7f4;
+    border: 1px solid #e5ebe5;
+    border-radius: 8px;
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   8. FORM GRID
+   ========================================================= */
+
+.activity-form__grid {
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 21px 22px;
+
+    width: 100%;
+    min-width: 0;
+}
+
+.activity-form__field {
+    display: flex;
+    flex-direction: column;
+
+    min-width: 0;
+}
+
+.activity-form__field--full {
+    grid-column: 1 / -1;
+}
+
+
+/* =========================================================
+   9. LABEL
+   ========================================================= */
+
+.activity-form__field > label {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+
+    margin: 0 0 8px;
+
+    color: #354238;
+
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.activity-form-body .required {
+    color: var(--activity-danger);
+
+    font-size: 14px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   10. INPUT / SELECT / TEXTAREA
+   ========================================================= */
+
+.activity-form__field input,
+.activity-form__field select,
+.activity-form__field textarea {
+    display: block;
+
+    width: 100%;
+    min-width: 0;
+    min-height: 44px;
+
+    margin: 0;
+    padding: 10px 13px;
+
+    color: var(--activity-text);
+    background: #ffffff;
+
+    border: 1px solid #dfe6df;
+    border-radius: var(--activity-radius-input);
+
+    outline: none;
+    box-shadow: none;
+
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.5;
+
+    transition:
+        border-color .2s ease,
+        box-shadow .2s ease;
+}
+
+.activity-form__field input:hover,
+.activity-form__field select:hover,
+.activity-form__field textarea:hover {
+    border-color: var(--activity-border-hover);
+}
+
+.activity-form__field input:focus,
+.activity-form__field select:focus,
+.activity-form__field textarea:focus {
+    border-color: var(--activity-primary);
+
+    outline: none;
+
+    box-shadow: 0 0 0 3px rgb(41 66 54 / 7%);
+}
+
+.activity-form__field input::placeholder,
+.activity-form__field textarea::placeholder {
+    color: #a1aaa2;
+    opacity: 1;
+}
+
+.activity-form__field select {
+    cursor: pointer;
+}
+
+.activity-form__field textarea {
+    min-height: 140px;
+    resize: vertical;
+}
+
+
+/* =========================================================
+   11. FIELD HINT
+   ========================================================= */
+
+.activity-form__hint {
+    display: block;
+
+    margin: 7px 0 0;
+
+    color: #879188;
+
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   12. FIELD ERROR
+   ========================================================= */
+
+.activity-form__error {
+    display: block;
+
+    margin: 6px 0 0;
+
+    color: var(--activity-danger);
+
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 1.6;
+
+    overflow-wrap: anywhere;
+}
+
+.activity-form__field input.is-invalid,
+.activity-form__field select.is-invalid,
+.activity-form__field textarea.is-invalid {
+    border-color: #d98c83;
+}
+
+.activity-form__field input.is-invalid:focus,
+.activity-form__field select.is-invalid:focus,
+.activity-form__field textarea.is-invalid:focus {
+    box-shadow: 0 0 0 3px rgb(195 78 67 / 8%);
+}
+
+
+/* =========================================================
+   13. VALIDATION ALERT
+   ========================================================= */
+
+.activity-form__alert {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+
+    width: 100%;
+
+    padding: 15px 17px;
+
+    color: #783c32;
+    background: var(--activity-danger-soft);
+
+    border: 1px solid #f0d8d3;
+    border-radius: 10px;
+}
+
+.activity-form__alert-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex: 0 0 23px;
+
+    width: 23px;
+    height: 23px;
+
+    color: #ffffff;
+    background: #c75c4b;
+
+    border-radius: 50%;
+
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.activity-form__alert-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.activity-form__alert-content strong {
+    display: block;
+
+    margin-bottom: 3px;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.activity-form__alert-content p {
+    margin: 0 0 6px;
+
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+.activity-form__alert-content ul {
+    margin: 0;
+    padding-left: 17px;
+}
+
+.activity-form__alert-content li {
+    margin: 3px 0;
+
+    font-size: 11px;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* =========================================================
+   14. REMINDER
+   ========================================================= */
+
+.activity-form__reminder {
+    display: block;
+
+    width: 100%;
+    min-width: 0;
+
+    padding: 17px 19px;
+
+    background: #f1f5f1;
+
+    border: 1px solid #e0e9e0;
+    border-radius: 12px;
+}
+
+.activity-form__reminder-content {
+    width: 100%;
+    min-width: 0;
+}
+
+.activity-form__reminder-content h3 {
+    margin: 0 0 4px;
+
+    color: var(--activity-primary);
+
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.5;
+}
+
+.activity-form__reminder-content p {
+    margin: 0;
+
+    color: var(--activity-secondary);
+
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   15. FORM ACTIONS
+   ========================================================= */
+
+.activity-form__actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+
+    width: 100%;
+
+    padding-top: 3px;
+}
+
+.activity-form__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+
+    min-height: 43px;
+
+    padding: 10px 19px;
+
+    border: 1px solid transparent;
+    border-radius: 9px;
+
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.4;
+
+    white-space: nowrap;
+
+    cursor: pointer;
+
+    transition:
+        background-color .2s ease,
+        color .2s ease,
+        border-color .2s ease,
+        box-shadow .2s ease;
+}
+
+.activity-form__button svg {
+    width: 15px;
+    height: 15px;
+
+    flex-shrink: 0;
+}
+
+.activity-form__button--secondary {
+    color: #59665c;
+    background: #ffffff;
+
+    border-color: #dfe6df;
+}
+
+.activity-form__button--secondary:hover {
+    color: var(--activity-primary);
+
+    background: #f7f9f7;
+
+    border-color: #bdcdbf;
+}
+
+.activity-form__button--primary {
+    color: #ffffff;
+
+    background: var(--activity-primary);
+
+    border-color: var(--activity-primary);
+}
+
+.activity-form__button--primary:hover {
+    color: #ffffff;
+
+    background: var(--activity-primary-dark);
+
+    border-color: var(--activity-primary-dark);
+
+    box-shadow: 0 3px 9px rgb(41 66 54 / 13%);
+}
+
+.activity-form__button:disabled {
+    opacity: .6;
+    cursor: not-allowed;
+}
+
+
+/* =========================================================
+   16. TABLET RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .activity-form-page {
+        width: calc(100% - 44px);
+    }
+
+    .activity-form__section {
+        padding: 23px;
+    }
+
+    .activity-form__header {
+        padding: 23px;
+    }
+
+}
+
+
+/* =========================================================
+   17. MOBILE RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 640px) {
+
+    .activity-form-body {
+        font-size: 13px;
+    }
+
+    .activity-form-page {
+        width: calc(100% - 28px);
+
+        padding: 20px 0 32px;
+    }
+
+    .activity-form__breadcrumb {
+        gap: 8px;
+
+        margin-bottom: 19px;
+
+        font-size: 11px;
+    }
+
+    .activity-form__breadcrumb-link {
+        gap: 6px;
+    }
+
+    .activity-form__breadcrumb-link svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    .activity-form__breadcrumb-separator {
+        width: 12px;
+        height: 12px;
+    }
+
+    .activity-form__header {
+        align-items: flex-start;
+        gap: 13px;
+
+        margin-bottom: 21px;
+        padding: 19px 17px;
+
+        border-radius: 12px;
+    }
+
+    .activity-form__header-icon {
+        flex-basis: 43px;
+
+        width: 43px;
+        height: 43px;
+
+        padding: 10px;
+
+        border-radius: 10px;
+    }
+
+    .activity-form__eyebrow {
+        margin-bottom: 4px;
+
+        font-size: 9px;
+        letter-spacing: .8px;
+    }
+
+    .activity-form__heading h1 {
+        font-size: 20px;
+    }
+
+    .activity-form__heading p {
+        margin-top: 5px;
+
+        font-size: 11px;
+        line-height: 1.6;
+    }
+
+    .activity-form__required-note {
+        margin-bottom: 12px;
+
+        font-size: 10px;
+    }
+
+    .activity-form {
+        gap: 14px;
+    }
+
+    .activity-form__section {
+        padding: 18px 16px;
+
+        border-radius: 12px;
+    }
+
+    .activity-form__section-header {
+        gap: 10px;
+
+        padding-bottom: 15px;
+        margin-bottom: 18px;
+    }
+
+    .activity-form__section-icon {
+        flex-basis: 36px;
+
+        width: 36px;
+        height: 36px;
+
+        padding: 9px;
+
+        border-radius: 9px;
+    }
+
+    .activity-form__section-heading h2 {
+        font-size: 13px;
+    }
+
+    .activity-form__section-heading p {
+        font-size: 10px;
+    }
+
+    .activity-form__step {
+        width: 27px;
+        height: 27px;
+
+        font-size: 10px;
+    }
+
+    .activity-form__grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 17px;
+    }
+
+    .activity-form__field--full {
+        grid-column: auto;
+    }
+
+    .activity-form__field > label {
+        margin-bottom: 7px;
+
+        font-size: 11px;
+    }
+
+    .activity-form__field input,
+    .activity-form__field select,
+    .activity-form__field textarea {
+        min-height: 43px;
+
+        padding: 10px 11px;
+
+        font-size: 11px;
+    }
+
+    .activity-form__field textarea {
+        min-height: 120px;
+    }
+
+    .activity-form__hint,
+    .activity-form__error {
+        font-size: 9px;
+    }
+
+    .activity-form__alert {
+        padding: 13px;
+    }
+
+    .activity-form__reminder {
+        padding: 14px;
+    }
+
+    .activity-form__reminder-content h3 {
+        font-size: 11px;
+    }
+
+    .activity-form__reminder-content p {
+        font-size: 10px;
+    }
+
+    .activity-form__actions {
+        flex-direction: column-reverse;
+        align-items: stretch;
+        gap: 9px;
+    }
+
+    .activity-form__button {
+        width: 100%;
+
+        min-height: 43px;
+    }
+
+}
+
+
+/* =========================================================
+   18. SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 380px) {
+
+    .activity-form-page {
+        width: calc(100% - 22px);
+    }
+
+    .activity-form__header {
+        gap: 10px;
+        padding: 16px 13px;
+    }
+
+    .activity-form__header-icon {
+        flex-basis: 38px;
+
+        width: 38px;
+        height: 38px;
+
+        padding: 9px;
+    }
+
+    .activity-form__heading h1 {
+        font-size: 18px;
+    }
+
+    .activity-form__section {
+        padding: 16px 12px;
+    }
+
+}
+
+
+/* =========================================================
+   19. REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .activity-form-body *,
+    .activity-form-body *::before,
+    .activity-form-body *::after {
+        scroll-behavior: auto !important;
+
+        transition-duration: .01ms !important;
+
+        animation-duration: .01ms !important;
+
+        animation-iteration-count: 1 !important;
+    }
+
+}
