@@ -1,0 +1,417 @@
+
+/* =========================================================
+   PUBLIC HEADER
+========================================================= */
+
+.public-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    width: 100%;
+
+    background: rgba(255, 255, 255, 0.97);
+
+    border-bottom: 1px solid #edf0ed;
+
+    font-family: var(--font-primary);
+}
+
+
+/* =========================================================
+   HEADER CONTAINER
+========================================================= */
+
+.public-header__container {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+    min-height: 104px;
+
+    padding: 0 48px;
+
+    margin: 0 auto;
+}
+
+
+/* =========================================================
+   BRAND
+========================================================= */
+
+.public-header .public-brand {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 12px;
+
+    flex-shrink: 0;
+
+    text-decoration: none;
+}
+
+.public-header .public-brand__logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 48px;
+    height: 48px;
+
+    color: var(--beneficiaries-green);
+}
+
+.public-header .public-brand__logo svg {
+    width: 100%;
+    height: 100%;
+}
+
+.public-header .public-brand__text {
+    display: flex;
+    flex-direction: column;
+
+    gap: 3px;
+}
+
+.public-header .public-brand__name {
+    color: var(--beneficiaries-green-dark);
+
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.public-header .public-brand__description {
+    color: var(--beneficiaries-muted);
+
+    font-size: 11px;
+    font-weight: 400;
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+.public-navigation {
+    display: flex;
+    align-items: center;
+
+    gap: 42px;
+}
+
+
+/* =========================================================
+   NAVIGATION LINKS WRAPPER
+========================================================= */
+
+.public-navigation__links {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    gap: 38px;
+
+    height: 104px;
+}
+
+
+/* =========================================================
+   NAVIGATION LINK
+========================================================= */
+
+.public-navigation__link {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 100%;
+
+    color: #747d75;
+
+    font-size: 13px;
+    font-weight: 500;
+
+    text-decoration: none;
+
+    white-space: nowrap;
+
+    transition: color 0.2s ease;
+}
+
+.public-navigation__link:hover,
+.public-navigation__link.active {
+    color: var(--beneficiaries-green);
+}
+
+
+/* =========================================================
+   ANIMATED ACTIVE INDICATOR
+========================================================= */
+
+.public-navigation__indicator {
+    position: absolute;
+
+    left: 0;
+    bottom: 0;
+
+    width: 0;
+    height: 3px;
+
+    background: var(--beneficiaries-green);
+
+    border-radius: 4px 4px 0 0;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition:
+        left 0.28s ease,
+        width 0.28s ease,
+        opacity 0.2s ease;
+}
+
+
+/* =========================================================
+   CONTACT BUTTON
+========================================================= */
+
+.public-navigation__contact {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 13px;
+
+    min-width: 174px;
+    min-height: 54px;
+
+    padding: 0 22px;
+
+    color: #ffffff;
+
+    background: var(--beneficiaries-green);
+
+    border: 1px solid var(--beneficiaries-green);
+
+    border-radius: 12px;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    white-space: nowrap;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.public-navigation__contact:hover {
+    color: #ffffff;
+
+    background: var(--beneficiaries-green-dark);
+
+    border-color: var(--beneficiaries-green-dark);
+}
+
+.public-navigation__contact svg {
+    width: 18px;
+    height: 18px;
+
+    flex-shrink: 0;
+
+    transition: transform 0.2s ease;
+}
+
+.public-navigation__contact:hover svg {
+    transform: translateX(3px);
+}
+
+
+/* =========================================================
+   MOBILE TOGGLE
+========================================================= */
+
+.public-header__toggle {
+    display: none;
+
+    width: 42px;
+    height: 42px;
+
+    padding: 10px;
+
+    background: #f5f8f5;
+
+    border: 1px solid #e8eee8;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+}
+
+.public-header__toggle span {
+    display: block;
+
+    width: 100%;
+    height: 2px;
+
+    margin: 4px 0;
+
+    background: var(--beneficiaries-green);
+
+    border-radius: 2px;
+
+    transition:
+        transform 0.2s ease,
+        opacity 0.2s ease;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .public-header__container {
+        padding: 0 28px;
+    }
+
+    .public-navigation {
+        gap: 22px;
+    }
+
+    .public-navigation__links {
+        gap: 23px;
+    }
+
+    .public-navigation__link {
+        font-size: 12px;
+    }
+
+    .public-navigation__contact {
+        min-width: 150px;
+        padding: 0 16px;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE NAVIGATION
+========================================================= */
+
+@media (max-width: 850px) {
+
+    .public-header__container {
+        min-height: 76px;
+
+        padding: 0 22px;
+    }
+
+    .public-header__toggle {
+        display: block;
+
+        flex-shrink: 0;
+    }
+
+    .public-navigation {
+        position: absolute;
+
+        top: 100%;
+        left: 0;
+        right: 0;
+
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+
+        gap: 18px;
+
+        padding: 20px 22px 24px;
+
+        background: #ffffff;
+
+        border-bottom: 1px solid #edf0ed;
+
+        box-shadow: 0 12px 20px rgba(25, 45, 30, 0.06);
+
+        opacity: 0;
+        visibility: hidden;
+
+        transform: translateY(-8px);
+
+        transition:
+            opacity 0.2s ease,
+            visibility 0.2s ease,
+            transform 0.2s ease;
+    }
+
+    .public-navigation.is-open {
+        opacity: 1;
+        visibility: visible;
+
+        transform: translateY(0);
+    }
+
+    .public-navigation__links {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+
+        gap: 0;
+
+        width: 100%;
+        height: auto;
+    }
+
+    .public-navigation__link {
+        justify-content: flex-start;
+
+        width: 100%;
+        min-height: 46px;
+        height: auto;
+
+        font-size: 13px;
+    }
+
+    .public-navigation__indicator {
+        display: none;
+    }
+
+    .public-navigation__link.active {
+        color: var(--beneficiaries-green);
+
+        font-weight: 600;
+
+        padding-left: 12px;
+
+        border-left: 3px solid var(--beneficiaries-green);
+    }
+
+    .public-navigation__contact {
+        width: 100%;
+        min-height: 48px;
+    }
+
+    .public-header__toggle.is-active span:nth-child(1) {
+        transform: translateY(6px) rotate(45deg);
+    }
+
+    .public-header__toggle.is-active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .public-header__toggle.is-active span:nth-child(3) {
+        transform: translateY(-6px) rotate(-45deg);
+    }
+
+}

@@ -1,0 +1,348 @@
+
+/* =========================================================
+   PUBLIC FOOTER
+   Formal Institutional Design
+========================================================= */
+
+.public-footer {
+    width: 100%;
+    margin-top: 0;
+    padding: 55px 0 0;
+
+    background: #f8faf8;
+
+    border-top: 1px solid #e8ece8;
+
+    font-family: var(--font-primary);
+}
+
+
+/* =========================================================
+   FOOTER MAIN LAYOUT
+========================================================= */
+
+.public-footer__main {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.4fr)
+        minmax(150px, 0.65fr)
+        minmax(250px, 0.95fr);
+
+    column-gap: 65px;
+
+    align-items: start;
+
+    padding-bottom: 45px;
+}
+
+
+/* =========================================================
+   BRAND SECTION
+========================================================= */
+
+.public-footer__brand {
+    width: 100%;
+    max-width: 420px;
+}
+
+.public-footer__brand .public-brand {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 13px;
+
+    margin: 0 0 17px;
+
+    text-decoration: none;
+}
+
+.public-footer__brand .public-brand__logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 48px;
+    height: 48px;
+
+    flex-shrink: 0;
+
+    color: var(--beneficiaries-green);
+}
+
+.public-footer__brand .public-brand__logo svg {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+}
+
+.public-footer__brand .public-brand__text {
+    display: flex;
+    flex-direction: column;
+
+    gap: 3px;
+}
+
+.public-footer__brand .public-brand__name {
+    color: var(--beneficiaries-green-dark);
+
+    font-size: 17px;
+    font-weight: 700;
+
+    line-height: 1.4;
+}
+
+.public-footer__brand .public-brand__description {
+    color: var(--beneficiaries-muted);
+
+    font-size: 11px;
+    font-weight: 400;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   BRAND DESCRIPTION
+========================================================= */
+
+.public-footer__description {
+    max-width: 370px;
+
+    margin: 0;
+
+    color: #747d75;
+
+    font-size: 12px;
+    font-weight: 400;
+
+    line-height: 1.9;
+}
+
+
+/* =========================================================
+   NAVIGATION AND CONTACT
+========================================================= */
+
+.public-footer__navigation,
+.public-footer__contact {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    gap: 13px;
+
+    min-width: 0;
+}
+
+
+/* =========================================================
+   SECTION HEADING
+========================================================= */
+
+.public-footer__heading {
+    margin: 2px 0 9px;
+
+    color: var(--beneficiaries-green-dark);
+
+    font-size: 13px;
+    font-weight: 600;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   NAVIGATION LINKS
+========================================================= */
+
+.public-footer__navigation a {
+    display: inline-block;
+
+    color: #747d75;
+
+    font-size: 11px;
+    font-weight: 400;
+
+    line-height: 1.7;
+
+    text-decoration: none;
+
+    transition: color 0.2s ease;
+}
+
+.public-footer__navigation a:hover {
+    color: var(--beneficiaries-green);
+}
+
+
+/* =========================================================
+   CONTACT INFORMATION
+========================================================= */
+
+.public-footer__contact-content {
+    display: flex;
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 12px;
+}
+
+.public-footer__contact-name {
+    color: #747d75;
+
+    font-size: 11px;
+    font-weight: 500;
+
+    line-height: 1.7;
+}
+
+.public-footer__contact-content p {
+    max-width: 330px;
+
+    margin: 0;
+
+    color: #747d75;
+
+    font-size: 11px;
+    font-weight: 400;
+
+    line-height: 1.9;
+}
+
+
+/* =========================================================
+   FOOTER BOTTOM
+========================================================= */
+
+.public-footer__bottom {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    min-height: 65px;
+
+    border-top: 1px solid #e5eae5;
+}
+
+.public-footer__bottom p {
+    margin: 0;
+
+    color: #858d86;
+
+    font-size: 10px;
+    font-weight: 400;
+
+    line-height: 1.7;
+}
+
+.public-footer__bottom span {
+    color: var(--beneficiaries-green);
+
+    font-size: 10px;
+    font-weight: 500;
+
+    line-height: 1.7;
+
+    text-align: right;
+}
+
+
+/* =========================================================
+   TABLET RESPONSIVE
+========================================================= */
+
+@media (max-width: 992px) {
+
+    .public-footer {
+        padding-top: 45px;
+    }
+
+    .public-footer__main {
+        grid-template-columns: 1.2fr 0.8fr;
+
+        column-gap: 45px;
+        row-gap: 35px;
+    }
+
+    .public-footer__brand {
+        grid-column: 1 / -1;
+
+        max-width: 550px;
+    }
+
+    .public-footer__navigation,
+    .public-footer__contact {
+        grid-column: auto;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE RESPONSIVE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .public-footer {
+        padding-top: 35px;
+    }
+
+    .public-footer__main {
+        grid-template-columns: 1fr;
+
+        gap: 30px;
+
+        padding-bottom: 30px;
+    }
+
+    .public-footer__brand {
+        grid-column: auto;
+
+        max-width: 100%;
+    }
+
+    .public-footer__navigation,
+    .public-footer__contact {
+        grid-column: auto;
+
+        gap: 10px;
+    }
+
+    .public-footer__heading {
+        margin-bottom: 5px;
+    }
+
+    .public-footer__description {
+        max-width: 100%;
+
+        font-size: 11px;
+    }
+
+    .public-footer__contact-content p {
+        max-width: 100%;
+    }
+
+    .public-footer__bottom {
+        flex-direction: column;
+
+        align-items: flex-start;
+        justify-content: center;
+
+        gap: 7px;
+
+        padding: 15px 0;
+
+    }
+
+    .public-footer__bottom span {
+        text-align: left;
+    }
+
+}

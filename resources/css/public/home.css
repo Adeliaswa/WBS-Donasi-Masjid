@@ -1,0 +1,830 @@
+
+/* =========================================================
+   PUBLIC HOME
+========================================================= */
+
+
+/* =========================================================
+   ANALYTICS SECTION
+========================================================= */
+
+.public-analytics {
+    padding: 10px 0 65px;
+
+    background: var(--color-white);
+}
+
+
+.public-analytics__grid {
+    display: grid;
+
+    grid-template-columns: 1fr;
+
+    gap: 20px;
+}
+
+
+.public-panel {
+    padding: 30px;
+
+    background: var(--color-white);
+
+    border: 1px solid var(--beneficiaries-border);
+
+    border-radius: var(--radius-card);
+
+    box-shadow: var(--shadow-card);
+}
+
+
+.public-panel__header {
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-bottom: 25px;
+}
+
+
+.public-panel__title {
+    margin-bottom: 7px;
+
+    color: var(--beneficiaries-text);
+
+    font-size: 18px;
+
+    font-weight: 600;
+
+    line-height: 1.5;
+}
+
+
+.public-panel__description {
+    max-width: 570px;
+
+    margin-bottom: 0;
+
+    color: var(--beneficiaries-muted);
+
+    font-size: 11px;
+
+    line-height: 1.8;
+}
+
+
+.public-panel__year {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-width: 65px;
+
+    min-height: 32px;
+
+    padding: 5px 12px;
+
+    color: var(--beneficiaries-green);
+
+    background: var(--beneficiaries-green-light);
+
+    border-radius: 8px;
+
+    font-size: 11px;
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   CHART LEGEND
+========================================================= */
+
+.public-chart-legend {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    align-items: center;
+
+    gap: 23px;
+
+    margin-bottom: 20px;
+}
+
+
+.public-chart-legend > span {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    color: var(--beneficiaries-muted);
+
+    font-size: 10px;
+
+    font-weight: 500;
+}
+
+
+.public-chart-legend__dot {
+    display: inline-block;
+
+    width: 9px;
+
+    height: 9px;
+
+    border-radius: 3px;
+}
+
+
+.public-chart-legend__dot--green {
+    background: var(--beneficiaries-green);
+}
+
+
+.public-chart-legend__dot--blue {
+    background: #6b91cf;
+}
+
+
+/* =========================================================
+   CHART WRAPPER
+========================================================= */
+
+.public-chart-wrapper {
+    position: relative;
+
+    width: 100%;
+
+    height: 330px;
+}
+
+
+.public-chart-wrapper canvas {
+    width: 100% !important;
+
+    height: 100% !important;
+}
+
+
+/* =========================================================
+   CATEGORY SECTION
+========================================================= */
+
+.public-category-section {
+    padding: 0 0 75px;
+
+    background: var(--color-white);
+}
+
+
+.public-category-card {
+    padding: 30px;
+
+    background: #fbfcfb;
+
+    border: 1px solid var(--beneficiaries-border);
+
+    border-radius: var(--radius-card);
+}
+
+
+.public-category-card__header {
+    margin-bottom: 25px;
+}
+
+
+.public-category-card__header .public-section-title {
+    font-size: 23px;
+}
+
+
+.public-category-card__content {
+    display: grid;
+
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+
+    align-items: center;
+
+    gap: 45px;
+}
+
+
+.public-category-card__chart {
+    position: relative;
+    width: 100%;
+    max-width: 320px;
+    height: 290px;
+    margin: 0 auto;
+}
+
+.public-category-card__chart canvas {
+    display: block;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.public-category-card__legend {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 0;
+}
+
+
+.public-category-legend-item {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    min-height: 58px;
+
+    padding: 12px 0;
+
+    border-bottom: 1px solid var(--beneficiaries-border);
+}
+
+
+.public-category-legend-item:last-child {
+    border-bottom: none;
+}
+
+
+.public-category-legend-item__left {
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+    min-width: 0;
+}
+
+
+.public-category-legend-item__dot {
+    display: inline-block;
+
+    width: 10px;
+
+    height: 10px;
+
+    flex-shrink: 0;
+
+    background: var(--beneficiaries-green);
+
+    border-radius: 50%;
+}
+
+
+.public-category-legend-item__name {
+    color: var(--beneficiaries-text);
+
+    font-size: 11px;
+
+    font-weight: 500;
+}
+
+
+.public-category-legend-item strong {
+    color: var(--beneficiaries-green);
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   PROGRAMS
+========================================================= */
+
+.public-programs {
+    padding: 75px 0 85px;
+
+    background: #f8faf8;
+}
+
+
+.public-programs__grid {
+    display: grid;
+
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+
+    gap: 20px;
+}
+
+
+.public-program-card {
+    position: relative;
+
+    min-height: 250px;
+
+    padding: 25px 22px;
+
+    overflow: hidden;
+
+    background: var(--color-white);
+
+    border: 1px solid var(--beneficiaries-border);
+
+    border-radius: var(--radius-card);
+
+    transition: var(--transition-normal);
+}
+
+
+.public-program-card:hover {
+    transform: translateY(-6px);
+
+    box-shadow: var(--shadow-card-hover);
+
+    border-color: #d5e3d7;
+}
+
+
+.public-program-card__icon {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 53px;
+
+    height: 53px;
+
+    margin-bottom: 23px;
+
+    border-radius: 15px;
+}
+
+
+.public-program-card__icon svg {
+    width: 26px;
+
+    height: 26px;
+}
+
+
+.public-program-card__icon--green {
+    color: var(--beneficiaries-green);
+
+    background: var(--beneficiaries-green-light);
+}
+
+
+.public-program-card__icon--blue {
+    color: var(--color-blue-normal);
+
+    background: var(--color-blue-light);
+}
+
+
+.public-program-card__icon--purple {
+    color: var(--color-purple);
+
+    background: var(--color-purple-light);
+}
+
+
+.public-program-card__icon--orange {
+    color: var(--color-orange);
+
+    background: var(--color-orange-light);
+}
+
+
+.public-program-card__number {
+    position: absolute;
+
+    top: 22px;
+
+    right: 22px;
+
+    color: #e5eae5;
+
+    font-size: 23px;
+
+    font-weight: 600;
+}
+
+
+.public-program-card h3 {
+    margin-bottom: 10px;
+
+    color: var(--beneficiaries-green-dark);
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    line-height: 1.5;
+}
+
+
+.public-program-card p {
+    margin-bottom: 0;
+
+    color: var(--beneficiaries-muted);
+
+    font-size: 11px;
+
+    line-height: 1.9;
+}
+
+
+/* =========================================================
+   ACTIVITIES
+========================================================= */
+
+.public-activities {
+    padding: 80px 0;
+
+    background: var(--color-white);
+}
+
+
+.public-activities__grid {
+    display: grid;
+
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+
+    gap: 20px;
+}
+
+
+.public-activity-card {
+    overflow: hidden;
+
+    background: var(--color-white);
+
+    border: 1px solid var(--beneficiaries-border);
+
+    border-radius: var(--radius-card);
+
+    transition: var(--transition-normal);
+}
+
+
+.public-activity-card:hover {
+    transform: translateY(-5px);
+
+    box-shadow: var(--shadow-card-hover);
+}
+
+
+.public-activity-card__image {
+    position: relative;
+
+    width: 100%;
+
+    height: 185px;
+
+    overflow: hidden;
+
+    background: var(--beneficiaries-green-light);
+}
+
+
+.public-activity-card__image img {
+    display: block;
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    transition: transform 0.5s ease;
+}
+
+
+.public-activity-card:hover
+.public-activity-card__image img {
+    transform: scale(1.05);
+}
+
+
+.public-activity-card__placeholder {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 9px;
+
+    width: 100%;
+
+    height: 100%;
+
+    color: var(--beneficiaries-green);
+}
+
+
+.public-activity-card__placeholder svg {
+    width: 43px;
+
+    height: 43px;
+
+    opacity: 0.6;
+}
+
+
+.public-activity-card__placeholder span {
+    font-size: 10px;
+
+    font-weight: 500;
+}
+
+
+.public-activity-card__content {
+    padding: 19px;
+}
+
+
+.public-activity-card__date {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    margin-bottom: 10px;
+
+    color: var(--beneficiaries-muted);
+
+    font-size: 9px;
+
+    font-weight: 500;
+}
+
+
+.public-activity-card__date svg {
+    width: 14px;
+
+    height: 14px;
+}
+
+
+.public-activity-card__content h3 {
+    display: -webkit-box;
+
+    overflow: hidden;
+
+    margin-bottom: 8px;
+
+    color: var(--beneficiaries-green-dark);
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    line-height: 1.6;
+
+    -webkit-box-orient: vertical;
+
+    -webkit-line-clamp: 2;
+}
+
+
+.public-activity-card__content p {
+    display: -webkit-box;
+
+    overflow: hidden;
+
+    margin-bottom: 0;
+
+    color: var(--beneficiaries-muted);
+
+    font-size: 10px;
+
+    line-height: 1.8;
+
+    -webkit-box-orient: vertical;
+
+    -webkit-line-clamp: 3;
+}
+
+
+/* =========================================================
+   DONATION BANNER
+   Minimalist & Professional Design
+========================================================= */
+
+.public-donation-banner {
+    position: relative;
+    padding: 20px 0 75px;
+    background: var(--color-white);
+}
+
+.public-donation-banner__content {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+
+    min-height: 205px;
+    padding: 42px 55px;
+
+    overflow: hidden;
+
+    background: var(--beneficiaries-green);
+    border-radius: 18px;
+}
+
+/* =========================================================
+   DECORATION
+========================================================= */
+
+.public-donation-banner__content::after {
+    display: none;
+}
+
+.public-donation-banner__decoration {
+    display: none;
+}
+
+/* =========================================================
+   TEXT CONTENT
+========================================================= */
+
+.public-donation-banner__text {
+    position: relative;
+    z-index: 1;
+
+    max-width: 700px;
+}
+
+.public-donation-banner__eyebrow {
+    display: inline-block;
+
+    margin-bottom: 12px;
+
+    color: #c4d8ca;
+
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+}
+
+.public-donation-banner__text h2 {
+    margin: 0 0 12px;
+
+    color: var(--color-white);
+
+    font-size: 27px;
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: -0.5px;
+}
+
+.public-donation-banner__text p {
+    max-width: 560px;
+
+    margin: 0;
+
+    color: rgba(255, 255, 255, 0.82);
+
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.8;
+}
+
+/* =========================================================
+   DONATION BUTTON
+========================================================= */
+
+.public-donation-banner__content .public-button {
+    position: relative;
+    z-index: 2;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    flex-shrink: 0;
+
+    min-height: 52px;
+    padding: 0 25px;
+
+    background: var(--color-white);
+    color: var(--beneficiaries-green);
+
+    border: 1px solid var(--color-white);
+    border-radius: 9px;
+
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.public-donation-banner__content .public-button:hover {
+    background: var(--beneficiaries-green-dark);
+    color: var(--color-white);
+    border-color: var(--beneficiaries-green-dark);
+}
+
+/* =========================================================
+   RESPONSIVE TABLET
+========================================================= */
+
+@media (max-width: 992px) {
+
+    .public-donation-banner__content {
+        padding: 38px 35px;
+        gap: 25px;
+    }
+
+    .public-donation-banner__text h2 {
+        font-size: 24px;
+    }
+
+}
+
+/* =========================================================
+   RESPONSIVE MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .public-donation-banner {
+        padding: 15px 0 50px;
+    }
+
+    .public-donation-banner__content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 25px;
+
+        min-height: auto;
+        padding: 32px 25px;
+
+        border-radius: 14px;
+    }
+
+    .public-donation-banner__text {
+        max-width: 100%;
+    }
+
+    .public-donation-banner__eyebrow {
+        font-size: 10px;
+    }
+
+    .public-donation-banner__text h2 {
+        font-size: 22px;
+        line-height: 1.4;
+    }
+
+    .public-donation-banner__text p {
+        font-size: 12px;
+    }
+
+    .public-donation-banner__content .public-button {
+        width: 100%;
+        min-height: 48px;
+    }
+
+}
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+
+    .public-donation-banner__content {
+        padding: 28px 20px;
+    }
+
+    .public-donation-banner__text h2 {
+        font-size: 20px;
+    }
+
+}

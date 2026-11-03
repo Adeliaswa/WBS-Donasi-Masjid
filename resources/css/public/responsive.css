@@ -1,0 +1,1341 @@
+
+/* =========================================================
+   RESPONSIVE DESIGN
+   MASJID SABILILLAH
+========================================================= */
+
+
+/* =========================================================
+   LARGE LAPTOP
+   MAX WIDTH 1200PX
+========================================================= */
+
+@media (max-width: 1200px) {
+
+    .public-container {
+        width: calc(100% - 50px);
+    }
+
+
+    .public-hero__content {
+        gap: 45px;
+    }
+
+
+    .public-hero__title {
+        font-size: 46px;
+    }
+
+
+    .public-hero__image-wrapper {
+        height: 380px;
+    }
+
+
+    .public-summary__grid {
+        gap: 14px;
+    }
+
+
+    .public-stat-card {
+        padding: 18px;
+    }
+
+
+    .public-stat-card__top {
+        gap: 8px;
+    }
+
+
+    .public-stat-card__label {
+        font-size: 9px;
+    }
+
+
+    .public-programs__grid,
+    .public-activities__grid {
+        gap: 15px;
+    }
+
+
+    .public-footer__main {
+        gap: 45px;
+    }
+
+
+    .public-filter-form {
+        gap: 12px;
+    }
+
+}
+
+
+/* =========================================================
+   TABLET LANDSCAPE
+   MAX WIDTH 1024PX
+========================================================= */
+
+@media (max-width: 1024px) {
+
+    :root {
+        --header-height: 75px;
+    }
+
+
+    .public-header__container {
+        width: calc(100% - 45px);
+    }
+
+
+    .public-navigation {
+        gap: 18px;
+    }
+
+
+    .public-navigation__link {
+        font-size: 11px;
+    }
+
+
+    .public-navigation__contact {
+        padding: 0 13px;
+
+        font-size: 10px;
+    }
+
+
+    /* HERO */
+
+    .public-hero {
+        padding: 60px 0 70px;
+    }
+
+
+    .public-hero__content {
+        grid-template-columns: 1fr 0.9fr;
+
+        gap: 30px;
+    }
+
+
+    .public-hero__title {
+        font-size: 39px;
+    }
+
+
+    .public-hero__description {
+        font-size: 12px;
+    }
+
+
+    .public-hero__image-wrapper {
+        height: 340px;
+
+        border-radius: 22px;
+    }
+
+
+    /* SUMMARY */
+
+    .public-summary__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+
+    .public-stat-card {
+        min-height: 155px;
+    }
+
+
+    /* PROGRAM */
+
+    .public-programs__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+
+    /* ACTIVITIES */
+
+    .public-activities__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+
+    .public-activity-card__image {
+        height: 210px;
+    }
+
+
+    /* CATEGORY */
+
+    .public-category-card__content {
+        gap: 25px;
+    }
+
+
+    /* FOOTER */
+
+    .public-footer__main {
+        grid-template-columns: 1.2fr 0.8fr 1fr;
+
+        gap: 30px;
+    }
+
+
+    /* REPORT FILTER */
+
+    .public-filter-form {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+
+    .public-filter-form__action {
+        align-items: flex-end;
+    }
+
+
+    .public-filter-form__action .public-button {
+        width: 100%;
+    }
+
+}
+
+
+/* =========================================================
+   TABLET PORTRAIT
+   MAX WIDTH 768PX
+========================================================= */
+
+@media (max-width: 768px) {
+
+    :root {
+        --header-height: 72px;
+    }
+
+
+    .public-container {
+        width: calc(100% - 40px);
+    }
+
+
+    .public-section-title {
+        font-size: 25px;
+    }
+
+
+    /* HEADER */
+
+    .public-header__container {
+        width: calc(100% - 40px);
+    }
+
+
+    .public-header__toggle {
+        display: flex;
+    }
+
+
+    .public-navigation {
+        position: absolute;
+
+        top: calc(100% + 1px);
+
+        right: 0;
+
+        left: 0;
+
+        display: none;
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+        gap: 0;
+
+        padding: 12px 20px 20px;
+
+        background: var(--color-white);
+
+        border-bottom: 1px solid var(--beneficiaries-border);
+
+        box-shadow: var(--shadow-dropdown);
+    }
+
+
+    .public-navigation.is-open {
+        display: flex;
+    }
+
+
+    .public-navigation__link {
+        height: auto;
+
+        min-height: 45px;
+
+        padding: 10px 5px;
+
+        border-bottom: 1px solid #f0f2f0;
+    }
+
+
+    .public-navigation__link.active::after {
+        display: none;
+    }
+
+
+    .public-navigation__contact {
+        margin-top: 13px;
+
+        min-height: 44px;
+    }
+
+
+    /* HERO */
+
+    .public-hero {
+        padding: 55px 0 65px;
+    }
+
+
+    .public-hero__content {
+        grid-template-columns: 1fr;
+
+        gap: 40px;
+    }
+
+
+    .public-hero__text {
+        max-width: 620px;
+    }
+
+
+    .public-hero__title {
+        max-width: 570px;
+
+        font-size: 45px;
+    }
+
+
+    .public-hero__description {
+        max-width: 520px;
+    }
+
+
+    .public-hero__visual {
+        max-width: 620px;
+
+        width: 100%;
+
+        margin: 0 auto;
+
+        padding-right: 12px;
+    }
+
+
+    .public-hero__image-wrapper {
+        height: 390px;
+    }
+
+
+    /* SECTION HEADINGS */
+
+    .public-section-heading--row {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 15px;
+    }
+
+
+    /* SUMMARY */
+
+    .public-summary {
+        padding: 35px 0 55px;
+    }
+
+
+    /* ANALYTICS */
+
+    .public-analytics {
+        padding-bottom: 50px;
+    }
+
+
+    .public-panel {
+        padding: 23px;
+    }
+
+
+    .public-chart-wrapper {
+        height: 280px;
+    }
+
+
+    /* CATEGORY */
+
+    .public-category-card {
+        padding: 23px;
+    }
+
+
+    .public-category-card__content {
+        grid-template-columns: 1fr;
+
+        gap: 25px;
+    }
+
+
+    .public-category-card__chart {
+        height: 250px;
+    }
+
+
+    /* PROGRAM */
+
+    .public-programs {
+        padding: 60px 0;
+    }
+
+
+    /* ACTIVITIES */
+
+    .public-activities {
+        padding: 60px 0;
+    }
+
+
+    /* DONATION BANNER */
+
+    .public-donation-banner__content {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        min-height: 250px;
+
+        padding: 35px;
+    }
+
+
+    .public-donation-banner__text h2 {
+        font-size: 24px;
+    }
+
+
+    .public-donation-banner__decoration {
+        right: 30px;
+
+        opacity: 0.5;
+    }
+
+
+    /* FOOTER */
+
+    .public-footer {
+        padding-top: 45px;
+    }
+
+
+    .public-footer__main {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+        gap: 35px;
+    }
+
+
+    .public-footer__brand {
+        grid-column: 1 / -1;
+
+        max-width: 100%;
+    }
+
+
+    /* REPORT */
+
+    .public-report-page {
+        padding: 35px 0 65px;
+    }
+
+
+    .public-report-heading__title {
+        font-size: 29px;
+    }
+
+
+    .public-filter-card {
+        padding: 22px;
+    }
+
+
+    .public-report-tabs {
+        justify-content: flex-start;
+    }
+
+
+    .public-report-tab {
+        flex: 0 0 auto;
+    }
+
+
+    .public-data-card__header {
+        padding: 22px;
+    }
+
+
+    .public-table-footer {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+
+    .public-pagination {
+        justify-content: flex-start;
+
+        width: 100%;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   MAX WIDTH 576PX
+========================================================= */
+
+@media (max-width: 576px) {
+
+    .public-container {
+        width: calc(100% - 32px);
+    }
+
+
+    .public-section-title {
+        font-size: 22px;
+
+        letter-spacing: -0.4px;
+    }
+
+
+    .public-section-description {
+        font-size: 11px;
+    }
+
+
+    /* HEADER */
+
+    .public-header__container {
+        width: calc(100% - 32px);
+    }
+
+
+    .public-brand__logo {
+        width: 38px;
+
+        height: 38px;
+    }
+
+
+    .public-brand__name {
+        font-size: 13px;
+    }
+
+
+    .public-brand__description {
+        font-size: 8px;
+    }
+
+
+    /* HERO */
+
+    .public-hero {
+        padding: 45px 0 50px;
+    }
+
+
+    .public-hero__content {
+        gap: 30px;
+    }
+
+
+    .public-hero__title {
+        font-size: 35px;
+
+        letter-spacing: -1.2px;
+
+        line-height: 1.25;
+    }
+
+
+    .public-hero__description {
+        margin-bottom: 23px;
+
+        font-size: 11px;
+
+        line-height: 1.9;
+    }
+
+
+    .public-hero__actions {
+        align-items: stretch;
+
+        flex-direction: column;
+
+        gap: 10px;
+
+        margin-bottom: 23px;
+    }
+
+
+    .public-hero__actions .public-button {
+        width: 100%;
+
+        min-height: 46px;
+    }
+
+
+    .public-hero__trust {
+        align-items: flex-start;
+
+        font-size: 9px;
+    }
+
+
+    .public-hero__visual {
+        padding-right: 8px;
+    }
+
+
+    .public-hero__image-wrapper {
+        height: 280px;
+
+        border-radius: 19px;
+    }
+
+
+    .public-hero__image-caption {
+        right: 17px;
+
+        bottom: 17px;
+
+        left: 17px;
+    }
+
+
+    .public-hero__caption-text {
+        font-size: 13px;
+    }
+
+
+    /* SECTION HEADING */
+
+    .public-section-heading {
+        margin-bottom: 25px;
+    }
+
+
+    .public-section-heading--row {
+        gap: 12px;
+    }
+
+
+    .public-eyebrow {
+        font-size: 9px;
+    }
+
+
+    /* SUMMARY */
+
+    .public-summary {
+        padding: 30px 0 45px;
+    }
+
+
+    .public-summary__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+        gap: 10px;
+    }
+
+
+    .public-stat-card {
+        min-height: 150px;
+
+        padding: 14px;
+
+        border-radius: 14px;
+    }
+
+
+    .public-stat-card__top {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 9px;
+
+        margin-bottom: 12px;
+    }
+
+
+    .public-stat-card__icon {
+        width: 34px;
+
+        height: 34px;
+
+        border-radius: 10px;
+    }
+
+
+    .public-stat-card__icon svg {
+        width: 18px;
+
+        height: 18px;
+    }
+
+
+    .public-stat-card__label {
+        font-size: 9px;
+
+        line-height: 1.5;
+    }
+
+
+    .public-stat-card__value {
+        font-size: 15px;
+
+        letter-spacing: -0.3px;
+
+        margin-bottom: 8px;
+    }
+
+
+    .public-stat-card__value span {
+        font-size: 9px;
+    }
+
+
+    .public-stat-card__note {
+        font-size: 8px;
+    }
+
+
+    /* ANALYTICS */
+
+    .public-panel {
+        padding: 18px;
+
+        border-radius: 16px;
+    }
+
+
+    .public-panel__header {
+        flex-direction: column;
+
+        gap: 10px;
+    }
+
+
+    .public-panel__title {
+        font-size: 15px;
+    }
+
+
+    .public-panel__description {
+        font-size: 10px;
+    }
+
+
+    .public-chart-legend {
+        gap: 15px;
+    }
+
+
+    .public-chart-legend > span {
+        font-size: 9px;
+    }
+
+
+    .public-chart-wrapper {
+        height: 230px;
+    }
+
+
+    /* CATEGORY */
+
+    .public-category-card {
+        padding: 18px;
+
+        border-radius: 16px;
+    }
+
+
+    .public-category-card__header .public-section-title {
+        font-size: 19px;
+    }
+
+
+    .public-category-card__chart {
+        height: 220px;
+    }
+
+
+    .public-category-legend-item {
+        min-height: 51px;
+    }
+
+
+    .public-category-legend-item__name,
+    .public-category-legend-item strong {
+        font-size: 9px;
+    }
+
+
+    /* PROGRAMS */
+
+    .public-programs {
+        padding: 50px 0;
+    }
+
+
+    .public-programs__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+        gap: 11px;
+    }
+
+
+    .public-program-card {
+        min-height: 235px;
+
+        padding: 16px;
+
+        border-radius: 15px;
+    }
+
+
+    .public-program-card__icon {
+        width: 43px;
+
+        height: 43px;
+
+        margin-bottom: 20px;
+
+        border-radius: 12px;
+    }
+
+
+    .public-program-card__icon svg {
+        width: 22px;
+
+        height: 22px;
+    }
+
+
+    .public-program-card__number {
+        top: 15px;
+
+        right: 14px;
+
+        font-size: 17px;
+    }
+
+
+    .public-program-card h3 {
+        font-size: 11px;
+    }
+
+
+    .public-program-card p {
+        font-size: 9px;
+
+        line-height: 1.8;
+    }
+
+
+    /* ACTIVITIES */
+
+    .public-activities {
+        padding: 50px 0;
+    }
+
+
+    .public-activities__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+        gap: 12px;
+    }
+
+
+    .public-activity-card {
+        border-radius: 14px;
+    }
+
+
+    .public-activity-card__image {
+        height: 125px;
+    }
+
+
+    .public-activity-card__content {
+        padding: 12px;
+    }
+
+
+    .public-activity-card__date {
+        font-size: 8px;
+
+        gap: 5px;
+    }
+
+
+    .public-activity-card__content h3 {
+        font-size: 10px;
+    }
+
+
+    .public-activity-card__content p {
+        font-size: 9px;
+    }
+
+
+    /* DONATION BANNER */
+
+    .public-donation-banner {
+        padding-bottom: 50px;
+    }
+
+
+    .public-donation-banner__content {
+        gap: 23px;
+
+        min-height: auto;
+
+        padding: 28px 22px;
+
+        border-radius: 19px;
+    }
+
+
+    .public-donation-banner__text h2 {
+        font-size: 21px;
+    }
+
+
+    .public-donation-banner__text p {
+        font-size: 10px;
+    }
+
+
+    .public-donation-banner__content .public-button {
+        width: 100%;
+    }
+
+
+    /* FOOTER */
+
+    .public-footer {
+        padding-top: 38px;
+    }
+
+
+    .public-footer__main {
+        grid-template-columns: 1fr;
+
+        gap: 30px;
+
+        padding-bottom: 35px;
+    }
+
+
+    .public-footer__brand {
+        grid-column: auto;
+    }
+
+
+    .public-footer__description {
+        font-size: 10px;
+    }
+
+
+    .public-footer__bottom {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        justify-content: center;
+
+        gap: 5px;
+
+        padding: 15px 0;
+    }
+
+
+    .public-footer__bottom p,
+    .public-footer__bottom span {
+        font-size: 9px;
+    }
+
+
+    /* REPORT */
+
+    .public-report-page {
+        padding: 27px 0 50px;
+    }
+
+
+    .public-breadcrumb {
+        gap: 7px;
+
+        font-size: 9px;
+
+        margin-bottom: 20px;
+    }
+
+
+    .public-report-heading {
+        margin-bottom: 24px;
+    }
+
+
+    .public-report-heading__content {
+        gap: 15px;
+
+        padding-bottom: 22px;
+    }
+
+
+    .public-report-heading__title {
+        font-size: 25px;
+    }
+
+
+    .public-report-heading__description {
+        font-size: 10px;
+    }
+
+
+    .public-report-heading__icon {
+        width: 49px;
+
+        height: 49px;
+
+        border-radius: 13px;
+    }
+
+
+    .public-report-heading__icon svg {
+        width: 25px;
+
+        height: 25px;
+    }
+
+
+    /* FILTER */
+
+    .public-filter-card {
+        padding: 17px;
+
+        margin-bottom: 23px;
+
+        border-radius: 15px;
+    }
+
+
+    .public-filter-card__heading {
+        margin-bottom: 18px;
+    }
+
+
+    .public-filter-card__heading h2 {
+        font-size: 13px;
+    }
+
+
+    .public-filter-card__heading p {
+        font-size: 9px;
+    }
+
+
+    .public-filter-card__icon {
+        width: 34px;
+
+        height: 34px;
+    }
+
+
+    .public-filter-form {
+        grid-template-columns: 1fr;
+
+        gap: 13px;
+    }
+
+
+    .public-filter-form__group {
+        gap: 6px;
+    }
+
+
+    .public-filter-form__group label {
+        font-size: 10px;
+    }
+
+
+    .public-filter-form__group input,
+    .public-filter-form__group select {
+        height: 42px;
+
+        font-size: 10px;
+    }
+
+
+    .public-filter-form__action .public-button {
+        width: 100%;
+    }
+
+
+    /* REPORT SUMMARY */
+
+    .public-report-summary {
+        margin-bottom: 27px;
+    }
+
+
+    .public-report-summary__heading {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 8px;
+    }
+
+
+    .public-report-summary__heading h2 {
+        font-size: 14px;
+    }
+
+
+    .public-report-summary__heading p {
+        font-size: 9px;
+    }
+
+
+    /* REPORT TABS */
+
+    .public-report-tabs-section {
+        margin-bottom: 16px;
+    }
+
+
+    .public-report-tabs-section__heading h2 {
+        font-size: 14px;
+    }
+
+
+    .public-report-tabs-section__heading p {
+        font-size: 9px;
+    }
+
+
+    .public-report-tabs {
+        gap: 5px;
+
+        padding: 5px;
+
+        border-radius: 10px;
+    }
+
+
+    .public-report-tab {
+        min-height: 39px;
+
+        padding: 0 12px;
+
+        gap: 7px;
+
+        font-size: 9px;
+    }
+
+
+    .public-report-tab svg {
+        width: 14px;
+
+        height: 14px;
+    }
+
+
+    /* DATA CARD */
+
+    .public-data-card {
+        border-radius: 15px;
+    }
+
+
+    .public-data-card__header {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 15px;
+
+        padding: 18px;
+    }
+
+
+    .public-data-card__header h2 {
+        font-size: 15px;
+    }
+
+
+    .public-data-card__header p {
+        font-size: 9px;
+    }
+
+
+    /* TABLE */
+
+    .public-table {
+        min-width: 760px;
+    }
+
+
+    .public-table thead th {
+        padding: 13px 12px;
+
+        font-size: 9px;
+    }
+
+
+    .public-table tbody td {
+        padding: 13px 12px;
+
+        font-size: 9px;
+    }
+
+
+    /* PAGINATION */
+
+    .public-table-footer {
+        gap: 12px;
+
+        padding: 13px 17px;
+    }
+
+
+    .public-table-footer > p {
+        font-size: 9px;
+    }
+
+
+    .public-pagination span,
+    .public-pagination a {
+        min-width: 29px;
+
+        height: 29px;
+
+        font-size: 9px;
+    }
+
+
+    /* NOTES */
+
+    .public-report-notes {
+        gap: 11px;
+
+        padding: 17px;
+
+        border-radius: 15px;
+    }
+
+
+    .public-report-notes__icon {
+        width: 32px;
+
+        height: 32px;
+    }
+
+
+    .public-report-notes__content h3 {
+        font-size: 11px;
+    }
+
+
+    .public-report-notes__content p,
+    .public-report-notes__content ul {
+        font-size: 9px;
+    }
+
+}
+
+
+/* =========================================================
+   EXTRA SMALL MOBILE
+   MAX WIDTH 380PX
+========================================================= */
+
+@media (max-width: 380px) {
+
+    .public-container {
+        width: calc(100% - 26px);
+    }
+
+
+    .public-hero__title {
+        font-size: 31px;
+    }
+
+
+    .public-hero__image-wrapper {
+        height: 235px;
+    }
+
+
+    .public-stat-card {
+        padding: 12px;
+    }
+
+
+    .public-stat-card__value {
+        font-size: 13px;
+    }
+
+
+    .public-program-card {
+        padding: 13px;
+
+        min-height: 225px;
+    }
+
+
+    .public-activity-card__image {
+        height: 110px;
+    }
+
+
+    .public-report-heading__title {
+        font-size: 22px;
+    }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION ACCESSIBILITY
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+
+        animation-duration: 0.01ms !important;
+
+        animation-iteration-count: 1 !important;
+
+        transition-duration: 0.01ms !important;
+    }
+
+}

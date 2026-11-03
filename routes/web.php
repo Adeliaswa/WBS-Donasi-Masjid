@@ -9,16 +9,30 @@ use App\Http\Controllers\BeneficiaryController;
 use App\Http\Controllers\BeneficiaryCategoryController;
 use App\Http\Controllers\DistributionController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\Public\PublicHomeController;
+use App\Http\Controllers\Public\PublicReportController;
+use App\Http\Controllers\Public\PublicReportPdfController;
 
 
 // ==================================================
 // HALAMAN UTAMA
 // ==================================================
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [PublicHomeController::class, 'index'])
+    ->name('public.home');
 
+Route::get('/transparansi', [PublicReportController::class, 'index'])
+    ->name('public.reports.index');
+
+Route::get('/transparansi/pdf/donasi', [
+    PublicReportPdfController::class,
+    'donations'
+])->name('public.reports.pdf.donations');
+
+Route::get('/transparansi/pdf/penyaluran', [
+    PublicReportPdfController::class,
+    'distributions'
+])->name('public.reports.pdf.distributions');
 
 // ==================================================
 // AUTENTIKASI

@@ -7,66 +7,91 @@ export default defineConfig({
     plugins: [
         laravel({
             input: [
-                // CSS utama
+
+                // ==========================================
+                // CSS UTAMA
+                // ==========================================
                 'resources/css/app.css',
 
-                // CSS halaman login
+                // ==========================================
+                // CSS AUTHENTICATION
+                // ==========================================
                 'resources/css/auth.css',
 
-                // CSS sidebar admin
+                // ==========================================
+                // CSS ADMIN
+                // ==========================================
                 'resources/css/admin-sidebar.css',
-                
                 'resources/css/admin-dashboard.css',
-
                 'resources/css/admin-layout.css',
-
-                // CSS halaman donasi
-                'resources/css/admin-donations.css',
-
-                // CSS halaman tambah donasi
-                'resources/css/admin-donation-form.css',
-
-                // CSS halaman penerima manfaat
-                'resources/css/beneficiaries.css',
-
-                // CSS halaman menampilkan penerima manfaat
-                'resources/css/admin-beneficiaries-show.css',
-
-                'resources/css/beneficiary-categories.css',
-
-                'resources/css/beneficiary-category-form.css',
-
-                'resources/css/admin-distributions.css',
-
-                'resources/css/admin-distribution-form.css',
                 'resources/css/admin-footer.css',
 
-                // JavaScript utama
+                // ==========================================
+                // CSS DONASI
+                // ==========================================
+                'resources/css/admin-donations.css',
+                'resources/css/admin-donation-form.css',
+
+                // ==========================================
+                // CSS PENERIMA MANFAAT
+                // ==========================================
+                'resources/css/beneficiaries.css',
+                'resources/css/admin-beneficiaries-show.css',
+                'resources/css/beneficiary-categories.css',
+                'resources/css/beneficiary-category-form.css',
+
+                // ==========================================
+                // CSS PENYALURAN
+                // ==========================================
+                'resources/css/admin-distributions.css',
+                'resources/css/admin-distribution-form.css',
+
+                // ==========================================
+                // CSS TRANSPARANSI PUBLIK
+                // ==========================================
+                'resources/css/public/public.css',
+
+                // ==========================================
+                // JAVASCRIPT UTAMA
+                // ==========================================
                 'resources/js/app.js',
 
-                // JavaScript halaman login
+                // ==========================================
+                // JAVASCRIPT AUTHENTICATION
+                // ==========================================
                 'resources/js/auth.js',
 
-                // JavaScript sidebar admin
+                // ==========================================
+                // JAVASCRIPT ADMIN
+                // ==========================================
                 'resources/js/admin-sidebar.js',
-
                 'resources/js/admin-dashboard.js',
 
-                // JavaScript halaman donasi
+                // ==========================================
+                // JAVASCRIPT DONASI
+                // ==========================================
                 'resources/js/admin-donations.js',
 
+                // ==========================================
+                // JAVASCRIPT PENERIMA MANFAAT
+                // ==========================================
                 'resources/js/admin-beneficiaries-show.js',
-
                 'resources/js/admin-beneficiaries-form.js',
-
                 'resources/js/beneficiary-categories.js',
-        
                 'resources/js/beneficiary-category-form.js',
-                
-                'resources/js/admin-distributions.js'
-                
-                
+
+                // ==========================================
+                // JAVASCRIPT PENYALURAN
+                // ==========================================
+                'resources/js/admin-distributions.js',
+
+                // ==========================================
+                // JAVASCRIPT TRANSPARANSI PUBLIK
+                // ==========================================
+                'resources/js/public/public.js',
+
             ],
+
             refresh: true,
         }),
 
@@ -75,7 +100,9 @@ export default defineConfig({
 
     server: {
         watch: {
-            ignored: ['**/storage/framework/views/**'],
+            ignored: [
+                '**/storage/framework/views/**',
+            ],
         },
     },
 });
