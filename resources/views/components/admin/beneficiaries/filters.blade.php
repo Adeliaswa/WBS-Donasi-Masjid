@@ -1,18 +1,22 @@
 
 {{-- Pencarian dan Filter Penerima Manfaat --}}
+
 <form
     action="{{ route('beneficiaries.index') }}"
     method="GET"
     class="beneficiary-filters"
     id="beneficiaryFilterForm"
 >
-    {{-- Pencarian --}}
+
+    {{-- SEARCH --}}
     <div class="beneficiary-filters__search">
+
         <label for="beneficiarySearch">
             Cari Penerima
         </label>
 
         <div class="beneficiary-filters__search-box">
+
             <svg
                 width="18"
                 height="18"
@@ -35,11 +39,15 @@
                 placeholder="Cari nama, NIK, atau alamat..."
                 value="{{ request('search') }}"
             >
+
         </div>
+
     </div>
 
-    {{-- Filter Kategori --}}
+
+    {{-- CATEGORY --}}
     <div class="beneficiary-filters__field">
+
         <label for="beneficiaryCategory">
             Kategori
         </label>
@@ -48,9 +56,13 @@
             id="beneficiaryCategory"
             name="category_id"
         >
-            <option value="">Semua Kategori</option>
+
+            <option value="">
+                Semua Kategori
+            </option>
 
             @foreach ($categories as $category)
+
                 <option
                     value="{{ $category->id }}"
                     @selected(
@@ -60,12 +72,17 @@
                 >
                     {{ $category->name }}
                 </option>
+
             @endforeach
+
         </select>
+
     </div>
 
-    {{-- Filter Status --}}
+
+    {{-- STATUS --}}
     <div class="beneficiary-filters__field">
+
         <label for="beneficiaryStatus">
             Status Penerima
         </label>
@@ -74,7 +91,10 @@
             id="beneficiaryStatus"
             name="status"
         >
-            <option value="">Semua Status</option>
+
+            <option value="">
+                Semua Status
+            </option>
 
             <option
                 value="Aktif"
@@ -89,15 +109,31 @@
             >
                 Tidak Aktif
             </option>
+
         </select>
+
     </div>
 
-    {{-- Tombol Filter --}}
+
+    {{-- ACTIONS --}}
     <div class="beneficiary-filters__actions">
+
         <button
             type="submit"
             class="beneficiary-filters__submit"
         >
+            <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+            >
+                <path d="M4 5h16l-6.5 7.5V19l-3 1v-7.5L4 5z"/>
+            </svg>
+
             Terapkan
         </button>
 
@@ -107,5 +143,7 @@
         >
             Reset
         </a>
+
     </div>
+
 </form>

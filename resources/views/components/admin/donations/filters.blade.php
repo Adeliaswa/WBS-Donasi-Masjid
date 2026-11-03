@@ -1,12 +1,14 @@
-{{-- Pencarian dan Filter Data Donasi --}}
+
 <form
     action="{{ route('donations.index') }}"
     method="GET"
     class="donations-filters"
     id="donationsFilterForm"
 >
-    {{-- Pencarian Donatur --}}
+
+    {{-- SEARCH --}}
     <div class="donations-filters__field donations-filters__field--search">
+
         <label
             for="donationSearch"
             class="donations-filters__label"
@@ -15,16 +17,15 @@
         </label>
 
         <div class="donations-filters__search-wrapper">
+
             <svg
-                class="donations-filters__search-icon"
-                width="18"
-                height="18"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
                 stroke-width="1.8"
                 stroke-linecap="round"
                 stroke-linejoin="round"
+                class="donations-filters__search-icon"
                 aria-hidden="true"
             >
                 <circle cx="11" cy="11" r="7"/>
@@ -35,15 +36,19 @@
                 type="search"
                 id="donationSearch"
                 name="search"
-                class="donations-filters__input donations-filters__input--search"
+                class="donations-filters__input"
                 placeholder="Cari nama donatur..."
                 value="{{ request('search') }}"
             >
+
         </div>
+
     </div>
 
-    {{-- Filter Kategori Donasi --}}
+
+    {{-- CATEGORY --}}
     <div class="donations-filters__field">
+
         <label
             for="donationCategory"
             class="donations-filters__label"
@@ -56,9 +61,13 @@
             name="category"
             class="donations-filters__select"
         >
-            <option value="">Semua Kategori</option>
+
+            <option value="">
+                Semua Kategori
+            </option>
 
             @foreach (($categories ?? collect()) as $category)
+
                 @php
                     $categoryName = is_string($category)
                         ? $category
@@ -71,12 +80,17 @@
                 >
                     {{ $categoryName }}
                 </option>
+
             @endforeach
+
         </select>
+
     </div>
 
-    {{-- Filter Status Verifikasi --}}
+
+    {{-- VERIFICATION STATUS --}}
     <div class="donations-filters__field">
+
         <label
             for="donationStatus"
             class="donations-filters__label"
@@ -89,7 +103,10 @@
             name="verification_status"
             class="donations-filters__select"
         >
-            <option value="">Semua Status</option>
+
+            <option value="">
+                Semua Status
+            </option>
 
             <option
                 value="pending"
@@ -111,16 +128,34 @@
             >
                 Ditolak
             </option>
+
         </select>
+
     </div>
 
-    {{-- Tombol Aksi --}}
+
+    {{-- ACTIONS --}}
     <div class="donations-filters__actions">
+
         <button
             type="submit"
             class="donations-button donations-button--primary"
         >
+
+            <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+            >
+                <path d="M4 5h16l-6.5 7.5V19l-3 1v-7.5L4 5z"/>
+            </svg>
+
             Terapkan
+
         </button>
 
         <a
@@ -129,5 +164,7 @@
         >
             Reset
         </a>
+
     </div>
+
 </form>

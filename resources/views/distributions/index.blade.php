@@ -1,423 +1,740 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#294236">
 
-    <title>Penyaluran Bantuan | Masjid Sabilillah</title>
+@extends('layouts.admin')
 
-    @vite([
-        'resources/css/app.css',
-        'resources/css/admin-sidebar.css',
-        'resources/css/admin-distributions.css',
-        'resources/js/admin-sidebar.js',
-        'resources/js/admin-distributions.js'
-    ])
-</head>
+@section('title', 'Penyaluran Bantuan - Admin Masjid Sabilillah')
 
-<body class="admin-layout">
+@push('styles')
+    @vite('resources/css/admin-distributions.css')
+@endpush
 
-    @include('components.admin.sidebar')
+@push('scripts')
+    @vite('resources/js/admin-distributions.js')
+@endpush
 
-    <div class="admin-main">
+@section('content')
 
-        {{-- HEADER MOBILE --}}
-        <div class="admin-mobile-header">
-            <button
-                type="button"
-                class="admin-sidebar-toggle"
-                id="openSidebar"
-                aria-label="Buka menu navigasi"
-                aria-controls="adminSidebar"
-                aria-expanded="false"
-            >
-                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <path
-                        d="M4 6H20M4 12H20M4 18H20"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                    />
-                </svg>
-            </button>
+<div class="distribution-page">
 
-            <div class="admin-mobile-header__identity">
-                <span class="admin-mobile-header__title">Masjid Sabilillah</span>
-                <span class="admin-mobile-header__subtitle">Panel Administrasi</span>
+    {{-- =====================================================
+         1. PAGE HEADER
+    ====================================================== --}}
+
+    <section class="admin-page-header">
+
+        <div class="admin-page-header__content">
+
+            <div class="admin-page-header__eyebrow">
+                <span class="admin-page-header__line"></span>
+                Masjid Sabilillah
             </div>
+
+            <h1 class="admin-page-header__title">
+                Penyaluran Bantuan
+            </h1>
+
+            <p class="admin-page-header__description">
+                Kelola, pantau, dan catat penyaluran bantuan kepada
+                penerima manfaat secara tertib, tepat sasaran,
+                dan transparan.
+            </p>
+
         </div>
 
-        <main class="distribution-index-page">
+        <div class="admin-page-header__action">
 
-            {{-- HEADER HALAMAN --}}
-            <header class="distribution-index-header">
-                <div class="distribution-index-header__content">
-                    <span class="distribution-index-header__eyebrow">
-                        MASJID SABILILLAH
-                    </span>
-
-                    <h1 class="distribution-index-header__title">
-                        Penyaluran Bantuan
-                    </h1>
-
-                    <p class="distribution-index-header__description">
-                        Kelola penyaluran bantuan kepada penerima manfaat
-                        secara tertib, tepat sasaran, dan transparan.
-                    </p>
-                </div>
-
-                <a
-                    href="#distribution-create-panel"
-                    class="distribution-button distribution-button--primary"
+            <a
+                href="#distribution-create-panel"
+                class="distribution-button distribution-button--primary distribution-add-button"
+            >
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
                 >
-                    <svg viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="1.8"
-                        stroke-linecap="round" aria-hidden="true">
-                        <path d="M12 5v14M5 12h14"/>
-                    </svg>
-                    Tambah Penyaluran
-                </a>
-            </header>
+                    <path d="M12 5v14M5 12h14"/>
+                </svg>
+
+                Tambah Penyaluran
+            </a>
+
+        </div>
+
+    </section>
 
 
-            {{-- NOTIFIKASI --}}
-            @if (session('success'))
-                <div class="distribution-alert distribution-alert--success" role="status">
-                    {{ session('success') }}
-                </div>
-            @endif
+    {{-- =====================================================
+         2. NOTIFICATIONS
+    ====================================================== --}}
 
-            @if (session('warning'))
-                <div class="distribution-alert distribution-alert--warning" role="status">
-                    {{ session('warning') }}
-                </div>
-            @endif
+    @if (session('success'))
+        <div
+            class="distribution-alert distribution-alert--success"
+            role="status"
+        >
+            {{ session('success') }}
+        </div>
+    @endif
 
-            @if (session('error'))
-                <div class="distribution-alert distribution-alert--error" role="alert">
-                    {{ session('error') }}
-                </div>
-            @endif
+    @if (session('warning'))
+        <div
+            class="distribution-alert distribution-alert--warning"
+            role="status"
+        >
+            {{ session('warning') }}
+        </div>
+    @endif
 
-            @if ($errors->any())
-                <div class="distribution-alert distribution-alert--error" role="alert">
-                    <div>
-                        <strong>Data belum dapat disimpan.</strong>
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                </div>
-            @endif
+    @if (session('error'))
+        <div
+            class="distribution-alert distribution-alert--error"
+            role="alert"
+        >
+            {{ session('error') }}
+        </div>
+    @endif
+
+    @if ($errors->any())
+        <div
+            class="distribution-alert distribution-alert--error"
+            role="alert"
+        >
+            <div>
+                <strong>Data belum dapat disimpan.</strong>
+
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
+    @endif
 
 
-            {{-- PERINGATAN DUPLIKASI --}}
-            @if (session('duplicate_warning'))
-                <section class="distribution-duplicate-confirmation">
-                    <div class="distribution-duplicate-confirmation__header">
-                        <span class="distribution-duplicate-confirmation__icon">!</span>
+    {{-- =====================================================
+         3. DUPLICATE CONFIRMATION
+    ====================================================== --}}
 
-                        <div>
-                            <h2>Peringatan Potensi Duplikasi</h2>
-                            <p>
-                                Ditemukan
-                                <strong>{{ session('duplicate_warning.count') }}</strong>
-                                catatan penyaluran untuk penerima ini pada bulan yang sama.
-                            </p>
-                        </div>
-                    </div>
+    @if (session('duplicate_warning'))
 
-                    <div class="distribution-duplicate-confirmation__table-wrap">
-                        <table class="distribution-duplicate-confirmation__table">
-                            <thead>
-                                <tr>
-                                    <th>Penerima</th>
-                                    <th>Tanggal</th>
-                                    <th>Jenis Bantuan</th>
-                                    <th>Nominal</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (session('duplicate_warning.data') as $item)
-                                    <tr>
-                                        <td>{{ $item['beneficiary_name'] }}</td>
-                                        <td>{{ $item['distribution_date'] }}</td>
-                                        <td>{{ $item['assistance_type'] }}</td>
-                                        <td>
-                                            Rp{{ number_format((float) $item['amount'], 0, ',', '.') }}
-                                        </td>
-                                        <td>{{ $item['status'] }}</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
+        <section class="distribution-duplicate-confirmation">
 
-                    <p class="distribution-duplicate-confirmation__question">
-                        Apakah kamu tetap ingin menyimpan penyaluran ini?
+            <div class="distribution-duplicate-confirmation__header">
+
+                <span class="distribution-duplicate-confirmation__icon">
+                    !
+                </span>
+
+                <div>
+                    <h2>
+                        Peringatan Potensi Duplikasi
+                    </h2>
+
+                    <p>
+                        Ditemukan
+                        <strong>
+                            {{ session('duplicate_warning.count') }}
+                        </strong>
+                        catatan penyaluran untuk penerima ini
+                        pada bulan yang sama.
                     </p>
+                </div>
 
-                    <form
-                        action="{{ route('distributions.store') }}"
-                        method="POST"
-                        class="distribution-duplicate-confirmation__actions"
-                    >
-                        @csrf
+            </div>
 
-                        @foreach (old() as $key => $value)
-                            @if (is_scalar($value) && $key !== '_token' && $key !== '_method')
-                                <input type="hidden" name="{{ $key }}" value="{{ $value }}">
-                            @endif
+
+            <div class="distribution-duplicate-confirmation__table-wrap">
+
+                <table class="distribution-duplicate-confirmation__table">
+
+                    <thead>
+                        <tr>
+                            <th>Penerima</th>
+                            <th>Tanggal</th>
+                            <th>Jenis Bantuan</th>
+                            <th>Nominal</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        @foreach (session('duplicate_warning.data') as $item)
+
+                            <tr>
+                                <td>
+                                    {{ $item['beneficiary_name'] }}
+                                </td>
+
+                                <td>
+                                    {{ $item['distribution_date'] }}
+                                </td>
+
+                                <td>
+                                    {{ $item['assistance_type'] }}
+                                </td>
+
+                                <td>
+                                    Rp{{ number_format((float) $item['amount'], 0, ',', '.') }}
+                                </td>
+
+                                <td>
+                                    {{ $item['status'] }}
+                                </td>
+                            </tr>
+
                         @endforeach
 
-                        <input type="hidden" name="confirm_duplicate" value="1">
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+            <p class="distribution-duplicate-confirmation__question">
+                Apakah kamu tetap ingin menyimpan penyaluran ini?
+            </p>
+
+
+            <form
+                action="{{ route('distributions.store') }}"
+                method="POST"
+                class="distribution-duplicate-confirmation__actions"
+            >
+                @csrf
+
+                @foreach (old() as $key => $value)
+
+                    @if (
+                        is_scalar($value) &&
+                        $key !== '_token' &&
+                        $key !== '_method'
+                    )
+
+                        <input
+                            type="hidden"
+                            name="{{ $key }}"
+                            value="{{ $value }}"
+                        >
+
+                    @endif
+
+                @endforeach
+
+                <input
+                    type="hidden"
+                    name="confirm_duplicate"
+                    value="1"
+                >
+
+                <a
+                    href="{{ route('distributions.index') }}"
+                    class="distribution-button distribution-button--secondary"
+                >
+                    Periksa Kembali
+                </a>
+
+                <button
+                    type="submit"
+                    class="distribution-button distribution-button--warning"
+                >
+                    Tetap Simpan
+                </button>
+
+            </form>
+
+        </section>
+
+    @endif
+
+
+    {{-- =====================================================
+         4. SUMMARY CARDS
+    ====================================================== --}}
+
+    <section
+        class="distribution-summary"
+        aria-label="Ringkasan penyaluran"
+    >
+
+        {{-- TOTAL PENYALURAN --}}
+
+        <article class="distribution-summary__card">
+
+            <div class="distribution-summary__top">
+
+                <div class="distribution-summary__icon">
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.7"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                    >
+                        <rect x="4" y="4" width="16" height="16" rx="2"/>
+                        <path d="M8 9h8M8 13h8M8 17h4"/>
+                    </svg>
+
+                </div>
+
+                <span class="distribution-summary__label">
+                    Total Penyaluran
+                </span>
+
+            </div>
+
+            <div class="distribution-summary__body">
+
+                <h3 class="distribution-summary__value">
+                    {{ number_format((int) ($summary['total'] ?? 0), 0, ',', '.') }}
+                </h3>
+
+                <p class="distribution-summary__description">
+                    Seluruh catatan penyaluran bantuan.
+                </p>
+
+            </div>
+
+        </article>
+
+
+        {{-- PENYALURAN BULAN INI --}}
+
+        <article class="distribution-summary__card">
+
+            <div class="distribution-summary__top">
+
+                <div class="distribution-summary__icon distribution-summary__icon--green">
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.7"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                    >
+                        <circle cx="12" cy="12" r="9"/>
+                        <path d="m8 12 2.5 2.5L16 9"/>
+                    </svg>
+
+                </div>
+
+                <span class="distribution-summary__label">
+                    Penyaluran Bulan Ini
+                </span>
+
+            </div>
+
+            <div class="distribution-summary__body">
+
+                <h3 class="distribution-summary__value">
+                    {{ number_format((int) ($summary['this_month'] ?? 0), 0, ',', '.') }}
+                </h3>
+
+                <p class="distribution-summary__description">
+                    Jumlah penyaluran pada bulan berjalan.
+                </p>
+
+            </div>
+
+        </article>
+
+
+        {{-- TOTAL NILAI BANTUAN --}}
+
+        <article class="distribution-summary__card">
+
+            <div class="distribution-summary__top">
+
+                <div class="distribution-summary__icon distribution-summary__icon--blue">
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.7"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                    >
+                        <rect x="3" y="6" width="18" height="13" rx="2"/>
+                        <path d="M3 10h18M7 15h4"/>
+                    </svg>
+
+                </div>
+
+                <span class="distribution-summary__label">
+                    Total Nilai Bantuan
+                </span>
+
+            </div>
+
+            <div class="distribution-summary__body">
+
+                <h3 class="distribution-summary__value distribution-summary__value--currency">
+                    Rp{{ number_format((float) ($summary['total_amount'] ?? 0), 0, ',', '.') }}
+                </h3>
+
+                <p class="distribution-summary__description">
+                    Akumulasi nilai penyaluran bantuan.
+                </p>
+
+            </div>
+
+        </article>
+
+
+        {{-- PENERIMA TERSEDIA --}}
+
+        <article class="distribution-summary__card">
+
+            <div class="distribution-summary__top">
+
+                <div class="distribution-summary__icon distribution-summary__icon--orange">
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.7"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                    >
+                        <circle cx="9" cy="8" r="3"/>
+                        <path d="M3 20v-1a6 6 0 0 1 12 0v1"/>
+                        <path d="M17 8h4M19 6v4"/>
+                    </svg>
+
+                </div>
+
+                <span class="distribution-summary__label">
+                    Penerima Tersedia
+                </span>
+
+            </div>
+
+            <div class="distribution-summary__body">
+
+                <h3 class="distribution-summary__value">
+                    {{ count($beneficiaries) }}
+                </h3>
+
+                <p class="distribution-summary__description">
+                    Penerima yang tersedia pada form penyaluran.
+                </p>
+
+            </div>
+
+        </article>
+
+    </section>
+
+
+    {{-- =====================================================
+         5. MAIN DISTRIBUTION CONTENT
+    ====================================================== --}}
+
+    <section class="distribution-section">
+
+
+        {{-- SECTION HEADING --}}
+
+        <div class="distribution-section__heading">
+
+            <div>
+
+                <span class="distribution-section__eyebrow">
+                </span>
+
+                <h2>
+                </h2>
+
+                <p>
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        {{-- =================================================
+             MAIN TWO COLUMN LAYOUT
+        ================================================== --}}
+
+        <div class="distribution-layout">
+
+
+            {{-- =============================================
+                 LEFT COLUMN: DISTRIBUTION DATA
+            ============================================== --}}
+
+            <div class="distribution-list-panel">
+
+
+                {{-- PANEL HEADING --}}
+
+                <div class="distribution-panel-header">
+
+                    <div>
+
+                        <h3 class="distribution-panel-title">
+                            Daftar Penyaluran
+                        </h3>
+
+                        <p class="distribution-panel-description">
+                            Cari dan filter riwayat penyaluran bantuan
+                            berdasarkan jenis, status, dan periode.
+                        </p>
+
+                    </div>
+
+                    <span class="distribution-count">
+                        {{ $distributions->total() }} Data
+                    </span>
+
+                </div>
+
+
+                {{-- =========================================
+                     FILTER
+                ========================================== --}}
+
+                <form
+                    action="{{ route('distributions.index') }}"
+                    method="GET"
+                    class="distribution-filters"
+                    id="distributionFilterForm"
+                >
+
+
+                    {{-- SEARCH --}}
+
+                    <div class="distribution-filter-field distribution-filter-field--search">
+
+                        <label
+                            for="distribution-search"
+                        >
+                            Cari Penyaluran
+                        </label>
+
+                        <div class="distribution-search-wrapper">
+
+                            <svg
+                                class="distribution-search-icon"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true"
+                            >
+                                <circle cx="11" cy="11" r="7"/>
+                                <path d="m16 16 4 4"/>
+                            </svg>
+
+                            <input
+                                type="search"
+                                id="distribution-search"
+                                name="search"
+                                value="{{ request('search') }}"
+                                placeholder="Cari nama penerima atau jenis bantuan..."
+                                class="distribution-input distribution-input--search"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    {{-- ASSISTANCE TYPE --}}
+
+                    <div class="distribution-filter-field">
+
+                        <label for="distribution-type-filter">
+                            Jenis Bantuan
+                        </label>
+
+                        <input
+                            type="text"
+                            id="distribution-type-filter"
+                            name="assistance_type"
+                            value="{{ request('assistance_type') }}"
+                            class="distribution-input"
+                            placeholder="Semua jenis bantuan"
+                        >
+
+                    </div>
+
+
+                    {{-- STATUS --}}
+
+                    <div class="distribution-filter-field">
+
+                        <label for="distribution-status-filter">
+                            Status
+                        </label>
+
+                        <select
+                            id="distribution-status-filter"
+                            name="status"
+                            class="distribution-select"
+                        >
+
+                            <option value="">
+                                Semua Status
+                            </option>
+
+                            @foreach (['Disalurkan', 'Diproses', 'Dibatalkan'] as $status)
+
+                                <option
+                                    value="{{ $status }}"
+                                    @selected(request('status') === $status)
+                                >
+                                    {{ $status }}
+                                </option>
+
+                            @endforeach
+
+                        </select>
+
+                    </div>
+
+
+                    {{-- PERIOD --}}
+
+                    <div class="distribution-filter-field">
+
+                        <label for="distribution-period-filter">
+                            Periode
+                        </label>
+
+                        <select
+                            id="distribution-period-filter"
+                            name="period"
+                            class="distribution-select"
+                        >
+
+                            <option value="">
+                                Semua Periode
+                            </option>
+
+                            <option
+                                value="this_month"
+                                @selected(request('period') === 'this_month')
+                            >
+                                Bulan Ini
+                            </option>
+
+                            <option
+                                value="last_month"
+                                @selected(request('period') === 'last_month')
+                            >
+                                Bulan Lalu
+                            </option>
+
+                            <option
+                                value="this_year"
+                                @selected(request('period') === 'this_year')
+                            >
+                                Tahun Ini
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    {{-- FILTER ACTIONS --}}
+
+                    <div class="distribution-filter-actions">
+
+                        <button
+                            type="submit"
+                            class="distribution-button distribution-button--primary"
+                        >
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true"
+                            >
+                                <path d="M4 5h16l-6.5 7.5V19l-3 1v-7.5L4 5z"/>
+                            </svg>
+
+                            Terapkan
+
+                        </button>
 
                         <a
                             href="{{ route('distributions.index') }}"
                             class="distribution-button distribution-button--secondary"
                         >
-                            Periksa Kembali
+                            Reset
                         </a>
 
-                        <button
-                            type="submit"
-                            class="distribution-button distribution-button--warning"
-                        >
-                            Tetap Simpan
-                        </button>
-                    </form>
-                </section>
-            @endif
-
-
-            {{-- RINGKASAN --}}
-            <section class="distribution-summary" aria-label="Ringkasan penyaluran">
-
-                <article class="distribution-summary__card">
-                    <div class="distribution-summary__top">
-                        <span class="distribution-summary__icon">
-                            <svg viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="1.7"
-                                stroke-linecap="round" stroke-linejoin="round"
-                                aria-hidden="true">
-                                <rect x="4" y="4" width="16" height="16" rx="2"/>
-                                <path d="M8 9h8M8 13h8M8 17h4"/>
-                            </svg>
-                        </span>
-                        <span class="distribution-summary__label">Total Penyaluran</span>
                     </div>
 
-                    <strong class="distribution-summary__value">
-                        {{ number_format((int) ($summary['total'] ?? 0), 0, ',', '.') }}
-                    </strong>
-
-                    <p class="distribution-summary__description">
-                        Seluruh catatan penyaluran bantuan.
-                    </p>
-                </article>
-
-                <article class="distribution-summary__card">
-                    <div class="distribution-summary__top">
-                        <span class="distribution-summary__icon distribution-summary__icon--green">
-                            <svg viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="1.7"
-                                stroke-linecap="round" stroke-linejoin="round"
-                                aria-hidden="true">
-                                <circle cx="12" cy="12" r="9"/>
-                                <path d="m8 12 2.5 2.5L16 9"/>
-                            </svg>
-                        </span>
-                        <span class="distribution-summary__label">Penyaluran Bulan Ini</span>
-                    </div>
-
-                    <strong class="distribution-summary__value">
-                        {{ number_format((int) ($summary['this_month'] ?? 0), 0, ',', '.') }}
-                    </strong>
-
-                    <p class="distribution-summary__description">
-                        Jumlah penyaluran pada bulan berjalan.
-                    </p>
-                </article>
-
-                <article class="distribution-summary__card">
-                    <div class="distribution-summary__top">
-                        <span class="distribution-summary__icon distribution-summary__icon--blue">
-                            <svg viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="1.7"
-                                stroke-linecap="round" stroke-linejoin="round"
-                                aria-hidden="true">
-                                <rect x="3" y="6" width="18" height="13" rx="2"/>
-                                <path d="M3 10h18M7 15h4"/>
-                            </svg>
-                        </span>
-                        <span class="distribution-summary__label">Total Nilai Bantuan</span>
-                    </div>
-
-                    <strong class="distribution-summary__value distribution-summary__value--currency">
-                        Rp{{ number_format((float) ($summary['total_amount'] ?? 0), 0, ',', '.') }}
-                    </strong>
-
-                    <p class="distribution-summary__description">
-                        Akumulasi nilai penyaluran bantuan.
-                    </p>
-                </article>
-
-                <article class="distribution-summary__card">
-                    <div class="distribution-summary__top">
-                        <span class="distribution-summary__icon distribution-summary__icon--orange">
-                            <svg viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="1.7"
-                                stroke-linecap="round" stroke-linejoin="round"
-                                aria-hidden="true">
-                                <circle cx="9" cy="8" r="3"/>
-                                <path d="M3 20v-1a6 6 0 0 1 12 0v1"/>
-                                <path d="M17 8h4M19 6v4"/>
-                            </svg>
-                        </span>
-                        <span class="distribution-summary__label">Penerima Tersedia</span>
-                    </div>
-
-                    <strong class="distribution-summary__value">
-                        {{ count($beneficiaries) }}
-                    </strong>
-
-                    <p class="distribution-summary__description">
-                        Penerima yang tersedia pada form penyaluran.
-                    </p>
-                </article>
-
-            </section>
+                </form>
 
 
-            {{-- LAYOUT UTAMA --}}
-            <div class="distribution-layout">
+                {{-- =========================================
+                     TABLE CARD
+                ========================================== --}}
 
-                {{-- KOLOM KIRI: DAFTAR --}}
-                <section class="distribution-list-panel">
+                <div class="distribution-table-card">
 
-                    <div class="distribution-panel-header">
+
+                    {{-- TABLE HEADING --}}
+
+                    <div class="distribution-table-card__heading">
+
                         <div>
-                            <h2 class="distribution-panel-title">Daftar Penyaluran</h2>
-                            <p class="distribution-panel-description">
-                                Pantau dan kelola riwayat penyaluran bantuan.
+
+                            <h3>
+                                Seluruh Data Penyaluran
+                            </h3>
+
+                            <p>
+                                Menampilkan data penyaluran yang
+                                tercatat dalam sistem.
                             </p>
+
                         </div>
 
-                        <span class="distribution-count">
-                            {{ $distributions->total() }} data
+                        <span class="distribution-table-card__count">
+                            {{ $distributions->total() }} Data
                         </span>
+
                     </div>
 
 
-                    {{-- FILTER --}}
-                    <form
-                        action="{{ route('distributions.index') }}"
-                        method="GET"
-                        class="distribution-filters"
-                    >
-                        <div class="distribution-filter-field distribution-filter-field--search">
-                            <label for="distribution-search">Cari Penyaluran</label>
+                    {{-- =====================================
+                         TABLE CONTENT
+                    ====================================== --}}
 
-                            <div class="distribution-search-wrapper">
-                                <svg class="distribution-search-icon"
-                                    viewBox="0 0 24 24" fill="none"
-                                    stroke="currentColor" stroke-width="1.8"
-                                    stroke-linecap="round" aria-hidden="true">
-                                    <circle cx="11" cy="11" r="7"/>
-                                    <path d="m16 16 4 4"/>
-                                </svg>
-
-                                <input
-                                    type="search"
-                                    id="distribution-search"
-                                    name="search"
-                                    value="{{ request('search') }}"
-                                    placeholder="Cari nama penerima atau jenis bantuan..."
-                                    class="distribution-input distribution-input--search"
-                                >
-                            </div>
-                        </div>
-
-                        <div class="distribution-filter-field">
-                            <label for="distribution-type-filter">Jenis Bantuan</label>
-                            <input
-                                type="text"
-                                id="distribution-type-filter"
-                                name="assistance_type"
-                                value="{{ request('assistance_type') }}"
-                                class="distribution-input"
-                                placeholder="Semua jenis bantuan"
-                            >
-                        </div>
-
-                        <div class="distribution-filter-field">
-                            <label for="distribution-status-filter">Status</label>
-                            <select
-                                id="distribution-status-filter"
-                                name="status"
-                                class="distribution-select"
-                            >
-                                <option value="">Semua Status</option>
-                                @foreach (['Disalurkan', 'Diproses', 'Dibatalkan'] as $status)
-                                    <option
-                                        value="{{ $status }}"
-                                        @selected(request('status') === $status)
-                                    >
-                                        {{ $status }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="distribution-filter-field">
-                            <label for="distribution-period-filter">Periode</label>
-                            <select
-                                id="distribution-period-filter"
-                                name="period"
-                                class="distribution-select"
-                            >
-                                <option value="">Semua Periode</option>
-                                <option value="this_month"
-                                    @selected(request('period') === 'this_month')>
-                                    Bulan Ini
-                                </option>
-                                <option value="last_month"
-                                    @selected(request('period') === 'last_month')>
-                                    Bulan Lalu
-                                </option>
-                                <option value="this_year"
-                                    @selected(request('period') === 'this_year')>
-                                    Tahun Ini
-                                </option>
-                            </select>
-                        </div>
-
-                        <div class="distribution-filter-actions">
-                            <button
-                                type="submit"
-                                class="distribution-button distribution-button--primary"
-                            >
-                                Terapkan
-                            </button>
-
-                            <a
-                                href="{{ route('distributions.index') }}"
-                                class="distribution-button distribution-button--secondary"
-                            >
-                                Reset
-                            </a>
-                        </div>
-                    </form>
-
-
-                    {{-- TABEL PENYALURAN --}}
                     <div class="distribution-table-wrapper">
+
                         <table class="distribution-table">
+
                             <thead>
+
                                 <tr>
                                     <th scope="col">No.</th>
                                     <th scope="col">Tanggal</th>
@@ -427,52 +744,99 @@
                                     <th scope="col">Status</th>
                                     <th scope="col">Aksi</th>
                                 </tr>
+
                             </thead>
 
+
                             <tbody>
+
                                 @forelse ($distributions as $distribution)
+
                                     @php
+
                                         $statusSlug = strtolower(
                                             str_replace(' ', '-', $distribution->status)
                                         );
+
                                     @endphp
 
+
                                     <tr>
+
+                                        {{-- NUMBER --}}
+
                                         <td class="distribution-table__number">
-                                            {{ $distributions->firstItem() + $loop->index }}
+                                            {{ ($distributions->firstItem() ?? 0) + $loop->index }}
                                         </td>
+
+
+                                        {{-- DATE --}}
 
                                         <td class="distribution-table__date">
                                             {{ $distribution->distribution_date?->format('d-m-Y') ?? '-' }}
                                         </td>
 
+
+                                        {{-- BENEFICIARY --}}
+
                                         <td class="distribution-table__person">
-                                            <span class="distribution-table__name">
-                                                {{ $distribution->beneficiary?->name ?? 'Penerima tidak tersedia' }}
-                                            </span>
+
+                                            <div class="distribution-table__person-content">
+
+                                             
+
+                                                <span class="distribution-table__name">
+                                                    {{ $distribution->beneficiary?->name ?? 'Penerima tidak tersedia' }}
+                                                </span>
+
+                                            </div>
+
                                         </td>
 
+
+                                        {{-- ASSISTANCE TYPE --}}
+
                                         <td>
+
                                             <span class="distribution-table__type">
                                                 {{ $distribution->assistance_type }}
                                             </span>
+
                                         </td>
+
+
+                                        {{-- AMOUNT --}}
 
                                         <td class="distribution-table__amount">
                                             Rp{{ number_format((float) $distribution->amount, 0, ',', '.') }}
                                         </td>
 
-                                        <td>
-                                            <span class="distribution-status distribution-status--{{ $statusSlug }}">
-                                                {{ $distribution->status }}
-                                            </span>
-                                        </td>
+
+                                        {{-- STATUS --}}
 
                                         <td>
+
+                                            <span class="distribution-status distribution-status--{{ $statusSlug }}">
+
+                                                <span class="distribution-status__dot"></span>
+
+                                                {{ $distribution->status }}
+
+                                            </span>
+
+                                        </td>
+
+
+                                        {{-- ACTIONS --}}
+
+                                        <td>
+
                                             <div class="distribution-actions">
+
                                                 <a
                                                     href="{{ route('distributions.show', $distribution) }}"
                                                     class="distribution-action distribution-action--detail"
+                                                    aria-label="Lihat detail penyaluran {{ $distribution->assistance_type }}"
                                                 >
                                                     Detail
                                                 </a>
@@ -480,8 +844,9 @@
                                                 <a
                                                     href="{{ route('distributions.edit', $distribution) }}"
                                                     class="distribution-action distribution-action--edit"
+                                                    aria-label="Ubah penyaluran {{ $distribution->assistance_type }}"
                                                 >
-                                                    Edit
+                                                    Ubah
                                                 </a>
 
                                                 <form
@@ -491,6 +856,7 @@
                                                     data-delete-distribution-form
                                                     data-distribution-name="{{ $distribution->assistance_type }} - {{ $distribution->beneficiary?->name ?? 'Penerima' }}"
                                                 >
+
                                                     @csrf
                                                     @method('DELETE')
 
@@ -500,25 +866,46 @@
                                                     >
                                                         Hapus
                                                     </button>
+
                                                 </form>
+
                                             </div>
+
                                         </td>
+
                                     </tr>
+
+
                                 @empty
+
+                                    {{-- EMPTY STATE --}}
+
                                     <tr>
+
                                         <td colspan="7">
+
                                             <div class="distribution-empty">
-                                                <span class="distribution-empty__icon">
-                                                    <svg viewBox="0 0 24 24" fill="none"
-                                                        stroke="currentColor" stroke-width="1.7"
-                                                        stroke-linecap="round" stroke-linejoin="round"
-                                                        aria-hidden="true">
+
+                                                <div class="distribution-empty__icon">
+
+                                                    <svg
+                                                        viewBox="0 0 24 24"
+                                                        fill="none"
+                                                        stroke="currentColor"
+                                                        stroke-width="1.5"
+                                                        stroke-linecap="round"
+                                                        stroke-linejoin="round"
+                                                        aria-hidden="true"
+                                                    >
                                                         <rect x="4" y="4" width="16" height="16" rx="2"/>
                                                         <path d="M8 9h8M8 13h8M8 17h4"/>
                                                     </svg>
-                                                </span>
 
-                                                <strong>Belum Ada Data Penyaluran</strong>
+                                                </div>
+
+                                                <h3>
+                                                    Belum Ada Data Penyaluran
+                                                </h3>
 
                                                 <p>
                                                     Data penyaluran yang tersimpan
@@ -529,424 +916,844 @@
                                                     href="#distribution-create-panel"
                                                     class="distribution-button distribution-button--primary"
                                                 >
-                                                    Tambah Penyaluran
+                                                    + Tambah Penyaluran
                                                 </a>
+
                                             </div>
+
                                         </td>
+
                                     </tr>
+
                                 @endforelse
+
                             </tbody>
+
                         </table>
-                    </div>
 
-                    <div class="distribution-pagination">
-                        {{ $distributions->appends(request()->query())->links() }}
-                    </div>
-
-                </section>
-
-
-                {{-- KOLOM KANAN: FORM TAMBAH --}}
-                <aside
-                    class="distribution-create-panel"
-                    id="distribution-create-panel"
-                >
-                    <div class="distribution-create-panel__header">
-                        <span class="distribution-create-panel__icon">
-                            <svg viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="1.7"
-                                stroke-linecap="round" stroke-linejoin="round"
-                                aria-hidden="true">
-                                <rect x="4" y="4" width="16" height="16" rx="2"/>
-                                <path d="M8 9h8M8 13h8M8 17h4"/>
-                            </svg>
-                        </span>
-
-                        <div>
-                            <h2 class="distribution-panel-title">
-                                Tambah Penyaluran Bantuan
-                            </h2>
-                            <p class="distribution-panel-description">
-                                Input data penyaluran bantuan baru.
-                            </p>
-                        </div>
                     </div>
 
 
-                    <div
-                        id="duplicate-check-result"
-                        class="distribution-duplicate-result"
-                        aria-live="polite"
-                    ></div>
+                    {{-- =====================================
+                         PAGINATION
+                    ====================================== --}}
 
+                    @if ($distributions->hasPages())
 
-                    <form
-                        id="distribution-form"
-                        action="{{ route('distributions.store') }}"
-                        method="POST"
-                        class="distribution-form"
-                        data-duplicate-check-url="{{ route('distributions.check-duplicates') }}"
-                    >
-                        @csrf
+                        <div class="distribution-pagination">
 
-                        <div class="distribution-field">
-                            <label for="distribution-date">
-                                Tanggal Penyaluran
-                                <span class="distribution-required">*</span>
-                            </label>
+                            <div class="distribution-pagination__info">
 
-                            <input
-                                type="date"
-                                id="distribution-date"
-                                name="distribution_date"
-                                value="{{ old('distribution_date', date('Y-m-d')) }}"
-                                required
-                            >
+                                Menampilkan
 
-                            @error('distribution_date')
-                                <small class="distribution-field__error">{{ $message }}</small>
-                            @enderror
-                        </div>
+                                <strong>
+                                    {{ $distributions->firstItem() ?? 0 }}
+                                </strong>
 
-                        <div class="distribution-field">
-                            <label for="distribution-beneficiary">
-                                Penerima Manfaat
-                                <span class="distribution-required">*</span>
-                            </label>
+                                sampai
 
-                            <select
-                                id="distribution-beneficiary"
-                                name="beneficiary_id"
-                                required
-                            >
-                                <option value="">Pilih penerima</option>
+                                <strong>
+                                    {{ $distributions->lastItem() ?? 0 }}
+                                </strong>
 
-                                @foreach ($beneficiaries as $beneficiary)
-                                    <option
-                                        value="{{ $beneficiary->id }}"
-                                        @selected((string) old('beneficiary_id') === (string) $beneficiary->id)
-                                    >
-                                        {{ $beneficiary->name }}
-                                    </option>
-                                @endforeach
-                            </select>
+                                dari
 
-                            @error('beneficiary_id')
-                                <small class="distribution-field__error">{{ $message }}</small>
-                            @enderror
-                        </div>
+                                <strong>
+                                    {{ $distributions->total() }}
+                                </strong>
 
-                        <div class="distribution-field">
-                            <label for="distribution-assistance-type">
-                                Jenis Bantuan
-                                <span class="distribution-required">*</span>
-                            </label>
+                                data penyaluran
 
-                            <input
-                                type="text"
-                                id="distribution-assistance-type"
-                                name="assistance_type"
-                                value="{{ old('assistance_type') }}"
-                                maxlength="255"
-                                placeholder="Contoh: Bantuan sembako"
-                                required
-                            >
-
-                            @error('assistance_type')
-                                <small class="distribution-field__error">{{ $message }}</small>
-                            @enderror
-                        </div>
-
-                        <div class="distribution-field">
-                            <label for="distribution-amount">
-                                Nominal/Nilai Bantuan
-                                <span class="distribution-required">*</span>
-                            </label>
-
-                            <div class="distribution-amount-wrapper">
-                                <span class="distribution-amount-prefix">Rp</span>
-
-                                <input
-                                    type="number"
-                                    id="distribution-amount"
-                                    name="amount"
-                                    min="10000"
-                                    step="1"
-                                    value="{{ old('amount') }}"
-                                    placeholder="Masukkan nominal"
-                                    required
-                                >
                             </div>
 
-                            @error('amount')
-                                <small class="distribution-field__error">{{ $message }}</small>
-                            @enderror
-                        </div>
 
-                        <div class="distribution-field">
-                            <label for="distribution-donation">
-                                Sumber Donasi
-                                <span class="distribution-optional">Opsional</span>
-                            </label>
-
-                            <select id="distribution-donation" name="donation_id">
-                                <option value="">Tanpa sumber donasi</option>
-
-                                @foreach ($donations as $donation)
-                                    <option
-                                        value="{{ $donation->id }}"
-                                        @selected((string) old('donation_id') === (string) $donation->id)
-                                    >
-                                        Donasi #{{ $donation->id }}
-                                        - {{ $donation->display_donor_name }}
-                                        - Rp{{ number_format((float) $donation->amount, 0, ',', '.') }}
-                                    </option>
-                                @endforeach
-                            </select>
-
-                            @error('donation_id')
-                                <small class="distribution-field__error">{{ $message }}</small>
-                            @enderror
-                        </div>
-
-                        <div class="distribution-field">
-                            <label for="distribution-status">
-                                Status
-                                <span class="distribution-required">*</span>
-                            </label>
-
-                            <select id="distribution-status" name="status" required>
-                                @foreach (['Disalurkan', 'Diproses', 'Dibatalkan'] as $status)
-                                    <option
-                                        value="{{ $status }}"
-                                        @selected(old('status', 'Disalurkan') === $status)
-                                    >
-                                        {{ $status }}
-                                    </option>
-                                @endforeach
-                            </select>
-
-                            @error('status')
-                                <small class="distribution-field__error">{{ $message }}</small>
-                            @enderror
-                        </div>
-
-                        <div class="distribution-field">
-                            <label for="distribution-notes">
-                                Catatan
-                                <span class="distribution-optional">Opsional</span>
-                            </label>
-
-                            <textarea
-                                id="distribution-notes"
-                                name="notes"
-                                rows="3"
-                                placeholder="Tambahkan keterangan jika diperlukan"
-                            >{{ old('notes') }}</textarea>
-
-                            @error('notes')
-                                <small class="distribution-field__error">{{ $message }}</small>
-                            @enderror
-                        </div>
-
-                        <div class="distribution-guidance">
-                            <span class="distribution-guidance__icon">
-                                <svg viewBox="0 0 24 24" fill="none"
-                                    stroke="currentColor" stroke-width="1.7"
-                                    stroke-linecap="round" stroke-linejoin="round"
-                                    aria-hidden="true">
-                                    <circle cx="12" cy="12" r="9"/>
-                                    <path d="M12 11v5M12 8h.01"/>
-                                </svg>
-                            </span>
-
-                            <p>
-                                Sistem memeriksa potensi penyaluran ganda
-                                untuk penerima yang sama pada bulan yang sama.
-                            </p>
-                        </div>
-
-                        <div class="distribution-form-actions">
-                            <button
-                                type="reset"
-                                class="distribution-button distribution-button--secondary"
+                            <nav
+                                class="distribution-pagination__navigation"
+                                aria-label="Navigasi halaman"
                             >
-                                Reset
-                            </button>
 
-                            <button
-                                type="submit"
-                                class="distribution-button distribution-button--primary"
-                            >
-                                Simpan Penyaluran
-                            </button>
+                                {{-- PREVIOUS --}}
+
+                                @if ($distributions->onFirstPage())
+
+                                    <span class="distribution-pagination__button is-disabled">
+                                        ← Sebelumnya
+                                    </span>
+
+                                @else
+
+                                    <a
+                                        href="{{ $distributions->previousPageUrl() }}"
+                                        class="distribution-pagination__button"
+                                    >
+                                        ← Sebelumnya
+                                    </a>
+
+                                @endif
+
+
+                                {{-- PAGE NUMBERS --}}
+
+                                @php
+
+                                    $startPage = max(
+                                        1,
+                                        $distributions->currentPage() - 2
+                                    );
+
+                                    $endPage = min(
+                                        $distributions->lastPage(),
+                                        $distributions->currentPage() + 2
+                                    );
+
+                                @endphp
+
+
+                                @for ($page = $startPage; $page <= $endPage; $page++)
+
+                                    @if ($distributions->currentPage() === $page)
+
+                                        <span
+                                            class="distribution-pagination__number is-active"
+                                            aria-current="page"
+                                        >
+                                            {{ $page }}
+                                        </span>
+
+                                    @else
+
+                                        <a
+                                            href="{{ $distributions->appends(request()->query())->url($page) }}"
+                                            class="distribution-pagination__number"
+                                        >
+                                            {{ $page }}
+                                        </a>
+
+                                    @endif
+
+                                @endfor
+
+
+                                {{-- NEXT --}}
+
+                                @if ($distributions->hasMorePages())
+
+                                    <a
+                                        href="{{ $distributions->nextPageUrl() }}"
+                                        class="distribution-pagination__button"
+                                    >
+                                        Berikutnya →
+                                    </a>
+
+                                @else
+
+                                    <span class="distribution-pagination__button is-disabled">
+                                        Berikutnya →
+                                    </span>
+
+                                @endif
+
+                            </nav>
+
                         </div>
-                    </form>
-                </aside>
+
+                    @endif
+
+                </div>
 
             </div>
 
-        </main>
-    </div>
+
+            {{-- =============================================
+                 RIGHT COLUMN: CREATE DISTRIBUTION FORM
+            ============================================== --}}
+
+            <aside
+                class="distribution-create-panel"
+                id="distribution-create-panel"
+            >
 
 
-    {{-- CEK DUPLIKASI DAN KONFIRMASI HAPUS --}}
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const form = document.getElementById('distribution-form');
-            const result = document.getElementById('duplicate-check-result');
+                {{-- FORM PANEL HEADER --}}
 
-            if (form && result) {
-                const dateInput = form.querySelector('[name="distribution_date"]');
-                const beneficiaryInput = form.querySelector('[name="beneficiary_id"]');
-                const csrfInput = form.querySelector('[name="_token"]');
-                const checkUrl = form.dataset.duplicateCheckUrl;
+                <div class="distribution-create-panel__header">
 
-                let timeout;
-                let requestNumber = 0;
+                    <div class="distribution-create-panel__icon">
 
-                function clearResult() {
-                    result.replaceChildren();
-                }
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.7"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
+                        >
+                            <rect x="4" y="4" width="16" height="16" rx="2"/>
+                            <path d="M8 9h8M8 13h8M8 17h4"/>
+                        </svg>
 
-                function addText(parent, tag, text, className = '') {
-                    const element = document.createElement(tag);
-                    element.textContent = text;
+                    </div>
 
-                    if (className) {
-                        element.className = className;
-                    }
+                    <div>
 
-                    parent.appendChild(element);
-                    return element;
-                }
+                        <h2 class="distribution-panel-title">
+                            Tambah Penyaluran
+                        </h2>
 
-                async function checkDuplicates() {
-                    const date = dateInput.value;
-                    const beneficiaryId = beneficiaryInput.value;
-                    const currentRequest = ++requestNumber;
+                        <p class="distribution-panel-description">
+                            Lengkapi informasi penyaluran bantuan
+                            kepada penerima manfaat.
+                        </p>
 
-                    clearTimeout(timeout);
+                    </div>
 
-                    if (!date || !beneficiaryId) {
-                        clearResult();
-                        return;
-                    }
+                </div>
 
-                    timeout = setTimeout(async function () {
-                        try {
-                            const response = await fetch(checkUrl, {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                    'Accept': 'application/json',
-                                    'X-CSRF-TOKEN': csrfInput.value
-                                },
-                                body: JSON.stringify({
-                                    distribution_date: date,
-                                    beneficiary_id: beneficiaryId
-                                })
-                            });
 
-                            if (!response.ok) {
-                                throw new Error('Pengecekan duplikasi gagal.');
-                            }
+                {{-- DUPLICATE CHECK RESULT --}}
 
-                            const data = await response.json();
+                <div
+                    id="duplicate-check-result"
+                    class="distribution-duplicate-result"
+                    aria-live="polite"
+                ></div>
 
-                            if (currentRequest !== requestNumber) {
-                                return;
-                            }
 
-                            clearResult();
+                {{-- =========================================
+                     CREATE FORM
+                ========================================== --}}
 
-                            if (!data.has_duplicates) {
-                                return;
-                            }
+                <form
+                    id="distribution-form"
+                    action="{{ route('distributions.store') }}"
+                    method="POST"
+                    class="distribution-form"
+                    data-duplicate-check-url="{{ route('distributions.check-duplicates') }}"
+                >
 
-                            const warning = document.createElement('div');
-                            warning.className = 'distribution-duplicate-warning';
+                    @csrf
 
-                            addText(
-                                warning,
-                                'strong',
-                                'Peringatan: Potensi duplikasi penyaluran!'
-                            );
 
-                            addText(
-                                warning,
-                                'p',
-                                'Ditemukan ' + data.count +
-                                ' catatan pada bulan yang sama.'
-                            );
+                    {{-- DISTRIBUTION DATE --}}
 
-                            const list = document.createElement('ul');
+                    <div class="distribution-field">
 
-                            data.data.forEach(function (item) {
-                                const entry = document.createElement('li');
+                        <label for="distribution-date">
 
-                                entry.textContent =
-                                    item.beneficiary_name + ' — ' +
-                                    item.distribution_date + ' — ' +
-                                    item.assistance_type + ' — Rp' +
-                                    Number(item.amount).toLocaleString('id-ID') +
-                                    ' — ' + item.status;
+                            Tanggal Penyaluran
 
-                                list.appendChild(entry);
-                            });
+                            <span class="distribution-required">*</span>
 
-                            warning.appendChild(list);
+                        </label>
 
-                            addText(
-                                warning,
-                                'p',
-                                'Jika melanjutkan, sistem akan meminta konfirmasi saat menyimpan.'
-                            );
+                        <input
+                            type="date"
+                            id="distribution-date"
+                            name="distribution_date"
+                            value="{{ old('distribution_date', date('Y-m-d')) }}"
+                            required
+                        >
 
-                            result.appendChild(warning);
-                        } catch (error) {
-                            if (currentRequest !== requestNumber) {
-                                return;
-                            }
+                        @error('distribution_date')
+                            <small class="distribution-field__error">
+                                {{ $message }}
+                            </small>
+                        @enderror
 
-                            clearResult();
+                    </div>
 
-                            addText(
-                                result,
-                                'p',
-                                'Tidak dapat memeriksa potensi duplikasi. Coba lagi.',
-                                'distribution-duplicate-warning'
-                            );
-                        }
-                    }, 300);
-                }
 
-                dateInput.addEventListener('change', checkDuplicates);
-                beneficiaryInput.addEventListener('change', checkDuplicates);
+                    {{-- BENEFICIARY --}}
 
-                form.addEventListener('reset', function () {
-                    clearTimeout(timeout);
-                    requestNumber++;
-                    clearResult();
-                });
+                    <div class="distribution-field">
 
-                if (dateInput.value && beneficiaryInput.value) {
-                    checkDuplicates();
-                }
+                        <label for="distribution-beneficiary">
+
+                            Penerima Manfaat
+
+                            <span class="distribution-required">*</span>
+
+                        </label>
+
+                        <select
+                            id="distribution-beneficiary"
+                            name="beneficiary_id"
+                            required
+                        >
+
+                            <option value="">
+                                Pilih penerima
+                            </option>
+
+                            @foreach ($beneficiaries as $beneficiary)
+
+                                <option
+                                    value="{{ $beneficiary->id }}"
+                                    @selected((string) old('beneficiary_id') === (string) $beneficiary->id)
+                                >
+                                    {{ $beneficiary->name }}
+                                </option>
+
+                            @endforeach
+
+                        </select>
+
+                        @error('beneficiary_id')
+                            <small class="distribution-field__error">
+                                {{ $message }}
+                            </small>
+                        @enderror
+
+                    </div>
+
+
+                    {{-- ASSISTANCE TYPE --}}
+
+                    <div class="distribution-field">
+
+                        <label for="distribution-assistance-type">
+
+                            Jenis Bantuan
+
+                            <span class="distribution-required">*</span>
+
+                        </label>
+
+                        <input
+                            type="text"
+                            id="distribution-assistance-type"
+                            name="assistance_type"
+                            value="{{ old('assistance_type') }}"
+                            maxlength="255"
+                            placeholder="Contoh: Bantuan sembako"
+                            required
+                        >
+
+                        @error('assistance_type')
+                            <small class="distribution-field__error">
+                                {{ $message }}
+                            </small>
+                        @enderror
+
+                    </div>
+
+
+                    {{-- AMOUNT --}}
+
+                    <div class="distribution-field">
+
+                        <label for="distribution-amount">
+
+                            Nominal/Nilai Bantuan
+
+                            <span class="distribution-required">*</span>
+
+                        </label>
+
+                        <div class="distribution-amount-wrapper">
+
+                            <span class="distribution-amount-prefix">
+                                Rp
+                            </span>
+
+                            <input
+                                type="number"
+                                id="distribution-amount"
+                                name="amount"
+                                min="10000"
+                                step="1"
+                                value="{{ old('amount') }}"
+                                placeholder="Masukkan nominal"
+                                required
+                            >
+
+                        </div>
+
+                        @error('amount')
+                            <small class="distribution-field__error">
+                                {{ $message }}
+                            </small>
+                        @enderror
+
+                    </div>
+
+
+                    {{-- DONATION SOURCE --}}
+
+                    <div class="distribution-field">
+
+                        <label for="distribution-donation">
+
+                            Sumber Donasi
+
+                            <span class="distribution-optional">
+                                Opsional
+                            </span>
+
+                        </label>
+
+                        <select
+                            id="distribution-donation"
+                            name="donation_id"
+                        >
+
+                            <option value="">
+                                Tanpa sumber donasi
+                            </option>
+
+                            @foreach ($donations as $donation)
+
+                                <option
+                                    value="{{ $donation->id }}"
+                                    @selected((string) old('donation_id') === (string) $donation->id)
+                                >
+
+                                    Donasi #{{ $donation->id }}
+
+                                    - {{ $donation->display_donor_name }}
+
+                                    - Rp{{ number_format((float) $donation->amount, 0, ',', '.') }}
+
+                                </option>
+
+                            @endforeach
+
+                        </select>
+
+                        @error('donation_id')
+                            <small class="distribution-field__error">
+                                {{ $message }}
+                            </small>
+                        @enderror
+
+                    </div>
+
+
+                    {{-- STATUS --}}
+
+                    <div class="distribution-field">
+
+                        <label for="distribution-status">
+
+                            Status
+
+                            <span class="distribution-required">*</span>
+
+                        </label>
+
+                        <select
+                            id="distribution-status"
+                            name="status"
+                            required
+                        >
+
+                            @foreach (['Disalurkan', 'Diproses', 'Dibatalkan'] as $status)
+
+                                <option
+                                    value="{{ $status }}"
+                                    @selected(old('status', 'Disalurkan') === $status)
+                                >
+                                    {{ $status }}
+                                </option>
+
+                            @endforeach
+
+                        </select>
+
+                        @error('status')
+                            <small class="distribution-field__error">
+                                {{ $message }}
+                            </small>
+                        @enderror
+
+                    </div>
+
+
+                    {{-- NOTES --}}
+
+                    <div class="distribution-field">
+
+                        <label for="distribution-notes">
+
+                            Catatan
+
+                            <span class="distribution-optional">
+                                Opsional
+                            </span>
+
+                        </label>
+
+                        <textarea
+                            id="distribution-notes"
+                            name="notes"
+                            rows="3"
+                            placeholder="Tambahkan keterangan jika diperlukan"
+                        >{{ old('notes') }}</textarea>
+
+                        @error('notes')
+                            <small class="distribution-field__error">
+                                {{ $message }}
+                            </small>
+                        @enderror
+
+                    </div>
+
+
+                    {{-- DUPLICATE GUIDANCE --}}
+
+                    <div class="distribution-guidance">
+
+                        <span class="distribution-guidance__icon">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.7"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true"
+                            >
+                                <circle cx="12" cy="12" r="9"/>
+                                <path d="M12 11v5M12 8h.01"/>
+                            </svg>
+
+                        </span>
+
+                        <p>
+                            Sistem memeriksa potensi penyaluran ganda
+                            untuk penerima yang sama pada bulan yang sama.
+                        </p>
+
+                    </div>
+
+
+                    {{-- FORM ACTIONS --}}
+
+                    <div class="distribution-form-actions">
+
+                        <button
+                            type="reset"
+                            class="distribution-button distribution-button--secondary"
+                        >
+                            Reset
+                        </button>
+
+                        <button
+                            type="submit"
+                            class="distribution-button distribution-button--primary"
+                        >
+                            Simpan Penyaluran
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </aside>
+
+        </div>
+
+    </section>
+
+</div>
+
+@endsection
+
+
+{{-- =========================================================
+     6. DISTRIBUTION PAGE INTERACTIONS
+========================================================= --}}
+
+@push('scripts')
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+    /*
+    |--------------------------------------------------------------------------
+    | DUPLICATE DISTRIBUTION CHECK
+    |--------------------------------------------------------------------------
+    */
+
+    const form = document.getElementById('distribution-form');
+
+    const result = document.getElementById('duplicate-check-result');
+
+    if (form && result) {
+
+        const dateInput = form.querySelector('[name="distribution_date"]');
+
+        const beneficiaryInput = form.querySelector('[name="beneficiary_id"]');
+
+        const csrfInput = form.querySelector('[name="_token"]');
+
+        const checkUrl = form.dataset.duplicateCheckUrl;
+
+        let timeout;
+
+        let requestNumber = 0;
+
+
+        function clearResult() {
+
+            result.replaceChildren();
+
+        }
+
+
+        function addText(parent, tag, text, className = '') {
+
+            const element = document.createElement(tag);
+
+            element.textContent = text;
+
+            if (className) {
+                element.className = className;
             }
 
-            document.querySelectorAll('[data-delete-distribution-form]')
-                .forEach(function (deleteForm) {
-                    deleteForm.addEventListener('submit', function (event) {
-                        const name = deleteForm.dataset.distributionName || 'data ini';
+            parent.appendChild(element);
 
-                        if (!confirm('Yakin ingin menghapus penyaluran "' + name + '"?')) {
-                            event.preventDefault();
-                        }
+            return element;
+
+        }
+
+
+        async function checkDuplicates() {
+
+            const date = dateInput.value;
+
+            const beneficiaryId = beneficiaryInput.value;
+
+            const currentRequest = ++requestNumber;
+
+            clearTimeout(timeout);
+
+
+            if (!date || !beneficiaryId) {
+
+                clearResult();
+
+                return;
+
+            }
+
+
+            timeout = setTimeout(async function () {
+
+                try {
+
+                    const response = await fetch(checkUrl, {
+
+                        method: 'POST',
+
+                        headers: {
+
+                            'Content-Type': 'application/json',
+
+                            'Accept': 'application/json',
+
+                            'X-CSRF-TOKEN': csrfInput.value
+
+                        },
+
+                        body: JSON.stringify({
+
+                            distribution_date: date,
+
+                            beneficiary_id: beneficiaryId
+
+                        })
+
                     });
-                });
-        });
-    </script>
 
-</body>
-</html>
+
+                    if (!response.ok) {
+
+                        throw new Error('Pengecekan duplikasi gagal.');
+
+                    }
+
+
+                    const data = await response.json();
+
+
+                    if (currentRequest !== requestNumber) {
+
+                        return;
+
+                    }
+
+
+                    clearResult();
+
+
+                    if (!data.has_duplicates) {
+
+                        return;
+
+                    }
+
+
+                    const warning = document.createElement('div');
+
+                    warning.className = 'distribution-duplicate-warning';
+
+
+                    addText(
+
+                        warning,
+
+                        'strong',
+
+                        'Peringatan: Potensi duplikasi penyaluran!'
+
+                    );
+
+
+                    addText(
+
+                        warning,
+
+                        'p',
+
+                        'Ditemukan ' + data.count +
+                        ' catatan pada bulan yang sama.'
+
+                    );
+
+
+                    const list = document.createElement('ul');
+
+
+                    data.data.forEach(function (item) {
+
+                        const entry = document.createElement('li');
+
+                        entry.textContent =
+
+                            item.beneficiary_name + ' — ' +
+
+                            item.distribution_date + ' — ' +
+
+                            item.assistance_type + ' — Rp' +
+
+                            Number(item.amount).toLocaleString('id-ID') +
+
+                            ' — ' + item.status;
+
+
+                        list.appendChild(entry);
+
+                    });
+
+
+                    warning.appendChild(list);
+
+
+                    addText(
+
+                        warning,
+
+                        'p',
+
+                        'Jika melanjutkan, sistem akan meminta konfirmasi saat menyimpan.'
+
+                    );
+
+
+                    result.appendChild(warning);
+
+
+                } catch (error) {
+
+                    if (currentRequest !== requestNumber) {
+
+                        return;
+
+                    }
+
+
+                    clearResult();
+
+
+                    addText(
+
+                        result,
+
+                        'p',
+
+                        'Tidak dapat memeriksa potensi duplikasi. Coba lagi.',
+
+                        'distribution-duplicate-warning'
+
+                    );
+
+                }
+
+            }, 300);
+
+        }
+
+
+        dateInput.addEventListener('change', checkDuplicates);
+
+        beneficiaryInput.addEventListener('change', checkDuplicates);
+
+
+        form.addEventListener('reset', function () {
+
+            clearTimeout(timeout);
+
+            requestNumber++;
+
+            clearResult();
+
+        });
+
+
+        if (dateInput.value && beneficiaryInput.value) {
+
+            checkDuplicates();
+
+        }
+
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | DELETE CONFIRMATION
+    |--------------------------------------------------------------------------
+    */
+
+    document.querySelectorAll('[data-delete-distribution-form]')
+
+        .forEach(function (deleteForm) {
+
+            deleteForm.addEventListener('submit', function (event) {
+
+                const name =
+
+                    deleteForm.dataset.distributionName || 'data ini';
+
+
+                if (!confirm(
+
+                    'Yakin ingin menghapus penyaluran "' + name + '"?'
+
+                )) {
+
+                    event.preventDefault();
+
+                }
+
+            });
+
+        });
+
+});
+</script>
+
+@endpush

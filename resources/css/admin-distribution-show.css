@@ -1,226 +1,252 @@
 
 /* =========================================================
-   DETAIL PENYALURAN BANTUAN
-   Masjid Sabilillah — Admin Panel
-   ========================================================= */
+   MASJID SABILILLAH
+   ADMIN - DETAIL PENYALURAN BANTUAN
+   Consistent with Admin Distributions
+========================================================= */
 
-.distribution-detail-page,
+
+/* =========================================================
+   1. DESIGN TOKENS
+========================================================= */
+
+.distribution-detail-page {
+    --show-primary: var(--color-green-normal, #315b43);
+    --show-primary-dark: var(--color-green-dark, #244633);
+    --show-primary-light: #edf5ee;
+
+    --show-background: #ffffff;
+    --show-text: #26352b;
+    --show-muted: #758078;
+    --show-border: #e7ece7;
+
+    --show-success: #287a43;
+    --show-success-light: #effaf1;
+
+    --show-warning: #a7792f;
+    --show-warning-light: #fff7e9;
+
+    --show-danger: #c5221f;
+    --show-danger-light: #fff1f0;
+
+    --show-blue: #3269b1;
+    --show-blue-light: #edf4ff;
+
+    --show-radius: 15px;
+    --show-shadow: 0 3px 15px rgba(27, 43, 35, .025);
+    --show-transition: .22s ease;
+
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+
+    margin: 0 auto;
+    padding: 0 0 25px;
+
+    color: var(--show-text);
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 1.6;
+
+    overflow-wrap: break-word;
+}
+
 .distribution-detail-page *,
 .distribution-detail-page *::before,
 .distribution-detail-page *::after {
     box-sizing: border-box;
 }
 
-.distribution-detail-page {
-    --detail-primary: #294236;
-    --detail-primary-hover: #20362a;
-    --detail-text: #26372c;
-    --detail-muted: #758078;
-    --detail-border: #e1e8e1;
-    --detail-surface: #ffffff;
-
-    width: 100%;
-    max-width: 100%;
-    min-width: 0;
-
-    margin: 0 auto;
-    padding: 27px clamp(18px, 2vw, 32px) 42px;
-
-    color: var(--detail-text);
-    font-family: inherit;
-    font-size: 13px;
-    line-height: 1.65;
-}
-
 .distribution-detail-page a {
     text-decoration: none;
-}
-
-.distribution-detail-page svg {
-    display: block;
-    flex-shrink: 0;
+    -webkit-tap-highlight-color: transparent;
 }
 
 
 /* =========================================================
-   1. HEADER HALAMAN
-   ========================================================= */
+   2. PAGE HEADER
+   Menggunakan admin-page-header dari admin layout.
+========================================================= */
 
-.distribution-detail-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 22px;
-
-    margin-bottom: 25px;
-}
-
-.distribution-detail-header__content {
-    position: relative;
+.distribution-detail-page .admin-page-header {
+    width: 100%;
     min-width: 0;
-
-    padding-left: 16px;
+    margin: 0 0 25px;
 }
 
-.distribution-detail-header__content::before {
-    position: absolute;
-    top: 3px;
-    bottom: 3px;
-    left: 0;
-
-    width: 4px;
-
-    background: var(--detail-primary);
-    border-radius: 4px;
-
-    content: "";
+.distribution-detail-page .admin-page-header__content {
+    min-width: 0;
 }
 
-.distribution-detail-header__eyebrow {
-    display: block;
-    margin-bottom: 6px;
-
-    color: var(--detail-primary);
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: 1.6px;
-    line-height: 1.5;
+.distribution-detail-page .admin-page-header__description {
+    max-width: 760px;
 }
 
-.distribution-detail-header__title {
-    margin: 0 0 7px;
-
-    color: var(--detail-text);
-    font-size: clamp(24px, 2vw, 29px);
-    font-weight: 750;
-    letter-spacing: -0.7px;
-    line-height: 1.35;
-}
-
-.distribution-detail-header__description {
-    max-width: 650px;
-    margin: 0;
-
-    color: #758078;
-    font-size: 13px;
-    line-height: 1.7;
-}
-
-.distribution-detail-header__actions {
+.distribution-detail-page .admin-page-header__action {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    flex-shrink: 0;
+    flex-wrap: wrap;
     gap: 10px;
+
+    flex-shrink: 0;
 }
 
 
 /* =========================================================
-   2. BUTTON
-   ========================================================= */
+   3. HEADER BUTTONS
+   Mengikuti sistem tombol Distribution.
+========================================================= */
 
-.distribution-detail-button {
+.distribution-detail-page .distribution-button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 9px;
+    gap: 8px;
 
-    min-height: 42px;
+    min-height: 43px;
     padding: 10px 16px;
 
     border: 1px solid transparent;
-    border-radius: 9px;
+    border-radius: 10px;
 
     font-family: inherit;
-    font-size: 13px;
-    font-weight: 700;
+    font-size: 12px;
+    font-weight: 600;
     line-height: 1.4;
+
     text-align: center;
     white-space: nowrap;
+    text-decoration: none;
 
     cursor: pointer;
 
     transition:
-        color 0.2s ease,
-        background-color 0.2s ease,
-        border-color 0.2s ease,
-        box-shadow 0.2s ease,
-        transform 0.2s ease;
+        color var(--show-transition),
+        background var(--show-transition),
+        border-color var(--show-transition),
+        box-shadow var(--show-transition),
+        transform var(--show-transition);
 }
 
-.distribution-detail-button svg {
-    width: 17px;
-    height: 17px;
+.distribution-detail-page .distribution-button svg {
+    display: block;
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
 }
 
-.distribution-detail-button--secondary {
-    color: var(--detail-primary) !important;
+.distribution-detail-page .distribution-button:active {
+    transform: translateY(1px);
+}
+
+.distribution-detail-page .distribution-button--primary {
+    color: #ffffff;
+    background: var(--show-primary);
+    border-color: var(--show-primary);
+
+    box-shadow: 0 4px 10px rgba(41, 66, 54, .08);
+}
+
+.distribution-detail-page .distribution-button--primary:hover {
+    color: #ffffff;
+    background: var(--show-primary-dark);
+    border-color: var(--show-primary-dark);
+}
+
+.distribution-detail-page .distribution-button--secondary {
+    color: var(--show-text);
     background: #ffffff;
-    border-color: #d6e1d7;
+    border-color: var(--show-border);
 }
 
-.distribution-detail-button--secondary:hover {
-    color: var(--detail-primary) !important;
-    background: #f0f5f0;
-    border-color: #c2d2c4;
-}
-
-.distribution-detail-button--primary {
-    color: #ffffff !important;
-    background: var(--detail-primary);
-    border-color: var(--detail-primary);
-
-    box-shadow: 0 3px 8px rgba(41, 66, 54, 0.12);
-}
-
-.distribution-detail-button--primary:hover {
-    color: #ffffff !important;
-    background: var(--detail-primary-hover);
-    border-color: var(--detail-primary-hover);
-
-    box-shadow: 0 5px 12px rgba(41, 66, 54, 0.16);
-    transform: translateY(-1px);
-}
-
-.distribution-detail-button:focus-visible {
-    outline: 3px solid rgba(41, 66, 54, 0.2);
-    outline-offset: 3px;
+.distribution-detail-page .distribution-button--secondary:hover {
+    color: var(--show-primary);
+    background: var(--show-primary-light);
+    border-color: #d5e3d6;
 }
 
 
 /* =========================================================
-   3. KARTU DETAIL
-   ========================================================= */
+   4. SUCCESS ALERT
+========================================================= */
 
-.distribution-detail-card {
+.distribution-show-alert {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 14px 17px;
+
+    color: var(--show-success);
+    background: var(--show-success-light);
+
+    border: 1px solid #d8f0df;
+    border-radius: 11px;
+
+    font-size: 12px;
+    line-height: 1.6;
+
+    animation: distribution-show-enter .25s ease both;
+}
+
+.distribution-show-alert svg {
+    display: block;
+    width: 19px;
+    height: 19px;
+    flex-shrink: 0;
+}
+
+@keyframes distribution-show-enter {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* =========================================================
+   5. DETAIL CARD
+========================================================= */
+
+.distribution-show-card {
     width: 100%;
     min-width: 0;
+
     overflow: hidden;
 
-    background: var(--detail-surface);
-    border: 1px solid var(--detail-border);
-    border-radius: 17px;
+    background: var(--show-background);
 
-    box-shadow: 0 3px 14px rgba(35, 55, 41, 0.04);
+    border: 1px solid var(--show-border);
+    border-radius: var(--show-radius);
+
+    box-shadow: var(--show-shadow);
 }
 
 
 /* =========================================================
-   4. HEADER KARTU
-   ========================================================= */
+   6. CARD HEADER
+========================================================= */
 
-.distribution-detail-card__header {
+.distribution-show-card__header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 18px;
+    gap: 20px;
 
-    padding: 23px 25px;
+    padding: 24px 27px;
 
     border-bottom: 1px solid #edf0ed;
 }
 
-.distribution-detail-card__identity {
+.distribution-show-card__heading {
     display: flex;
     align-items: center;
     gap: 13px;
@@ -228,571 +254,776 @@
     min-width: 0;
 }
 
-.distribution-detail-card__icon {
+.distribution-show-card__icon {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
 
-    width: 43px;
-    height: 43px;
-    flex: 0 0 43px;
+    width: 44px;
+    height: 44px;
 
-    color: var(--detail-primary);
-    background: #edf3ee;
-    border: 1px solid #e0e9e1;
-    border-radius: 11px;
+    color: var(--show-primary);
+    background: var(--show-primary-light);
+
+    border: 1px solid #e5eee6;
+    border-radius: 13px;
 }
 
-.distribution-detail-card__icon svg {
+.distribution-show-card__icon svg {
+    display: block;
     width: 22px;
     height: 22px;
 }
 
-.distribution-detail-card__heading {
+.distribution-show-card__heading > div:last-child {
     min-width: 0;
 }
 
-.distribution-detail-card__eyebrow {
-    display: block;
-    margin-bottom: 3px;
+.distribution-show-card__heading h2 {
+    margin: 0;
 
-    color: #758078;
-    font-size: 9px;
-    font-weight: 800;
-    letter-spacing: 1.2px;
+    color: var(--show-primary-dark);
+
+    font-size: 17px;
+    font-weight: 700;
     line-height: 1.5;
 }
 
-.distribution-detail-card__title {
-    margin: 0 0 4px;
+.distribution-show-card__heading p {
+    margin: 5px 0 0;
 
-    color: var(--detail-text);
-    font-size: 17px;
-    font-weight: 750;
-    letter-spacing: -0.25px;
-    line-height: 1.45;
+    color: var(--show-muted);
+
+    font-size: 11px;
+    line-height: 1.7;
 }
 
-.distribution-detail-card__description {
-    margin: 0;
-
-    color: var(--detail-muted);
-    font-size: 12px;
-    line-height: 1.6;
-}
-
-.distribution-detail-id {
+.distribution-show-reference {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
 
-    padding: 7px 11px;
+    min-height: 32px;
+    padding: 6px 11px;
 
-    color: var(--detail-primary);
-    background: #f0f5f0;
-    border: 1px solid #e0e9e1;
-    border-radius: 8px;
+    color: var(--show-primary);
+    background: var(--show-primary-light);
 
-    font-size: 12px;
-    font-weight: 750;
+    border: 1px solid #dfebdf;
+    border-radius: 9px;
+
+    font-size: 10px;
+    font-weight: 600;
     white-space: nowrap;
 }
 
 
 /* =========================================================
-   5. ISI KARTU
-   ========================================================= */
+   7. CARD BODY
+========================================================= */
 
-.distribution-detail-card__body {
-    padding: 25px;
+.distribution-show-card__body {
+    padding: 25px 27px;
 }
 
 
 /* =========================================================
-   6. RINGKASAN NOMINAL DAN STATUS
-   ========================================================= */
+   8. DONATION / DISTRIBUTION HIGHLIGHT
+========================================================= */
 
-.distribution-detail-summary {
-    display: flex;
+.distribution-show-highlight {
+    display: grid;
+    grid-template-columns: 1fr 1px 1fr;
+
     align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 22px;
+    gap: 28px;
 
-    margin-bottom: 23px;
-    padding: 22px 23px;
+    width: 100%;
+    min-width: 0;
 
-    background: linear-gradient(
-        120deg,
-        #f5f9f5 0%,
-        #edf4ee 100%
-    );
+    margin-bottom: 30px;
+    padding: 25px 27px;
 
-    border: 1px solid #e0e9e1;
-    border-radius: 12px;
+    background: #f7faf7;
+
+    border: 1px solid #e8efe8;
+    border-radius: 13px;
 }
 
-.distribution-detail-summary__amount,
-.distribution-detail-summary__status {
+.distribution-show-highlight__amount,
+.distribution-show-highlight__status {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 8px;
 
     min-width: 0;
 }
 
-.distribution-detail-summary__label {
-    color: #69766c;
-    font-size: 12px;
+.distribution-show-label {
+    display: block;
+
+    margin-bottom: 9px;
+
+    color: var(--show-muted);
+
+    font-size: 11px;
     font-weight: 600;
     line-height: 1.5;
 }
 
-.distribution-detail-summary__amount strong {
-    color: var(--detail-primary);
-    font-size: clamp(25px, 2.5vw, 31px);
-    font-weight: 800;
-    letter-spacing: -0.7px;
-    line-height: 1.35;
+.distribution-show-highlight__amount strong {
+    display: block;
+
+    max-width: 100%;
+
+    color: var(--show-primary-dark);
+
+    font-size: clamp(25px, 2.5vw, 32px);
+    font-weight: 700;
+    letter-spacing: -.8px;
+    line-height: 1.3;
 
     overflow-wrap: anywhere;
+    font-variant-numeric: tabular-nums;
 }
 
-.distribution-detail-summary__note {
-    color: #758078;
-    font-size: 11px;
+.distribution-show-caption {
+    display: block;
+
+    margin-top: 8px;
+
+    color: #929b92;
+
+    font-size: 10px;
     line-height: 1.6;
+}
+
+.distribution-show-highlight__divider {
+    width: 1px;
+    height: 72px;
+
+    background: #e2eae2;
 }
 
 
 /* =========================================================
-   7. STATUS BADGE
-   ========================================================= */
+   9. DISTRIBUTION STATUS
+========================================================= */
 
-.distribution-detail-status {
+.distribution-show-status {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
 
-    min-height: 33px;
+    min-height: 32px;
     padding: 7px 12px;
 
     border: 1px solid transparent;
-    border-radius: 30px;
+    border-radius: 8px;
 
-    font-size: 12px;
-    font-weight: 750;
-    line-height: 1.4;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.5;
+
     white-space: nowrap;
 }
 
-.distribution-detail-status__dot {
+.distribution-show-status__dot {
+    display: inline-block;
+    flex: 0 0 7px;
+
     width: 7px;
     height: 7px;
-    flex: 0 0 7px;
 
     background: currentColor;
     border-radius: 50%;
 }
 
-.distribution-detail-status--success {
-    color: #267348;
-    background: #eaf7ed;
-    border-color: #d3ecd9;
+.distribution-show-status--success {
+    color: var(--show-success);
+    background: var(--show-success-light);
+    border-color: #dcefe0;
 }
 
-.distribution-detail-status--pending,
-.distribution-detail-status--processing {
-    color: #936018;
-    background: #fff5e5;
-    border-color: #f0dfbd;
+.distribution-show-status--pending {
+    color: var(--show-warning);
+    background: var(--show-warning-light);
+    border-color: #f1e4c9;
 }
 
-.distribution-detail-status--danger {
-    color: #b33e3e;
-    background: #fff0ef;
-    border-color: #f1d5d2;
+.distribution-show-status--processing {
+    color: var(--show-blue);
+    background: var(--show-blue-light);
+    border-color: #dce8ff;
 }
 
-.distribution-detail-status--neutral {
-    color: #59665c;
-    background: #f0f3f0;
-    border-color: #e1e7e1;
+.distribution-show-status--danger {
+    color: var(--show-danger);
+    background: var(--show-danger-light);
+    border-color: #f8e0de;
+}
+
+.distribution-show-status--neutral {
+    color: #657366;
+    background: #f2f5f2;
+    border-color: #e5eae5;
 }
 
 
 /* =========================================================
-   8. GRID INFORMASI
-   ========================================================= */
+   10. INFORMATION SECTION
+========================================================= */
 
-.distribution-detail-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 14px;
-
+.distribution-show-section {
     width: 100%;
     min-width: 0;
+}
 
+.distribution-show-section__heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 19px;
+}
+
+.distribution-show-section__eyebrow {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: var(--show-primary);
+
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    line-height: 1.5;
+}
+
+.distribution-show-section__heading h3 {
+    margin: 0;
+
+    color: var(--show-primary-dark);
+
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   11. INFORMATION GRID
+========================================================= */
+
+.distribution-show-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 0 22px;
+
+    width: 100%;
     margin: 0;
     padding: 0;
 }
 
-.distribution-detail-item {
+.distribution-show-item {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
+    justify-content: center;
 
     min-width: 0;
-    padding: 17px 18px;
+    min-height: 83px;
 
-    background: #ffffff;
-    border: 1px solid #e6ece6;
-    border-radius: 11px;
+    padding: 15px 0;
 
-    transition:
-        background-color 0.2s ease,
-        border-color 0.2s ease;
+    border-bottom: 1px solid #edf0ed;
 }
 
-.distribution-detail-item:hover {
-    background: #fcfdfc;
-    border-color: #d6e2d7;
-}
+.distribution-show-item dt {
+    display: block;
 
-.distribution-detail-item--full {
-    grid-column: 1 / -1;
-}
+    margin-bottom: 7px;
 
-.distribution-detail-item dt {
-    margin: 0;
+    color: var(--show-muted);
 
-    color: #758078;
     font-size: 11px;
-    font-weight: 650;
-    line-height: 1.6;
+    font-weight: 500;
+    line-height: 1.5;
 }
 
-.distribution-detail-item dd {
-    width: 100%;
-    min-width: 0;
+.distribution-show-item dd {
+    display: block;
+
     margin: 0;
 
-    color: #304236;
-    font-size: 13px;
-    font-weight: 700;
+    color: var(--show-text);
+
+    font-size: 12px;
+    font-weight: 600;
     line-height: 1.7;
 
     overflow-wrap: anywhere;
-    word-break: normal;
 }
 
 
 /* =========================================================
-   9. JENIS BANTUAN
-   ========================================================= */
+   12. ASSISTANCE TYPE
+========================================================= */
 
-.distribution-detail-type {
-    display: inline-block;
+.distribution-show-type {
+    display: inline-flex;
+    align-items: center;
+
     max-width: 100%;
-    padding: 5px 10px;
+    padding: 6px 10px;
 
-    color: #47624e;
-    background: #eff5ef;
-    border: 1px solid #e0e9e1;
-    border-radius: 7px;
+    color: #657366;
+    background: #f2f6f1;
 
-    font-size: 12px;
-    font-weight: 700;
+    border: 1px solid #e8eee6;
+    border-radius: 8px;
+
+    font-size: 10px;
+    font-weight: 600;
     line-height: 1.5;
 
+    white-space: normal;
     overflow-wrap: anywhere;
 }
 
 
 /* =========================================================
-   10. SUMBER DONASI
-   ========================================================= */
+   13. DONATION SOURCE
+========================================================= */
 
-.distribution-detail-donation {
-    display: block;
-
-    color: #304b37;
-    font-size: 13px;
-    font-weight: 750;
+.distribution-show-donation {
+    display: flex !important;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3px;
 }
 
-.distribution-detail-donation__amount {
+.distribution-show-donation__name {
     display: block;
-    margin-top: 3px;
 
-    color: #758078;
+    color: var(--show-primary);
+
     font-size: 12px;
-    font-weight: 500;
+    font-weight: 600;
+    line-height: 1.5;
 }
 
-.distribution-detail-muted {
-    color: #89938b;
-    font-size: 12px;
+.distribution-show-donation__amount {
+    display: block;
+
+    color: var(--show-muted);
+
+    font-size: 11px;
     font-weight: 500;
+    line-height: 1.5;
+
+    font-variant-numeric: tabular-nums;
+}
+
+.distribution-show-muted {
+    color: #929b92;
+    font-size: 11px;
+    font-weight: 400;
 }
 
 
 /* =========================================================
-   11. CATATAN
-   ========================================================= */
+   14. NOTES SECTION
+========================================================= */
 
-.distribution-detail-notes {
-    min-height: 28px;
+.distribution-show-section--notes {
+    margin-top: 27px;
+}
 
-    color: #4f5d52 !important;
-    font-size: 13px !important;
-    font-weight: 500 !important;
-    line-height: 1.8 !important;
+.distribution-show-section--notes
+.distribution-show-section__heading {
+    margin-bottom: 13px;
+}
 
-    white-space: pre-wrap;
+.distribution-show-notes {
+    display: block;
+
+    width: 100%;
+    min-width: 0;
+    min-height: 76px;
+
+    padding: 15px 18px;
+
+    background: #f8faf8;
+
+    border: 1px solid #e9eee9;
+    border-radius: 10px;
+
+    text-align: left;
+}
+
+.distribution-show-notes p {
+    display: block;
+
+    width: 100%;
+    margin: 0;
+    padding: 0;
+
+    color: #59665c;
+
+    font-family: inherit;
+    font-size: 12px !important;
+    font-weight: 400 !important;
+    line-height: 1.7 !important;
+
+    text-align: left !important;
+    letter-spacing: normal !important;
+
+    white-space: pre-line;
     overflow-wrap: anywhere;
 }
 
 
 /* =========================================================
-   12. FOOTER KARTU
-   ========================================================= */
+   15. CARD FOOTER
+========================================================= */
 
-.distribution-detail-card__footer {
+.distribution-show-card__footer {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 20px;
 
-    padding: 19px 25px;
+    padding: 20px 27px;
 
     background: #fbfcfb;
     border-top: 1px solid #edf0ed;
 }
 
-.distribution-detail-card__footer p {
-    max-width: 530px;
-    margin: 0;
+.distribution-show-footer-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 
-    color: #758078;
-    font-size: 12px;
-    line-height: 1.8;
+    min-width: 0;
 }
 
-.distribution-detail-card__footer .distribution-detail-button {
+.distribution-show-footer-info svg {
+    display: block;
+
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+
+    color: var(--show-muted);
+}
+
+.distribution-show-footer-info p {
+    margin: 0;
+
+    color: var(--show-muted);
+
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+.distribution-show-edit-button {
     flex-shrink: 0;
 }
 
 
 /* =========================================================
-   13. TABLET
-   ========================================================= */
+   16. FOCUS ACCESSIBILITY
+========================================================= */
+
+.distribution-detail-page a:focus-visible {
+    outline: 3px solid rgba(41, 66, 54, .2);
+    outline-offset: 3px;
+}
+
+
+/* =========================================================
+   17. TABLET
+========================================================= */
 
 @media (max-width: 900px) {
+
+    .distribution-show-card__header {
+        padding: 22px;
+    }
+
+    .distribution-show-card__body {
+        padding: 22px;
+    }
+
+    .distribution-show-highlight {
+        gap: 20px;
+        padding: 22px;
+    }
+
+    .distribution-show-card__footer {
+        padding: 19px 22px;
+    }
+
+}
+
+
+/* =========================================================
+   18. MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
     .distribution-detail-page {
-        padding: 23px 21px 34px;
+        padding-bottom: 20px;
     }
 
-    .distribution-detail-header {
+    /* PAGE HEADER */
+
+    .distribution-detail-page .admin-page-header {
+        flex-direction: column;
         align-items: flex-start;
-        gap: 16px;
+        gap: 17px;
+
+        margin-bottom: 20px;
     }
 
-    .distribution-detail-header__title {
-        font-size: 25px;
+    .distribution-detail-page .admin-page-header__content {
+        width: 100%;
     }
 
-    .distribution-detail-card__header {
-        padding: 21px;
+    .distribution-detail-page .admin-page-header__action {
+        justify-content: flex-start;
+
+        width: 100%;
+        gap: 8px;
     }
 
-    .distribution-detail-card__body {
-        padding: 21px;
+    .distribution-detail-page .admin-page-header__action
+    .distribution-button {
+        flex: 1;
     }
 
-    .distribution-detail-grid {
+    /* ALERT */
+
+    .distribution-show-alert {
+        align-items: flex-start;
+        padding: 12px 14px;
+        font-size: 11px;
+    }
+
+    /* CARD */
+
+    .distribution-show-card {
+        border-radius: 13px;
+    }
+
+    .distribution-show-card__header {
+        align-items: flex-start;
+        padding: 18px 16px;
         gap: 12px;
     }
 
-    .distribution-detail-item {
-        padding: 16px;
+    .distribution-show-card__heading {
+        gap: 10px;
     }
 
-    .distribution-detail-card__footer {
-        padding: 18px 21px;
-    }
-}
-
-
-/* =========================================================
-   14. MOBILE
-   ========================================================= */
-
-@media (max-width: 600px) {
-    .distribution-detail-page {
-        padding: 20px 14px 28px;
+    .distribution-show-card__icon {
+        width: 38px;
+        height: 38px;
+        border-radius: 11px;
     }
 
-    .distribution-detail-header {
-        align-items: stretch;
-        flex-direction: column;
-        gap: 16px;
-
-        margin-bottom: 19px;
+    .distribution-show-card__icon svg {
+        width: 19px;
+        height: 19px;
     }
 
-    .distribution-detail-header__content {
-        padding-left: 13px;
+    .distribution-show-card__heading h2 {
+        font-size: 14px;
     }
 
-    .distribution-detail-header__content::before {
-        width: 3px;
+    .distribution-show-card__heading p {
+        font-size: 10px;
     }
 
-    .distribution-detail-header__eyebrow {
+    .distribution-show-reference {
+        min-height: 27px;
+        padding: 5px 8px;
         font-size: 9px;
-        letter-spacing: 1.3px;
     }
 
-    .distribution-detail-header__title {
-        font-size: 23px;
-        letter-spacing: -0.5px;
-    }
-
-    .distribution-detail-header__description {
-        font-size: 12px;
-    }
-
-    .distribution-detail-header__actions {
-        justify-content: flex-start;
-    }
-
-    .distribution-detail-header__actions .distribution-detail-button {
-        width: 100%;
-    }
-
-    .distribution-detail-card {
-        border-radius: 14px;
-    }
-
-    .distribution-detail-card__header {
-        align-items: flex-start;
-        flex-direction: column;
-        gap: 14px;
-
+    .distribution-show-card__body {
         padding: 18px 16px;
     }
 
-    .distribution-detail-card__identity {
-        align-items: flex-start;
-        gap: 10px;
+    /* HIGHLIGHT */
+
+    .distribution-show-highlight {
+        grid-template-columns: 1fr;
+        gap: 16px;
+
+        margin-bottom: 25px;
+        padding: 18px 16px;
+
+        border-radius: 11px;
     }
 
-    .distribution-detail-card__icon {
-        width: 38px;
-        height: 38px;
-        flex-basis: 38px;
-        border-radius: 9px;
+    .distribution-show-highlight__amount strong {
+        font-size: 25px;
     }
 
-    .distribution-detail-card__icon svg {
-        width: 20px;
-        height: 20px;
+    .distribution-show-highlight__divider {
+        width: 100%;
+        height: 1px;
     }
 
-    .distribution-detail-card__eyebrow {
+    .distribution-show-label {
+        margin-bottom: 7px;
+        font-size: 10px;
+    }
+
+    .distribution-show-caption {
         font-size: 9px;
     }
 
-    .distribution-detail-card__title {
-        font-size: 16px;
+    .distribution-show-status {
+        min-height: 29px;
+        font-size: 10px;
     }
 
-    .distribution-detail-card__description {
-        font-size: 11px;
+    /* INFORMATION */
+
+    .distribution-show-section__heading {
+        margin-bottom: 13px;
     }
 
-    .distribution-detail-id {
-        align-self: flex-start;
-        padding: 6px 10px;
-        font-size: 11px;
+    .distribution-show-section__eyebrow {
+        font-size: 8px;
     }
 
-    .distribution-detail-card__body {
-        padding: 16px;
+    .distribution-show-section__heading h3 {
+        font-size: 14px;
     }
 
-    .distribution-detail-summary {
-        align-items: flex-start;
-        flex-direction: column;
-        gap: 20px;
-
-        margin-bottom: 17px;
-        padding: 18px;
-    }
-
-    .distribution-detail-summary__amount strong {
-        font-size: 27px;
-    }
-
-    .distribution-detail-summary__note {
-        font-size: 11px;
-    }
-
-    .distribution-detail-grid {
+    .distribution-show-grid {
         grid-template-columns: minmax(0, 1fr);
-        gap: 10px;
+        gap: 0;
     }
 
-    .distribution-detail-item,
-    .distribution-detail-item--full {
-        grid-column: auto;
-        padding: 14px 15px;
+    .distribution-show-item {
+        min-height: 70px;
+        padding: 12px 0;
     }
 
-    .distribution-detail-item dt {
+    .distribution-show-item dt {
+        margin-bottom: 5px;
+        font-size: 10px;
+    }
+
+    .distribution-show-item dd {
         font-size: 11px;
     }
 
-    .distribution-detail-item dd {
-        font-size: 13px;
+    .distribution-show-donation__name {
+        font-size: 11px;
     }
 
-    .distribution-detail-card__footer {
+    .distribution-show-donation__amount {
+        font-size: 10px;
+    }
+
+    /* NOTES */
+
+    .distribution-show-section--notes {
+        margin-top: 22px;
+    }
+
+    .distribution-show-notes {
+        min-height: 65px;
+        padding: 13px 14px;
+    }
+
+    .distribution-show-notes p {
+        font-size: 11px !important;
+        line-height: 1.7 !important;
+    }
+
+    /* FOOTER */
+
+    .distribution-show-card__footer {
         align-items: stretch;
         flex-direction: column;
-        gap: 14px;
 
+        gap: 15px;
         padding: 17px 16px;
     }
 
-    .distribution-detail-card__footer p {
-        font-size: 11px;
+    .distribution-show-footer-info p {
+        font-size: 10px;
     }
 
-    .distribution-detail-card__footer .distribution-detail-button {
+    .distribution-show-card__footer
+    .distribution-button {
         width: 100%;
+        min-height: 42px;
     }
 
-    .distribution-detail-button {
-        min-height: 42px;
-        font-size: 12px;
-    }
 }
 
 
 /* =========================================================
-   15. AKSESIBILITAS
-   ========================================================= */
+   19. SMALL MOBILE
+========================================================= */
+
+@media (max-width: 380px) {
+
+    .distribution-detail-page .admin-page-header__action {
+        flex-direction: column;
+    }
+
+    .distribution-detail-page .admin-page-header__action
+    .distribution-button {
+        width: 100%;
+        flex: none;
+    }
+
+    .distribution-show-card__header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .distribution-show-reference {
+        align-self: flex-start;
+    }
+
+    .distribution-show-highlight__amount strong {
+        font-size: 22px;
+    }
+
+}
+
+
+/* =========================================================
+   20. REDUCED MOTION
+========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
+
     .distribution-detail-page *,
     .distribution-detail-page *::before,
     .distribution-detail-page *::after {
-        transition-duration: 0.01ms !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
     }
+
 }
+
+
+/* =========================================================
+   END OF ADMIN DISTRIBUTION SHOW CSS
+========================================================= */

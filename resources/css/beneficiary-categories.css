@@ -1,32 +1,33 @@
 
-/* =========================================================
+/* =====================================================
+   BENEFICIARY CATEGORIES
    MASJID SABILILLAH
-   KATEGORI PENERIMA MANFAAT
-   Typography dan header mengikuti Data Penerima Manfaat
-   ========================================================= */
+   Dashboard Layout Reference
+===================================================== */
+
+
+/* =====================================================
+   1. GLOBAL
+===================================================== */
 
 .beneficiary-categories-page {
-    --bc-primary: var(--color-green-normal, #294236);
-    --bc-primary-dark: var(--color-green-dark, #1b2b23);
-    --bc-primary-light: var(--color-green-light, #edf5ee);
-    --bc-text: var(--color-neutral-darker, #26372d);
-    --bc-muted: var(--color-neutral-dark, #747b75);
-    --bc-border: #e6ebe6;
-    --bc-radius: 12px;
-    --bc-transition: 0.22s ease;
+    --dashboard-green: var(--color-green-normal, #294236);
+    --dashboard-green-dark: var(--color-green-dark, #1b2b23);
+    --dashboard-green-light: #edf4ee;
+
+    --dashboard-border: #eceeeb;
+    --dashboard-text: #242a26;
+    --dashboard-muted: #90958f;
 
     width: 100%;
     max-width: 100%;
     min-width: 0;
-    margin: 0 auto;
-    padding: 28px 30px 35px;
 
-    color: var(--bc-text);
-    font-family: inherit;
-    font-size: 14px;
-    line-height: 1.6;
+    margin: 0;
+    padding: 0 0 24px;
 
-    overflow-wrap: break-word;
+    color: var(--dashboard-text);
+    font-family: var(--font-primary, "Poppins"), sans-serif;
 }
 
 .beneficiary-categories-page *,
@@ -35,979 +36,980 @@
     box-sizing: border-box;
 }
 
-.beneficiary-categories-page a {
-    -webkit-tap-highlight-color: transparent;
-}
-
 .beneficiary-categories-page button,
 .beneficiary-categories-page input,
 .beneficiary-categories-page select {
     font-family: inherit;
 }
 
-/* =========================================================
-   1. HEADER
-   Mengikuti header Data Penerima Manfaat
-   ========================================================= */
-
-.beneficiary-categories-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 24px;
-
-    width: 100%;
-    min-width: 0;
-
-    margin-bottom: 24px;
-    padding: 5px 0 25px;
-
-    border-bottom: 1px solid var(--bc-border);
-}
-
-.beneficiary-categories-header__content {
-    flex: 1;
-    min-width: 0;
-}
-
-.beneficiary-categories-header__eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-
-    margin-bottom: 8px;
-
-    color: var(--bc-primary);
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 1.6px;
-    line-height: 1.5;
-    text-transform: uppercase;
-}
-
-.beneficiary-categories-header__eyebrow::before {
-    display: inline-block;
+.beneficiary-categories-page svg {
+    display: block;
     flex-shrink: 0;
-
-    width: 19px;
-    height: 2px;
-
-    background: var(--bc-primary);
-    border-radius: 10px;
-
-    content: "";
 }
 
-.beneficiary-categories-header__title {
-    margin: 0;
 
-    color: var(--bc-primary-dark);
-    font-size: clamp(25px, 2vw, 31px);
-    font-weight: 700;
-    letter-spacing: -0.7px;
-    line-height: 1.3;
+/* =====================================================
+   2. PAGE HEADER
+   Same component as Dashboard
+===================================================== */
+
+.beneficiary-categories-page .admin-page-header {
+    width: 100%;
+    margin: 0 0 24px;
 }
 
-.beneficiary-categories-header__description {
-    max-width: 650px;
-    margin: 10px 0 0;
-
-    color: var(--bc-muted);
-    font-size: 13px;
-    font-weight: 400;
-    line-height: 1.8;
+.beneficiary-categories-page .admin-page-header__content {
+    min-width: 0;
 }
 
-/* =========================================================
-   2. BUTTONS
-   ========================================================= */
+.beneficiary-categories-page .admin-page-header__description {
+    max-width: 760px;
+}
 
-.beneficiary-categories-button {
+.beneficiary-categories-page .admin-page-header__action {
+    flex-shrink: 0;
+}
+
+.beneficiary-add-button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 9px;
+    gap: 8px;
 
-    flex-shrink: 0;
     min-height: 43px;
-    padding: 10px 17px;
+    padding: 11px 17px;
 
-    color: var(--bc-text);
-    background: #ffffff;
-    border: 1px solid var(--bc-border);
-    border-radius: 10px;
+    color: #fff;
+    background: var(--dashboard-green);
 
-    font-family: inherit;
-    font-size: 12px;
+    border: 1px solid var(--dashboard-green);
+    border-radius: 9px;
+
+    font-size: 11px;
     font-weight: 600;
     line-height: 1.4;
-    text-align: center;
-    text-decoration: none;
-    white-space: nowrap;
 
+    white-space: nowrap;
     cursor: pointer;
 
-    transition:
-        color var(--bc-transition),
-        background var(--bc-transition),
-        border-color var(--bc-transition),
-        box-shadow var(--bc-transition),
-        transform var(--bc-transition);
+    transition: all .2s ease;
 }
 
-.beneficiary-categories-button:hover {
-    color: var(--bc-primary);
-    background: var(--bc-primary-light);
-    border-color: #d5e3d6;
+.beneficiary-add-button:hover {
+    color: #fff;
+    background: var(--dashboard-green-dark);
+    border-color: var(--dashboard-green-dark);
 }
 
-.beneficiary-categories-button:active {
-    transform: translateY(1px);
+.beneficiary-add-button svg {
+    width: 16px;
+    height: 16px;
 }
 
-.beneficiary-categories-button:focus-visible {
-    outline: 3px solid rgba(41, 66, 54, 0.2);
-    outline-offset: 3px;
-}
 
-.beneficiary-categories-button--primary {
-    color: #ffffff;
-    background: var(--bc-primary);
-    border-color: var(--bc-primary);
-    box-shadow: 0 5px 12px rgba(41, 66, 54, 0.1);
-}
+/* =====================================================
+   3. ALERT
+===================================================== */
 
-.beneficiary-categories-button--primary:hover {
-    color: #ffffff;
-    background: var(--bc-primary-dark);
-    border-color: var(--bc-primary-dark);
-    box-shadow: 0 8px 17px rgba(41, 66, 54, 0.14);
-    transform: translateY(-1px);
-}
+.beneficiary-alert {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 
-.beneficiary-categories-button > span {
-    font-size: 19px;
-    font-weight: 400;
-    line-height: 1;
-}
-
-/* =========================================================
-   3. ALERT / NOTIFIKASI
-   ========================================================= */
-
-.beneficiary-categories-alert {
-    margin-bottom: 20px;
-    padding: 14px 17px;
+    width: 100%;
+    margin-bottom: 17px;
+    padding: 12px 15px;
 
     border: 1px solid transparent;
     border-radius: 10px;
 
-    font-size: 13px;
-    line-height: 1.7;
-}
-
-.beneficiary-categories-alert strong {
-    display: block;
-    margin-bottom: 3px;
-    font-weight: 700;
-}
-
-.beneficiary-categories-alert ul {
-    margin: 6px 0 0;
-    padding-left: 20px;
-}
-
-.beneficiary-categories-alert--success {
-    color: #166534;
-    background: #effaf1;
-    border-color: #d8f0df;
-}
-
-.beneficiary-categories-alert--error {
-    color: #b42318;
-    background: #fff1f0;
-    border-color: #f7d8d5;
-}
-
-/* =========================================================
-   4. SUMMARY CARDS
-   ========================================================= */
-
-.beneficiary-categories-summary {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 16px;
-
-    width: 100%;
-    min-width: 0;
-    margin-bottom: 24px;
-}
-
-.beneficiary-categories-summary__card {
-    position: relative;
-
-    display: flex;
-    flex-direction: column;
-
-    min-width: 0;
-    min-height: 150px;
-    padding: 22px 22px 20px 24px;
-
-    overflow: hidden;
-
-    background: #ffffff;
-    border: 1px solid var(--bc-border);
-    border-radius: 16px;
-
-    box-shadow: 0 3px 15px rgba(27, 43, 35, 0.025);
-
-    transition:
-        border-color var(--bc-transition),
-        box-shadow var(--bc-transition),
-        transform var(--bc-transition);
-}
-
-.beneficiary-categories-summary__card::before {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-
-    width: 3px;
-
-    background: #789382;
-    content: "";
-}
-
-.beneficiary-categories-summary__card:hover {
-    border-color: #dce6dc;
-    box-shadow: 0 10px 28px rgba(27, 43, 35, 0.07);
-    transform: translateY(-2px);
-}
-
-.beneficiary-categories-summary__label {
-    margin-bottom: 12px;
-
-    color: var(--bc-muted);
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 500;
     line-height: 1.6;
 }
 
-.beneficiary-categories-summary__value {
+.beneficiary-alert svg {
+    width: 17px;
+    height: 17px;
+}
+
+.beneficiary-alert--success {
+    color: #43864c;
+    background: #edf7ed;
+    border-color: #dcebd9;
+}
+
+.beneficiary-alert--error {
     display: block;
-    margin: 0;
-
-    color: var(--bc-primary-dark);
-    font-size: clamp(26px, 2vw, 32px);
-    font-weight: 700;
-    letter-spacing: -0.7px;
-    line-height: 1.25;
-    font-variant-numeric: tabular-nums;
-
-    overflow-wrap: anywhere;
+    color: #bf5b51;
+    background: #fff0ee;
+    border-color: #f2dcd8;
 }
 
-.beneficiary-categories-summary__note {
-    margin: auto 0 0;
-    padding-top: 11px;
-
-    color: var(--bc-muted);
-    font-size: 11px;
-    line-height: 1.7;
+.beneficiary-alert ul {
+    margin: 6px 0 0;
+    padding-left: 18px;
 }
 
-/* =========================================================
-   5. SECTION DAFTAR KATEGORI
-   ========================================================= */
 
-.beneficiary-categories-section {
+/* =====================================================
+   4. SUMMARY SECTION
+   Same dimensions as Dashboard Summary
+===================================================== */
+
+.beneficiary-summary {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    gap: 15px;
+    width: 100%;
+
+    margin-bottom: 19px;
+}
+
+.beneficiary-summary .summary-card {
+    position: relative;
+
+    display: block;
+
     width: 100%;
     min-width: 0;
+
+    height: 151px;
+    min-height: 151px;
+
+    padding: 17px 18px 15px;
+
     overflow: hidden;
 
-    background: #ffffff;
-    border: 1px solid var(--bc-border);
+    background: #fff;
+    border: 1px solid #eceeeb;
     border-radius: 16px;
 
-    box-shadow: 0 3px 15px rgba(27, 43, 35, 0.025);
+    box-shadow: 0 3px 12px rgba(29, 46, 33, .025);
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease;
 }
 
-.beneficiary-categories-section__header {
+.beneficiary-summary .summary-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 7px 18px rgba(29, 46, 33, .06);
+}
+
+
+/* CARD TOP */
+
+.beneficiary-summary .summary-card__top {
+    position: relative;
+    z-index: 1;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 18px;
-
-    padding: 25px 26px 23px;
 }
 
-.beneficiary-categories-section__header > div {
-    min-width: 0;
+.beneficiary-summary .summary-card__icon {
+    display: grid;
+    place-items: center;
+
+    width: 37px;
+    height: 37px;
+
+    color: var(--dashboard-green);
+    background: #edf4ee;
+
+    border-radius: 11px;
 }
 
-.beneficiary-categories-section__title {
+.beneficiary-summary .summary-card__icon svg {
+    width: 20px;
+    height: 20px;
+}
+
+.beneficiary-summary .summary-card--2 .summary-card__icon {
+    color: #5576a5;
+    background: #eef3fa;
+}
+
+.beneficiary-summary .summary-card--3 .summary-card__icon {
+    color: #a28a48;
+    background: #f5f2e9;
+}
+
+.beneficiary-summary__index {
+    color: #c0c8be;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+
+/* CARD BODY */
+
+.beneficiary-summary .summary-card__body {
+    position: relative;
+    z-index: 1;
+
+    margin-top: 9px;
+}
+
+.beneficiary-summary .summary-card__label {
+    display: block;
+
+    margin-bottom: 2px;
+
+    color: #888e88;
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.beneficiary-summary .summary-card__body h2 {
     margin: 0;
 
-    color: var(--bc-primary-dark);
-    font-size: 19px;
-    font-weight: 700;
-    letter-spacing: -0.35px;
+    color: #252d26;
+
+    font-size: clamp(19px, 2vw, 24px);
+    font-weight: 600;
+    line-height: 1.3;
+
+    letter-spacing: -.8px;
+}
+
+
+/* CARD BOTTOM */
+
+.beneficiary-summary .summary-card__bottom {
+    position: relative;
+    z-index: 1;
+
+    display: flex;
+    align-items: center;
+
+    margin-top: 5px;
+}
+
+.beneficiary-summary .summary-card__comparison {
+    color: #a1a59f;
+    font-size: 9px;
+    font-weight: 400;
     line-height: 1.4;
 }
 
-.beneficiary-categories-section__description {
-    margin: 7px 0 0;
 
-    color: var(--bc-muted);
-    font-size: 12px;
-    line-height: 1.8;
+/* CARD DECORATION */
+
+.beneficiary-summary .summary-card__decoration {
+    position: absolute;
+
+    top: -45px;
+    right: -42px;
+
+    width: 85px;
+    height: 85px;
+
+    background: rgba(131, 184, 77, .055);
+    border-radius: 50%;
+
+    pointer-events: none;
 }
 
-.beneficiary-categories-section__count {
+
+/* =====================================================
+   5. TABLE PANEL
+   Same structure as Dashboard Table Panel
+===================================================== */
+
+.beneficiary-table-section {
+    width: 100%;
+    min-width: 0;
+}
+
+.beneficiary-table-panel {
+    width: 100%;
+    min-width: 0;
+
+    padding: 19px 0 0;
+
+    overflow: hidden;
+
+    background: #fff;
+    border: 1px solid #eceeeb;
+    border-radius: 16px;
+
+    box-shadow: 0 3px 12px rgba(29, 46, 33, .025);
+}
+
+
+/* PANEL HEADING */
+
+.beneficiary-table-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    gap: 12px;
+
+    padding: 0 19px 17px;
+}
+
+.beneficiary-table-heading > div {
+    min-width: 0;
+}
+
+.beneficiary-table-heading .panel-eyebrow {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #a1a79f;
+
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.beneficiary-table-heading h3 {
+    margin: 0;
+
+    color: #263027;
+
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.beneficiary-table-heading p {
+    margin: 4px 0 0;
+
+    color: #a0a49e;
+
+    font-size: 10px;
+    line-height: 1.5;
+}
+
+
+/* TOTAL LABEL */
+
+.beneficiary-total {
     display: inline-flex;
     align-items: center;
     justify-content: center;
 
     flex-shrink: 0;
-    min-height: 34px;
-    padding: 6px 12px;
 
-    color: var(--bc-primary);
-    background: var(--bc-primary-light);
-    border: 1px solid #dfebdf;
-    border-radius: 9px;
+    padding: 7px 10px;
 
-    font-size: 11px;
-    font-weight: 700;
+    color: #527052;
+    background: #f0f6ef;
+
+    border-radius: 7px;
+
+    font-size: 9px;
+    font-weight: 600;
     white-space: nowrap;
 }
 
-/* =========================================================
-   6. TABLE WRAPPER
-   ========================================================= */
 
-.beneficiary-categories-table-wrap {
+/* =====================================================
+   6. TABLE
+   Same typography and padding as Dashboard
+===================================================== */
+
+.beneficiary-table-wrapper {
     width: 100%;
-    max-width: 100%;
+    min-width: 0;
+
     overflow-x: auto;
-    overflow-y: hidden;
 
     scrollbar-width: thin;
-    scrollbar-color: #cbd7cc transparent;
+    scrollbar-color: #d9ded8 transparent;
 }
 
-.beneficiary-categories-table-wrap::-webkit-scrollbar {
-    height: 7px;
+.beneficiary-table-wrapper::-webkit-scrollbar {
+    height: 6px;
 }
 
-.beneficiary-categories-table-wrap::-webkit-scrollbar-track {
-    background: #f7f9f7;
-}
-
-.beneficiary-categories-table-wrap::-webkit-scrollbar-thumb {
-    background: #cbd7cc;
+.beneficiary-table-wrapper::-webkit-scrollbar-thumb {
+    background: #d9ded8;
     border-radius: 10px;
 }
 
-/* =========================================================
-   7. TABLE
-   ========================================================= */
-
-.beneficiary-categories-table {
+.beneficiary-table {
     width: 100%;
-    min-width: 950px;
+    min-width: 900px;
 
-    border-collapse: separate;
-    border-spacing: 0;
+    border-collapse: collapse;
 
-    color: var(--bc-text);
-    font-family: inherit;
-    font-size: 12px;
-}
-
-/* Header tabel */
-
-.beneficiary-categories-table thead th {
-    padding: 15px 16px;
-
-    color: #5f6c61;
-    background: #f4f7f4;
-
-    border-top: 1px solid #edf0ed;
-    border-bottom: 1px solid #e5ebe5;
-
-    font-size: 11px;
-    font-weight: 700;
-    line-height: 1.6;
-    text-align: left;
     white-space: nowrap;
+    text-align: left;
 }
 
-.beneficiary-categories-table thead th:first-child,
-.beneficiary-categories-table tbody td:first-child {
-    padding-left: 25px;
+.beneficiary-table thead {
+    background: #f8f9f7;
 }
 
-.beneficiary-categories-table thead th:last-child,
-.beneficiary-categories-table tbody td:last-child {
-    padding-right: 25px;
+.beneficiary-table th {
+    padding: 11px 12px;
+
+    color: #92988f;
+
+    font-size: 9px;
+    font-weight: 500;
+
+    border-top: 1px solid #f0f1ef;
+    border-bottom: 1px solid #f0f1ef;
 }
 
-/* Isi tabel */
+.beneficiary-table th:first-child,
+.beneficiary-table td:first-child {
+    padding-left: 19px;
+}
 
-.beneficiary-categories-table tbody td {
-    padding: 16px;
+.beneficiary-table th:last-child,
+.beneficiary-table td:last-child {
+    padding-right: 19px;
+}
 
-    color: var(--bc-text);
-    background: #ffffff;
-    border-bottom: 1px solid #eff2ef;
+.beneficiary-table td {
+    padding: 12px;
 
-    font-size: 12px;
-    line-height: 1.7;
+    color: #596259;
+
+    font-size: 10px;
     vertical-align: middle;
+
+    border-bottom: 1px solid #f2f3f1;
 }
 
-.beneficiary-categories-table tbody tr {
-    transition: background var(--bc-transition);
+.beneficiary-table tbody tr {
+    transition: background .15s ease;
 }
 
-.beneficiary-categories-table tbody tr:hover td {
-    background: #fbfdfb;
+.beneficiary-table tbody tr:hover {
+    background: #fafbf9;
 }
 
-.beneficiary-categories-table tbody tr:last-child td {
+.beneficiary-table tbody tr:last-child td {
     border-bottom: none;
 }
 
-/* Nomor urut */
 
-.beneficiary-categories-table__number {
-    width: 65px;
+/* =====================================================
+   7. TABLE CONTENT
+===================================================== */
 
-    color: var(--bc-muted) !important;
-    font-variant-numeric: tabular-nums;
+.beneficiary-table .table-date {
+    color: #91978f !important;
+    font-size: 9px !important;
 }
 
-/* Nama kategori */
+.beneficiary-table .table-person {
+    display: flex;
+    align-items: center;
+    gap: 7px;
 
-.beneficiary-categories-table__name {
+    color: #3d483e;
+
+    font-size: 10px;
+    font-weight: 500;
+}
+
+.beneficiary-table .table-avatar {
+    display: grid;
+    place-items: center;
+
+    width: 27px;
+    height: 27px;
+
+    flex-shrink: 0;
+
+    color: #426747;
+    background: #edf3eb;
+
+    border-radius: 8px;
+}
+
+.beneficiary-table .table-avatar svg {
+    width: 14px;
+    height: 14px;
+}
+
+.beneficiary-description {
     display: inline-block;
-    min-width: 120px;
 
-    color: var(--bc-primary-dark);
-    font-size: 12px;
+    max-width: 240px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+
+    color: #7f877e;
+}
+
+.beneficiary-table .table-amount {
+    color: #344235 !important;
+    font-size: 10px !important;
     font-weight: 600;
-    line-height: 1.7;
 }
 
-/* Deskripsi */
-
-.beneficiary-categories-table__description {
-    display: block;
-
-    max-width: 300px;
-
-    color: var(--bc-muted);
-    font-size: 12px;
-    line-height: 1.8;
-
-    overflow-wrap: anywhere;
-}
-
-/* Jumlah penerima */
-
-.beneficiary-categories-table__count {
-    color: var(--bc-primary);
-    font-size: 12px;
-    font-weight: 700;
-    font-variant-numeric: tabular-nums;
-}
-
-.beneficiary-categories-table__count-label {
+.beneficiary-count-label {
     margin-left: 3px;
 
-    color: var(--bc-muted);
-    font-size: 11px;
+    color: #a0a69e;
+    font-size: 9px;
 }
 
-/* =========================================================
-   8. STATUS BADGE
-   ========================================================= */
 
-.beneficiary-categories-status {
+/* =====================================================
+   8. STATUS BADGE
+===================================================== */
+
+.beneficiary-table .status-badge {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
+    gap: 5px;
 
-    min-height: 27px;
-    padding: 5px 10px;
+    padding: 5px 8px;
 
-    border: 1px solid transparent;
-    border-radius: 8px;
+    border-radius: 20px;
 
-    font-size: 10px;
+    font-size: 8px;
     font-weight: 600;
-    line-height: 1.5;
+
     white-space: nowrap;
 }
 
-.beneficiary-categories-status::before {
-    display: inline-block;
-    flex-shrink: 0;
+.beneficiary-table .status-badge--success {
+    color: #43864c;
+    background: #edf7ed;
+}
 
+.beneficiary-table .status-badge--danger {
+    color: #bf5b51;
+    background: #fff0ee;
+}
+
+.beneficiary-status-dot {
     width: 5px;
     height: 5px;
 
+    flex-shrink: 0;
+
     background: currentColor;
     border-radius: 50%;
-    content: "";
 }
 
-.beneficiary-categories-status--active {
-    color: #16803d;
-    background: #effaf1;
-    border-color: #dcefe0;
-}
 
-.beneficiary-categories-status--inactive {
-    color: #747b84;
-    background: #f4f5f4;
-    border-color: #e7e9e7;
-}
+/* =====================================================
+   9. ACTION BUTTONS
+===================================================== */
 
-/* =========================================================
-   9. AKSI TABEL
-   ========================================================= */
-
-.beneficiary-categories-actions {
+.beneficiary-actions {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    gap: 9px;
-
-    min-width: 190px;
-}
-
-.beneficiary-categories-action-form {
-    display: inline-flex;
-    align-items: center;
-    margin: 0;
-}
-
-.beneficiary-categories-action {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    min-height: 32px;
-    padding: 6px 10px;
-
-    color: var(--bc-primary);
-    background: #ffffff;
-    border: 1px solid #e6ebe6;
-    border-radius: 8px;
-
-    font-family: inherit;
-    font-size: 11px;
-    font-weight: 600;
-    line-height: 1.4;
-    text-align: center;
-    text-decoration: none;
-    white-space: nowrap;
-
-    cursor: pointer;
-
-    transition:
-        color var(--bc-transition),
-        background var(--bc-transition),
-        border-color var(--bc-transition);
-}
-
-.beneficiary-categories-action:hover {
-    color: var(--bc-primary-dark);
-    background: var(--bc-primary-light);
-    border-color: #d4e3d5;
-}
-
-.beneficiary-categories-action--status {
-    color: #657267;
-}
-
-.beneficiary-categories-action--status:hover {
-    color: var(--bc-primary);
-}
-
-.beneficiary-categories-action--delete {
-    color: #b42318;
-}
-
-.beneficiary-categories-action--delete:hover {
-    color: #b42318;
-    background: #fff1f0;
-    border-color: #f0d3d0;
-}
-
-.beneficiary-categories-action:focus-visible {
-    outline: 3px solid rgba(41, 66, 54, 0.2);
-    outline-offset: 2px;
-}
-
-.beneficiary-categories-action:disabled {
-    opacity: 0.55;
-    cursor: not-allowed;
-}
-
-/* =========================================================
-   10. EMPTY STATE
-   ========================================================= */
-
-.beneficiary-categories-empty {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
-
-    min-height: 230px;
-    padding: 48px 20px;
-
-    text-align: center;
-}
-
-.beneficiary-categories-empty strong {
-    margin: 0;
-
-    color: var(--bc-primary-dark);
-    font-size: 15px;
-    font-weight: 700;
-    line-height: 1.5;
-}
-
-.beneficiary-categories-empty p {
-    max-width: 350px;
-    margin: 7px 0 20px;
-
-    color: var(--bc-muted);
-    font-size: 12px;
-    line-height: 1.8;
-}
-
-/* =========================================================
-   11. PAGINATION
-   ========================================================= */
-
-.beneficiary-categories-pagination {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-
-    padding: 19px 25px;
-
-    background: #ffffff;
-    border-top: 1px solid #edf0ed;
-}
-
-.beneficiary-categories-pagination__info {
-    color: var(--bc-muted);
-    font-size: 11px;
-    line-height: 1.7;
-}
-
-.beneficiary-categories-pagination__info strong {
-    color: var(--bc-text);
-    font-weight: 600;
-}
-
-.beneficiary-categories-pagination__navigation {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    flex-wrap: wrap;
     gap: 5px;
 }
 
-.beneficiary-categories-pagination__button,
-.beneficiary-categories-pagination__number {
+.beneficiary-action-form {
+    display: inline-flex;
+    margin: 0;
+}
+
+.beneficiary-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+
+    min-height: 29px;
+    padding: 5px 9px;
+
+    border: 1px solid transparent;
+    border-radius: 6px;
+
+    font-size: 9px;
+    font-weight: 600;
+    line-height: 1.4;
+
+    white-space: nowrap;
+    cursor: pointer;
+
+    transition:
+        color .2s ease,
+        background .2s ease,
+        border-color .2s ease;
+}
+
+.beneficiary-action svg {
+    width: 13px;
+    height: 13px;
+}
+
+.beneficiary-action--edit {
+    color: #55749c;
+    background: #f0f4fa;
+}
+
+.beneficiary-action--edit:hover {
+    color: #fff;
+    background: #55749c;
+}
+
+.beneficiary-action--status {
+    color: #a07c3f;
+    background: #faf5e9;
+}
+
+.beneficiary-action--status:hover {
+    color: #fff;
+    background: #a07c3f;
+}
+
+.beneficiary-action--delete {
+    color: #bd6158;
+    background: #fff1ef;
+}
+
+.beneficiary-action--delete:hover {
+    color: #fff;
+    background: #bd6158;
+}
+
+.beneficiary-action:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+}
+
+
+/* =====================================================
+   10. EMPTY STATE
+===================================================== */
+
+.beneficiary-empty {
+    min-height: 215px;
+    padding: 25px 15px;
+}
+
+.beneficiary-empty .dashboard-empty__icon {
+    margin-bottom: 10px;
+}
+
+.beneficiary-empty strong {
+    color: #5e695e;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.beneficiary-empty span {
+    max-width: 300px;
+}
+
+.beneficiary-empty-link {
     display: inline-flex;
     align-items: center;
     justify-content: center;
 
-    min-width: 33px;
-    min-height: 33px;
-    padding: 5px 9px;
+    margin-top: 12px;
+    padding: 8px 13px;
 
-    color: var(--bc-text);
-    background: #ffffff;
-    border: 1px solid var(--bc-border);
-    border-radius: 8px;
+    color: #fff;
+    background: var(--dashboard-green);
 
-    font-family: inherit;
-    font-size: 11px;
-    line-height: 1.4;
-    text-align: center;
-    text-decoration: none;
-    white-space: nowrap;
+    border-radius: 7px;
 
-    transition:
-        color var(--bc-transition),
-        background var(--bc-transition),
-        border-color var(--bc-transition);
-}
-
-.beneficiary-categories-pagination__button:hover,
-.beneficiary-categories-pagination__number:hover {
-    color: var(--bc-primary);
-    background: var(--bc-primary-light);
-    border-color: #d4e3d5;
-}
-
-.beneficiary-categories-pagination__number.is-active {
-    color: #ffffff;
-    background: var(--bc-primary);
-    border-color: var(--bc-primary);
+    font-size: 10px;
     font-weight: 600;
 }
 
-.beneficiary-categories-pagination__button.is-disabled {
-    color: #a8a8a8;
-    background: #ffffff;
-    border-color: #e1e8e1;
+.beneficiary-empty-link:hover {
+    color: #fff;
+    background: var(--dashboard-green-dark);
+}
+
+
+/* =====================================================
+   11. PAGINATION
+===================================================== */
+
+.beneficiary-pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 15px 19px;
+
+    border-top: 1px solid #f0f1ef;
+}
+
+.beneficiary-pagination__info {
+    color: #969e95;
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+.beneficiary-pagination__info strong {
+    color: #596359;
+    font-weight: 600;
+}
+
+.beneficiary-pagination__navigation {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.beneficiary-pagination__button,
+.beneficiary-pagination__number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 30px;
+    min-height: 30px;
+
+    padding: 0 9px;
+
+    color: #727c72;
+    background: #fff;
+
+    border: 1px solid #e9ece7;
+    border-radius: 7px;
+
+    font-size: 9px;
+    font-weight: 500;
+
+    white-space: nowrap;
+
+    transition: all .2s ease;
+}
+
+.beneficiary-pagination__button:hover,
+.beneficiary-pagination__number:hover {
+    color: var(--dashboard-green);
+    background: #f2f6f0;
+    border-color: #d5e1d2;
+}
+
+.beneficiary-pagination__number.is-active {
+    color: #fff;
+    background: var(--dashboard-green);
+    border-color: var(--dashboard-green);
+}
+
+.beneficiary-pagination__button.is-disabled {
+    color: #bdc2bb;
+    background: #fafbf9;
+
+    pointer-events: none;
     cursor: not-allowed;
 }
 
-.beneficiary-categories-pagination__button:focus-visible,
-.beneficiary-categories-pagination__number:focus-visible {
-    outline: 2px solid rgba(41, 66, 54, 0.3);
-    outline-offset: 2px;
-}
 
-/* =========================================================
-   12. TABLET
-   ========================================================= */
+/* =====================================================
+   12. LAPTOP
+===================================================== */
 
 @media (max-width: 1200px) {
-    .beneficiary-categories-page {
-        padding: 25px 24px 32px;
-    }
 
-    .beneficiary-categories-summary {
-        gap: 13px;
-    }
-
-    .beneficiary-categories-summary__card {
-        padding: 20px;
-    }
-}
-
-@media (max-width: 900px) {
-    .beneficiary-categories-summary {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .beneficiary-categories-summary__card:last-child {
-        grid-column: 1 / -1;
-    }
-
-    .beneficiary-categories-section__header {
-        padding: 22px;
-    }
-
-    .beneficiary-categories-table {
-        min-width: 900px;
-    }
-}
-
-/* =========================================================
-   13. MOBILE
-   ========================================================= */
-
-@media (max-width: 600px) {
-    .beneficiary-categories-page {
-        padding: 21px 16px 28px;
-    }
-
-    .beneficiary-categories-header {
-        align-items: stretch;
-        flex-direction: column;
-        gap: 17px;
-
-        margin-bottom: 20px;
-        padding: 5px 0 21px;
-    }
-
-    .beneficiary-categories-header__eyebrow {
-        font-size: 9px;
-        letter-spacing: 1.3px;
-    }
-
-    .beneficiary-categories-header__title {
-        font-size: 25px;
-        letter-spacing: -0.5px;
-    }
-
-    .beneficiary-categories-header__description {
-        margin-top: 8px;
-        font-size: 12px;
-    }
-
-    .beneficiary-categories-header > .beneficiary-categories-button {
-        width: 100%;
-    }
-
-    .beneficiary-categories-summary {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+    .beneficiary-summary {
         gap: 11px;
-        margin-bottom: 19px;
     }
 
-    .beneficiary-categories-summary__card {
-        min-height: 140px;
-        padding: 17px 15px 16px 18px;
+    .beneficiary-summary .summary-card {
+        padding: 15px 13px;
     }
 
-    .beneficiary-categories-summary__card:last-child {
-        grid-column: 1 / -1;
-        min-height: 125px;
+    .beneficiary-summary .summary-card__body h2 {
+        font-size: 19px;
     }
 
-    .beneficiary-categories-summary__label {
-        font-size: 11px;
-    }
-
-    .beneficiary-categories-summary__value {
-        font-size: 25px;
-    }
-
-    .beneficiary-categories-summary__note {
-        font-size: 10px;
-    }
-
-    .beneficiary-categories-section {
+    .beneficiary-table-panel {
         border-radius: 15px;
     }
 
-    .beneficiary-categories-section__header {
-        align-items: flex-start;
+    .beneficiary-table th,
+    .beneficiary-table td {
+        padding-left: 9px;
+        padding-right: 9px;
+    }
+}
+
+
+/* =====================================================
+   13. TABLET
+===================================================== */
+
+@media (max-width: 900px) {
+
+    .beneficiary-summary {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .beneficiary-table-panel {
+        border-radius: 14px;
+    }
+}
+
+
+/* =====================================================
+   14. MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+    .beneficiary-categories-page {
+        padding-bottom: 20px;
+    }
+
+    .beneficiary-categories-page .admin-page-header {
         flex-direction: column;
-        gap: 12px;
-        padding: 19px 16px;
+        align-items: stretch;
+        gap: 16px;
+        margin-bottom: 17px;
     }
 
-    .beneficiary-categories-section__title {
-        font-size: 17px;
-    }
-
-    .beneficiary-categories-section__description {
-        font-size: 11px;
-    }
-
-    .beneficiary-categories-section__count {
-        min-height: 30px;
-        padding: 5px 9px;
-        font-size: 10px;
-    }
-
-    .beneficiary-categories-table {
-        min-width: 900px;
-    }
-
-    .beneficiary-categories-table thead th {
-        padding: 13px;
-        font-size: 10px;
-    }
-
-    .beneficiary-categories-table tbody td {
-        padding: 13px;
-        font-size: 11px;
-    }
-
-    .beneficiary-categories-table thead th:first-child,
-    .beneficiary-categories-table tbody td:first-child {
-        padding-left: 16px;
-    }
-
-    .beneficiary-categories-table thead th:last-child,
-    .beneficiary-categories-table tbody td:last-child {
-        padding-right: 16px;
-    }
-
-    .beneficiary-categories-actions {
-        gap: 7px;
-    }
-
-    .beneficiary-categories-action {
-        min-height: 31px;
-        padding: 5px 9px;
-        font-size: 11px;
-    }
-
-    .beneficiary-categories-pagination {
-        align-items: flex-start;
-        flex-direction: column;
-        gap: 12px;
-        padding: 16px;
-    }
-
-    .beneficiary-categories-pagination__navigation {
-        justify-content: flex-start;
+    .beneficiary-categories-page .admin-page-header__action {
         width: 100%;
     }
-}
 
-/* =========================================================
-   14. MOBILE KECIL
-   ========================================================= */
-
-@media (max-width: 380px) {
-    .beneficiary-categories-page {
-        padding: 18px 12px 24px;
+    .beneficiary-add-button {
+        width: 100%;
     }
 
-    .beneficiary-categories-header__title {
-        font-size: 23px;
+    .beneficiary-summary {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+        margin-bottom: 13px;
     }
 
-    .beneficiary-categories-summary {
-        gap: 9px;
+    .beneficiary-summary .summary-card {
+        height: 145px;
+        min-height: 145px;
+
+        padding: 13px;
+        border-radius: 13px;
     }
 
-    .beneficiary-categories-summary__card {
-        padding: 15px 12px 14px 15px;
+    .beneficiary-summary .summary-card__icon {
+        width: 33px;
+        height: 33px;
     }
 
-    .beneficiary-categories-summary__value {
-        font-size: 23px;
+    .beneficiary-summary .summary-card__icon svg {
+        width: 18px;
+        height: 18px;
     }
 
-    .beneficiary-categories-section__header {
-        padding: 17px 14px;
+    .beneficiary-summary .summary-card__body {
+        margin-top: 9px;
     }
 
-    .beneficiary-categories-pagination__navigation {
-        gap: 4px;
+    .beneficiary-summary .summary-card__body h2 {
+        font-size: clamp(16px, 4.5vw, 20px);
     }
 
-    .beneficiary-categories-pagination__button,
-    .beneficiary-categories-pagination__number {
-        min-width: 30px;
-        padding: 5px 7px;
+    .beneficiary-summary .summary-card__label {
+        font-size: 10px;
+    }
+
+    .beneficiary-summary .summary-card__comparison {
+        font-size: 8px;
+    }
+
+    .beneficiary-table-panel {
+        border-radius: 14px;
+    }
+
+    .beneficiary-table-heading {
+        padding: 0 15px 14px;
+    }
+
+    .beneficiary-table-heading h3 {
+        font-size: 14px;
+    }
+
+    .beneficiary-table-heading p {
+        font-size: 9px;
+    }
+
+    .beneficiary-table th:first-child,
+    .beneficiary-table td:first-child {
+        padding-left: 15px;
+    }
+
+    .beneficiary-table th:last-child,
+    .beneficiary-table td:last-child {
+        padding-right: 15px;
+    }
+
+    .beneficiary-pagination {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+
+        padding: 14px 15px;
+    }
+
+    .beneficiary-pagination__info {
+        font-size: 9px;
+    }
+
+    .beneficiary-pagination__navigation {
+        flex-wrap: wrap;
+        width: 100%;
+    }
+
+    .beneficiary-alert {
+        padding: 12px;
         font-size: 10px;
     }
 }
 
-/* =========================================================
-   15. ACCESSIBILITY
-   ========================================================= */
+
+/* =====================================================
+   15. SMALL MOBILE
+===================================================== */
+
+@media (max-width: 360px) {
+
+    .beneficiary-summary {
+        grid-template-columns: 1fr;
+    }
+
+    .beneficiary-summary .summary-card {
+        height: 130px;
+        min-height: 130px;
+    }
+}
+
+
+/* =====================================================
+   16. FONT CONSISTENCY
+===================================================== */
+
+.beneficiary-categories-page,
+.beneficiary-categories-page *,
+.beneficiary-categories-page *::before,
+.beneficiary-categories-page *::after {
+    font-family: var(--font-primary, "Poppins"), sans-serif;
+}
+
+
+/* =====================================================
+   17. ACCESSIBILITY
+===================================================== */
 
 @media (prefers-reduced-motion: reduce) {
+
     .beneficiary-categories-page *,
     .beneficiary-categories-page *::before,
     .beneficiary-categories-page *::after {
-        animation: none !important;
-        transition: none !important;
-        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+        animation-duration: .01ms !important;
     }
 }

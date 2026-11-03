@@ -1,153 +1,117 @@
 
-/* =========================================
+/* =========================================================
    ADMIN FOOTER
-========================================= */
+   Minimal Clean Design
+========================================================= */
 
 .admin-footer {
     width: 100%;
-    padding: 17px 30px;
+    margin-top: auto;
+    padding: 0 30px;
 
-    background: #ffffff;
-    border-top: 1px solid #e9ede9;
+    background: transparent;
+    border-top: 1px solid #e9eee9;
 
-    font-family: 'Poppins', sans-serif;
+    font-family: inherit;
 }
-
-/* Main container */
 
 .admin-footer__content {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 16px;
+    justify-content: center;
+    flex-wrap: nowrap;
 
     width: 100%;
-}
+    min-height: 54px;
+    gap: 8px;
 
-/* Brand */
+    text-align: center;
+}
 
 .admin-footer__brand {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-
-    min-width: 0;
-}
-
-/* Mosque icon */
-
-.admin-footer__icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    width: 29px;
-    height: 29px;
-    flex-shrink: 0;
-
-    color: #294236;
-    background: #edf4ed;
-    border-radius: 8px;
-}
-
-.admin-footer__icon svg {
-    width: 18px;
-    height: 18px;
-}
-
-/* Brand name */
-
-.admin-footer__name {
-    color: #68736b;
+    color: #455449;
 
     font-size: 11px;
-    font-weight: 500;
-    line-height: 1.5;
+    font-weight: 600;
+    letter-spacing: .1px;
+
+    white-space: nowrap;
 }
 
-/* Right information */
-
-.admin-footer__info {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 10px;
-
-    flex-shrink: 0;
-
-    color: #858d86;
+.admin-footer__copyright {
+    color: #929b93;
 
     font-size: 10px;
     font-weight: 400;
+    text-align: center;
+
+    white-space: nowrap;
 }
 
-/* Separator */
 
-.admin-footer__separator {
-    width: 4px;
-    height: 4px;
-    flex-shrink: 0;
-
-    background: #294236;
-    border-radius: 50%;
-}
-
-/* =========================================
+/* =========================================================
    TABLET
-========================================= */
+========================================================= */
 
 @media (max-width: 900px) {
 
     .admin-footer {
-        padding: 16px 23px;
+        padding: 0 22px;
     }
 
-    .admin-footer__name {
-        font-size: 10px;
+    .admin-footer__content {
+        min-height: 50px;
     }
 
 }
 
-/* =========================================
+
+/* =========================================================
    MOBILE
-========================================= */
+========================================================= */
 
 @media (max-width: 600px) {
 
     .admin-footer {
-        padding: 15px 17px;
+        padding: 0 16px;
     }
 
     .admin-footer__content {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 9px;
+        min-height: 48px;
+        gap: 7px;
     }
 
-    .admin-footer__name {
+    .admin-footer__brand {
         font-size: 10px;
     }
 
-    .admin-footer__info {
-        padding-left: 39px;
+    .admin-footer__copyright {
         font-size: 9px;
     }
 
 }
 
-/* =========================================
+
+/* =========================================================
    SMALL MOBILE
-========================================= */
+========================================================= */
 
 @media (max-width: 360px) {
 
-    .admin-footer__name {
+    .admin-footer {
+        padding: 0 10px;
+    }
+
+    .admin-footer__content {
+        gap: 6px;
+    }
+
+    .admin-footer__brand {
         font-size: 9px;
     }
 
-    .admin-footer__info {
+    .admin-footer__copyright {
         font-size: 8px;
-        gap: 7px;
     }
 
 }

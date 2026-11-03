@@ -1,267 +1,556 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#294236">
 
-    <title>Detail Penerima Manfaat | Masjid Sabilillah</title>
+@extends('layouts.admin')
 
+@section('title', 'Detail Penerima Manfaat - Admin Masjid Sabilillah')
+
+@push('styles')
     @vite([
-        'resources/css/app.css',
-        'resources/css/admin-sidebar.css',
+        'resources/css/admin-beneficiaries.css',
         'resources/css/admin-beneficiaries-show.css',
-        'resources/js/app.js',
-        'resources/js/admin-sidebar.js',
-        'resources/js/admin-beneficiaries-show.js',
     ])
-</head>
+@endpush
 
-<body class="admin-layout">
+@section('content')
 
-    {{-- Sidebar Admin --}}
-    @include('components.admin.sidebar')
+@php
+    $categoryName = $beneficiary->beneficiaryCategory?->name;
 
-    <div class="admin-main">
-        <main class="beneficiaries-page beneficiary-detail-page">
+    $displayCategory = $categoryName ?? '-';
 
-            {{-- Breadcrumb --}}
-            <nav class="beneficiary-detail-breadcrumb" aria-label="Breadcrumb">
-                <a href="{{ route('beneficiaries.index') }}">
-                    ← Data Penerima
-                </a>
+    if (
+        strtolower($categoryName ?? '') === 'lainnya'
+        && $beneficiary->other_category
+    ) {
+        $displayCategory = $beneficiary->other_category;
+    }
 
-                <span class="beneficiary-detail-breadcrumb__separator">/</span>
+    $isActive = $beneficiary->status === 'Aktif';
 
-                <span>Detail Penerima</span>
-            </nav>
+    $registeredDate = $beneficiary->registered_at
+        ? $beneficiary->registered_at->format('d M Y')
+        : '-';
 
-            {{-- Notifikasi Berhasil --}}
-            @if (session('success'))
-                <div
-                    class="beneficiaries-alert beneficiaries-alert--success"
-                    role="status"
+    $updatedDate = $beneficiary->updated_at
+        ? $beneficiary->updated_at->format('d-m-Y H:i')
+        : '-';
+@endphp
+
+<div class="beneficiaries-page beneficiary-detail-page">
+
+    {{-- ==========================================
+         BREADCRUMB
+    =========================================== --}}
+
+    <nav class="beneficiary-show-breadcrumb" aria-label="Breadcrumb">
+
+        <a href="{{ route('beneficiaries.index') }}">
+            <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+            >
+                <path d="M19 12H5"/>
+                <path d="m12 19-7-7 7-7"/>
+            </svg>
+
+            Data Penerima
+        </a>
+
+        <span class="beneficiary-show-breadcrumb__separator">/</span>
+
+        <span>Detail Penerima</span>
+
+    </nav>
+
+
+    {{-- ==========================================
+         PAGE HEADER
+    =========================================== --}}
+
+    <section class="admin-page-header">
+
+        <div class="admin-page-header__content">
+
+            <div class="admin-page-header__eyebrow">
+                <span class="admin-page-header__line"></span>
+                Masjid Sabilillah
+            </div>
+
+            <h1 class="admin-page-header__title">
+                Detail Penerima Manfaat
+            </h1>
+
+            <p class="admin-page-header__description">
+                Informasi lengkap penerima bantuan yang tercatat
+                dalam sistem administrasi Masjid Sabilillah.
+            </p>
+
+        </div>
+
+        <div class="admin-page-header__action">
+
+            <a
+                href="{{ route('beneficiaries.index') }}"
+                class="beneficiary-show-button beneficiary-show-button--secondary"
+            >
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
                 >
-                    {{ session('success') }}
-                </div>
-            @endif
+                    <path d="M19 12H5"/>
+                    <path d="m12 19-7-7 7-7"/>
+                </svg>
 
-            {{-- Header --}}
-            <header class="beneficiary-detail-header">
-                <div class="beneficiary-detail-header__content">
-                    <span class="beneficiary-detail-header__eyebrow">
-                        MASJID SABILILLAH
+                Kembali
+            </a>
+
+            <a
+                href="{{ route('beneficiaries.edit', $beneficiary) }}"
+                class="beneficiary-show-button beneficiary-show-button--primary"
+            >
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                >
+                    <path d="M12 20h9"/>
+                    <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L8 18l-4 1 1-4Z"/>
+                </svg>
+
+                Ubah Data
+            </a>
+
+        </div>
+
+    </section>
+
+
+    {{-- ==========================================
+         SUCCESS NOTIFICATION
+    =========================================== --}}
+
+    @if (session('success'))
+
+        <div class="beneficiary-show-alert" role="status">
+
+            <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+            >
+                <circle cx="12" cy="12" r="10"/>
+                <path d="m8 12 3 3 5-6"/>
+            </svg>
+
+            <span>{{ session('success') }}</span>
+
+        </div>
+
+    @endif
+
+
+    {{-- ==========================================
+         BENEFICIARY DETAIL CARD
+    =========================================== --}}
+
+    <section
+        class="beneficiary-show-card"
+        aria-labelledby="beneficiaryShowTitle"
+    >
+
+        {{-- CARD HEADER --}}
+
+        <div class="beneficiary-show-card__header">
+
+            <div class="beneficiary-show-card__identity">
+
+                <div class="beneficiary-show-card__icon">
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.8"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                    >
+                        <circle cx="12" cy="8" r="4"/>
+                        <path d="M5 21v-2a7 7 0 0 1 14 0v2"/>
+                    </svg>
+
+                </div>
+
+                <div class="beneficiary-show-card__heading">
+
+                    <span class="beneficiary-show-card__eyebrow">
+                        INFORMASI PENERIMA
                     </span>
 
-                    <h1 class="beneficiary-detail-header__title">
-                        Detail Penerima Manfaat
-                    </h1>
+                    <h2 id="beneficiaryShowTitle">
+                        {{ $beneficiary->name }}
+                    </h2>
 
-                    <p class="beneficiary-detail-header__description">
-                        Informasi lengkap penerima bantuan yang tersimpan
-                        dalam sistem.
+                    <p>
+                        Data identitas dan informasi administrasi penerima.
                     </p>
 
-                    <div class="beneficiary-detail-header__meta">
-                        <span>
-                            ID Penerima:
-                            <strong>#{{ $beneficiary->id }}</strong>
-                        </span>
-
-                        <span class="beneficiary-detail-header__meta-divider">
-                            ·
-                        </span>
-
-                        <span>
-                            Terdaftar
-                            {{ $beneficiary->registered_at?->format('d M Y') ?? '-' }}
-                        </span>
-                    </div>
                 </div>
 
-                <div class="beneficiary-detail-header__actions">
-                    <a
-                        href="{{ route('beneficiaries.index') }}"
-                        class="beneficiary-detail-button beneficiary-detail-button--secondary"
-                    >
-                        Kembali
-                    </a>
+            </div>
 
-                    <a
-                        href="{{ route('beneficiaries.edit', $beneficiary) }}"
-                        class="beneficiary-detail-button beneficiary-detail-button--primary"
-                    >
-                        Ubah Data
-                    </a>
-                </div>
-            </header>
+            <div class="beneficiary-show-card__header-right">
 
-            {{-- Persiapan data kategori --}}
-            @php
-                $categoryName = $beneficiary->beneficiaryCategory?->name;
+                <span class="beneficiary-show-reference">
+                    ID #{{ $beneficiary->id }}
+                </span>
 
-                $displayCategory = $categoryName ?? '-';
+                @if ($isActive)
 
-                if (
-                    strtolower($categoryName ?? '') === 'lainnya'
-                    && $beneficiary->other_category
-                ) {
-                    $displayCategory = $beneficiary->other_category;
-                }
-            @endphp
-
-            {{-- Kartu Informasi Penerima --}}
-            <section
-                class="beneficiary-detail-card"
-                aria-labelledby="beneficiary-detail-title"
-            >
-                <div class="beneficiary-detail-card__header">
-                    <div>
-                        <span class="beneficiary-detail-card__eyebrow">
-                            INFORMASI PENERIMA
-                        </span>
-
-                        <h2
-                            id="beneficiary-detail-title"
-                            class="beneficiary-detail-card__title"
-                        >
-                            {{ $beneficiary->name }}
-                        </h2>
-
-                        <p class="beneficiary-detail-card__description">
-                            Data identitas dan informasi administrasi penerima.
-                        </p>
-                    </div>
-
-                    @if ($beneficiary->status === 'Aktif')
-                        <span class="beneficiaries-status beneficiaries-status--active">
-                            Aktif
-                        </span>
-                    @else
-                        <span class="beneficiaries-status beneficiaries-status--inactive">
-                            Tidak Aktif
-                        </span>
-                    @endif
-                </div>
-
-                <div class="beneficiary-detail-grid">
-
-                    {{-- Nama --}}
-                    <div class="beneficiary-detail-field">
-                        <span class="beneficiary-detail-field__label">
-                            Nama Penerima
-                        </span>
-
-                        <p class="beneficiary-detail-field__value">
-                            {{ $beneficiary->name }}
-                        </p>
-                    </div>
-
-                    {{-- NIK --}}
-                    <div class="beneficiary-detail-field">
-                        <span class="beneficiary-detail-field__label">
-                            NIK
-                        </span>
-
-                        <p class="beneficiary-detail-field__value">
-                            {{ $beneficiary->nik }}
-                        </p>
-                    </div>
-
-                    {{-- Kontak --}}
-                    <div class="beneficiary-detail-field">
-                        <span class="beneficiary-detail-field__label">
-                            Nomor Kontak
-                        </span>
-
-                        <p class="beneficiary-detail-field__value">
-                            {{ $beneficiary->contact ?: '-' }}
-                        </p>
-                    </div>
-
-                    {{-- Kategori --}}
-                    <div class="beneficiary-detail-field">
-                        <span class="beneficiary-detail-field__label">
-                            Kategori Penerima
-                        </span>
-
-                        <p class="beneficiary-detail-field__value">
-                            {{ $displayCategory }}
-                        </p>
-                    </div>
-
-                    {{-- Status --}}
-                    <div class="beneficiary-detail-field">
-                        <span class="beneficiary-detail-field__label">
-                            Status Penerima
-                        </span>
-
-                        <p class="beneficiary-detail-field__value">
-                            {{ $beneficiary->status }}
-                        </p>
-                    </div>
-
-                    {{-- Tanggal Terdaftar --}}
-                    <div class="beneficiary-detail-field">
-                        <span class="beneficiary-detail-field__label">
-                            Tanggal Terdaftar
-                        </span>
-
-                        <p class="beneficiary-detail-field__value">
-                            {{ $beneficiary->registered_at?->format('d-m-Y') ?? '-' }}
-                        </p>
-                    </div>
-
-                    {{-- Alamat --}}
-                    <div class="beneficiary-detail-field beneficiary-detail-field--full">
-                        <span class="beneficiary-detail-field__label">
-                            Alamat Lengkap
-                        </span>
-
-                        <p class="beneficiary-detail-field__value beneficiary-detail-field__value--multiline">
-                            {{ $beneficiary->address }}
-                        </p>
-                    </div>
-
-                    {{-- Kondisi --}}
-                    <div class="beneficiary-detail-field beneficiary-detail-field--full">
-                        <span class="beneficiary-detail-field__label">
-                            Kondisi / Kriteria Penerima
-                        </span>
-
-                        <p class="beneficiary-detail-field__value beneficiary-detail-field__value--multiline">
-                            {{ $beneficiary->condition ?: '-' }}
-                        </p>
-                    </div>
-
-                    {{-- Catatan --}}
-                    <div class="beneficiary-detail-field beneficiary-detail-field--full">
-                        <span class="beneficiary-detail-field__label">
-                            Catatan Tambahan
-                        </span>
-
-                        <p class="beneficiary-detail-field__value beneficiary-detail-field__value--multiline">
-                            {{ $beneficiary->notes ?: '-' }}
-                        </p>
-                    </div>
-
-                </div>
-
-                {{-- Footer Kartu --}}
-                <div class="beneficiary-detail-card__footer">
-                    <span>
-                        Terakhir diperbarui:
-                        {{ $beneficiary->updated_at?->format('d-m-Y H:i') ?? '-' }}
+                    <span class="beneficiary-show-status beneficiary-show-status--active">
+                        <span class="beneficiary-show-status__dot"></span>
+                        Aktif
                     </span>
 
-                    <a href="{{ route('beneficiaries.index') }}">
-                        Kembali ke daftar penerima
-                    </a>
+                @else
+
+                    <span class="beneficiary-show-status beneficiary-show-status--inactive">
+                        <span class="beneficiary-show-status__dot"></span>
+                        Tidak Aktif
+                    </span>
+
+                @endif
+
+            </div>
+
+        </div>
+
+
+        {{-- CARD BODY --}}
+
+        <div class="beneficiary-show-card__body">
+
+
+            {{-- ==================================
+                 REGISTRATION SUMMARY
+            =================================== --}}
+
+            <div class="beneficiary-show-highlight">
+
+                <div class="beneficiary-show-highlight__identity">
+
+                    <span class="beneficiary-show-label">
+                        Nama Penerima Manfaat
+                    </span>
+
+                    <strong>
+                        {{ $beneficiary->name }}
+                    </strong>
+
+                    <span class="beneficiary-show-caption">
+                        Identitas penerima bantuan Masjid Sabilillah.
+                    </span>
+
                 </div>
-            </section>
 
-        </main>
-    </div>
+                <div class="beneficiary-show-highlight__divider"></div>
 
-</body>
-</html>
+                <div class="beneficiary-show-highlight__registration">
+
+                    <span class="beneficiary-show-label">
+                        Tanggal Terdaftar
+                    </span>
+
+                    <strong>
+                        {{ $registeredDate }}
+                    </strong>
+
+                    <span class="beneficiary-show-caption">
+                        Tanggal pencatatan penerima dalam sistem.
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            {{-- ==================================
+                 PERSONAL INFORMATION
+            =================================== --}}
+
+            <div class="beneficiary-show-section">
+
+                <div class="beneficiary-show-section__heading">
+
+                    <div>
+
+                        <span class="beneficiary-show-section__eyebrow">
+                            INFORMASI UTAMA
+                        </span>
+
+                        <h3>Data Identitas Penerima</h3>
+
+                    </div>
+
+                </div>
+
+
+                <dl class="beneficiary-show-grid">
+
+                    {{-- NAMA --}}
+
+                    <div class="beneficiary-show-item">
+
+                        <dt>Nama Penerima</dt>
+
+                        <dd>
+                            {{ $beneficiary->name ?: '-' }}
+                        </dd>
+
+                    </div>
+
+
+                    {{-- NIK --}}
+
+                    <div class="beneficiary-show-item">
+
+                        <dt>Nomor Induk Kependudukan (NIK)</dt>
+
+                        <dd>
+                            {{ $beneficiary->nik ?: '-' }}
+                        </dd>
+
+                    </div>
+
+
+                    {{-- KONTAK --}}
+
+                    <div class="beneficiary-show-item">
+
+                        <dt>Nomor Kontak</dt>
+
+                        <dd>
+                            {{ $beneficiary->contact ?: '-' }}
+                        </dd>
+
+                    </div>
+
+
+                    {{-- KATEGORI --}}
+
+                    <div class="beneficiary-show-item">
+
+                        <dt>Kategori Penerima</dt>
+
+                        <dd>
+                            {{ $displayCategory }}
+                        </dd>
+
+                    </div>
+
+
+                    {{-- STATUS --}}
+
+                    <div class="beneficiary-show-item">
+
+                        <dt>Status Penerima</dt>
+
+                        <dd>
+
+                            @if ($isActive)
+
+                                <span class="beneficiary-show-inline-status beneficiary-show-inline-status--active">
+                                    Aktif
+                                </span>
+
+                            @else
+
+                                <span class="beneficiary-show-inline-status beneficiary-show-inline-status--inactive">
+                                    Tidak Aktif
+                                </span>
+
+                            @endif
+
+                        </dd>
+
+                    </div>
+
+
+                    {{-- TANGGAL TERDAFTAR --}}
+
+                    <div class="beneficiary-show-item">
+
+                        <dt>Tanggal Terdaftar</dt>
+
+                        <dd>
+                            {{ $beneficiary->registered_at?->format('d-m-Y') ?? '-' }}
+                        </dd>
+
+                    </div>
+
+
+                    {{-- ALAMAT --}}
+
+                    <div class="beneficiary-show-item beneficiary-show-item--full">
+
+                        <dt>Alamat Lengkap</dt>
+
+                        <dd class="beneficiary-show-item__multiline">
+                            {{ $beneficiary->address ?: '-' }}
+                        </dd>
+
+                    </div>
+
+
+                    {{-- KONDISI --}}
+
+                    <div class="beneficiary-show-item beneficiary-show-item--full">
+
+                        <dt>Kondisi / Kriteria Penerima</dt>
+
+                        <dd class="beneficiary-show-item__multiline">
+                            {{ $beneficiary->condition ?: '-' }}
+                        </dd>
+
+                    </div>
+
+
+                    {{-- CATATAN --}}
+
+                    <div class="beneficiary-show-item beneficiary-show-item--full">
+
+                        <dt>Catatan Tambahan</dt>
+
+                        <dd class="beneficiary-show-item__multiline">
+                            {{ $beneficiary->notes ?: 'Tidak ada catatan tambahan untuk penerima ini.' }}
+                        </dd>
+
+                    </div>
+
+                </dl>
+
+            </div>
+
+
+            {{-- ==================================
+                 REGISTRATION INFORMATION
+            =================================== --}}
+
+            <div class="beneficiary-show-section beneficiary-show-section--registration">
+
+                <div class="beneficiary-show-section__heading">
+
+                    <div>
+
+                        <span class="beneficiary-show-section__eyebrow">
+                            INFORMASI ADMINISTRASI
+                        </span>
+
+                        <h3>Riwayat Pencatatan</h3>
+
+                    </div>
+
+                </div>
+
+                <div class="beneficiary-show-registration">
+
+                    <div class="beneficiary-show-registration__item">
+
+                        <span>Terdaftar Sejak</span>
+
+                        <strong>
+                            {{ $registeredDate }}
+                        </strong>
+
+                    </div>
+
+                    <div class="beneficiary-show-registration__item">
+
+                        <span>Terakhir Diperbarui</span>
+
+                        <strong>
+                            {{ $updatedDate }}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        {{-- ==================================
+             CARD FOOTER
+        =================================== --}}
+
+        <div class="beneficiary-show-card__footer">
+
+            <div class="beneficiary-show-footer-info">
+
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                >
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 16v-4"/>
+                    <path d="M12 8h.01"/>
+                </svg>
+
+                <p>
+                    Pastikan data penerima sesuai dengan informasi
+                    administrasi yang tersimpan.
+                </p>
+
+            </div>
+
+            <a
+                href="{{ route('beneficiaries.edit', $beneficiary) }}"
+                class="beneficiary-show-button beneficiary-show-button--primary beneficiary-show-edit-button"
+            >
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                >
+                    <path d="M12 20h9"/>
+                    <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L8 18l-4 1 1-4Z"/>
+                </svg>
+
+                Ubah Data Penerima
+            </a>
+
+        </div>
+
+    </section>
+
+</div>
+
+@endsection

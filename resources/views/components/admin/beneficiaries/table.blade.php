@@ -1,8 +1,12 @@
 
 {{-- Tabel Data Penerima Manfaat --}}
+
 <div class="beneficiaries-table-wrap">
+
     <table class="beneficiaries-table">
+
         <thead>
+
             <tr>
                 <th>No.</th>
                 <th>Nama Penerima</th>
@@ -13,28 +17,40 @@
                 <th>Tanggal Terdaftar</th>
                 <th>Aksi</th>
             </tr>
+
         </thead>
 
         <tbody>
+
             @forelse ($beneficiaries as $beneficiary)
+
                 <tr>
-                    {{-- Nomor urut --}}
+
+                    {{-- NUMBER --}}
                     <td>
                         {{ $beneficiaries->firstItem() + $loop->index }}
                     </td>
 
-                    {{-- Nama --}}
+
+                    {{-- NAME --}}
                     <td>
+
                         <span class="beneficiaries-table__name">
                             {{ $beneficiary->name }}
                         </span>
+
                     </td>
 
-                    {{-- NIK --}}
-                    <td>{{ $beneficiary->nik }}</td>
 
-                    {{-- Kategori --}}
+                    {{-- NIK --}}
                     <td>
+                        {{ $beneficiary->nik }}
+                    </td>
+
+
+                    {{-- CATEGORY --}}
+                    <td>
+
                         @php
                             $categoryName = $beneficiary
                                 ->beneficiaryCategory?->name;
@@ -52,39 +68,55 @@
                         <span class="beneficiaries-category">
                             {{ $displayCategory }}
                         </span>
+
                     </td>
 
-                    {{-- Alamat --}}
+
+                    {{-- ADDRESS --}}
                     <td>
+
                         <span class="beneficiaries-table__address">
                             {{ $beneficiary->address }}
                         </span>
+
                     </td>
 
-                    {{-- Status --}}
+
+                    {{-- STATUS --}}
                     <td>
+
                         @if ($beneficiary->status === 'Aktif')
+
                             <span class="beneficiaries-status beneficiaries-status--active">
                                 Aktif
                             </span>
+
                         @else
+
                             <span class="beneficiaries-status beneficiaries-status--inactive">
                                 Tidak Aktif
                             </span>
+
                         @endif
+
                     </td>
 
-                    {{-- Tanggal terdaftar --}}
+
+                    {{-- REGISTERED DATE --}}
                     <td>
                         {{ $beneficiary->registered_at?->format('d-m-Y') ?? '-' }}
                     </td>
 
-                    {{-- Aksi --}}
+
+                    {{-- ACTIONS --}}
                     <td>
+
                         <div class="beneficiaries-table__actions">
+
                             <a
                                 href="{{ route('beneficiaries.show', $beneficiary) }}"
                                 class="beneficiaries-action-button"
+                                aria-label="Lihat detail {{ $beneficiary->name }}"
                             >
                                 Detail
                             </a>
@@ -92,6 +124,7 @@
                             <a
                                 href="{{ route('beneficiaries.edit', $beneficiary) }}"
                                 class="beneficiaries-action-button"
+                                aria-label="Ubah data {{ $beneficiary->name }}"
                             >
                                 Ubah
                             </a>
@@ -101,6 +134,7 @@
                                 method="POST"
                                 onsubmit="return confirm('Yakin ingin menghapus data penerima ini?')"
                             >
+
                                 @csrf
                                 @method('DELETE')
 
@@ -110,15 +144,26 @@
                                 >
                                     Hapus
                                 </button>
+
                             </form>
+
                         </div>
+
                     </td>
+
                 </tr>
+
             @empty
+
+                {{-- EMPTY STATE --}}
                 <tr>
+
                     <td colspan="8">
+
                         <div class="beneficiaries-empty">
+
                             <div class="beneficiaries-empty__icon">
+
                                 <svg
                                     viewBox="0 0 24 24"
                                     fill="none"
@@ -133,9 +178,12 @@
                                     <path d="M16 11a3 3 0 0 0 0-6"/>
                                     <path d="M18 14a5 5 0 0 1 3 5v1"/>
                                 </svg>
+
                             </div>
 
-                            <strong>Belum ada data penerima</strong>
+                            <strong>
+                                Belum ada data penerima
+                            </strong>
 
                             <p>
                                 Data penerima manfaat belum tersedia
@@ -148,18 +196,29 @@
                                 || request()->filled('category_id')
                                 || request()->filled('status')
                             )
+
                                 <a href="{{ route('beneficiaries.index') }}">
                                     Reset pencarian dan filter
                                 </a>
+
                             @else
+
                                 <a href="{{ route('beneficiaries.create') }}">
                                     Tambah penerima manfaat
                                 </a>
+
                             @endif
+
                         </div>
+
                     </td>
+
                 </tr>
+
             @endforelse
+
         </tbody>
+
     </table>
+
 </div>

@@ -10,279 +10,259 @@
 
     @vite([
         'resources/css/app.css',
+        'resources/css/admin-footer.css',
         'resources/css/beneficiary-category-form.css',
+        'resources/js/app.js',
         'resources/js/beneficiary-category-form.js',
     ])
 </head>
 
-<body class="beneficiary-category-form-body">
+<body class="beneficiary-form-body">
 
-    <main class="beneficiary-category-form-page">
+    <main class="beneficiary-form-page">
 
-        {{-- Breadcrumb --}}
-        <nav class="beneficiary-category-form__breadcrumb"
-             aria-label="Breadcrumb">
-
+        {{-- BREADCRUMB --}}
+        <nav class="beneficiary-form__breadcrumb" aria-label="Breadcrumb">
             <a href="{{ route('beneficiary-categories.index') }}"
-               class="beneficiary-category-form__breadcrumb-back">
-
-                <span class="beneficiary-category-form__breadcrumb-arrow"
-                      aria-hidden="true">←</span>
-
+               class="beneficiary-form__breadcrumb-link">
+                <svg viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor" stroke-width="1.8"
+                     stroke-linecap="round" stroke-linejoin="round"
+                     aria-hidden="true">
+                    <path d="M19 12H5"/>
+                    <path d="m12 19-7-7 7-7"/>
+                </svg>
                 <span>Kategori Penerima</span>
             </a>
 
-            <span class="beneficiary-category-form__breadcrumb-separator"
-                  aria-hidden="true">/</span>
+            <svg class="beneficiary-form__breadcrumb-separator"
+                 viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="1.7"
+                 stroke-linecap="round" stroke-linejoin="round"
+                 aria-hidden="true">
+                <path d="m9 18 6-12"/>
+            </svg>
 
-            <span class="beneficiary-category-form__breadcrumb-current"
+            <span class="beneficiary-form__breadcrumb-current"
                   aria-current="page">
                 Tambah Kategori
             </span>
-
         </nav>
 
-        {{-- Header --}}
-        <header class="beneficiary-category-form__header">
+        {{-- PAGE HEADER --}}
+        <header class="beneficiary-form__header">
 
-            <div class="beneficiary-category-form__header-icon"
-                aria-hidden="true">
-                <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.6"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                >
-                    <path d="M3 21h18"/>
-                    <path d="M5 21V10l7-6 7 6v11"/>
-                    <path d="M9 21v-6a3 3 0 0 1 6 0v6"/>
-                    <path d="M12 2v2"/>
+            <div class="beneficiary-form__header-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor" stroke-width="1.6"
+                     stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="9" cy="8" r="3.5"/>
+                    <path d="M2.5 20v-1.5a6.5 6.5 0 0 1 13 0V20"/>
+                    <path d="M19 8v6"/>
+                    <path d="M16 11h6"/>
                 </svg>
             </div>
 
-            <div class="beneficiary-category-form__heading">
-
-                <span class="beneficiary-category-form__eyebrow">
-                    ADMIN PANEL · MASJID SABILILLAH
+            <div class="beneficiary-form__heading">
+                <span class="beneficiary-form__eyebrow">
+                    ADMIN PANEL
                 </span>
 
                 <h1>Tambah Kategori Penerima Manfaat</h1>
 
                 <p>
                     Tambahkan kategori untuk mengelompokkan penerima bantuan
-                    agar pendataan dan pengelolaan bantuan masjid tetap
-                    akurat dan terstruktur.
+                    agar pendataan dan pengelolaan bantuan Masjid Sabilillah
+                    tetap akurat dan terstruktur.
                 </p>
-
             </div>
 
         </header>
 
-        {{-- Keterangan kolom wajib --}}
-        <p class="beneficiary-category-form__required-note">
-            <span aria-hidden="true">*</span>
+        {{-- REQUIRED INFORMATION --}}
+        <div class="beneficiary-form__required-note">
+            <span class="beneficiary-form__required-symbol">*</span>
             Kolom bertanda bintang wajib diisi.
-        </p>
+        </div>
 
-        {{-- Pesan kesalahan --}}
-        @if ($errors->any())
-            <div class="beneficiary-category-form__alert beneficiary-category-form__alert--error"
-                 role="alert">
-
-                <strong>Kategori belum dapat disimpan.</strong>
-
-                <p>Periksa kembali data yang kamu masukkan.</p>
-
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-
-            </div>
-        @endif
-
-        {{-- Form Create --}}
-        <form action="{{ route('beneficiary-categories.store') }}"
-              method="POST"
-              class="beneficiary-category-form">
-
+        {{-- FORM --}}
+        <form
+            action="{{ route('beneficiary-categories.store') }}"
+            method="POST"
+            class="beneficiary-form"
+        >
             @csrf
 
-            <section class="beneficiary-category-form__card"
-                     aria-labelledby="category-section-title">
+            {{-- VALIDATION SUMMARY --}}
+            @if ($errors->any())
+                <div class="beneficiary-form__alert" role="alert">
 
-                {{-- Header bagian --}}
-                <div class="beneficiary-category-form__card-header">
-
-                    <div class="beneficiary-category-form__section-icon"
-                         aria-hidden="true">
-
-                        <svg viewBox="0 0 24 24"
-                             fill="none"
-                             stroke="currentColor"
-                             stroke-width="1.7"
-                             stroke-linecap="round"
-                             stroke-linejoin="round">
-
-                            <path d="M4 5.5h16v13H4z"/>
-                            <path d="M8 9h8M8 13h5"/>
-                            <path d="M8 2.5v3M16 2.5v3"/>
-
-                        </svg>
-
+                    <div class="beneficiary-form__alert-icon">
+                        !
                     </div>
 
-                    <div class="beneficiary-category-form__section-heading">
+                    <div class="beneficiary-form__alert-content">
 
-                        <h2 id="category-section-title">
-                            Informasi Kategori
-                        </h2>
+                        <strong>Kategori belum dapat disimpan.</strong>
 
                         <p>
-                            Lengkapi informasi dasar kategori penerima manfaat.
+                            Periksa kembali beberapa kolom berikut.
+                        </p>
+
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+
+                    </div>
+                </div>
+            @endif
+
+            {{-- BAGIAN 01: INFORMASI KATEGORI --}}
+            <section class="beneficiary-form__section">
+
+                <div class="beneficiary-form__section-header">
+
+                    <div class="beneficiary-form__section-icon">
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.7"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
+                        >
+                            <rect x="4" y="4" width="16" height="16" rx="2"/>
+                            <path d="M8 9h8M8 13h8M8 17h4"/>
+                        </svg>
+                    </div>
+
+                    <div class="beneficiary-form__section-heading">
+
+                        <h2>Informasi Kategori</h2>
+
+                        <p>
+                            Masukkan nama dan keterangan kategori penerima manfaat.
                         </p>
 
                     </div>
 
-                    <span class="beneficiary-category-form__step">
-                        BAGIAN 1
+                    <span class="beneficiary-form__step">
+                        01
                     </span>
 
                 </div>
 
-                {{-- Isi form --}}
-                <div class="beneficiary-category-form__body">
+                <div class="beneficiary-form__grid">
 
-                    <div class="beneficiary-category-form__grid">
+                    {{-- NAMA KATEGORI --}}
+                    <div class="beneficiary-form__field beneficiary-form__field--full">
 
-                        {{-- Nama kategori --}}
-                        <div class="beneficiary-category-form__field beneficiary-category-form__field--full">
+                        <label for="name">
+                            Nama Kategori
+                            <span class="required">*</span>
+                        </label>
 
-                            <label for="name">
-                                Nama Kategori
-                                <span class="required" aria-hidden="true">*</span>
-                            </label>
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            value="{{ old('name') }}"
+                            placeholder="Contoh: Fakir Miskin"
+                            maxlength="255"
+                            autocomplete="off"
+                            required
+                            class="@error('name') is-invalid @enderror"
+                        >
 
-                            <input
-                                type="text"
-                                id="name"
-                                name="name"
-                                value="{{ old('name') }}"
-                                placeholder="Contoh: Fakir Miskin"
-                                maxlength="255"
-                                autocomplete="off"
-                                required
-                                class="{{ $errors->has('name') ? 'is-invalid' : '' }}"
-                                @if ($errors->has('name'))
-                                    aria-invalid="true"
-                                    aria-describedby="name-error"
-                                @endif
-                            >
+                        <small class="beneficiary-form__hint">
+                            Masukkan nama kategori yang jelas dan mudah dikenali.
+                        </small>
 
-                            <span class="beneficiary-category-form__hint">
-                                Masukkan nama kategori yang jelas dan mudah dikenali.
-                            </span>
-
-                            @error('name')
-                                <span id="name-error"
-                                      class="beneficiary-category-form__error">
-                                    {{ $message }}
-                                </span>
-                            @enderror
-
-                        </div>
-
-                        {{-- Deskripsi --}}
-                        <div class="beneficiary-category-form__field beneficiary-category-form__field--full">
-
-                            <label for="description">
-                                Deskripsi Kategori
-                                <span class="beneficiary-category-form__optional">
-                                    Opsional
-                                </span>
-                            </label>
-
-                            <textarea
-                                id="description"
-                                name="description"
-                                rows="4"
-                                maxlength="1000"
-                                placeholder="Jelaskan kriteria atau keterangan kategori penerima manfaat..."
-                                class="{{ $errors->has('description') ? 'is-invalid' : '' }}"
-                                @if ($errors->has('description'))
-                                    aria-invalid="true"
-                                    aria-describedby="description-error"
-                                @endif
-                            >{{ old('description') }}</textarea>
-
-                            <div class="beneficiary-category-form__field-meta">
-
-                                <span class="beneficiary-category-form__hint">
-                                    Berikan keterangan tambahan jika diperlukan.
-                                </span>
-
-                                <span class="beneficiary-category-form__counter"
-                                      id="description-counter"
-                                      aria-live="off">0/1000</span>
-
-                            </div>
-
-                            @error('description')
-                                <span id="description-error"
-                                      class="beneficiary-category-form__error">
-                                    {{ $message }}
-                                </span>
-                            @enderror
-
-                        </div>
+                        @error('name')
+                            <small class="beneficiary-form__error">
+                                {{ $message }}
+                            </small>
+                        @enderror
 
                     </div>
 
-                </div>
+                    {{-- DESKRIPSI KATEGORI --}}
+                    <div class="beneficiary-form__field beneficiary-form__field--full">
 
-                {{-- Tombol --}}
-                <div class="beneficiary-category-form__footer">
+                        <label for="description">
+                            Deskripsi Kategori
+                            <span class="beneficiary-form__optional">
+                                Opsional
+                            </span>
+                        </label>
 
-                    <a href="{{ route('beneficiary-categories.index') }}"
-                       class="beneficiary-category-form__button beneficiary-category-form__button--secondary">
-                        Batal
-                    </a>
+                        <textarea
+                            id="description"
+                            name="description"
+                            rows="3"
+                            maxlength="1000"
+                            placeholder="Jelaskan kriteria atau keterangan kategori penerima manfaat..."
+                            class="@error('description') is-invalid @enderror"
+                        >{{ old('description') }}</textarea>
 
-                    <button type="submit"
-                            class="beneficiary-category-form__button beneficiary-category-form__button--primary">
+                        <small class="beneficiary-form__hint">
+                            Berikan keterangan tambahan jika diperlukan.
+                        </small>
 
-                        <svg viewBox="0 0 24 24"
-                             fill="none"
-                             stroke="currentColor"
-                             stroke-width="1.8"
-                             stroke-linecap="round"
-                             stroke-linejoin="round"
-                             aria-hidden="true">
+                        @error('description')
+                            <small class="beneficiary-form__error">
+                                {{ $message }}
+                            </small>
+                        @enderror
 
-                            <path d="M12 5v14M5 12h14"/>
-
-                        </svg>
-
-                        Simpan Kategori
-
-                    </button>
+                    </div>
 
                 </div>
 
             </section>
 
+            {{-- FORM ACTIONS --}}
+            <div class="beneficiary-form__actions">
+
+                <a
+                    href="{{ route('beneficiary-categories.index') }}"
+                    class="beneficiary-form__button beneficiary-form__button--secondary"
+                >
+                    Batal
+                </a>
+
+                <button
+                    type="submit"
+                    class="beneficiary-form__button beneficiary-form__button--primary"
+                >
+                    Simpan Kategori
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.8"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                    >
+                        <path d="M5 12h14"/>
+                        <path d="m13 6 6 6-6 6"/>
+                    </svg>
+
+                </button>
+
+            </div>
+
         </form>
 
-        <p class="beneficiary-category-form__footer-note">
-            Masjid Sabilillah
-            <span aria-hidden="true">•</span>
-            Pengelolaan Data Penerima Manfaat
-        </p>
-
     </main>
+
+    {{-- FOOTER GLOBAL --}}
+    <x-admin.footer />
 
 </body>
 </html>

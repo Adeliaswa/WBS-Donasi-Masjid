@@ -1,276 +1,327 @@
 
-<!DOCTYPE html>
-<html lang="id">
+@extends('layouts.admin')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#294236">
+@section('title', 'Detail Donasi - Admin Masjid Sabilillah')
 
-    <title>Detail Donasi | Masjid Sabilillah</title>
-
+@push('styles')
     @vite([
-        'resources/css/app.css',
-        'resources/css/admin-sidebar.css',
-        'resources/css/admin-donations.css'
+        'resources/css/admin-donations.css',
+        'resources/css/admin-donation-show.css',
     ])
-</head>
+@endpush
 
-<body class="admin-layout">
+@section('content')
 
-    {{-- Sidebar navigasi admin --}}
-    @include('components.admin.sidebar')
+@php
+    $status = strtolower((string) $donation->verification_status);
 
-    <div class="admin-main">
+    $statusClass = match ($status) {
+        'pending' => 'pending',
+        'verified' => 'verified',
+        'rejected' => 'rejected',
+        default => 'unknown',
+    };
 
-        {{-- Header mobile --}}
-        <div class="admin-mobile-header">
+    $statusLabel = match ($status) {
+        'pending' => 'Menunggu Verifikasi',
+        'verified' => 'Terverifikasi',
+        'rejected' => 'Ditolak',
+        default => ucfirst((string) $donation->verification_status),
+    };
 
-            <button
-                type="button"
-                class="admin-sidebar-toggle"
-                id="openSidebar"
-                aria-label="Buka menu navigasi"
-                aria-controls="adminSidebar"
-                aria-expanded="false"
-            >
-                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <path
-                        d="M4 6H20M4 12H20M4 18H20"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                    />
-                </svg>
-            </button>
+    $formatRupiah = function ($value) {
+        return 'Rp ' . number_format((float) $value, 0, ',', '.');
+    };
+@endphp
 
-            <div class="admin-mobile-header__identity">
-                <span class="admin-mobile-header__title">
-                    Masjid Sabilillah
-                </span>
+<div class="donations-page donation-detail-page">
 
-                <span class="admin-mobile-header__subtitle">
-                    Panel Administrasi
-                </span>
+    {{-- ==========================================
+         PAGE HEADER
+    =========================================== --}}
+
+    <section class="admin-page-header">
+
+        <div class="admin-page-header__content">
+
+            <div class="admin-page-header__eyebrow">
+                <span class="admin-page-header__line"></span>
+                Masjid Sabilillah
             </div>
+
+            <h1 class="admin-page-header__title">
+                Detail Donasi
+            </h1>
+
+            <p class="admin-page-header__description">
+                Informasi lengkap transaksi donasi yang tercatat
+                dalam sistem administrasi Masjid Sabilillah.
+            </p>
 
         </div>
 
-        <main class="donations-page donation-detail-page">
+        <div class="admin-page-header__action donation-detail-page__header-actions">
 
-            {{-- Header halaman --}}
-            <header class="donations-page__header">
-
-                <div class="donations-page__heading">
-                    <div class="donations-page__identity">
-
-                        <span class="donations-page__eyebrow">
-                            MASJID SABILILLAH
-                        </span>
-
-                        <h1 class="donations-page__title">
-                            Detail Donasi
-                        </h1>
-
-                        <p class="donations-page__description">
-                            Informasi lengkap pencatatan donasi masjid
-                            yang tersimpan dalam sistem.
-                        </p>
-
-                    </div>
-                </div>
-
-                <div class="donation-detail-page__actions">
-
-                    <a
-                        href="{{ route('donations.index') }}"
-                        class="donations-button donations-button--secondary"
-                    >
-                        Kembali
-                    </a>
-
-                    <a
-                        href="{{ route('donations.edit', $donation) }}"
-                        class="donations-button donations-button--primary"
-                    >
-                        Ubah Donasi
-                    </a>
-
-                </div>
-
-            </header>
-
-            {{-- Notifikasi berhasil --}}
-            @if (session('success'))
-                <div
-                    class="donations-alert donations-alert--success"
-                    role="status"
-                >
-                    {{ session('success') }}
-                </div>
-            @endif
-
-            {{-- Status donasi --}}
-            @php
-                $status = strtolower(
-                    (string) $donation->verification_status
-                );
-
-                $statusClass = match ($status) {
-                    'pending' => 'pending',
-                    'verified' => 'verified',
-                    'rejected' => 'rejected',
-                    default => 'unknown',
-                };
-
-                $statusLabel = match ($status) {
-                    'pending' => 'Menunggu Verifikasi',
-                    'verified' => 'Terverifikasi',
-                    'rejected' => 'Ditolak',
-                    default => ucfirst(
-                        (string) $donation->verification_status
-                    ),
-                };
-            @endphp
-
-            {{-- Kartu detail donasi --}}
-            <section
-                class="donation-detail-card"
-                aria-labelledby="donationDetailTitle"
+            <a
+                href="{{ route('donations.index') }}"
+                class="donations-button donations-button--secondary"
             >
+                <svg viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round"
+                    aria-hidden="true">
+                    <path d="M19 12H5"/>
+                    <path d="m12 19-7-7 7-7"/>
+                </svg>
+                Kembali
+            </a>
 
-                <div class="donation-detail-card__header">
+            <a
+                href="{{ route('donations.edit', $donation) }}"
+                class="donations-button donations-button--primary"
+            >
+                <svg viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round"
+                    aria-hidden="true">
+                    <path d="M12 20h9"/>
+                    <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L8 18l-4 1 1-4Z"/>
+                </svg>
+                Ubah Donasi
+            </a>
 
-                    <div>
-                        <h2
-                            class="donations-section__title"
-                            id="donationDetailTitle"
-                        >
-                            Informasi Donasi
-                        </h2>
+        </div>
 
-                        <p class="donations-section__description">
-                            Rincian donasi untuk membantu proses
-                            pencatatan dan verifikasi.
-                        </p>
-                    </div>
+    </section>
 
-                    <span class="donation-detail-card__label">
-                        Detail transaksi
+
+    {{-- ==========================================
+         SUCCESS NOTIFICATION
+    =========================================== --}}
+
+    @if (session('success'))
+
+        <div class="donation-show-alert" role="status">
+
+            <svg viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round"
+                aria-hidden="true">
+                <path d="M20 6 9 17l-5-5"/>
+                <circle cx="12" cy="12" r="10"/>
+            </svg>
+
+            <span>{{ session('success') }}</span>
+
+        </div>
+
+    @endif
+
+
+    {{-- ==========================================
+         DONATION DETAIL
+    =========================================== --}}
+
+    <section class="donation-show-card">
+
+        {{-- CARD HEADER --}}
+
+        <div class="donation-show-card__header">
+
+            <div class="donation-show-card__heading">
+
+                <div class="donation-show-card__icon">
+                    <svg viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="1.8"
+                        stroke-linecap="round" stroke-linejoin="round"
+                        aria-hidden="true">
+                        <path d="M12 2v20"/>
+                        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                    </svg>
+                </div>
+
+                <div>
+                    <h2>Informasi Donasi</h2>
+
+                    <p>
+                        Rincian transaksi donasi yang tersimpan
+                        dalam sistem.
+                    </p>
+                </div>
+
+            </div>
+
+            <span class="donation-show-card__reference">
+                Detail Transaksi
+            </span>
+
+        </div>
+
+
+        {{-- CARD BODY --}}
+
+        <div class="donation-show-card__body">
+
+            {{-- DONATION HIGHLIGHT --}}
+
+            <div class="donation-show-highlight">
+
+                <div class="donation-show-highlight__amount">
+
+                    <span class="donation-show-label">
+                        Nominal Donasi
+                    </span>
+
+                    <strong>
+                        {{ $formatRupiah($donation->amount) }}
+                    </strong>
+
+                    <span class="donation-show-highlight__caption">
+                        Jumlah donasi yang dicatat
                     </span>
 
                 </div>
 
-                <div class="donation-detail-card__body">
+                <div class="donation-show-highlight__divider"></div>
 
-                    {{-- Ringkasan nominal dan status --}}
-                    <div class="donation-detail-summary">
+                <div class="donation-show-highlight__verification">
 
-                        <div class="donation-detail-summary__amount">
-                            <span class="donation-detail-summary__label">
-                                Nominal Donasi
-                            </span>
+                    <span class="donation-show-label">
+                        Status Verifikasi
+                    </span>
 
-                            <strong>
-                                Rp {{ number_format(
-                                    (float) $donation->amount,
-                                    0,
-                                    ',',
-                                    '.'
-                                ) }}
-                            </strong>
-                        </div>
+                    <span class="donation-show-status donation-show-status--{{ $statusClass }}">
+                        <span class="donation-show-status__dot"></span>
+                        {{ $statusLabel }}
+                    </span>
 
-                        <div class="donation-detail-summary__status">
-                            <span class="donation-detail-summary__label">
-                                Status Verifikasi
-                            </span>
+                    <span class="donation-show-highlight__caption">
+                        Status pencatatan transaksi
+                    </span>
 
-                            <span
-                                class="donations-status donations-status--{{ $statusClass }}"
-                            >
-                                {{ $statusLabel }}
-                            </span>
-                        </div>
+                </div>
 
+            </div>
+
+
+            {{-- DONOR INFORMATION --}}
+
+            <div class="donation-show-section">
+
+                <div class="donation-show-section__heading">
+
+                    <div>
+                        <span class="donation-show-section__eyebrow">
+                            INFORMASI UTAMA
+                        </span>
+
+                        <h3>Data Donasi</h3>
                     </div>
 
-                    {{-- Rincian informasi donasi --}}
-                    <dl class="donation-detail-grid">
+                </div>
 
-                        <div class="donation-detail-item">
-                            <dt>Nama Donatur</dt>
-                            <dd>
-                                {{ $donation->display_donor_name }}
-                            </dd>
-                        </div>
+                <dl class="donation-show-grid">
 
-                        <div class="donation-detail-item">
-                            <dt>Tanggal Donasi</dt>
-                            <dd>
-                                {{ $donation->donation_date?->format('d-m-Y') ?? '-' }}
-                            </dd>
-                        </div>
+                    <div class="donation-show-item">
+                        <dt>Nama Donatur</dt>
+                        <dd>{{ $donation->display_donor_name ?: '-' }}</dd>
+                    </div>
 
-                        <div class="donation-detail-item">
-                            <dt>Kanal Donasi</dt>
-                            <dd>
-                                {{ $donation->channel ?: '-' }}
-                            </dd>
-                        </div>
+                    <div class="donation-show-item">
+                        <dt>Tanggal Donasi</dt>
+                        <dd>
+                            {{ $donation->donation_date?->format('d-m-Y') ?? '-' }}
+                        </dd>
+                    </div>
 
-                        <div class="donation-detail-item">
-                            <dt>Metode Pembayaran</dt>
-                            <dd>
-                                {{ $donation->payment_method ?: '-' }}
-                            </dd>
-                        </div>
+                    <div class="donation-show-item">
+                        <dt>Kanal Donasi</dt>
+                        <dd>{{ $donation->channel ?: '-' }}</dd>
+                    </div>
 
-                        <div class="donation-detail-item">
-                            <dt>Kategori Donasi</dt>
-                            <dd>
-                                {{ $donation->category ?: '-' }}
-                            </dd>
-                        </div>
+                    <div class="donation-show-item">
+                        <dt>Metode Pembayaran</dt>
+                        <dd>{{ $donation->payment_method ?: '-' }}</dd>
+                    </div>
 
-                        <div class="donation-detail-item donation-detail-item--full">
-                            <dt>Catatan</dt>
-                            <dd class="donation-detail-item__notes">
-                                {{ $donation->notes ?: '-' }}
-                            </dd>
-                        </div>
+                    <div class="donation-show-item donation-show-item--full">
+                        <dt>Kategori Donasi</dt>
+                        <dd>{{ $donation->category ?: '-' }}</dd>
+                    </div>
 
-                    </dl>
+                </dl>
+
+            </div>
+
+
+            {{-- NOTES --}}
+
+            <div class="donation-show-section donation-show-section--notes">
+
+                <div class="donation-show-section__heading">
+
+                    <div>
+                        <span class="donation-show-section__eyebrow">
+                            KETERANGAN
+                        </span>
+
+                        <h3>Catatan Donasi</h3>
+                    </div>
 
                 </div>
 
-                {{-- Footer kartu --}}
-                <div class="donation-detail-card__footer">
-
+                <div class="donation-show-notes">
                     <p>
-                        Pastikan informasi donasi sesuai dengan
-                        catatan penerimaan yang tersimpan.
+                        {{ $donation->notes ?: 'Tidak ada catatan tambahan untuk transaksi donasi ini.' }}
                     </p>
-
-                    <a
-                        href="{{ route('donations.edit', $donation) }}"
-                        class="donations-button donations-button--primary"
-                    >
-                        Ubah Data Donasi
-                    </a>
-
                 </div>
 
-            </section>
+            </div>
 
-        </main>
+        </div>
 
-    </div>
 
-    {{-- JavaScript navigasi sidebar --}}
-    @vite([
-        'resources/js/admin-sidebar.js'
-    ])
+        {{-- CARD FOOTER --}}
 
-</body>
-</html>
+        <div class="donation-show-card__footer">
+
+            <div class="donation-show-card__footer-info">
+
+                <svg viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="1.8"
+                    stroke-linecap="round" stroke-linejoin="round"
+                    aria-hidden="true">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 16v-4"/>
+                    <path d="M12 8h.01"/>
+                </svg>
+
+                <p>
+                    Pastikan informasi transaksi sesuai dengan
+                    catatan penerimaan donasi.
+                </p>
+
+            </div>
+
+            <a
+                href="{{ route('donations.edit', $donation) }}"
+                class="donations-button donations-button--primary donation-show-edit-button"
+            >
+                <svg viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round"
+                    aria-hidden="true">
+                    <path d="M12 20h9"/>
+                    <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L8 18l-4 1 1-4Z"/>
+                </svg>
+
+                Ubah Data Donasi
+            </a>
+
+        </div>
+
+    </section>
+
+</div>
+
+@endsection

@@ -1,137 +1,206 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#294236">
 
-    <title>Data Penerima Manfaat | Masjid Sabilillah</title>
+@extends('layouts.admin')
 
-    @vite([
-        'resources/css/app.css',
-        'resources/css/admin-sidebar.css',
-        'resources/css/admin-beneficiaries.css',
-        'resources/js/app.js',
-        'resources/js/admin-sidebar.js',
-        'resources/js/beneficiary-categories.js',
-    ])
-    
-</head>
+@section('title', 'Data Penerima Manfaat - Admin Masjid Sabilillah')
 
-<body class="admin-layout">
+@push('styles')
+    @vite('resources/css/admin-beneficiaries.css')
+@endpush
 
-    {{-- Sidebar Admin --}}
-    @include('components.admin.sidebar')
+@push('scripts')
+    @vite('resources/js/beneficiary-categories.js')
+@endpush
 
-    {{-- Konten Utama --}}
-    <div class="admin-main">
-        <main class="beneficiaries-page">
+@section('content')
 
-            {{-- Header Halaman --}}
-            <header class="beneficiaries-header">
-                <div class="beneficiaries-header__content">
-                    <span class="beneficiaries-header__eyebrow">
-                        MASJID SABILILLAH
-                    </span>
+<div class="beneficiaries-page">
 
-                    <h1 class="beneficiaries-header__title">
-                        Data Penerima Manfaat
-                    </h1>
+    {{-- ==========================================
+         PAGE HEADER
+    =========================================== --}}
 
-                    <p class="beneficiaries-header__description">
-                        Kelola dan pantau data penerima bantuan masjid
-                        dengan tertib dan terstruktur.
-                    </p>
-                </div>
+    <section class="admin-page-header">
 
-                <a
-                    href="{{ route('beneficiaries.create') }}"
-                    class="beneficiaries-button beneficiaries-button--primary"
-                >
-                    <span aria-hidden="true">+</span>
-                    Tambah Penerima
-                </a>
-            </header>
+        <div class="admin-page-header__content">
 
-            {{-- Notifikasi Berhasil --}}
-            @if (session('success'))
-                <div
-                    class="beneficiaries-alert beneficiaries-alert--success"
-                    role="status"
-                >
-                    {{ session('success') }}
-                </div>
-            @endif
+            <div class="admin-page-header__eyebrow">
+                <span class="admin-page-header__line"></span>
+                Masjid Sabilillah
+            </div>
 
-            {{-- Notifikasi Error --}}
-            @if (session('error'))
-                <div
-                    class="beneficiaries-alert beneficiaries-alert--error"
-                    role="alert"
-                >
-                    {{ session('error') }}
-                </div>
-            @endif
+            <h1 class="admin-page-header__title">
+                Data Penerima Manfaat
+            </h1>
 
-            {{-- Notifikasi Validasi --}}
-            @if ($errors->any())
-                <div
-                    class="beneficiaries-alert beneficiaries-alert--error"
-                    role="alert"
-                >
-                    <strong>
-                        Data belum dapat diproses. Periksa kembali:
-                    </strong>
+            <p class="admin-page-header__description">
+                Kelola dan pantau data penerima bantuan masjid
+                dengan tertib dan terstruktur.
+            </p>
 
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
+        </div>
 
-            {{-- Ringkasan Penerima Manfaat --}}
-            @include('components.admin.beneficiaries.summary-cards')
+        <div class="admin-page-header__action">
 
-            {{-- Pencarian dan Filter --}}
-            @include('components.admin.beneficiaries.filters')
-
-            {{-- Daftar Penerima Manfaat --}}
-            <section
-                class="beneficiaries-section"
-                aria-labelledby="beneficiaries-list-title"
+            <a
+                href="{{ route('beneficiaries.create') }}"
+                class="beneficiaries-button beneficiaries-button--primary beneficiaries-add-button"
             >
-                <div class="beneficiaries-section__header">
-                    <div>
-                        <h2
-                            id="beneficiaries-list-title"
-                            class="beneficiaries-section__title"
-                        >
-                            Daftar Penerima
-                        </h2>
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                >
+                    <path d="M12 5v14M5 12h14"/>
+                </svg>
 
-                        <p class="beneficiaries-section__description">
-                            Informasi penerima manfaat yang tercatat
-                            dalam sistem.
-                        </p>
-                    </div>
+                Tambah Penerima
+            </a>
 
-                    <span class="beneficiaries-section__count">
-                        {{ number_format($beneficiaries->total(), 0, ',', '.') }}
-                        data
-                    </span>
+        </div>
+
+    </section>
+
+
+    {{-- ==========================================
+         NOTIFICATIONS
+    =========================================== --}}
+
+    @if (session('success'))
+
+        <div
+            class="beneficiaries-alert beneficiaries-alert--success"
+            role="status"
+        >
+            {{ session('success') }}
+        </div>
+
+    @endif
+
+
+    @if (session('error'))
+
+        <div
+            class="beneficiaries-alert beneficiaries-alert--error"
+            role="alert"
+        >
+            {{ session('error') }}
+        </div>
+
+    @endif
+
+
+    @if ($errors->any())
+
+        <div
+            class="beneficiaries-alert beneficiaries-alert--error"
+            role="alert"
+        >
+
+            <strong>
+                Data belum dapat diproses. Periksa kembali:
+            </strong>
+
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+
+        </div>
+
+    @endif
+
+
+    {{-- ==========================================
+         SUMMARY CARDS
+    =========================================== --}}
+
+    @include('components.admin.beneficiaries.summary-cards')
+
+
+    {{-- ==========================================
+         BENEFICIARIES DATA SECTION
+    =========================================== --}}
+
+    <section class="beneficiaries-section">
+
+        {{-- SECTION HEADING --}}
+
+        <div class="beneficiaries-section__heading">
+
+            <div>
+
+                <span class="beneficiaries-section__eyebrow">
+                </span>
+
+                <h2 class="beneficiaries-section__title">
+                </h2>
+
+                <p class="beneficiaries-section__description">
+                </p>
+
+            </div>
+
+        </div>
+
+
+        {{-- ======================================
+             FILTERS
+        ======================================= --}}
+
+        @include('components.admin.beneficiaries.filters')
+
+
+        {{-- ======================================
+             BENEFICIARIES TABLE CARD
+        ======================================= --}}
+
+        <div class="beneficiaries-table-card">
+
+            {{-- TABLE HEADING --}}
+
+            <div class="beneficiaries-table-card__heading">
+
+                <div>
+
+                    <h3>
+                        Seluruh Data Penerima Manfaat
+                    </h3>
+
+                    <p>
+                        Menampilkan data penerima manfaat
+                        yang tercatat dalam sistem.
+                    </p>
+
                 </div>
 
-                {{-- Tabel Data --}}
-                @include('components.admin.beneficiaries.table')
+                <span class="beneficiaries-table-card__count">
+                    {{ number_format($beneficiaries->total(), 0, ',', '.') }}
+                    Data
+                </span>
 
-                {{-- Navigasi Halaman --}}
-                @include('components.admin.beneficiaries.pagination')
-            </section>
+            </div>
 
-        </main>
-    </div>
 
-</body>
-</html>
+            {{-- TABLE CONTENT --}}
+
+            @include('components.admin.beneficiaries.table')
+
+
+            {{-- ==================================
+                 PAGINATION
+            =================================== --}}
+
+            @include('components.admin.beneficiaries.pagination')
+
+        </div>
+
+    </section>
+
+</div>
+
+@endsection

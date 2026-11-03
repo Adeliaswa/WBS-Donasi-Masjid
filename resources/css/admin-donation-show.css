@@ -1,0 +1,934 @@
+
+/* =========================================================
+   MASJID SABILILLAH
+   ADMIN - DETAIL DONASI
+   Consistent with Admin Donations
+========================================================= */
+
+
+/* =========================================================
+   1. DESIGN TOKENS
+========================================================= */
+
+.donation-detail-page {
+    --show-primary: var(--color-green-normal, #315b43);
+    --show-primary-dark: var(--color-green-dark, #244633);
+    --show-primary-light: #edf5ee;
+
+    --show-background: #ffffff;
+    --show-text: #26352b;
+    --show-muted: #758078;
+    --show-border: #e7ece7;
+
+    --show-success: #287a43;
+    --show-success-light: #effaf1;
+
+    --show-warning: #a7792f;
+    --show-warning-light: #fff7e9;
+
+    --show-danger: #c5221f;
+    --show-danger-light: #fff1f0;
+
+    --show-radius: 15px;
+    --show-shadow: 0 3px 15px rgba(27, 43, 35, .025);
+    --show-transition: .22s ease;
+
+    width: 100%;
+    min-width: 0;
+    padding-bottom: 25px;
+
+    color: var(--show-text);
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.donation-detail-page *,
+.donation-detail-page *::before,
+.donation-detail-page *::after {
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   2. PAGE HEADER
+========================================================= */
+
+.donation-detail-page .admin-page-header {
+    width: 100%;
+    min-width: 0;
+    margin-bottom: 25px;
+}
+
+.donation-detail-page .admin-page-header__content {
+    min-width: 0;
+}
+
+.donation-detail-page .admin-page-header__description {
+    max-width: 760px;
+}
+
+.donation-detail-page .admin-page-header__action {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   3. HEADER BUTTONS
+========================================================= */
+
+.donation-detail-page .donations-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    min-height: 43px;
+    padding: 10px 16px;
+
+    border: 1px solid transparent;
+    border-radius: 10px;
+
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.4;
+
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+
+    transition:
+        color var(--show-transition),
+        background var(--show-transition),
+        border-color var(--show-transition),
+        box-shadow var(--show-transition),
+        transform var(--show-transition);
+}
+
+.donation-detail-page .donations-button svg {
+    display: block;
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+}
+
+.donation-detail-page .donations-button:active {
+    transform: translateY(1px);
+}
+
+.donation-detail-page .donations-button--primary {
+    color: #ffffff;
+    background: var(--show-primary);
+    border-color: var(--show-primary);
+    box-shadow: 0 4px 10px rgba(41, 66, 54, .08);
+}
+
+.donation-detail-page .donations-button--primary:hover {
+    color: #ffffff;
+    background: var(--show-primary-dark);
+    border-color: var(--show-primary-dark);
+}
+
+.donation-detail-page .donations-button--secondary {
+    color: var(--show-text);
+    background: #ffffff;
+    border-color: var(--show-border);
+}
+
+.donation-detail-page .donations-button--secondary:hover {
+    color: var(--show-primary);
+    background: var(--show-primary-light);
+    border-color: #d5e3d6;
+}
+
+
+/* =========================================================
+   4. SUCCESS ALERT
+========================================================= */
+
+.donation-show-alert {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 14px 17px;
+
+    color: var(--show-success);
+    background: var(--show-success-light);
+
+    border: 1px solid #d8f0df;
+    border-radius: 11px;
+
+    font-size: 12px;
+    line-height: 1.6;
+
+    animation: donation-show-enter .25s ease both;
+}
+
+.donation-show-alert svg {
+    width: 19px;
+    height: 19px;
+    flex-shrink: 0;
+}
+
+@keyframes donation-show-enter {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* =========================================================
+   5. DETAIL CARD
+========================================================= */
+
+.donation-show-card {
+    width: 100%;
+    min-width: 0;
+
+    overflow: hidden;
+
+    background: var(--show-background);
+    border: 1px solid var(--show-border);
+    border-radius: var(--show-radius);
+
+    box-shadow: var(--show-shadow);
+}
+
+
+/* =========================================================
+   6. CARD HEADER
+========================================================= */
+
+.donation-show-card__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+
+    padding: 24px 27px;
+
+    border-bottom: 1px solid #edf0ed;
+}
+
+.donation-show-card__heading {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+
+    min-width: 0;
+}
+
+.donation-show-card__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    width: 44px;
+    height: 44px;
+
+    color: var(--show-primary);
+    background: var(--show-primary-light);
+
+    border: 1px solid #e5eee6;
+    border-radius: 13px;
+}
+
+.donation-show-card__icon svg {
+    width: 22px;
+    height: 22px;
+}
+
+.donation-show-card__heading > div:last-child {
+    min-width: 0;
+}
+
+.donation-show-card__heading h2 {
+    margin: 0;
+
+    color: var(--show-primary-dark);
+
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.5;
+}
+
+.donation-show-card__heading p {
+    margin: 5px 0 0;
+
+    color: var(--show-muted);
+
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+.donation-show-card__reference {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    min-height: 32px;
+    padding: 6px 11px;
+
+    color: var(--show-primary);
+    background: var(--show-primary-light);
+
+    border: 1px solid #dfebdf;
+    border-radius: 9px;
+
+    font-size: 10px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   7. CARD BODY
+========================================================= */
+
+.donation-show-card__body {
+    padding: 25px 27px;
+}
+
+
+/* =========================================================
+   8. DONATION HIGHLIGHT
+========================================================= */
+
+.donation-show-highlight {
+    display: grid;
+    grid-template-columns: 1fr 1px 1fr;
+
+    align-items: center;
+    gap: 28px;
+
+    width: 100%;
+    min-width: 0;
+
+    margin-bottom: 30px;
+    padding: 25px 27px;
+
+    background: #f7faf7;
+
+    border: 1px solid #e8efe8;
+    border-radius: 13px;
+}
+
+.donation-show-highlight__amount,
+.donation-show-highlight__verification {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    min-width: 0;
+}
+
+.donation-show-label {
+    display: block;
+
+    margin-bottom: 9px;
+
+    color: var(--show-muted);
+
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.donation-show-highlight__amount strong {
+    display: block;
+
+    max-width: 100%;
+
+    color: var(--show-primary-dark);
+
+    font-size: clamp(25px, 2.5vw, 32px);
+    font-weight: 700;
+    letter-spacing: -.8px;
+    line-height: 1.3;
+
+    overflow-wrap: anywhere;
+    font-variant-numeric: tabular-nums;
+}
+
+.donation-show-highlight__caption {
+    display: block;
+
+    margin-top: 8px;
+
+    color: #929b92;
+
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+.donation-show-highlight__divider {
+    width: 1px;
+    height: 72px;
+
+    background: #e2eae2;
+}
+
+
+/* =========================================================
+   9. VERIFICATION STATUS
+========================================================= */
+
+.donation-show-status {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    min-height: 32px;
+    padding: 7px 12px;
+
+    border: 1px solid transparent;
+    border-radius: 8px;
+
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.5;
+
+    white-space: nowrap;
+}
+
+.donation-show-status__dot {
+    display: inline-block;
+    flex: 0 0 7px;
+
+    width: 7px;
+    height: 7px;
+
+    background: currentColor;
+    border-radius: 50%;
+}
+
+.donation-show-status--pending {
+    color: var(--show-warning);
+    background: var(--show-warning-light);
+    border-color: #f1e4c9;
+}
+
+.donation-show-status--verified {
+    color: var(--show-success);
+    background: var(--show-success-light);
+    border-color: #dcefe0;
+}
+
+.donation-show-status--rejected {
+    color: var(--show-danger);
+    background: var(--show-danger-light);
+    border-color: #f8e0de;
+}
+
+.donation-show-status--unknown {
+    color: #657366;
+    background: #f2f5f2;
+    border-color: #e5eae5;
+}
+
+
+/* =========================================================
+   10. INFORMATION SECTION
+========================================================= */
+
+.donation-show-section {
+    width: 100%;
+    min-width: 0;
+}
+
+.donation-show-section__heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 19px;
+}
+
+.donation-show-section__eyebrow {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: var(--show-primary);
+
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    line-height: 1.5;
+}
+
+.donation-show-section__heading h3 {
+    margin: 0;
+
+    color: var(--show-primary-dark);
+
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   11. INFORMATION GRID
+========================================================= */
+
+.donation-show-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 0 22px;
+
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.donation-show-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    min-width: 0;
+    min-height: 83px;
+
+    padding: 15px 0;
+
+    border-bottom: 1px solid #edf0ed;
+}
+
+.donation-show-item--full {
+    grid-column: 1 / -1;
+}
+
+.donation-show-item dt {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: var(--show-muted);
+
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.donation-show-item dd {
+    display: block;
+
+    margin: 0;
+
+    color: var(--show-text);
+
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.7;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* =========================================================
+   12. NOTES SECTION
+========================================================= */
+
+.donation-show-section--notes {
+    margin-top: 27px;
+}
+
+.donation-show-section--notes
+.donation-show-section__heading {
+    margin-bottom: 13px;
+}
+
+/* Kotak catatan */
+
+.donation-show-notes {
+    display: block;
+
+    width: 100%;
+    min-width: 0;
+    min-height: 76px;
+
+    padding: 15px 18px;
+
+    background: #f8faf8;
+
+    border: 1px solid #e9eee9;
+    border-radius: 10px;
+
+    text-align: left;
+}
+
+/* Tulisan di dalam kotak catatan */
+
+.donation-show-notes p {
+    display: block;
+
+    width: 100%;
+    margin: 0;
+    padding: 0;
+
+    color: #59665c;
+
+    font-family: inherit;
+    font-size: 12px !important;
+    font-weight: 400 !important;
+    line-height: 1.7 !important;
+
+    text-align: left !important;
+    letter-spacing: normal !important;
+
+    white-space: pre-line;
+    overflow-wrap: anywhere;
+}
+
+
+/* =========================================================
+   13. CARD FOOTER
+========================================================= */
+
+.donation-show-card__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+
+    padding: 20px 27px;
+
+    background: #fbfcfb;
+    border-top: 1px solid #edf0ed;
+}
+
+.donation-show-card__footer-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    min-width: 0;
+}
+
+.donation-show-card__footer-info svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+
+    color: var(--show-muted);
+}
+
+.donation-show-card__footer-info p {
+    margin: 0;
+
+    color: var(--show-muted);
+
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+.donation-show-edit-button {
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   14. FOCUS ACCESSIBILITY
+========================================================= */
+
+.donation-detail-page a:focus-visible {
+    outline: 3px solid rgba(41, 66, 54, .2);
+    outline-offset: 3px;
+}
+
+
+/* =========================================================
+   15. TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .donation-show-card__header {
+        padding: 22px;
+    }
+
+    .donation-show-card__body {
+        padding: 22px;
+    }
+
+    .donation-show-highlight {
+        gap: 20px;
+        padding: 22px;
+    }
+
+    .donation-show-card__footer {
+        padding: 19px 22px;
+    }
+
+}
+
+
+/* =========================================================
+   16. MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .donation-detail-page {
+        padding-bottom: 20px;
+    }
+
+    /* PAGE HEADER */
+
+    .donation-detail-page .admin-page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 17px;
+
+        margin-bottom: 20px;
+    }
+
+    .donation-detail-page .admin-page-header__content {
+        width: 100%;
+    }
+
+    .donation-detail-page .admin-page-header__action {
+        justify-content: flex-start;
+
+        width: 100%;
+        gap: 8px;
+    }
+
+    .donation-detail-page .admin-page-header__action .donations-button {
+        flex: 1;
+    }
+
+    /* ALERT */
+
+    .donation-show-alert {
+        align-items: flex-start;
+        padding: 12px 14px;
+        font-size: 11px;
+    }
+
+    /* CARD */
+
+    .donation-show-card {
+        border-radius: 13px;
+    }
+
+    .donation-show-card__header {
+        align-items: flex-start;
+        padding: 18px 16px;
+        gap: 12px;
+    }
+
+    .donation-show-card__heading {
+        gap: 10px;
+    }
+
+    .donation-show-card__icon {
+        width: 38px;
+        height: 38px;
+        border-radius: 11px;
+    }
+
+    .donation-show-card__icon svg {
+        width: 19px;
+        height: 19px;
+    }
+
+    .donation-show-card__heading h2 {
+        font-size: 14px;
+    }
+
+    .donation-show-card__heading p {
+        font-size: 10px;
+    }
+
+    .donation-show-card__reference {
+        min-height: 27px;
+        padding: 5px 8px;
+        font-size: 9px;
+    }
+
+    .donation-show-card__body {
+        padding: 18px 16px;
+    }
+
+    /* HIGHLIGHT */
+
+    .donation-show-highlight {
+        grid-template-columns: 1fr;
+        gap: 16px;
+
+        margin-bottom: 25px;
+        padding: 18px 16px;
+
+        border-radius: 11px;
+    }
+
+    .donation-show-highlight__amount strong {
+        font-size: 25px;
+    }
+
+    .donation-show-highlight__divider {
+        width: 100%;
+        height: 1px;
+    }
+
+    .donation-show-label {
+        margin-bottom: 7px;
+        font-size: 10px;
+    }
+
+    .donation-show-highlight__caption {
+        font-size: 9px;
+    }
+
+    .donation-show-status {
+        min-height: 29px;
+        font-size: 10px;
+    }
+
+    /* INFORMATION */
+
+    .donation-show-section__heading {
+        margin-bottom: 13px;
+    }
+
+    .donation-show-section__eyebrow {
+        font-size: 8px;
+    }
+
+    .donation-show-section__heading h3 {
+        font-size: 14px;
+    }
+
+    .donation-show-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 0;
+    }
+
+    .donation-show-item {
+        min-height: 70px;
+        padding: 12px 0;
+    }
+
+    .donation-show-item dt {
+        margin-bottom: 5px;
+        font-size: 10px;
+    }
+
+    .donation-show-item dd {
+        font-size: 11px;
+    }
+
+    .donation-show-item--full {
+        grid-column: auto;
+    }
+
+    /* NOTES */
+
+    .donation-show-section--notes {
+        margin-top: 22px;
+    }
+
+    .donation-show-notes {
+        min-height: 65px;
+        padding: 13px 14px;
+    }
+
+    .donation-show-notes p {
+        font-size: 11px !important;
+        line-height: 1.7 !important;
+    }
+
+    /* FOOTER */
+
+    .donation-show-card__footer {
+        align-items: stretch;
+        flex-direction: column;
+
+        gap: 15px;
+        padding: 17px 16px;
+    }
+
+    .donation-show-card__footer-info p {
+        font-size: 10px;
+    }
+
+    .donation-show-edit-button {
+        width: 100%;
+        min-height: 42px;
+    }
+
+}
+
+
+/* =========================================================
+   17. SMALL MOBILE
+========================================================= */
+
+@media (max-width: 380px) {
+
+    .donation-detail-page .admin-page-header__action {
+        flex-direction: column;
+    }
+
+    .donation-detail-page .admin-page-header__action .donations-button {
+        width: 100%;
+        flex: none;
+    }
+
+    .donation-show-card__header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .donation-show-card__reference {
+        align-self: flex-start;
+    }
+
+    .donation-show-highlight__amount strong {
+        font-size: 22px;
+    }
+
+}
+
+
+/* =========================================================
+   18. REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .donation-detail-page *,
+    .donation-detail-page *::before,
+    .donation-detail-page *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+    }
+
+}
+
+
+/* =========================================================
+   END OF ADMIN DONATION SHOW CSS
+========================================================= */

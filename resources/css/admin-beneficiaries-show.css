@@ -1,49 +1,48 @@
 
 /* =========================================================
-   ADMIN BENEFICIARIES - DETAIL PAGE
-   UX IMPROVEMENT | MASJID SABILILLAH
-   ========================================================= */
+   MASJID SABILILLAH
+   ADMIN - DETAIL PENERIMA MANFAAT
+   Consistent with Admin Beneficiaries
+========================================================= */
 
-:root {
-    --bd-primary: #294236;
-    --bd-primary-hover: #1e3529;
-    --bd-primary-light: #edf4ed;
-
-    --bd-text: #24352b;
-    --bd-muted: #66756b;
-    --bd-border: #e1e8e1;
-    --bd-background: #f5f7f5;
-    --bd-white: #ffffff;
-
-    --bd-success: #166534;
-    --bd-success-bg: #eff8f0;
-    --bd-success-border: #d5ead8;
-
-    --bd-inactive: #596579;
-    --bd-inactive-bg: #f2f4f6;
-    --bd-inactive-border: #e1e5e9;
-
-    --bd-radius: 14px;
-    --bd-transition: 180ms ease;
-}
 
 /* =========================================================
-   1. MAIN LAYOUT
-   ========================================================= */
+   1. DESIGN TOKENS
+========================================================= */
 
-.beneficiaries-page.beneficiary-detail-page {
+.beneficiary-detail-page {
+    --show-primary: var(--color-green-normal, #315b43);
+    --show-primary-dark: var(--color-green-dark, #244633);
+    --show-primary-light: #edf5ee;
+
+    --show-background: #ffffff;
+    --show-text: #26352b;
+    --show-muted: #758078;
+    --show-border: #e7ece7;
+
+    --show-success: #287a43;
+    --show-success-light: #effaf1;
+
+    --show-danger: #c5221f;
+    --show-danger-light: #fff1f0;
+
+    --show-radius: 15px;
+    --show-shadow: 0 3px 15px rgba(27, 43, 35, .025);
+    --show-transition: .22s ease;
+
     width: 100%;
-    max-width: 1440px;
     min-width: 0;
-    margin: 0 auto;
-    padding: 28px 32px 40px;
+    max-width: 100%;
 
-    color: var(--bd-text);
+    margin: 0 auto;
+    padding: 0 0 25px;
+
+    color: var(--show-text);
     font-family: inherit;
     font-size: 14px;
-    line-height: 1.65;
+    line-height: 1.6;
 
-    box-sizing: border-box;
+    overflow-wrap: break-word;
 }
 
 .beneficiary-detail-page *,
@@ -53,738 +52,1027 @@
 }
 
 .beneficiary-detail-page a {
+    text-decoration: none;
     -webkit-tap-highlight-color: transparent;
 }
 
-.beneficiary-detail-page a:focus-visible {
-    outline: 3px solid rgba(41, 66, 54, 0.25);
-    outline-offset: 3px;
-}
 
 /* =========================================================
    2. BREADCRUMB
-   ========================================================= */
+========================================================= */
 
-.beneficiary-detail-breadcrumb {
+.beneficiary-show-breadcrumb {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 9px;
 
-    margin: 0 0 22px;
+    width: 100%;
+    margin: 0 0 19px;
 
-    color: var(--bd-muted);
-    font-size: 13px;
+    color: var(--show-muted);
+
+    font-size: 11px;
+    font-weight: 500;
     line-height: 1.5;
 }
 
-.beneficiary-detail-breadcrumb a {
+.beneficiary-show-breadcrumb a {
     display: inline-flex;
     align-items: center;
-    min-height: 32px;
+    gap: 7px;
 
-    color: var(--bd-primary);
-    font-weight: 600;
-    text-decoration: none;
+    color: var(--show-primary);
 
-    transition: color var(--bd-transition);
-}
-
-.beneficiary-detail-breadcrumb a:hover {
-    color: var(--bd-primary-hover);
-    text-decoration: underline;
-    text-underline-offset: 3px;
-}
-
-.beneficiary-detail-breadcrumb__separator {
-    color: #a8b3aa;
-}
-
-.beneficiary-detail-breadcrumb > span:last-child {
-    color: var(--bd-muted);
-}
-
-/* =========================================================
-   3. NOTIFICATION
-   ========================================================= */
-
-.beneficiary-detail-page .beneficiaries-alert {
-    display: block;
-    width: 100%;
-    margin: 0 0 22px;
-    padding: 14px 18px;
-
-    border: 1px solid var(--bd-border);
-    border-radius: 10px;
-
-    font-size: 13px;
-    line-height: 1.7;
-}
-
-.beneficiary-detail-page .beneficiaries-alert--success {
-    color: var(--bd-success);
-    background: var(--bd-success-bg);
-    border-color: var(--bd-success-border);
-}
-
-.beneficiary-detail-page .beneficiaries-alert--error {
-    color: #991b1b;
-    background: #fff4f3;
-    border-color: #f1d4d1;
-}
-
-.beneficiary-detail-page .beneficiaries-alert ul {
-    margin: 8px 0 0;
-    padding-left: 20px;
-}
-
-/* =========================================================
-   4. PAGE HEADER
-   ========================================================= */
-
-.beneficiary-detail-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 28px;
-
-    width: 100%;
-    min-width: 0;
-    margin-bottom: 24px;
-    padding: 28px;
-
-    background: var(--bd-white);
-    border: 1px solid var(--bd-border);
-    border-left: 4px solid var(--bd-primary);
-    border-radius: var(--bd-radius);
-
-    box-shadow: 0 2px 8px rgba(30, 53, 41, 0.025);
-}
-
-.beneficiary-detail-header__content {
-    flex: 1;
-    min-width: 0;
-}
-
-.beneficiary-detail-header__eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-
-    margin-bottom: 8px;
-
-    color: var(--bd-primary);
     font-size: 11px;
-    font-weight: 750;
-    letter-spacing: 1px;
+    font-weight: 600;
+
+    transition: color var(--show-transition);
 }
 
-.beneficiary-detail-header__eyebrow::before {
-    content: "";
-    display: inline-block;
-    width: 18px;
-    height: 2px;
-
-    background: var(--bd-primary);
-    border-radius: 2px;
+.beneficiary-show-breadcrumb a:hover {
+    color: var(--show-primary-dark);
 }
 
-.beneficiary-detail-header__title {
-    margin: 0;
-
-    color: var(--bd-text);
-    font-size: 28px;
-    font-weight: 750;
-    line-height: 1.3;
-    letter-spacing: -0.6px;
-
-    overflow-wrap: anywhere;
+.beneficiary-show-breadcrumb a svg {
+    display: block;
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
 }
 
-.beneficiary-detail-header__description {
-    max-width: 650px;
-    margin: 10px 0 0;
-
-    color: var(--bd-muted);
-    font-size: 14px;
-    line-height: 1.7;
-}
-
-.beneficiary-detail-header__meta {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 10px;
-
-    margin-top: 18px;
-
-    color: var(--bd-muted);
+.beneficiary-show-breadcrumb__separator {
+    color: #b3bcb4;
     font-size: 12px;
 }
 
-.beneficiary-detail-header__meta strong {
-    color: var(--bd-primary);
-    font-weight: 750;
+.beneficiary-show-breadcrumb > span:last-child {
+    color: #7d887e;
 }
 
-.beneficiary-detail-header__meta-divider {
-    color: #c3ccc4;
+
+/* =========================================================
+   3. PAGE HEADER
+   Menggunakan admin-page-header dari admin layout.
+========================================================= */
+
+.beneficiary-detail-page .admin-page-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    width: 100%;
+    min-width: 0;
+
+    margin: 0 0 25px;
+    gap: 20px;
 }
 
-.beneficiary-detail-header__actions {
+.beneficiary-detail-page .admin-page-header__content {
+    min-width: 0;
+}
+
+.beneficiary-detail-page .admin-page-header__description {
+    max-width: 760px;
+}
+
+.beneficiary-detail-page .admin-page-header__action {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    flex-shrink: 0;
     flex-wrap: wrap;
     gap: 10px;
+
+    flex-shrink: 0;
 }
 
-/* =========================================================
-   5. BUTTONS
-   ========================================================= */
 
-.beneficiary-detail-page .beneficiary-detail-button {
+/* =========================================================
+   4. HEADER BUTTONS
+========================================================= */
+
+.beneficiary-detail-page .beneficiary-show-button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
 
-    min-height: 44px;
-    padding: 11px 18px;
+    min-height: 43px;
+    padding: 10px 16px;
 
     border: 1px solid transparent;
-    border-radius: 9px;
+    border-radius: 10px;
 
     font-family: inherit;
-    font-size: 13px;
-    font-weight: 650;
+    font-size: 12px;
+    font-weight: 600;
     line-height: 1.4;
+
     text-align: center;
-    text-decoration: none;
     white-space: nowrap;
+    text-decoration: none;
 
     cursor: pointer;
 
     transition:
-        color var(--bd-transition),
-        background-color var(--bd-transition),
-        border-color var(--bd-transition),
-        box-shadow var(--bd-transition);
+        color var(--show-transition),
+        background var(--show-transition),
+        border-color var(--show-transition),
+        box-shadow var(--show-transition),
+        transform var(--show-transition);
 }
 
-.beneficiary-detail-page .beneficiary-detail-button--primary {
+.beneficiary-detail-page .beneficiary-show-button svg {
+    display: block;
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+}
+
+.beneficiary-detail-page .beneficiary-show-button:active {
+    transform: translateY(1px);
+}
+
+.beneficiary-detail-page .beneficiary-show-button--primary {
     color: #ffffff;
-    background: var(--bd-primary);
-    border-color: var(--bd-primary);
+    background: var(--show-primary);
+    border-color: var(--show-primary);
+
+    box-shadow: 0 4px 10px rgba(41, 66, 54, .08);
 }
 
-.beneficiary-detail-page .beneficiary-detail-button--primary:hover {
+.beneficiary-detail-page .beneficiary-show-button--primary:hover {
     color: #ffffff;
-    background: var(--bd-primary-hover);
-    border-color: var(--bd-primary-hover);
-    box-shadow: 0 3px 8px rgba(41, 66, 54, 0.12);
+    background: var(--show-primary-dark);
+    border-color: var(--show-primary-dark);
 }
 
-.beneficiary-detail-page .beneficiary-detail-button--secondary {
-    color: var(--bd-primary);
+.beneficiary-detail-page .beneficiary-show-button--secondary {
+    color: var(--show-text);
     background: #ffffff;
-    border-color: #d9e2da;
+    border-color: var(--show-border);
 }
 
-.beneficiary-detail-page .beneficiary-detail-button--secondary:hover {
-    color: var(--bd-primary-hover);
-    background: var(--bd-primary-light);
-    border-color: #c8d8ca;
+.beneficiary-detail-page .beneficiary-show-button--secondary:hover {
+    color: var(--show-primary);
+    background: var(--show-primary-light);
+    border-color: #d5e3d6;
 }
 
-.beneficiary-detail-page .beneficiary-detail-button:active {
-    box-shadow: none;
-}
-
-.beneficiary-detail-page .beneficiary-detail-button:focus-visible {
-    outline: 3px solid rgba(41, 66, 54, 0.25);
-    outline-offset: 3px;
-}
 
 /* =========================================================
-   6. INFORMATION CARD
-   ========================================================= */
+   5. SUCCESS ALERT
+========================================================= */
 
-.beneficiary-detail-card {
+.beneficiary-show-alert {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+
     width: 100%;
-    min-width: 0;
-    overflow: hidden;
+    margin-bottom: 20px;
+    padding: 14px 17px;
 
-    background: var(--bd-white);
-    border: 1px solid var(--bd-border);
-    border-radius: var(--bd-radius);
+    color: var(--show-success);
+    background: var(--show-success-light);
 
-    box-shadow: 0 2px 8px rgba(30, 53, 41, 0.025);
+    border: 1px solid #d8f0df;
+    border-radius: 11px;
+
+    font-size: 12px;
+    line-height: 1.6;
+
+    animation: beneficiary-show-enter .25s ease both;
 }
 
-.beneficiary-detail-card__header {
+.beneficiary-show-alert svg {
+    display: block;
+    width: 19px;
+    height: 19px;
+    flex-shrink: 0;
+}
+
+@keyframes beneficiary-show-enter {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* =========================================================
+   6. DETAIL CARD
+========================================================= */
+
+.beneficiary-show-card {
+    width: 100%;
+    min-width: 0;
+
+    overflow: hidden;
+
+    background: var(--show-background);
+
+    border: 1px solid var(--show-border);
+    border-radius: var(--show-radius);
+
+    box-shadow: var(--show-shadow);
+}
+
+
+/* =========================================================
+   7. CARD HEADER
+========================================================= */
+
+.beneficiary-show-card__header {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: space-between;
     gap: 20px;
 
-    padding: 26px 28px;
+    padding: 24px 27px;
 
-    border-bottom: 1px solid var(--bd-border);
+    border-bottom: 1px solid #edf0ed;
 }
 
-.beneficiary-detail-card__header > div:first-child {
-    flex: 1;
+.beneficiary-show-card__identity {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+
     min-width: 0;
 }
 
-.beneficiary-detail-card__eyebrow {
-    display: block;
-    margin-bottom: 7px;
+.beneficiary-show-card__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
 
-    color: var(--bd-muted);
-    font-size: 11px;
-    font-weight: 750;
-    letter-spacing: 0.8px;
+    width: 44px;
+    height: 44px;
+
+    color: var(--show-primary);
+    background: var(--show-primary-light);
+
+    border: 1px solid #e5eee6;
+    border-radius: 13px;
 }
 
-.beneficiary-detail-card__title {
+.beneficiary-show-card__icon svg {
+    display: block;
+    width: 22px;
+    height: 22px;
+}
+
+.beneficiary-show-card__heading {
+    min-width: 0;
+}
+
+.beneficiary-show-card__eyebrow {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: var(--show-primary);
+
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.3px;
+    line-height: 1.5;
+}
+
+.beneficiary-show-card__heading h2 {
     margin: 0;
 
-    color: var(--bd-text);
-    font-size: 22px;
-    font-weight: 750;
-    line-height: 1.4;
-    letter-spacing: -0.3px;
+    color: var(--show-primary-dark);
+
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.5;
 
     overflow-wrap: anywhere;
 }
 
-.beneficiary-detail-card__description {
-    margin: 7px 0 0;
+.beneficiary-show-card__heading p {
+    margin: 5px 0 0;
 
-    color: var(--bd-muted);
-    font-size: 13px;
+    color: var(--show-muted);
+
+    font-size: 11px;
     line-height: 1.7;
 }
 
-/* =========================================================
-   7. STATUS BADGE
-   ========================================================= */
+.beneficiary-show-card__header-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 9px;
 
-.beneficiary-detail-page .beneficiaries-status {
+    flex-shrink: 0;
+}
+
+.beneficiary-show-reference {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    flex-shrink: 0;
-    gap: 7px;
 
     min-height: 32px;
     padding: 6px 11px;
+
+    color: var(--show-primary);
+    background: var(--show-primary-light);
+
+    border: 1px solid #dfebdf;
+    border-radius: 9px;
+
+    font-size: 10px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   8. BENEFICIARY STATUS
+========================================================= */
+
+.beneficiary-show-status {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    min-height: 32px;
+    padding: 7px 12px;
 
     border: 1px solid transparent;
     border-radius: 8px;
 
-    font-size: 12px;
-    font-weight: 700;
-    line-height: 1.4;
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 1.5;
+
     white-space: nowrap;
 }
 
-.beneficiary-detail-page .beneficiaries-status::before {
-    content: "";
+.beneficiary-show-status__dot {
     display: inline-block;
-    flex-shrink: 0;
+    flex: 0 0 7px;
 
     width: 7px;
     height: 7px;
 
+    background: currentColor;
     border-radius: 50%;
 }
 
-.beneficiary-detail-page .beneficiaries-status--active {
-    color: var(--bd-success);
-    background: var(--bd-success-bg);
-    border-color: var(--bd-success-border);
+.beneficiary-show-status--active {
+    color: var(--show-success);
+    background: var(--show-success-light);
+    border-color: #dcefe0;
 }
 
-.beneficiary-detail-page .beneficiaries-status--active::before {
-    background: #19803d;
+.beneficiary-show-status--inactive {
+    color: var(--show-danger);
+    background: var(--show-danger-light);
+    border-color: #f8e0de;
 }
 
-.beneficiary-detail-page .beneficiaries-status--inactive {
-    color: var(--bd-inactive);
-    background: var(--bd-inactive-bg);
-    border-color: var(--bd-inactive-border);
-}
-
-.beneficiary-detail-page .beneficiaries-status--inactive::before {
-    background: #7b8794;
-}
 
 /* =========================================================
-   8. INFORMATION GRID
-   ========================================================= */
+   9. CARD BODY
+========================================================= */
 
-.beneficiary-detail-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 16px;
-
-    padding: 26px 28px;
+.beneficiary-show-card__body {
+    padding: 25px 27px;
 }
 
-.beneficiary-detail-field {
+
+/* =========================================================
+   10. BENEFICIARY HIGHLIGHT
+========================================================= */
+
+.beneficiary-show-highlight {
+    display: grid;
+    grid-template-columns: 1fr 1px 1fr;
+
+    align-items: center;
+    gap: 28px;
+
+    width: 100%;
+    min-width: 0;
+
+    margin-bottom: 30px;
+    padding: 25px 27px;
+
+    background: #f7faf7;
+
+    border: 1px solid #e8efe8;
+    border-radius: 13px;
+}
+
+.beneficiary-show-highlight__identity,
+.beneficiary-show-highlight__registration {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 7px;
 
     min-width: 0;
-    min-height: 100px;
-    padding: 17px 18px;
-
-    background: #ffffff;
-    border: 1px solid var(--bd-border);
-    border-radius: 10px;
-
-    transition:
-        border-color var(--bd-transition),
-        background-color var(--bd-transition);
 }
 
-/* Field biasa tidak diberi hover berlebihan.
-   Fokus visual diarahkan pada informasi dan aksi. */
-
-.beneficiary-detail-field--full {
-    grid-column: 1 / -1;
-    min-height: auto;
-}
-
-.beneficiary-detail-field__label {
+.beneficiary-show-label {
     display: block;
-    width: 100%;
 
-    color: var(--bd-muted);
-    font-size: 12px;
+    margin-bottom: 9px;
+
+    color: var(--show-muted);
+
+    font-size: 11px;
     font-weight: 600;
+    line-height: 1.5;
+}
+
+.beneficiary-show-highlight__identity strong,
+.beneficiary-show-highlight__registration strong {
+    display: block;
+
+    max-width: 100%;
+
+    color: var(--show-primary-dark);
+
+    font-size: clamp(20px, 2.2vw, 25px);
+    font-weight: 700;
+    letter-spacing: -.4px;
+    line-height: 1.4;
+
+    overflow-wrap: anywhere;
+}
+
+.beneficiary-show-caption {
+    display: block;
+
+    margin-top: 8px;
+
+    color: #929b92;
+
+    font-size: 10px;
     line-height: 1.6;
 }
 
-.beneficiary-detail-field__value {
-    display: block;
-    width: 100%;
-    min-width: 0;
-    margin: 0;
+.beneficiary-show-highlight__divider {
+    width: 1px;
+    height: 72px;
 
-    color: var(--bd-text);
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 1.75;
-
-    overflow-wrap: anywhere;
-    word-break: normal;
+    background: #e2eae2;
 }
 
-.beneficiary-detail-field__value--multiline {
-    color: #35483b;
-    font-weight: 450;
+
+/* =========================================================
+   11. INFORMATION SECTION
+========================================================= */
+
+.beneficiary-show-section {
+    width: 100%;
+    min-width: 0;
+}
+
+.beneficiary-show-section__heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 19px;
+}
+
+.beneficiary-show-section__eyebrow {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: var(--show-primary);
+
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    line-height: 1.5;
+}
+
+.beneficiary-show-section__heading h3 {
+    margin: 0;
+
+    color: var(--show-primary-dark);
+
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   12. INFORMATION GRID
+========================================================= */
+
+.beneficiary-show-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 0 22px;
+
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.beneficiary-show-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    min-width: 0;
+    min-height: 83px;
+
+    padding: 15px 0;
+
+    border-bottom: 1px solid #edf0ed;
+}
+
+.beneficiary-show-item--full {
+    grid-column: 1 / -1;
+}
+
+.beneficiary-show-item dt {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: var(--show-muted);
+
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.beneficiary-show-item dd {
+    display: block;
+
+    margin: 0;
+
+    color: var(--show-text);
+
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.7;
+
+    overflow-wrap: anywhere;
+}
+
+.beneficiary-show-item__multiline {
     white-space: pre-line;
     overflow-wrap: anywhere;
 }
 
-/* =========================================================
-   9. CARD FOOTER
-   ========================================================= */
 
-.beneficiary-detail-card__footer {
+/* =========================================================
+   13. INLINE STATUS
+========================================================= */
+
+.beneficiary-show-inline-status {
+    display: inline-flex;
+    align-items: center;
+
+    min-height: 25px;
+    padding: 4px 10px;
+
+    border: 1px solid transparent;
+    border-radius: 7px;
+
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.beneficiary-show-inline-status--active {
+    color: var(--show-success);
+    background: var(--show-success-light);
+    border-color: #dcefe0;
+}
+
+.beneficiary-show-inline-status--inactive {
+    color: var(--show-danger);
+    background: var(--show-danger-light);
+    border-color: #f8e0de;
+}
+
+
+/* =========================================================
+   14. REGISTRATION INFORMATION
+========================================================= */
+
+.beneficiary-show-section--registration {
+    margin-top: 28px;
+}
+
+.beneficiary-show-section--registration
+.beneficiary-show-section__heading {
+    margin-bottom: 13px;
+}
+
+.beneficiary-show-registration {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 15px;
+
+    width: 100%;
+}
+
+.beneficiary-show-registration__item {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+
+    min-width: 0;
+    padding: 16px 18px;
+
+    background: #f8faf8;
+
+    border: 1px solid #e9eee9;
+    border-radius: 10px;
+}
+
+.beneficiary-show-registration__item span {
+    color: var(--show-muted);
+
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.beneficiary-show-registration__item strong {
+    color: var(--show-text);
+
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.6;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* =========================================================
+   15. CARD FOOTER
+========================================================= */
+
+.beneficiary-show-card__footer {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 14px;
+    gap: 20px;
 
-    padding: 18px 28px;
+    padding: 20px 27px;
 
-    background: #fafcf9;
-    border-top: 1px solid var(--bd-border);
+    background: #fbfcfb;
+    border-top: 1px solid #edf0ed;
 }
 
-.beneficiary-detail-card__footer > span {
-    color: var(--bd-muted);
-    font-size: 12px;
+.beneficiary-show-footer-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    min-width: 0;
+}
+
+.beneficiary-show-footer-info svg {
+    display: block;
+
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+
+    color: var(--show-muted);
+}
+
+.beneficiary-show-footer-info p {
+    margin: 0;
+
+    color: var(--show-muted);
+
+    font-size: 11px;
     line-height: 1.7;
 }
 
-.beneficiary-detail-card__footer a {
-    display: inline-flex;
-    align-items: center;
-    min-height: 36px;
-
-    color: var(--bd-primary);
-    font-size: 12px;
-    font-weight: 650;
-    text-decoration: none;
-
-    transition: color var(--bd-transition);
+.beneficiary-show-edit-button {
+    flex-shrink: 0;
 }
 
-.beneficiary-detail-card__footer a:hover {
-    color: var(--bd-primary-hover);
-    text-decoration: underline;
-    text-underline-offset: 3px;
-}
 
 /* =========================================================
-   10. TABLET & LAPTOP
-   ========================================================= */
+   16. FOCUS ACCESSIBILITY
+========================================================= */
 
-@media (max-width: 1100px) {
-    .beneficiaries-page.beneficiary-detail-page {
-        padding: 24px 22px 32px;
+.beneficiary-detail-page a:focus-visible {
+    outline: 3px solid rgba(41, 66, 54, .2);
+    outline-offset: 3px;
+}
+
+
+/* =========================================================
+   17. TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .beneficiary-show-card__header {
+        padding: 22px;
     }
 
-    .beneficiary-detail-header {
-        align-items: flex-start;
+    .beneficiary-show-card__body {
+        padding: 22px;
+    }
+
+    .beneficiary-show-highlight {
         gap: 20px;
-        padding: 24px;
+        padding: 22px;
     }
 
-    .beneficiary-detail-header__title {
-        font-size: 25px;
+    .beneficiary-show-card__footer {
+        padding: 19px 22px;
     }
 
-    .beneficiary-detail-header__actions {
-        gap: 8px;
-    }
-
-    .beneficiary-detail-page .beneficiary-detail-button {
-        padding-right: 14px;
-        padding-left: 14px;
-    }
-
-    .beneficiary-detail-card__header {
-        padding: 23px 24px;
-    }
-
-    .beneficiary-detail-grid {
-        gap: 13px;
-        padding: 22px 24px;
-    }
-
-    .beneficiary-detail-field {
-        padding: 15px 16px;
-    }
-
-    .beneficiary-detail-card__footer {
-        padding: 16px 24px;
-    }
 }
 
+
 /* =========================================================
-   11. MOBILE
-   ========================================================= */
+   18. MOBILE
+========================================================= */
 
-@media (max-width: 760px) {
-    .beneficiaries-page.beneficiary-detail-page {
-        padding: 20px 16px 30px;
+@media (max-width: 600px) {
+
+    .beneficiary-detail-page {
+        padding-bottom: 20px;
     }
 
-    .beneficiary-detail-breadcrumb {
-        margin-bottom: 17px;
-        font-size: 12px;
+    /* BREADCRUMB */
+
+    .beneficiary-show-breadcrumb {
+        gap: 7px;
+        margin-bottom: 15px;
+        font-size: 10px;
     }
 
-    .beneficiary-detail-header {
+    .beneficiary-show-breadcrumb a {
+        font-size: 10px;
+    }
+
+    /* PAGE HEADER */
+
+    .beneficiary-detail-page .admin-page-header {
         flex-direction: column;
-        align-items: stretch;
-        gap: 20px;
+        align-items: flex-start;
+        gap: 17px;
 
-        margin-bottom: 18px;
-        padding: 22px 20px;
-
-        border-radius: 12px;
+        margin-bottom: 20px;
     }
 
-    .beneficiary-detail-header__title {
-        font-size: 23px;
-        letter-spacing: -0.4px;
+    .beneficiary-detail-page .admin-page-header__content {
+        width: 100%;
     }
 
-    .beneficiary-detail-header__description {
-        font-size: 13px;
-    }
+    .beneficiary-detail-page .admin-page-header__action {
+        justify-content: flex-start;
 
-    .beneficiary-detail-header__meta {
+        width: 100%;
         gap: 8px;
-        margin-top: 14px;
-        font-size: 12px;
     }
 
-    .beneficiary-detail-header__actions {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        width: 100%;
+    .beneficiary-detail-page .admin-page-header__action
+    .beneficiary-show-button {
+        flex: 1;
+    }
+
+    /* ALERT */
+
+    .beneficiary-show-alert {
+        align-items: flex-start;
+        padding: 12px 14px;
+        font-size: 11px;
+    }
+
+    /* CARD HEADER */
+
+    .beneficiary-show-card {
+        border-radius: 13px;
+    }
+
+    .beneficiary-show-card__header {
+        align-items: flex-start;
+        flex-direction: column;
+
+        padding: 18px 16px;
+        gap: 15px;
+    }
+
+    .beneficiary-show-card__identity {
         gap: 10px;
-    }
-
-    .beneficiary-detail-page .beneficiary-detail-button {
         width: 100%;
-        min-width: 0;
-        min-height: 44px;
-        padding: 10px 12px;
-        font-size: 12px;
     }
 
-    .beneficiary-detail-card__header {
-        gap: 14px;
-        padding: 21px 19px;
+    .beneficiary-show-card__icon {
+        width: 38px;
+        height: 38px;
+        border-radius: 11px;
     }
 
-    .beneficiary-detail-card__title {
-        font-size: 20px;
+    .beneficiary-show-card__icon svg {
+        width: 19px;
+        height: 19px;
     }
 
-    .beneficiary-detail-card__description {
-        font-size: 12px;
-    }
-
-    .beneficiary-detail-grid {
-        grid-template-columns: minmax(0, 1fr);
-        gap: 12px;
-        padding: 18px;
-    }
-
-    .beneficiary-detail-field,
-    .beneficiary-detail-field--full {
-        grid-column: 1 / -1;
-        min-height: auto;
-        padding: 15px 16px;
-    }
-
-    .beneficiary-detail-field__label {
-        font-size: 12px;
-    }
-
-    .beneficiary-detail-field__value {
+    .beneficiary-show-card__heading h2 {
         font-size: 14px;
     }
 
-    .beneficiary-detail-card__footer {
-        align-items: flex-start;
-        flex-direction: column;
-        gap: 8px;
-        padding: 16px 19px;
-    }
-}
-
-/* =========================================================
-   12. SMALL MOBILE
-   ========================================================= */
-
-@media (max-width: 400px) {
-    .beneficiaries-page.beneficiary-detail-page {
-        padding-right: 12px;
-        padding-left: 12px;
+    .beneficiary-show-card__heading p {
+        font-size: 10px;
     }
 
-    .beneficiary-detail-header {
-        padding: 19px 16px;
+    .beneficiary-show-card__header-right {
+        justify-content: flex-start;
+        width: 100%;
     }
 
-    .beneficiary-detail-header__title {
+    .beneficiary-show-reference,
+    .beneficiary-show-status {
+        min-height: 27px;
+        padding: 5px 9px;
+        font-size: 9px;
+    }
+
+    .beneficiary-show-card__body {
+        padding: 18px 16px;
+    }
+
+    /* HIGHLIGHT */
+
+    .beneficiary-show-highlight {
+        grid-template-columns: 1fr;
+        gap: 16px;
+
+        margin-bottom: 25px;
+        padding: 18px 16px;
+
+        border-radius: 11px;
+    }
+
+    .beneficiary-show-highlight__identity strong,
+    .beneficiary-show-highlight__registration strong {
         font-size: 21px;
     }
 
-    .beneficiary-detail-header__actions {
+    .beneficiary-show-highlight__divider {
+        width: 100%;
+        height: 1px;
+    }
+
+    .beneficiary-show-label {
+        margin-bottom: 7px;
+        font-size: 10px;
+    }
+
+    .beneficiary-show-caption {
+        font-size: 9px;
+    }
+
+    /* INFORMATION */
+
+    .beneficiary-show-section__heading {
+        margin-bottom: 13px;
+    }
+
+    .beneficiary-show-section__eyebrow {
+        font-size: 8px;
+    }
+
+    .beneficiary-show-section__heading h3 {
+        font-size: 14px;
+    }
+
+    .beneficiary-show-grid {
         grid-template-columns: minmax(0, 1fr);
+        gap: 0;
     }
 
-    .beneficiary-detail-card__header {
+    .beneficiary-show-item {
+        min-height: 70px;
+        padding: 12px 0;
+    }
+
+    .beneficiary-show-item dt {
+        margin-bottom: 5px;
+        font-size: 10px;
+    }
+
+    .beneficiary-show-item dd {
+        font-size: 11px;
+    }
+
+    .beneficiary-show-item--full {
+        grid-column: auto;
+    }
+
+    /* REGISTRATION */
+
+    .beneficiary-show-section--registration {
+        margin-top: 22px;
+    }
+
+    .beneficiary-show-registration {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 10px;
+    }
+
+    .beneficiary-show-registration__item {
+        padding: 13px 14px;
+    }
+
+    .beneficiary-show-registration__item span {
+        font-size: 9px;
+    }
+
+    .beneficiary-show-registration__item strong {
+        font-size: 11px;
+    }
+
+    /* FOOTER */
+
+    .beneficiary-show-card__footer {
+        align-items: stretch;
         flex-direction: column;
-        align-items: flex-start;
-        padding: 19px 16px;
+
+        gap: 15px;
+        padding: 17px 16px;
     }
 
-    .beneficiary-detail-grid {
-        padding: 14px;
+    .beneficiary-show-footer-info p {
+        font-size: 10px;
     }
 
-    .beneficiary-detail-field,
-    .beneficiary-detail-field--full {
-        padding: 14px;
+    .beneficiary-show-card__footer
+    .beneficiary-show-edit-button {
+        width: 100%;
+        min-height: 42px;
     }
 
-    .beneficiary-detail-card__footer {
-        padding: 15px 16px;
-    }
 }
 
+
 /* =========================================================
-   13. REDUCED MOTION ACCESSIBILITY
-   ========================================================= */
+   19. SMALL MOBILE
+========================================================= */
+
+@media (max-width: 380px) {
+
+    .beneficiary-detail-page .admin-page-header__action {
+        flex-direction: column;
+    }
+
+    .beneficiary-detail-page .admin-page-header__action
+    .beneficiary-show-button {
+        width: 100%;
+        flex: none;
+    }
+
+    .beneficiary-show-highlight__identity strong,
+    .beneficiary-show-highlight__registration strong {
+        font-size: 19px;
+    }
+
+}
+
+
+/* =========================================================
+   20. REDUCED MOTION
+========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
+
     .beneficiary-detail-page *,
     .beneficiary-detail-page *::before,
     .beneficiary-detail-page *::after {
-        scroll-behavior: auto !important;
-        animation-duration: 0.01ms !important;
+        animation-duration: .01ms !important;
         animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
+        transition-duration: .01ms !important;
     }
+
 }
 
 
 /* =========================================================
-   COPY BUTTON
-   ========================================================= */
-
-.beneficiary-detail-page .beneficiary-detail-copy {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    min-height: 32px;
-    margin-top: 4px;
-    padding: 6px 11px;
-
-    color: var(--bd-primary);
-    background: #ffffff;
-    border: 1px solid var(--bd-border);
-    border-radius: 7px;
-
-    font-family: inherit;
-    font-size: 12px;
-    font-weight: 600;
-    line-height: 1.4;
-
-    cursor: pointer;
-
-    transition:
-        color 180ms ease,
-        background-color 180ms ease,
-        border-color 180ms ease;
-}
-
-.beneficiary-detail-page .beneficiary-detail-copy:hover {
-    color: var(--bd-primary-hover);
-    background: var(--bd-primary-light);
-    border-color: #c8d8ca;
-}
-
-.beneficiary-detail-page .beneficiary-detail-copy.is-copied {
-    color: var(--bd-success);
-    background: var(--bd-success-bg);
-    border-color: var(--bd-success-border);
-}
-
-.beneficiary-detail-page .beneficiary-detail-copy:focus-visible {
-    outline: 3px solid rgba(41, 66, 54, 0.22);
-    outline-offset: 2px;
-}
-
-.beneficiary-detail-page .beneficiary-detail-copy:active {
-    background: var(--bd-primary-light);
-}
+   END OF ADMIN BENEFICIARIES SHOW CSS
+========================================================= */

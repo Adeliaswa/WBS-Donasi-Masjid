@@ -1,89 +1,123 @@
 
-{{-- Tabel Data Donasi --}}
 <div class="donations-table-wrapper">
+
     <table class="donations-table">
+
         <thead>
             <tr>
-                <th scope="col">No.</th>
-                <th scope="col">Tanggal</th>
-                <th scope="col">Nama Donatur</th>
-                <th scope="col">Nominal</th>
-                <th scope="col">Kanal</th>
-                <th scope="col">Metode Pembayaran</th>
-                <th scope="col">Kategori</th>
-                <th scope="col">Status</th>
-                <th scope="col">Aksi</th>
+                <th>No.</th>
+                <th>Tanggal</th>
+                <th>Nama Donatur</th>
+                <th>Nominal</th>
+                <th>Kanal</th>
+                <th>Metode Pembayaran</th>
+                <th>Kategori</th>
+                <th>Status</th>
+                <th>Aksi</th>
             </tr>
         </thead>
 
         <tbody>
+
             @forelse ($donations as $donation)
+
+                @php
+                    $status = strtolower($donation->verification_status);
+
+                    $statusClass = match ($status) {
+                        'pending' => 'pending',
+                        'verified' => 'verified',
+                        'rejected' => 'rejected',
+                        default => 'unknown',
+                    };
+
+                    $statusLabel = match ($status) {
+                        'pending' => 'Menunggu Verifikasi',
+                        'verified' => 'Terverifikasi',
+                        'rejected' => 'Ditolak',
+                        default => ucfirst($donation->verification_status),
+                    };
+                @endphp
+
                 <tr>
-                    {{-- Nomor urut --}}
+
+                    {{-- NUMBER --}}
                     <td class="donations-table__number">
-                        {{ $donations->firstItem() + $loop->index }}
+                        {{ ($donations->firstItem() ?? 0) + $loop->index }}
                     </td>
 
-                    {{-- Tanggal donasi --}}
+
+                    {{-- DATE --}}
                     <td>
                         {{ $donation->donation_date->format('d-m-Y') }}
                     </td>
 
-                    {{-- Nama donatur --}}
-                    <td class="donations-table__donor">
-                        {{ $donation->display_donor_name }}
+
+                    {{-- DONOR --}}
+                    <td>
+
+                        <div class="donations-table__donor">
+
+                            <span class="donations-table__avatar">
+                                {{ strtoupper(substr($donation->display_donor_name, 0, 1)) }}
+                            </span>
+
+                            <span>
+                                {{ $donation->display_donor_name }}
+                            </span>
+
+                        </div>
+
                     </td>
 
-                    {{-- Nominal --}}
+
+                    {{-- AMOUNT --}}
                     <td class="donations-table__amount">
                         Rp {{ number_format((float) $donation->amount, 0, ',', '.') }}
                     </td>
 
-                    {{-- Kanal --}}
+
+                    {{-- CHANNEL --}}
                     <td>
                         {{ $donation->channel }}
                     </td>
 
-                    {{-- Metode pembayaran --}}
+
+                    {{-- PAYMENT METHOD --}}
                     <td>
                         {{ $donation->payment_method }}
                     </td>
 
-                    {{-- Kategori --}}
+
+                    {{-- CATEGORY --}}
                     <td>
-                        {{ $donation->category }}
+
+                        <span class="donations-category">
+                            {{ $donation->category }}
+                        </span>
+
                     </td>
 
-                    {{-- Status verifikasi --}}
+
+                    {{-- VERIFICATION STATUS --}}
                     <td>
-                        @php
-                            $status = strtolower($donation->verification_status);
-
-                            $statusClass = match ($status) {
-                                'pending' => 'pending',
-                                'verified' => 'verified',
-                                'rejected' => 'rejected',
-                                default => 'unknown',
-                            };
-
-                            $statusLabel = match ($status) {
-                                'pending' => 'Menunggu Verifikasi',
-                                'verified' => 'Terverifikasi',
-                                'rejected' => 'Ditolak',
-                                default => ucfirst($donation->verification_status),
-                            };
-                        @endphp
 
                         <span class="donations-status donations-status--{{ $statusClass }}">
+
+                            <span class="donations-status__dot"></span>
+
                             {{ $statusLabel }}
+
                         </span>
+
                     </td>
 
-                    {{-- Aksi --}}
+
+                    {{-- ACTIONS --}}
                     <td>
+
                         <div class="donations-table__actions">
 
-                            {{-- Detail --}}
                             <a
                                 href="{{ route('donations.show', $donation) }}"
                                 class="donations-table__action donations-table__action--detail"
@@ -92,7 +126,6 @@
                                 Detail
                             </a>
 
-                            {{-- Ubah --}}
                             <a
                                 href="{{ route('donations.edit', $donation) }}"
                                 class="donations-table__action donations-table__action--edit"
@@ -101,7 +134,6 @@
                                 Ubah
                             </a>
 
-                            {{-- Hapus --}}
                             <button
                                 type="button"
                                 class="donations-table__action donations-table__action--delete"
@@ -114,26 +146,42 @@
                             </button>
 
                         </div>
+
                     </td>
+
                 </tr>
 
             @empty
+
+                {{-- EMPTY STATE --}}
                 <tr>
-                    <td colspan="9" class="donations-table__empty">
-                        <div class="donations-table__empty-content">
 
-                            <span
-                                class="donations-table__empty-icon"
-                                aria-hidden="true"
-                            >
-                                ♧
-                            </span>
+                    <td colspan="9">
 
-                            <p class="donations-table__empty-title">
+                        <div class="donations-table__empty">
+
+                            <div class="donations-table__empty-icon">
+
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="1.5"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    aria-hidden="true"
+                                >
+                                    <rect x="3" y="4" width="18" height="16" rx="2"/>
+                                    <path d="M8 10h8M8 14h5"/>
+                                </svg>
+
+                            </div>
+
+                            <h3>
                                 Belum Ada Data Donasi
-                            </p>
+                            </h3>
 
-                            <p class="donations-table__empty-description">
+                            <p>
                                 Data donasi yang tercatat akan ditampilkan di sini.
                             </p>
 
@@ -145,9 +193,15 @@
                             </a>
 
                         </div>
+
                     </td>
+
                 </tr>
+
             @endforelse
+
         </tbody>
+
     </table>
+
 </div>

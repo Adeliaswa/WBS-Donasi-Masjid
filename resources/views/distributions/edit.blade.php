@@ -10,6 +10,7 @@
 
     @vite([
         'resources/css/app.css',
+        'resources/css/admin-footer.css',
         'resources/css/admin-beneficiaries-form.css',
         'resources/css/admin-distribution-form.css',
         'resources/js/app.js'
@@ -20,39 +21,55 @@
 
     <main class="beneficiary-form-page">
 
-        {{-- Breadcrumb --}}
+        {{-- BREADCRUMB --}}
         <nav class="beneficiary-form__breadcrumb" aria-label="Breadcrumb">
-            <a href="{{ route('distributions.show', $distribution) }}">
-                <span aria-hidden="true">←</span>
-                Detail Penyaluran
+
+            <a href="{{ route('distributions.show', $distribution) }}"
+               class="beneficiary-form__breadcrumb-link">
+
+                <svg viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor" stroke-width="1.8"
+                     stroke-linecap="round" stroke-linejoin="round"
+                     aria-hidden="true">
+                    <path d="M19 12H5"/>
+                    <path d="m12 19-7-7 7-7"/>
+                </svg>
+
+                <span>Detail Penyaluran</span>
             </a>
 
-            <span class="beneficiary-form__breadcrumb-separator">/</span>
+            <svg class="beneficiary-form__breadcrumb-separator"
+                 viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="1.7"
+                 stroke-linecap="round" stroke-linejoin="round"
+                 aria-hidden="true">
+                <path d="m9 18 6-12"/>
+            </svg>
 
-            <span aria-current="page">Edit Penyaluran</span>
+            <span class="beneficiary-form__breadcrumb-current"
+                  aria-current="page">
+                Edit Penyaluran
+            </span>
+
         </nav>
 
-        {{-- Header halaman --}}
+        {{-- PAGE HEADER --}}
         <header class="beneficiary-form__header">
+
             <div class="beneficiary-form__header-icon" aria-hidden="true">
-                <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.6"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                >
-                    <path d="M3 21h18"/>
-                    <path d="M5 21V10l7-6 7 6v11"/>
-                    <path d="M9 21v-6a3 3 0 0 1 6 0v6"/>
-                    <path d="M12 2v2"/>
+                <svg viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor" stroke-width="1.6"
+                     stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 20h9"/>
+                    <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L9 17l-4 1 1-4Z"/>
+                    <path d="m15 5 4 4"/>
                 </svg>
             </div>
 
             <div class="beneficiary-form__heading">
+
                 <span class="beneficiary-form__eyebrow">
-                    ADMIN PANEL · MASJID SABILILLAH
+                    ADMIN PANEL
                 </span>
 
                 <h1>Edit Data Penyaluran Bantuan</h1>
@@ -61,54 +78,60 @@
                     Perbarui informasi penyaluran bantuan agar data tetap
                     akurat, tertib, dan transparan.
                 </p>
+
             </div>
+
         </header>
 
-        {{-- Keterangan kolom wajib --}}
-        <p class="beneficiary-form__required-note">
-            <span aria-hidden="true">*</span>
+        {{-- REQUIRED INFORMATION --}}
+        <div class="beneficiary-form__required-note">
+            <span class="beneficiary-form__required-symbol">*</span>
             Kolom bertanda bintang wajib diisi.
-        </p>
+        </div>
 
-        {{-- Notifikasi berhasil --}}
+        {{-- NOTIFIKASI BERHASIL --}}
         @if (session('success'))
-            <div
-                class="distribution-edit-alert distribution-edit-alert--success"
-                role="status"
-            >
+            <div class="distribution-edit-alert distribution-edit-alert--success"
+                 role="status">
                 <strong>Berhasil.</strong>
                 {{ session('success') }}
             </div>
         @endif
 
-        {{-- Ringkasan error validasi --}}
+        {{-- VALIDATION SUMMARY --}}
         @if ($errors->any())
-            <div
-                class="beneficiary-form__alert distribution-edit-alert--error"
-                role="alert"
-            >
-                <strong>Perubahan belum dapat disimpan.</strong>
-                <p>Periksa kembali kolom yang ditandai berikut.</p>
+            <div class="beneficiary-form__alert distribution-edit-alert--error"
+                 role="alert">
 
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
+                <div class="beneficiary-form__alert-icon">!</div>
+
+                <div class="beneficiary-form__alert-content">
+                    <strong>Perubahan belum dapat disimpan.</strong>
+
+                    <p>Periksa kembali kolom yang ditandai berikut.</p>
+
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+
             </div>
         @endif
 
-        {{-- Konfirmasi jika duplikasi ditemukan saat menyimpan --}}
+        {{-- KONFIRMASI JIKA DUPLIKASI DITEMUKAN --}}
         @if (session('duplicate_warning'))
+
             <section
                 class="distribution-edit-duplicate distribution-edit-duplicate--server"
                 aria-labelledby="duplicate-warning-title"
             >
+
                 <div class="distribution-edit-duplicate__heading">
-                    <span
-                        class="distribution-edit-duplicate__icon"
-                        aria-hidden="true"
-                    >!</span>
+
+                    <span class="distribution-edit-duplicate__icon"
+                          aria-hidden="true">!</span>
 
                     <div>
                         <h2 id="duplicate-warning-title">
@@ -124,10 +147,12 @@
                             untuk penerima ini pada bulan yang sama.
                         </p>
                     </div>
+
                 </div>
 
                 <div class="distribution-edit-duplicate__list-wrapper">
                     <ul class="distribution-edit-duplicate__list">
+
                         @foreach (session('duplicate_warning.data', []) as $item)
                             <li>
                                 <span>
@@ -161,6 +186,7 @@
                                 </span>
                             </li>
                         @endforeach
+
                     </ul>
                 </div>
 
@@ -170,10 +196,9 @@
                 </p>
 
                 <div class="distribution-edit-duplicate__actions">
-                    <a
-                        href="{{ route('distributions.edit', $distribution) }}"
-                        class="beneficiary-form__button beneficiary-form__button--secondary"
-                    >
+
+                    <a href="{{ route('distributions.edit', $distribution) }}"
+                       class="beneficiary-form__button beneficiary-form__button--secondary">
                         Periksa Kembali
                     </a>
 
@@ -193,32 +218,29 @@
                                     true
                                 )
                             )
-                                <input
-                                    type="hidden"
-                                    name="{{ $key }}"
-                                    value="{{ $value }}"
-                                >
+                                <input type="hidden"
+                                       name="{{ $key }}"
+                                       value="{{ $value }}">
                             @endif
                         @endforeach
 
-                        <input
-                            type="hidden"
-                            name="confirm_duplicate"
-                            value="1"
-                        >
+                        <input type="hidden"
+                               name="confirm_duplicate"
+                               value="1">
 
-                        <button
-                            type="submit"
-                            class="beneficiary-form__button beneficiary-form__button--primary distribution-edit-button--warning"
-                        >
+                        <button type="submit"
+                                class="beneficiary-form__button beneficiary-form__button--primary distribution-edit-button--warning">
                             Tetap Simpan
                         </button>
                     </form>
+
                 </div>
+
             </section>
+
         @endif
 
-        {{-- Form edit penyaluran --}}
+        {{-- FORM EDIT PENYALURAN --}}
         <form
             id="edit-distribution-form"
             action="{{ route('distributions.update', $distribution) }}"
@@ -228,7 +250,7 @@
             @csrf
             @method('PUT')
 
-            {{-- Hasil pengecekan duplikasi otomatis --}}
+            {{-- HASIL PENGECEKAN DUPLIKASI --}}
             <div
                 id="duplicate-check-result"
                 class="distribution-edit-duplicate-result"
@@ -239,18 +261,12 @@
             <section class="beneficiary-form__section">
 
                 <div class="beneficiary-form__section-header">
-                    <div
-                        class="beneficiary-form__section-icon"
-                        aria-hidden="true"
-                    >
-                        <svg
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="1.6"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                        >
+
+                    <div class="beneficiary-form__section-icon"
+                         aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="1.7"
+                             stroke-linecap="round" stroke-linejoin="round">
                             <rect x="3.5" y="5" width="17" height="16" rx="2"/>
                             <path d="M7.5 3v4M16.5 3v4M3.5 10h17"/>
                             <path d="m8.5 15 2.2 2.2 4.8-4.8"/>
@@ -262,13 +278,15 @@
                         <p>Perbarui tanggal dan penerima bantuan.</p>
                     </div>
 
-                    <span class="beneficiary-form__step">BAGIAN 01</span>
+                    <span class="beneficiary-form__step">01</span>
+
                 </div>
 
                 <div class="beneficiary-form__grid">
 
-                    {{-- Tanggal penyaluran --}}
+                    {{-- TANGGAL PENYALURAN --}}
                     <div class="beneficiary-form__field">
+
                         <label for="distribution_date">
                             Tanggal Penyaluran
                             <span class="required">*</span>
@@ -289,10 +307,8 @@
                             class="@error('distribution_date') is-invalid @enderror"
                         >
 
-                        <small
-                            id="distribution-date-help"
-                            class="beneficiary-form__hint"
-                        >
+                        <small id="distribution-date-help"
+                               class="beneficiary-form__hint">
                             Pilih tanggal penyaluran bantuan.
                         </small>
 
@@ -301,10 +317,12 @@
                                 {{ $message }}
                             </small>
                         @enderror
+
                     </div>
 
-                    {{-- Penerima manfaat --}}
+                    {{-- PENERIMA MANFAAT --}}
                     <div class="beneficiary-form__field">
+
                         <label for="beneficiary_id">
                             Penerima Manfaat
                             <span class="required">*</span>
@@ -331,6 +349,7 @@
                                     {{ $beneficiary->name }}
                                 </option>
                             @endforeach
+
                         </select>
 
                         <small class="beneficiary-form__hint">
@@ -342,27 +361,23 @@
                                 {{ $message }}
                             </small>
                         @enderror
+
                     </div>
 
                 </div>
+
             </section>
 
             {{-- BAGIAN 02: DETAIL BANTUAN --}}
             <section class="beneficiary-form__section">
 
                 <div class="beneficiary-form__section-header">
-                    <div
-                        class="beneficiary-form__section-icon"
-                        aria-hidden="true"
-                    >
-                        <svg
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="1.6"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                        >
+
+                    <div class="beneficiary-form__section-icon"
+                         aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="1.7"
+                             stroke-linecap="round" stroke-linejoin="round">
                             <rect x="4" y="3.5" width="16" height="17" rx="2"/>
                             <path d="M8 8h8M8 12h8M8 16h4"/>
                         </svg>
@@ -375,13 +390,15 @@
                         </p>
                     </div>
 
-                    <span class="beneficiary-form__step">BAGIAN 02</span>
+                    <span class="beneficiary-form__step">02</span>
+
                 </div>
 
                 <div class="beneficiary-form__grid">
 
-                    {{-- Jenis bantuan --}}
+                    {{-- JENIS BANTUAN --}}
                     <div class="beneficiary-form__field">
+
                         <label for="assistance_type">
                             Jenis Bantuan
                             <span class="required">*</span>
@@ -410,16 +427,19 @@
                                 {{ $message }}
                             </small>
                         @enderror
+
                     </div>
 
-                    {{-- Nominal bantuan --}}
+                    {{-- NOMINAL BANTUAN --}}
                     <div class="beneficiary-form__field">
+
                         <label for="amount">
                             Nominal/Nilai Bantuan
                             <span class="required">*</span>
                         </label>
 
                         <div class="distribution-edit-input-group">
+
                             <span class="distribution-edit-input-prefix">
                                 Rp
                             </span>
@@ -435,6 +455,7 @@
                                 required
                                 class="@error('amount') is-invalid @enderror"
                             >
+
                         </div>
 
                         <small class="beneficiary-form__hint">
@@ -446,10 +467,12 @@
                                 {{ $message }}
                             </small>
                         @enderror
+
                     </div>
 
-                    {{-- Sumber donasi --}}
+                    {{-- SUMBER DONASI --}}
                     <div class="beneficiary-form__field">
+
                         <label for="donation_id">
                             Sumber Donasi
                             <span class="beneficiary-form__optional">
@@ -478,6 +501,7 @@
                                     - {{ $donation->display_donor_name }}
                                 </option>
                             @endforeach
+
                         </select>
 
                         <small class="beneficiary-form__hint">
@@ -489,10 +513,12 @@
                                 {{ $message }}
                             </small>
                         @enderror
+
                     </div>
 
-                    {{-- Status penyaluran --}}
+                    {{-- STATUS PENYALURAN --}}
                     <div class="beneficiary-form__field">
+
                         <label for="status">
                             Status Penyaluran
                             <span class="required">*</span>
@@ -516,6 +542,7 @@
                                     {{ $status }}
                                 </option>
                             @endforeach
+
                         </select>
 
                         <small class="beneficiary-form__hint">
@@ -527,12 +554,12 @@
                                 {{ $message }}
                             </small>
                         @enderror
+
                     </div>
 
-                    {{-- Catatan --}}
-                    <div
-                        class="beneficiary-form__field beneficiary-form__field--full"
-                    >
+                    {{-- CATATAN --}}
+                    <div class="beneficiary-form__field beneficiary-form__field--full">
+
                         <label for="notes">
                             Catatan
                             <span class="beneficiary-form__optional">
@@ -550,6 +577,7 @@
                         >{{ old('notes', $distribution->notes) }}</textarea>
 
                         <div class="distribution-edit-field__bottom">
+
                             <small class="beneficiary-form__hint">
                                 Tambahkan informasi pendukung jika diperlukan.
                             </small>
@@ -557,6 +585,7 @@
                             <small class="beneficiary-form__hint">
                                 <span id="notes-count">{{ mb_strlen(old('notes', $distribution->notes ?? '')) }}</span>/1000 karakter
                             </small>
+
                         </div>
 
                         @error('notes')
@@ -564,31 +593,26 @@
                                 {{ $message }}
                             </small>
                         @enderror
+
                     </div>
 
                 </div>
+
             </section>
 
-            {{-- Informasi pencegahan duplikasi --}}
+            {{-- INFORMASI PENCEGAHAN DUPLIKASI --}}
             <div class="distribution-edit-guidance">
-                <span
-                    class="distribution-edit-guidance__icon"
-                    aria-hidden="true"
-                >
+
+                <span class="distribution-edit-guidance__icon"
+                      aria-hidden="true">
                     <svg viewBox="0 0 24 24" fill="none">
-                        <circle
-                            cx="12"
-                            cy="12"
-                            r="9"
-                            stroke="currentColor"
-                            stroke-width="1.7"
-                        />
-                        <path
-                            d="M12 11V16M12 8H12.01"
-                            stroke="currentColor"
-                            stroke-width="1.8"
-                            stroke-linecap="round"
-                        />
+                        <circle cx="12" cy="12" r="9"
+                                stroke="currentColor"
+                                stroke-width="1.7"/>
+                        <path d="M12 11V16M12 8H12.01"
+                              stroke="currentColor"
+                              stroke-width="1.8"
+                              stroke-linecap="round"/>
                     </svg>
                 </span>
 
@@ -600,38 +624,43 @@
                         Periksa peringatannya jika muncul.
                     </p>
                 </div>
+
             </div>
 
-            {{-- Tombol aksi --}}
-            <footer class="beneficiary-form__footer">
-                <a
-                    href="{{ route('distributions.show', $distribution) }}"
-                    class="beneficiary-form__button beneficiary-form__button--secondary"
-                >
+            {{-- FORM ACTIONS --}}
+            <div class="beneficiary-form__actions">
+
+                <a href="{{ route('distributions.show', $distribution) }}"
+                   class="beneficiary-form__button beneficiary-form__button--secondary">
                     Batal
                 </a>
 
-                <button
-                    type="submit"
-                    class="beneficiary-form__button beneficiary-form__button--primary"
-                >
+                <button type="submit"
+                        class="beneficiary-form__button beneficiary-form__button--primary">
                     Simpan Perubahan
-                    <span aria-hidden="true">→</span>
+
+                    <svg viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="1.8"
+                         stroke-linecap="round" stroke-linejoin="round"
+                         aria-hidden="true">
+                        <path d="M5 12h14"/>
+                        <path d="m13 6 6 6-6 6"/>
+                    </svg>
                 </button>
-            </footer>
+
+            </div>
 
         </form>
 
-        {{-- Footer halaman --}}
-        <p class="beneficiary-form__footer-note">
-            Masjid Sabilillah <span>•</span> Admin Panel
-        </p>
-
     </main>
 
-    {{-- Pengecekan duplikasi penyaluran --}}
+    {{-- FOOTER GLOBAL --}}
+    <x-admin.footer />
+
+    {{-- PENGECEKAN DUPLIKASI PENYALURAN --}}
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+
             const form = document.getElementById('edit-distribution-form');
             const dateInput = document.getElementById('distribution_date');
             const beneficiaryInput = document.getElementById('beneficiary_id');
@@ -746,6 +775,7 @@
                 }
 
                 timeout = setTimeout(async function () {
+
                     showMessage('Memeriksa potensi duplikasi penyaluran...');
 
                     try {
@@ -779,6 +809,7 @@
                         } else {
                             clearResult();
                         }
+
                     } catch (error) {
                         if (currentRequest === requestNumber) {
                             showMessage(
@@ -787,6 +818,7 @@
                             );
                         }
                     }
+
                 }, 300);
             }
 
@@ -805,6 +837,7 @@
 
             // Periksa tanggal dan penerima yang sudah terisi.
             checkDuplicates();
+
         });
     </script>
 

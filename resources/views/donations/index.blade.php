@@ -1,265 +1,150 @@
-<!DOCTYPE html>
-<html lang="id">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+@extends('layouts.admin')
 
-    <meta name="theme-color" content="#294236">
+@section('title', 'Data Donasi - Admin Masjid Sabilillah')
 
-    <title>Data Donasi | Masjid Sabilillah</title>
+@push('styles')
+    @vite('resources/css/admin-donations.css')
+@endpush
 
-    @vite([
-        'resources/css/app.css',
-        'resources/css/admin-sidebar.css',
-        'resources/css/admin-donations.css',
-        'resources/js/admin-donation.js',
-    ])
+@section('content')
 
-</head>
+<div class="donations-page">
 
-<body class="admin-layout">
+    {{-- ==========================================
+         PAGE HEADER
+    =========================================== --}}
 
-    {{-- Sidebar navigasi admin --}}
-    @include('components.admin.sidebar')
+    <section class="admin-page-header">
 
-    {{-- Area utama halaman --}}
-    <div class="admin-main">
+        <div class="admin-page-header__content">
 
-        {{-- Header mobile --}}
-        <div class="admin-mobile-header">
-
-            <button
-                type="button"
-                class="admin-sidebar-toggle"
-                id="openSidebar"
-                aria-label="Buka menu navigasi"
-                aria-controls="adminSidebar"
-                aria-expanded="false"
-            >
-                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <path
-                        d="M4 6H20M4 12H20M4 18H20"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                    />
-                </svg>
-            </button>
-
-            <div class="admin-mobile-header__identity">
-                <span class="admin-mobile-header__title">
-                    Masjid Sabilillah
-                </span>
-
-                <span class="admin-mobile-header__subtitle">
-                    Panel Administrasi
-                </span>
+            <div class="admin-page-header__eyebrow">
+                <span class="admin-page-header__line"></span>
+                Masjid Sabilillah
             </div>
 
-        </div>
+            <h1 class="admin-page-header__title">
+                Data Donasi
+            </h1>
 
-
-        <main class="donations-page">
-
-            {{-- Header halaman --}}
-            <header class="donations-page__header">
-
-                <div class="donations-page__heading">
-
-                    <div class="donations-page__identity">
-
-                        <span class="donations-page__eyebrow">
-                            MASJID SABILILLAH
-                        </span>
-
-                        <h1 class="donations-page__title">
-                            Data Donasi
-                        </h1>
-
-                        <p class="donations-page__description">
-                            Kelola dan pantau pencatatan donasi masjid
-                            dengan tertib, amanah, dan transparan.
-                        </p>
-
-                    </div>
-
-                </div>
-
-                <a
-                    href="{{ route('donations.create') }}"
-                    class="donations-button donations-button--primary"
-                >
-                    <span aria-hidden="true">+</span>
-                    Tambah Donasi
-                </a>
-
-            </header>
-
-
-            {{-- Notifikasi berhasil --}}
-            @if (session('success'))
-
-                <div
-                    class="donations-alert donations-alert--success"
-                    role="status"
-                >
-                    {{ session('success') }}
-                </div>
-
-            @endif
-
-
-            {{-- Notifikasi kesalahan --}}
-            @if ($errors->any())
-
-                <div
-                    class="donations-alert donations-alert--error"
-                    role="alert"
-                >
-
-                    <strong>
-                        Data belum dapat diproses.
-                    </strong>
-
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-
-                </div>
-
-            @endif
-
-
-            {{-- Ringkasan donasi --}}
-            @include('components.admin.donations.summary-cards')
-
-
-            {{-- Pencarian dan filter --}}
-            @include('components.admin.donations.filters')
-
-
-            {{-- Daftar donasi --}}
-            <section class="donations-section">
-
-                <div class="donations-section__header">
-
-                    <div>
-
-                        <h2 class="donations-section__title">
-                            Daftar Donasi
-                        </h2>
-
-                        <p class="donations-section__description">
-                            Pantau pencatatan dan status verifikasi donasi
-                            yang tersimpan dalam sistem.
-                        </p>
-
-                    </div>
-
-                    <span class="donations-section__count">
-                        {{ $donations->total() }} data
-                    </span>
-
-                </div>
-
-
-                {{-- Tabel donasi --}}
-                @include('components.admin.donations.table')
-
-
-                {{-- Navigasi halaman --}}
-                @include('components.admin.donations.pagination')
-
-            </section>
-
-        </main>
-
-    </div>
-
-
-    {{-- Modal konfirmasi penghapusan --}}
-    <div
-        class="donations-modal"
-        id="deleteDonationModal"
-        aria-hidden="true"
-    >
-
-        <div
-            class="donations-modal__backdrop"
-            data-close-modal
-        ></div>
-
-        <div
-            class="donations-modal__dialog"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="deleteDonationTitle"
-        >
-
-            <div
-                class="donations-modal__icon"
-                aria-hidden="true"
-            >
-                !
-            </div>
-
-            <h2
-                class="donations-modal__title"
-                id="deleteDonationTitle"
-            >
-                Hapus Data Donasi?
-            </h2>
-
-            <p class="donations-modal__description">
-                Apakah kamu yakin ingin menghapus data donasi atas nama
-                <strong id="deleteDonationName">ini</strong>?
-                Periksa kembali sebelum melanjutkan.
+            <p class="admin-page-header__description">
+                Kelola, pantau, dan verifikasi seluruh transaksi donasi
+                yang masuk ke Masjid Sabilillah.
             </p>
 
-            <div class="donations-modal__actions">
+        </div>
 
-                <button
-                    type="button"
-                    class="donations-button donations-button--secondary"
-                    data-close-modal
+        <div class="admin-page-header__action">
+
+            <a
+                href="{{ route('donations.create') }}"
+                class="donations-button donations-button--primary donations-add-button"
+            >
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
                 >
-                    Batal
-                </button>
+                    <path d="M12 5v14M5 12h14"/>
+                </svg>
 
-                <form
-                    id="deleteDonationForm"
-                    method="POST"
-                    action=""
-                >
+                Tambah Donasi
+            </a>
 
-                    @csrf
-                    @method('DELETE')
+        </div>
 
-                    <button
-                        type="submit"
-                        class="donations-button donations-button--danger"
-                    >
-                        Ya, Hapus
-                    </button>
+    </section>
 
-                </form>
+
+    {{-- ==========================================
+         SUMMARY CARDS
+    =========================================== --}}
+
+    @include('components.admin.donations.summary-cards')
+
+
+    {{-- ==========================================
+         DONATION DATA SECTION
+    =========================================== --}}
+
+    <section class="donations-section">
+
+        {{-- SECTION HEADING --}}
+
+        <div class="donations-section__heading">
+
+            <div>
+
+                <span class="donations-section__eyebrow">
+                </span>
+
+                <h2>
+                </h2>
+
+                <p>
+                </p>
 
             </div>
 
         </div>
 
-    </div>
+
+        {{-- ======================================
+             FILTER
+        ======================================= --}}
+
+        @include('components.admin.donations.filters')
 
 
-    {{-- Interaksi sidebar dan halaman donasi --}}
-    @vite([
-        'resources/js/admin-sidebar.js',
-        'resources/js/admin-donations.js'
-    ])
+        {{-- ======================================
+             DONATION TABLE CARD
+        ======================================= --}}
 
-</body>
+        <div class="donations-table-card">
 
-</html>
+            {{-- TABLE HEADING --}}
+
+            <div class="donations-table-card__heading">
+
+                <div>
+
+                    <h3>
+                        Seluruh Transaksi Donasi
+                    </h3>
+
+                    <p>
+                        Menampilkan data donasi yang tercatat dalam sistem.
+                    </p>
+
+                </div>
+
+                <span class="donations-table-card__count">
+                    {{ $donations->total() }} Data
+                </span>
+
+            </div>
+
+
+            {{-- TABLE CONTENT --}}
+
+            @include('components.admin.donations.table')
+
+
+            {{-- ==================================
+                 PAGINATION
+            =================================== --}}
+
+            @include('components.admin.donations.pagination')
+
+        </div>
+
+    </section>
+
+</div>
+
+@endsection

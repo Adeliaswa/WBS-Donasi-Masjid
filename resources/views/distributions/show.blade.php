@@ -1,392 +1,437 @@
-<!DOCTYPE html>
-<html lang="id">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#294236">
+@extends('layouts.admin')
 
-    <title>Detail Penyaluran Bantuan | Masjid Sabilillah</title>
+@section('title', 'Detail Penyaluran Bantuan - Admin Masjid Sabilillah')
 
+@push('styles')
     @vite([
-        'resources/css/app.css',
-        'resources/css/admin-sidebar.css',
         'resources/css/admin-distributions.css',
-        'resources/css/admin-distribution-show.css'
+        'resources/css/admin-distribution-show.css',
     ])
-</head>
+@endpush
 
-<body class="admin-layout">
+@section('content')
 
-    @include('components.admin.sidebar')
+@php
+    $status = strtolower(
+        trim((string) ($distribution->status ?? ''))
+    );
 
-    <div class="admin-main">
+    $statusClass = match ($status) {
+        'disalurkan', 'distributed', 'completed' => 'success',
+        'pending', 'menunggu', 'menunggu verifikasi' => 'pending',
+        'diproses', 'processing' => 'processing',
+        'dibatalkan', 'cancelled', 'canceled',
+        'ditolak', 'rejected' => 'danger',
+        default => 'neutral',
+    };
 
-        {{-- Header mobile --}}
-        <div class="admin-mobile-header">
-            <button
-                type="button"
-                class="admin-sidebar-toggle"
-                id="openSidebar"
-                aria-label="Buka menu navigasi"
-                aria-controls="adminSidebar"
-                aria-expanded="false"
-            >
-                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <path
-                        d="M4 6H20M4 12H20M4 18H20"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                    />
-                </svg>
-            </button>
+    $statusLabel = match ($status) {
+        'disalurkan', 'distributed', 'completed' => 'Disalurkan',
+        'pending', 'menunggu', 'menunggu verifikasi' => 'Menunggu',
+        'diproses', 'processing' => 'Diproses',
+        'dibatalkan', 'cancelled', 'canceled' => 'Dibatalkan',
+        'ditolak', 'rejected' => 'Ditolak',
+        default => $distribution->status ?: 'Belum ditentukan',
+    };
 
-            <div class="admin-mobile-header__identity">
-                <span class="admin-mobile-header__title">
-                    Masjid Sabilillah
-                </span>
+    $formatRupiah = function ($value) {
+        return 'Rp ' . number_format((float) $value, 0, ',', '.');
+    };
+@endphp
 
-                <span class="admin-mobile-header__subtitle">
-                    Panel Administrasi
-                </span>
+<div class="distribution-page distribution-detail-page">
+
+    {{-- ==========================================
+         PAGE HEADER
+    =========================================== --}}
+
+    <section class="admin-page-header">
+
+        <div class="admin-page-header__content">
+
+            <div class="admin-page-header__eyebrow">
+                <span class="admin-page-header__line"></span>
+                Masjid Sabilillah
             </div>
+
+            <h1 class="admin-page-header__title">
+                Detail Penyaluran Bantuan
+            </h1>
+
+            <p class="admin-page-header__description">
+                Informasi lengkap mengenai penyaluran bantuan
+                kepada penerima manfaat Masjid Sabilillah.
+            </p>
+
         </div>
 
-        <main class="distribution-detail-page">
+        <div class="admin-page-header__action">
 
-            {{-- Header halaman --}}
-            <header class="distribution-detail-header">
-
-                <div class="distribution-detail-header__content">
-
-                    <span class="distribution-detail-header__eyebrow">
-                        MASJID SABILILLAH
-                    </span>
-
-                    <h1 class="distribution-detail-header__title">
-                        Detail Penyaluran Bantuan
-                    </h1>
-
-                    <p class="distribution-detail-header__description">
-                        Informasi lengkap mengenai penyaluran bantuan
-                        kepada penerima manfaat.
-                    </p>
-
-                </div>
-
-                <div class="distribution-detail-header__actions">
-
-                    <a
-                        href="{{ route('distributions.index') }}"
-                        class="distribution-detail-button distribution-detail-button--secondary"
-                    >
-                        <svg
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            aria-hidden="true"
-                        >
-                            <path
-                                d="M19 12H5M12 19L5 12L12 5"
-                                stroke="currentColor"
-                                stroke-width="1.8"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                            />
-                        </svg>
-
-                        Kembali
-                    </a>
-
-                </div>
-
-            </header>
-
-
-            {{-- Kartu detail --}}
-            <section
-                class="distribution-detail-card"
-                aria-labelledby="distribution-detail-heading"
+            <a
+                href="{{ route('distributions.index') }}"
+                class="distribution-button distribution-button--secondary"
             >
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                >
+                    <path d="M19 12H5"/>
+                    <path d="m12 19-7-7 7-7"/>
+                </svg>
 
-                {{-- Header kartu --}}
-                <div class="distribution-detail-card__header">
+                Kembali
+            </a>
 
-                    <div class="distribution-detail-card__identity">
+            <a
+                href="{{ route('distributions.edit', $distribution) }}"
+                class="distribution-button distribution-button--primary"
+            >
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                >
+                    <path d="M12 20h9"/>
+                    <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L8 18l-4 1 1-4Z"/>
+                </svg>
 
-                        <div
-                            class="distribution-detail-card__icon"
-                            aria-hidden="true"
-                        >
-                            <svg
-                                viewBox="0 0 24 24"
-                                fill="none"
-                            >
-                                <rect
-                                    x="4"
-                                    y="3"
-                                    width="16"
-                                    height="18"
-                                    rx="2"
-                                    stroke="currentColor"
-                                    stroke-width="1.7"
-                                />
+                Edit Penyaluran
+            </a>
 
-                                <path
-                                    d="M8 8H16M8 12H16M8 16H13"
-                                    stroke="currentColor"
-                                    stroke-width="1.7"
-                                    stroke-linecap="round"
-                                />
-                            </svg>
-                        </div>
+        </div>
 
-                        <div class="distribution-detail-card__heading">
+    </section>
 
-                            <span class="distribution-detail-card__eyebrow">
-                                RINCIAN PENYALURAN
-                            </span>
 
-                            <h2
-                                id="distribution-detail-heading"
-                                class="distribution-detail-card__title"
-                            >
-                                Informasi Penyaluran
-                            </h2>
+    {{-- ==========================================
+         SUCCESS NOTIFICATION
+    =========================================== --}}
 
-                            <p class="distribution-detail-card__description">
-                                Rincian data penyaluran yang tersimpan dalam sistem.
-                            </p>
+    @if (session('success'))
 
-                        </div>
+        <div class="distribution-show-alert" role="status">
 
-                    </div>
+            <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+            >
+                <circle cx="12" cy="12" r="10"/>
+                <path d="m8 12 3 3 5-6"/>
+            </svg>
 
-                    <span class="distribution-detail-id">
-                        ID #{{ $distribution->id }}
-                    </span>
+            <span>{{ session('success') }}</span>
 
+        </div>
+
+    @endif
+
+
+    {{-- ==========================================
+         DETAIL CARD
+    =========================================== --}}
+
+    <section
+        class="distribution-show-card"
+        aria-labelledby="distributionShowTitle"
+    >
+
+        {{-- CARD HEADER --}}
+
+        <div class="distribution-show-card__header">
+
+            <div class="distribution-show-card__heading">
+
+                <div class="distribution-show-card__icon">
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.8"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                    >
+                        <rect x="4" y="3" width="16" height="18" rx="2"/>
+                        <path d="M8 8h8M8 12h8M8 16h5"/>
+                    </svg>
                 </div>
 
+                <div>
 
-                {{-- Persiapan status --}}
-                @php
-                    $status = strtolower(
-                        trim((string) ($distribution->status ?? ''))
-                    );
-
-                    $statusClass = match ($status) {
-                        'disalurkan', 'distributed', 'completed' => 'success',
-                        'pending', 'menunggu', 'menunggu verifikasi' => 'pending',
-                        'diproses', 'processing' => 'processing',
-                        'dibatalkan', 'cancelled', 'canceled',
-                        'ditolak', 'rejected' => 'danger',
-                        default => 'neutral',
-                    };
-
-                    $statusLabel = match ($status) {
-                        'disalurkan', 'distributed', 'completed' => 'Disalurkan',
-                        'pending', 'menunggu', 'menunggu verifikasi' => 'Menunggu',
-                        'diproses', 'processing' => 'Diproses',
-                        'dibatalkan', 'cancelled', 'canceled' => 'Dibatalkan',
-                        'ditolak', 'rejected' => 'Ditolak',
-                        default => $distribution->status ?: 'Belum ditentukan',
-                    };
-                @endphp
-
-
-                {{-- Isi kartu --}}
-                <div class="distribution-detail-card__body">
-
-                    {{-- Ringkasan nominal dan status --}}
-                    <div class="distribution-detail-summary">
-
-                        <div class="distribution-detail-summary__amount">
-
-                            <span class="distribution-detail-summary__label">
-                                Total Nilai Bantuan
-                            </span>
-
-                            <strong>
-                                Rp{{ number_format(
-                                    (float) $distribution->amount,
-                                    0,
-                                    ',',
-                                    '.'
-                                ) }}
-                            </strong>
-
-                            <span class="distribution-detail-summary__note">
-                                Nilai bantuan yang tercatat pada penyaluran ini.
-                            </span>
-
-                        </div>
-
-                        <div class="distribution-detail-summary__status">
-
-                            <span class="distribution-detail-summary__label">
-                                Status Penyaluran
-                            </span>
-
-                            <span class="distribution-detail-status distribution-detail-status--{{ $statusClass }}">
-                                <span
-                                    class="distribution-detail-status__dot"
-                                    aria-hidden="true"
-                                ></span>
-
-                                {{ $statusLabel }}
-                            </span>
-
-                        </div>
-
-                    </div>
-
-
-                    {{-- Informasi detail --}}
-                    <dl class="distribution-detail-grid">
-
-                        {{-- Tanggal --}}
-                        <div class="distribution-detail-item">
-
-                            <dt>Tanggal Penyaluran</dt>
-
-                            <dd>
-                                {{ $distribution->distribution_date
-                                    ? $distribution->distribution_date->format('d-m-Y')
-                                    : '-' }}
-                            </dd>
-
-                        </div>
-
-
-                        {{-- Penerima --}}
-                        <div class="distribution-detail-item">
-
-                            <dt>Nama Penerima Manfaat</dt>
-
-                            <dd>
-                                {{ $distribution->beneficiary?->name ?? '-' }}
-                            </dd>
-
-                        </div>
-
-
-                        {{-- Jenis bantuan --}}
-                        <div class="distribution-detail-item">
-
-                            <dt>Jenis Bantuan</dt>
-
-                            <dd>
-                                <span class="distribution-detail-type">
-                                    {{ $distribution->assistance_type ?: '-' }}
-                                </span>
-                            </dd>
-
-                        </div>
-
-
-                        {{-- Sumber donasi --}}
-                        <div class="distribution-detail-item">
-
-                            <dt>Sumber Donasi</dt>
-
-                            <dd>
-                                @if ($distribution->donation)
-
-                                    <span class="distribution-detail-donation">
-                                        Donasi #{{ $distribution->donation->id }}
-                                    </span>
-
-                                    <span class="distribution-detail-donation__amount">
-                                        Rp{{ number_format(
-                                            (float) $distribution->donation->amount,
-                                            0,
-                                            ',',
-                                            '.'
-                                        ) }}
-                                    </span>
-
-                                @else
-
-                                    <span class="distribution-detail-muted">
-                                        Tidak dipilih
-                                    </span>
-
-                                @endif
-                            </dd>
-
-                        </div>
-
-
-                        {{-- Catatan --}}
-                        <div class="distribution-detail-item distribution-detail-item--full">
-
-                            <dt>Catatan</dt>
-
-                            <dd class="distribution-detail-notes">
-                                @if (filled($distribution->notes))
-                                    {{ $distribution->notes }}
-                                @else
-                                    <span class="distribution-detail-muted">
-                                        Tidak ada catatan untuk penyaluran ini.
-                                    </span>
-                                @endif
-                            </dd>
-
-                        </div>
-
-                    </dl>
-
-                </div>
-
-
-                {{-- Footer kartu --}}
-                <footer class="distribution-detail-card__footer">
+                    <h2 id="distributionShowTitle">
+                        Informasi Penyaluran
+                    </h2>
 
                     <p>
-                        Pastikan informasi penyaluran sudah sesuai
-                        sebelum melakukan perubahan data.
+                        Rincian data penyaluran yang tersimpan
+                        dalam sistem administrasi.
                     </p>
 
-                    <a
-                        href="{{ route('distributions.edit', $distribution) }}"
-                        class="distribution-detail-button distribution-detail-button--primary"
-                    >
-                        <svg
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            aria-hidden="true"
-                        >
-                            <path
-                                d="M12 20H21"
-                                stroke="currentColor"
-                                stroke-width="1.8"
-                                stroke-linecap="round"
-                            />
+                </div>
 
-                            <path
-                                d="M16.5 3.5A2.12 2.12 0 0 1 19.5 6.5L8 18L4 19L5 15L16.5 3.5Z"
-                                stroke="currentColor"
-                                stroke-width="1.8"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                            />
-                        </svg>
+            </div>
 
-                        Edit Penyaluran
-                    </a>
+            <span class="distribution-show-reference">
+                ID #{{ $distribution->id }}
+            </span>
 
-                </footer>
+        </div>
 
-            </section>
 
-        </main>
+        {{-- CARD BODY --}}
 
-    </div>
+        <div class="distribution-show-card__body">
 
-    @vite([
-        'resources/js/admin-sidebar.js'
-    ])
+            {{-- ==================================
+                 SUMMARY
+            =================================== --}}
 
-</body>
-</html>
+            <div class="distribution-show-highlight">
+
+                <div class="distribution-show-highlight__amount">
+
+                    <span class="distribution-show-label">
+                        Total Nilai Bantuan
+                    </span>
+
+                    <strong>
+                        {{ $formatRupiah($distribution->amount) }}
+                    </strong>
+
+                    <span class="distribution-show-caption">
+                        Nilai bantuan yang tercatat pada penyaluran ini.
+                    </span>
+
+                </div>
+
+                <div class="distribution-show-highlight__divider"></div>
+
+                <div class="distribution-show-highlight__status">
+
+                    <span class="distribution-show-label">
+                        Status Penyaluran
+                    </span>
+
+                    <span class="distribution-show-status distribution-show-status--{{ $statusClass }}">
+                        <span class="distribution-show-status__dot"></span>
+                        {{ $statusLabel }}
+                    </span>
+
+                    <span class="distribution-show-caption">
+                        Status pelaksanaan penyaluran bantuan.
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            {{-- ==================================
+                 MAIN INFORMATION
+            =================================== --}}
+
+            <div class="distribution-show-section">
+
+                <div class="distribution-show-section__heading">
+
+                    <div>
+
+                        <span class="distribution-show-section__eyebrow">
+                            INFORMASI UTAMA
+                        </span>
+
+                        <h3>Data Penyaluran</h3>
+
+                    </div>
+
+                </div>
+
+
+                <dl class="distribution-show-grid">
+
+                    {{-- TANGGAL PENYALURAN --}}
+
+                    <div class="distribution-show-item">
+
+                        <dt>Tanggal Penyaluran</dt>
+
+                        <dd>
+                            {{ $distribution->distribution_date
+                                ? $distribution->distribution_date->format('d-m-Y')
+                                : '-' }}
+                        </dd>
+
+                    </div>
+
+
+                    {{-- PENERIMA MANFAAT --}}
+
+                    <div class="distribution-show-item">
+
+                        <dt>Nama Penerima Manfaat</dt>
+
+                        <dd>
+                            {{ $distribution->beneficiary?->name ?? '-' }}
+                        </dd>
+
+                    </div>
+
+
+                    {{-- JENIS BANTUAN --}}
+
+                    <div class="distribution-show-item">
+
+                        <dt>Jenis Bantuan</dt>
+
+                        <dd>
+                            <span class="distribution-show-type">
+                                {{ $distribution->assistance_type ?: '-' }}
+                            </span>
+                        </dd>
+
+                    </div>
+
+
+                    {{-- SUMBER DONASI --}}
+
+                    <div class="distribution-show-item">
+
+                        <dt>Sumber Donasi</dt>
+
+                        <dd class="distribution-show-donation">
+
+                            @if ($distribution->donation)
+
+                                <span class="distribution-show-donation__name">
+                                    Donasi #{{ $distribution->donation->id }}
+                                </span>
+
+                                <span class="distribution-show-donation__amount">
+                                    {{ $formatRupiah($distribution->donation->amount) }}
+                                </span>
+
+                            @else
+
+                                <span class="distribution-show-muted">
+                                    Tidak dipilih
+                                </span>
+
+                            @endif
+
+                        </dd>
+
+                    </div>
+
+                </dl>
+
+            </div>
+
+
+            {{-- ==================================
+                 NOTES
+            =================================== --}}
+
+            <div class="distribution-show-section distribution-show-section--notes">
+
+                <div class="distribution-show-section__heading">
+
+                    <div>
+
+                        <span class="distribution-show-section__eyebrow">
+                            KETERANGAN
+                        </span>
+
+                        <h3>Catatan Penyaluran</h3>
+
+                    </div>
+
+                </div>
+
+                <div class="distribution-show-notes">
+
+                    <p>
+                        @if (filled($distribution->notes))
+                            {{ $distribution->notes }}
+                        @else
+                            Tidak ada catatan tambahan untuk penyaluran bantuan ini.
+                        @endif
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        {{-- ==================================
+             CARD FOOTER
+        =================================== --}}
+
+        <div class="distribution-show-card__footer">
+
+            <div class="distribution-show-footer-info">
+
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                >
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 16v-4"/>
+                    <path d="M12 8h.01"/>
+                </svg>
+
+                <p>
+                    Pastikan informasi penyaluran sudah sesuai
+                    dengan catatan bantuan yang tersimpan.
+                </p>
+
+            </div>
+
+            <a
+                href="{{ route('distributions.edit', $distribution) }}"
+                class="distribution-button distribution-button--primary distribution-show-edit-button"
+            >
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                >
+                    <path d="M12 20h9"/>
+                    <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L8 18l-4 1 1-4Z"/>
+                </svg>
+
+                Ubah Data Penyaluran
+            </a>
+
+        </div>
+
+    </section>
+
+</div>
+
+@endsection
