@@ -27,7 +27,7 @@ export default defineConfig({
                 'resources/css/admin-donation-form.css',
 
                 // CSS halaman penerima manfaat
-                'resources/css/beneficiaries.css',
+                'resources/css/admin-beneficiaries.css',
 
                 // CSS halaman menampilkan penerima manfaat
                 'resources/css/admin-beneficiaries-show.css',
