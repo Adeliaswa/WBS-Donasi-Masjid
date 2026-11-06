@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Beneficiary extends Model
 {
@@ -31,8 +32,22 @@ class Beneficiary extends Model
         ];
     }
 
-    public function beneficiaryCategory()
+    public function beneficiaryCategory(): BelongsTo
     {
-        return $this->belongsTo(BeneficiaryCategory::class, 'category_id');
+        return $this->belongsTo(
+            BeneficiaryCategory::class,
+            'category_id'
+        );
+    }
+
+    /**
+     * Riwayat seluruh penyaluran bantuan penerima.
+     */
+    public function distributions(): HasMany
+    {
+        return $this->hasMany(
+            Distribution::class,
+            'beneficiary_id'
+        );
     }
 }

@@ -495,6 +495,126 @@
 
             </div>
 
+
+            {{-- ==================================
+                 DISTRIBUTION HISTORY
+            =================================== --}}
+
+            <div class="beneficiary-show-section beneficiary-show-section--distributions">
+
+                <div class="beneficiary-show-section__heading">
+
+                    <div>
+
+                        <span class="beneficiary-show-section__eyebrow">
+                            RIWAYAT BANTUAN
+                        </span>
+
+                        <h3>Riwayat Penyaluran</h3>
+
+                        <p>
+                            Daftar bantuan yang pernah diterima oleh
+                            {{ $beneficiary->name }}.
+                        </p>
+
+                    </div>
+
+                    <span class="beneficiary-show-reference">
+                        {{ $beneficiary->distributions->count() }} Penyaluran
+                    </span>
+
+                </div>
+
+                @if ($beneficiary->distributions->isNotEmpty())
+
+                    <div class="beneficiary-show-history-table-wrapper">
+
+                        <table class="beneficiary-show-history-table">
+
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Tanggal</th>
+                                    <th>Jenis Bantuan</th>
+                                    <th>Nominal / Nilai</th>
+                                    <th>Status</th>
+                                    <th>Catatan</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                @foreach ($beneficiary->distributions as $distribution)
+
+                                    <tr>
+                                        <td>
+                                            {{ $loop->iteration }}
+                                        </td>
+
+                                        <td>
+                                            {{ $distribution->distribution_date?->format('d-m-Y') ?? '-' }}
+                                        </td>
+
+                                        <td>
+                                            {{ $distribution->assistance_type }}
+                                        </td>
+
+                                        <td>
+                                            Rp{{ number_format((float) $distribution->amount, 0, ',', '.') }}
+                                        </td>
+
+                                        <td>
+                                            {{ $distribution->status }}
+                                        </td>
+
+                                        <td>
+                                            {{ $distribution->notes ?: '-' }}
+                                        </td>
+                                    </tr>
+
+                                @endforeach
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                @else
+
+                    <div class="beneficiary-show-empty-history">
+
+                        <div class="beneficiary-show-empty-history__icon">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true"
+                            >
+                                <rect x="3" y="4" width="18" height="16" rx="2"/>
+                                <path d="M8 9h8"/>
+                                <path d="M8 13h5"/>
+                            </svg>
+
+                        </div>
+
+                        <strong>Belum Ada Riwayat Penyaluran</strong>
+
+                        <p>
+                            Penerima manfaat ini belum memiliki riwayat
+                            penyaluran bantuan yang tercatat dalam sistem.
+                        </p>
+
+                    </div>
+
+                @endif
+
+            </div>
+
         </div>
 
 

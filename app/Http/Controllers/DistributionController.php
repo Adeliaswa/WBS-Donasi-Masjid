@@ -10,13 +10,19 @@ use Illuminate\Validation\Rule;
 
 class DistributionController extends Controller
 {
+    /**
+     * Menampilkan daftar penyaluran bantuan.
+     */
     public function index(Request $request)
     {
         $query = Distribution::with(['beneficiary', 'donation']);
 
-        // Pencarian nama penerima atau jenis bantuan
+        // ==============================================
+        // PENCARIAN NAMA PENERIMA ATAU JENIS BANTUAN
+        // ==============================================
+
         if ($request->filled('search')) {
-            $search = $request->search;
+            $search = trim($request->search);
 
             $query->where(function ($q) use ($search) {
                 $q->where('assistance_type', 'ILIKE', "%{$search}%")
@@ -26,12 +32,69 @@ class DistributionController extends Controller
             });
         }
 
-        // Filter status
+        // ==============================================
+        // FILTER JENIS BANTUAN
+        // ==============================================
+
+        if ($request->filled('assistance_type')) {
+            $assistanceType = trim($request->assistance_type);
+
+            $query->where(
+                'assistance_type',
+                'ILIKE',
+                "%{$assistanceType}%"
+            );
+        }
+
+        // ==============================================
+        // FILTER STATUS
+        // ==============================================
+
         if ($request->filled('status')) {
             $query->where('status', $request->status);
         }
 
-        // Filter tanggal
+        // ==============================================
+        // FILTER PERIODE
+        // ==============================================
+
+        $startDate = null;
+        $endDate = null;
+
+        switch ($request->input('period')) {
+            case 'this_month':
+                $startDate = now()->startOfMonth()->toDateString();
+                $endDate = now()->endOfMonth()->toDateString();
+                break;
+
+            case 'last_month':
+                $lastMonth = now()->subMonthNoOverflow();
+
+                $startDate = $lastMonth->copy()
+                    ->startOfMonth()
+                    ->toDateString();
+
+                $endDate = $lastMonth->copy()
+                    ->endOfMonth()
+                    ->toDateString();
+                break;
+
+            case 'this_year':
+                $startDate = now()->startOfYear()->toDateString();
+                $endDate = now()->endOfYear()->toDateString();
+                break;
+        }
+
+        // Terapkan filter periode
+        if ($startDate && $endDate) {
+            $query->whereDate('distribution_date', '>=', $startDate)
+                ->whereDate('distribution_date', '<=', $endDate);
+        }
+
+        // ==============================================
+        // FILTER RENTANG TANGGAL MANUAL
+        // ==============================================
+
         if ($request->filled('start_date')) {
             $query->whereDate(
                 'distribution_date',
@@ -48,15 +111,24 @@ class DistributionController extends Controller
             );
         }
 
+        // ==============================================
+        // HASIL DATA DAN PAGINATION
+        // ==============================================
+
         $distributions = $query
             ->orderByDesc('distribution_date')
             ->orderByDesc('id')
             ->paginate(10)
             ->withQueryString();
 
-        // Ringkasan seluruh data, tidak mengikuti filter pencarian
+        // ==============================================
+        // RINGKASAN SELURUH DATA
+        // TIDAK MENGIKUTI FILTER PENCARIAN
+        // ==============================================
+
         $summary = [
             'total' => Distribution::count(),
+
             'this_month' => Distribution::whereYear(
                 'distribution_date',
                 now()->year
@@ -64,8 +136,13 @@ class DistributionController extends Controller
                 'distribution_date',
                 now()->month
             )->count(),
+
             'total_amount' => Distribution::sum('amount'),
         ];
+
+        // ==============================================
+        // DATA PENERIMA DAN DONASI UNTUK FORM
+        // ==============================================
 
         $beneficiaries = Beneficiary::where('status', 'Aktif')
             ->orderBy('name')
@@ -81,6 +158,9 @@ class DistributionController extends Controller
         ));
     }
 
+    /**
+     * Menampilkan form tambah penyaluran.
+     */
     public function create()
     {
         $beneficiaries = Beneficiary::where('status', 'Aktif')
@@ -94,7 +174,10 @@ class DistributionController extends Controller
             'donations'
         ));
     }
-    
+
+    /**
+     * Memeriksa potensi duplikasi penyaluran.
+     */
     private function findPotentialDuplicates(
         array $data,
         ?int $excludeId = null
@@ -119,15 +202,21 @@ class DistributionController extends Controller
             ->get();
     }
 
+    /**
+     * Endpoint pemeriksaan duplikasi melalui AJAX.
+     */
     public function checkDuplicates(Request $request)
     {
         $validated = $request->validate([
             'distribution_date' => ['required', 'date'],
+
             'beneficiary_id' => [
                 'required',
                 'integer',
-                Rule::exists('beneficiaries', 'id')->whereNull('deleted_at'),
+                Rule::exists('beneficiaries', 'id')
+                    ->whereNull('deleted_at'),
             ],
+
             'distribution_id' => ['nullable', 'integer'],
         ]);
 
@@ -151,6 +240,7 @@ class DistributionController extends Controller
         return response()->json([
             'has_duplicates' => $duplicates->isNotEmpty(),
             'count' => $duplicates->count(),
+
             'data' => $duplicates->map(function ($item) {
                 return [
                     'beneficiary_name' => $item->beneficiary?->name,
@@ -162,42 +252,54 @@ class DistributionController extends Controller
             })->values(),
         ]);
     }
+
+    /**
+     * Menyimpan data penyaluran baru.
+     */
     public function store(Request $request)
     {
         $validated = $request->validate([
             'distribution_date' => ['required', 'date'],
+
             'beneficiary_id' => [
                 'required',
                 'integer',
                 Rule::exists('beneficiaries', 'id')
                     ->whereNull('deleted_at'),
             ],
+
             'assistance_type' => ['required', 'string', 'max:100'],
+
             'amount' => ['required', 'numeric', 'min:10000'],
+
             'donation_id' => [
                 'nullable',
                 'integer',
                 Rule::exists('donations', 'id')
                     ->whereNull('deleted_at'),
             ],
+
             'status' => [
                 'required',
                 Rule::in(['Disalurkan', 'Diproses', 'Dibatalkan']),
             ],
-            'notes' => ['nullable', 'string'],
-            ], [
-                'distribution_date.required' => 'Tanggal penyaluran wajib diisi.',
-                'distribution_date.date' => 'Tanggal penyaluran harus berupa tanggal yang valid.',
-                'beneficiary_id.required' => 'Penerima manfaat wajib dipilih.',
-                'beneficiary_id.exists' => 'Penerima manfaat tidak ditemukan atau sudah dihapus.',
-                'assistance_type.required' => 'Jenis bantuan wajib diisi.',
-                'amount.required' => 'Nominal atau nilai bantuan wajib diisi.',
-                'amount.numeric' => 'Nominal atau nilai bantuan harus berupa angka.',
-                'amount.min' => 'Nominal atau nilai bantuan minimal Rp10.000.',
-                'donation_id.exists' => 'Sumber donasi tidak ditemukan atau sudah dihapus.',
-                'status.required' => 'Status penyaluran wajib dipilih.',
-                'status.in' => 'Status penyaluran tidak valid.',
-            ]);
+
+            'notes' => ['nullable', 'string', 'max:500'],
+
+        ], [
+            'distribution_date.required' => 'Tanggal penyaluran wajib diisi.',
+            'distribution_date.date' => 'Tanggal penyaluran harus berupa tanggal yang valid.',
+            'beneficiary_id.required' => 'Penerima manfaat wajib dipilih.',
+            'beneficiary_id.exists' => 'Penerima manfaat tidak ditemukan atau sudah dihapus.',
+            'assistance_type.required' => 'Jenis bantuan wajib diisi.',
+            'amount.required' => 'Nominal atau nilai bantuan wajib diisi.',
+            'amount.numeric' => 'Nominal atau nilai bantuan harus berupa angka.',
+            'amount.min' => 'Nominal atau nilai bantuan minimal Rp10.000.',
+            'donation_id.exists' => 'Sumber donasi tidak ditemukan atau sudah dihapus.',
+            'status.required' => 'Status penyaluran wajib dipilih.',
+            'status.in' => 'Status penyaluran tidak valid.',
+            'notes.max' => 'Catatan penyaluran maksimal 500 karakter.',
+        ]);
 
         $duplicates = $this->findPotentialDuplicates($validated);
 
@@ -206,6 +308,7 @@ class DistributionController extends Controller
                 ->withInput()
                 ->with('duplicate_warning', [
                     'count' => $duplicates->count(),
+
                     'data' => $duplicates->map(function ($item) {
                         return [
                             'beneficiary_name' => $item->beneficiary?->name,
@@ -223,6 +326,10 @@ class DistributionController extends Controller
         return redirect()->route('distributions.index')
             ->with('success', 'Penyaluran bantuan berhasil ditambahkan.');
     }
+
+    /**
+     * Menampilkan detail penyaluran.
+     */
     public function show(Distribution $distribution)
     {
         $distribution->load(['beneficiary', 'donation']);
@@ -230,6 +337,9 @@ class DistributionController extends Controller
         return view('distributions.show', compact('distribution'));
     }
 
+    /**
+     * Menampilkan form edit penyaluran.
+     */
     public function edit(Distribution $distribution)
     {
         $beneficiaries = Beneficiary::where('status', 'Aktif')
@@ -249,42 +359,53 @@ class DistributionController extends Controller
         ));
     }
 
+    /**
+     * Memperbarui data penyaluran.
+     */
     public function update(Request $request, Distribution $distribution)
     {
         $validated = $request->validate([
             'distribution_date' => ['required', 'date'],
+
             'beneficiary_id' => [
                 'required',
                 'integer',
                 Rule::exists('beneficiaries', 'id')
                     ->whereNull('deleted_at'),
             ],
+
             'assistance_type' => ['required', 'string', 'max:100'],
+
             'amount' => ['required', 'numeric', 'min:10000'],
+
             'donation_id' => [
                 'nullable',
                 'integer',
                 Rule::exists('donations', 'id')
                     ->whereNull('deleted_at'),
             ],
+
             'status' => [
                 'required',
                 Rule::in(['Disalurkan', 'Diproses', 'Dibatalkan']),
             ],
-            'notes' => ['nullable', 'string'],
-            ], [
-                'distribution_date.required' => 'Tanggal penyaluran wajib diisi.',
-                'distribution_date.date' => 'Tanggal penyaluran harus berupa tanggal yang valid.',
-                'beneficiary_id.required' => 'Penerima manfaat wajib dipilih.',
-                'beneficiary_id.exists' => 'Penerima manfaat tidak ditemukan atau sudah dihapus.',
-                'assistance_type.required' => 'Jenis bantuan wajib diisi.',
-                'amount.required' => 'Nominal atau nilai bantuan wajib diisi.',
-                'amount.numeric' => 'Nominal atau nilai bantuan harus berupa angka.',
-                'amount.min' => 'Nominal atau nilai bantuan minimal Rp10.000.',
-                'donation_id.exists' => 'Sumber donasi tidak ditemukan atau sudah dihapus.',
-                'status.required' => 'Status penyaluran wajib dipilih.',
-                'status.in' => 'Status penyaluran tidak valid.',
-            ]);
+
+            'notes' => ['nullable', 'string', 'max:500'],
+
+        ], [
+            'distribution_date.required' => 'Tanggal penyaluran wajib diisi.',
+            'distribution_date.date' => 'Tanggal penyaluran harus berupa tanggal yang valid.',
+            'beneficiary_id.required' => 'Penerima manfaat wajib dipilih.',
+            'beneficiary_id.exists' => 'Penerima manfaat tidak ditemukan atau sudah dihapus.',
+            'assistance_type.required' => 'Jenis bantuan wajib diisi.',
+            'amount.required' => 'Nominal atau nilai bantuan wajib diisi.',
+            'amount.numeric' => 'Nominal atau nilai bantuan harus berupa angka.',
+            'amount.min' => 'Nominal atau nilai bantuan minimal Rp10.000.',
+            'donation_id.exists' => 'Sumber donasi tidak ditemukan atau sudah dihapus.',
+            'status.required' => 'Status penyaluran wajib dipilih.',
+            'status.in' => 'Status penyaluran tidak valid.',
+            'notes.max' => 'Catatan penyaluran maksimal 500 karakter.',
+        ]);
 
         $duplicates = $this->findPotentialDuplicates(
             $validated,
@@ -296,6 +417,7 @@ class DistributionController extends Controller
                 ->withInput()
                 ->with('duplicate_warning', [
                     'count' => $duplicates->count(),
+
                     'data' => $duplicates->map(function ($item) {
                         return [
                             'beneficiary_name' => $item->beneficiary?->name,
@@ -314,6 +436,9 @@ class DistributionController extends Controller
             ->with('success', 'Data penyaluran berhasil diperbarui.');
     }
 
+    /**
+     * Menghapus data penyaluran.
+     */
     public function destroy(Distribution $distribution)
     {
         $distribution->delete();

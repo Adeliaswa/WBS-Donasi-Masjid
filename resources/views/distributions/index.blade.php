@@ -876,56 +876,88 @@
                                     </tr>
 
 
-                                @empty
+                                
+                                    @empty
 
-                                    {{-- EMPTY STATE --}}
+                                        {{-- EMPTY STATE --}}
+                                        @php
+                                            $hasActiveFilters =
+                                                request()->filled('search') ||
+                                                request()->filled('assistance_type') ||
+                                                request()->filled('status') ||
+                                                request()->filled('period');
+                                        @endphp
 
-                                    <tr>
+                                        <tr>
+                                            <td colspan="7">
 
-                                        <td colspan="7">
+                                                <div class="distribution-empty">
 
-                                            <div class="distribution-empty">
+                                                    <div class="distribution-empty__icon">
+                                                        <svg
+                                                            viewBox="0 0 24 24"
+                                                            fill="none"
+                                                            stroke="currentColor"
+                                                            stroke-width="1.5"
+                                                            stroke-linecap="round"
+                                                            stroke-linejoin="round"
+                                                            aria-hidden="true"
+                                                        >
+                                                            <rect x="4" y="4" width="16" height="16" rx="2"/>
+                                                            <path d="M8 9h8M8 13h8M8 17h4"/>
+                                                        </svg>
+                                                    </div>
 
-                                                <div class="distribution-empty__icon">
+                                                    @if ($hasActiveFilters)
 
-                                                    <svg
-                                                        viewBox="0 0 24 24"
-                                                        fill="none"
-                                                        stroke="currentColor"
-                                                        stroke-width="1.5"
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                        aria-hidden="true"
-                                                    >
-                                                        <rect x="4" y="4" width="16" height="16" rx="2"/>
-                                                        <path d="M8 9h8M8 13h8M8 17h4"/>
-                                                    </svg>
+                                                        {{-- EMPTY SEARCH / FILTER RESULT --}}
+
+                                                        <h3>
+                                                            Data Tidak Ditemukan
+                                                        </h3>
+
+                                                        <p>
+                                                            Tidak ada data penyaluran yang sesuai dengan
+                                                            kata kunci atau filter yang kamu gunakan.
+                                                            Silakan periksa kembali pencarian atau reset filter.
+                                                        </p>
+
+                                                        <a
+                                                            href="{{ route('distributions.index') }}"
+                                                            class="distribution-button distribution-button--secondary"
+                                                        >
+                                                            Reset Filter
+                                                        </a>
+
+                                                    @else
+
+                                                        {{-- EMPTY DATABASE --}}
+
+                                                        <h3>
+                                                            Belum Ada Data Penyaluran
+                                                        </h3>
+
+                                                        <p>
+                                                            Data penyaluran yang tersimpan
+                                                            akan ditampilkan di sini.
+                                                        </p>
+
+                                                        <a
+                                                            href="#distribution-create-panel"
+                                                            class="distribution-button distribution-button--primary"
+                                                        >
+                                                            + Tambah Penyaluran
+                                                        </a>
+
+                                                    @endif
 
                                                 </div>
 
-                                                <h3>
-                                                    Belum Ada Data Penyaluran
-                                                </h3>
+                                            </td>
+                                        </tr>
 
-                                                <p>
-                                                    Data penyaluran yang tersimpan
-                                                    akan ditampilkan di sini.
-                                                </p>
+                                    @endforelse
 
-                                                <a
-                                                    href="#distribution-create-panel"
-                                                    class="distribution-button distribution-button--primary"
-                                                >
-                                                    + Tambah Penyaluran
-                                                </a>
-
-                                            </div>
-
-                                        </td>
-
-                                    </tr>
-
-                                @endforelse
 
                             </tbody>
 
@@ -1371,25 +1403,25 @@
 
 
                     {{-- NOTES --}}
-
                     <div class="distribution-field">
 
                         <label for="distribution-notes">
-
                             Catatan
-
-                            <span class="distribution-optional">
-                                Opsional
-                            </span>
-
+                            <span class="distribution-optional">Opsional</span>
                         </label>
 
                         <textarea
                             id="distribution-notes"
                             name="notes"
                             rows="3"
+                            maxlength="500"
                             placeholder="Tambahkan keterangan jika diperlukan"
+                            data-character-limit="500"
                         >{{ old('notes') }}</textarea>
+
+                        <div class="distribution-notes-counter">
+                            <span id="distribution-notes-count">0</span>/500 karakter
+                        </div>
 
                         @error('notes')
                             <small class="distribution-field__error">

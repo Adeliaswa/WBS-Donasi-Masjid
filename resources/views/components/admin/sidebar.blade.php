@@ -289,6 +289,39 @@
 
         </div>
 
+        {{-- LOGOUT --}}
+        <form action="{{ route('logout') }}" method="POST" class="admin-sidebar__logout-form">
+            @csrf
+
+            <button type="submit" class="admin-sidebar__link admin-sidebar__logout">
+                <span class="admin-sidebar__link-icon">
+                    <svg viewBox="0 0 24 24" fill="none">
+                        <path
+                            d="M10 17L15 12L10 7"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        />
+                        <path
+                            d="M15 12H3"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                        />
+                        <path
+                            d="M12 3H19C20.1 3 21 3.9 21 5V19C21 20.1 20.1 21 19 21H12"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                        />
+                    </svg>
+                </span>
+
+                <span class="admin-sidebar__link-text">Logout</span>
+            </button>
+        </form>
+
         <div class="admin-sidebar__footer">
             <span>Masjid Sabilillah</span>
             <span class="admin-sidebar__footer-dot"></span>

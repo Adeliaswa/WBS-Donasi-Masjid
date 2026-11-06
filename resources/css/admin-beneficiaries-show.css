@@ -1072,6 +1072,240 @@
 
 }
 
+/* =========================================================
+   21. DISTRIBUTION HISTORY
+   Sesuai dengan class pada beneficiaries/show.blade.php
+========================================================= */
+
+.beneficiary-show-section--distributions {
+    width: 100%;
+    margin-top: 30px;
+}
+
+.beneficiary-show-section--distributions
+.beneficiary-show-section__heading {
+    margin-bottom: 17px;
+}
+
+.beneficiary-show-section--distributions
+.beneficiary-show-section__heading p {
+    margin: 6px 0 0;
+    color: var(--show-muted);
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+/* TABLE WRAPPER */
+
+.beneficiary-show-history-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    background: #ffffff;
+    border: 1px solid var(--show-border);
+    border-radius: 12px;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* TABLE */
+
+.beneficiary-show-history-table {
+    width: 100%;
+    min-width: 680px;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.beneficiary-show-history-table thead {
+    background: #f5f8f5;
+}
+
+.beneficiary-show-history-table th {
+    padding: 14px 16px;
+    color: #657269;
+    font-size: 10px;
+    font-weight: 700;
+    white-space: nowrap;
+    border-bottom: 1px solid var(--show-border);
+}
+
+.beneficiary-show-history-table td {
+    padding: 15px 16px;
+    color: var(--show-text);
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.6;
+    border-bottom: 1px solid #edf0ed;
+    vertical-align: middle;
+}
+
+.beneficiary-show-history-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.beneficiary-show-history-table tbody tr {
+    transition: background .2s ease;
+}
+
+.beneficiary-show-history-table tbody tr:hover {
+    background: #f8faf8;
+}
+
+.beneficiary-show-history-table td:nth-child(1) {
+    width: 55px;
+    color: var(--show-muted);
+    text-align: center;
+}
+
+.beneficiary-show-history-table td:nth-child(2) {
+    white-space: nowrap;
+}
+
+.beneficiary-show-history-table td:nth-child(3) {
+    font-weight: 600;
+    color: var(--show-primary-dark);
+}
+
+.beneficiary-show-history-table td:nth-child(4) {
+    color: var(--show-primary-dark);
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.beneficiary-show-history-table td:nth-child(5) {
+    white-space: nowrap;
+}
+
+.beneficiary-show-history-table td:nth-child(6) {
+    min-width: 130px;
+    color: var(--show-muted);
+    overflow-wrap: anywhere;
+}
+
+/* EMPTY HISTORY */
+
+.beneficiary-show-empty-history {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+
+    width: 100%;
+    min-height: 190px;
+    padding: 30px 20px;
+
+    background: #f8faf8;
+    border: 1px solid #e9eee9;
+    border-radius: 12px;
+
+    text-align: center;
+}
+
+.beneficiary-show-empty-history__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 46px;
+    height: 46px;
+
+    color: var(--show-primary);
+    background: var(--show-primary-light);
+
+    border: 1px solid #e1ebe1;
+    border-radius: 13px;
+}
+
+.beneficiary-show-empty-history__icon svg {
+    display: block;
+    width: 23px;
+    height: 23px;
+}
+
+.beneficiary-show-empty-history strong {
+    color: var(--show-primary-dark);
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.5;
+}
+
+.beneficiary-show-empty-history p {
+    max-width: 420px;
+    margin: 0;
+
+    color: var(--show-muted);
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+/* TABLET */
+
+@media (max-width: 900px) {
+
+    .beneficiary-show-section--distributions {
+        margin-top: 25px;
+    }
+
+    .beneficiary-show-history-table th,
+    .beneficiary-show-history-table td {
+        padding: 13px 12px;
+    }
+
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+    .beneficiary-show-section--distributions {
+        margin-top: 22px;
+    }
+
+    .beneficiary-show-section--distributions
+    .beneficiary-show-section__heading {
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .beneficiary-show-section--distributions
+    .beneficiary-show-section__heading p {
+        font-size: 10px;
+    }
+
+    .beneficiary-show-history-table {
+        min-width: 650px;
+    }
+
+    .beneficiary-show-history-table th {
+        padding: 12px;
+        font-size: 9px;
+    }
+
+    .beneficiary-show-history-table td {
+        padding: 12px;
+        font-size: 10px;
+    }
+
+    .beneficiary-show-empty-history {
+        min-height: 165px;
+        padding: 25px 15px;
+    }
+
+    .beneficiary-show-empty-history__icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .beneficiary-show-empty-history strong {
+        font-size: 12px;
+    }
+
+    .beneficiary-show-empty-history p {
+        font-size: 10px;
+    }
+
+}
+
 
 /* =========================================================
    END OF ADMIN BENEFICIARIES SHOW CSS

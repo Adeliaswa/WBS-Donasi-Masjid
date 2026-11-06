@@ -145,9 +145,19 @@ class BeneficiaryController extends Controller
             );
     }
 
+    /**
+     * Menampilkan detail penerima beserta riwayat penyaluran.
+     */
     public function show(Beneficiary $beneficiary)
     {
-        $beneficiary->load('beneficiaryCategory');
+        $beneficiary->load([
+            'beneficiaryCategory',
+            'distributions' => function ($query) {
+                $query->with('donation')
+                    ->orderByDesc('distribution_date')
+                    ->orderByDesc('id');
+            },
+        ]);
 
         return view('beneficiaries.show', compact('beneficiary'));
     }

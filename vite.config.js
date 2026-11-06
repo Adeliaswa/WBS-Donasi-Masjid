@@ -35,7 +35,7 @@ export default defineConfig({
                 // ==========================================
                 // CSS PENERIMA MANFAAT
                 // ==========================================
-                'resources/css/beneficiaries.css',
+                'resources/css/admin-beneficiaries.css',
                 'resources/css/admin-beneficiaries-show.css',
                 'resources/css/beneficiary-categories.css',
                 'resources/css/beneficiary-category-form.css',

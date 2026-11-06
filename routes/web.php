@@ -35,6 +35,7 @@ Route::get('/transparansi/pdf/penyaluran', [
     'distributions'
 ])->name('public.reports.pdf.distributions');
 
+
 // ==================================================
 // AUTENTIKASI
 // Hanya untuk pengguna yang belum login
@@ -67,12 +68,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])
         ->name('dashboard');
 
+
     // ==============================================
     // LAPORAN DONASI DAN PENYALURAN
     // ==============================================
 
     Route::get('/reports', [ReportController::class, 'index'])
         ->name('reports.index');
+
 
     // ==============================================
     // CRUD DONASI
@@ -81,6 +84,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('donations', DonationController::class)
         ->whereNumber('donation');
 
+    // BUG-1 FIX: Membuat kategori donasi wajib login
     Route::post(
         '/donation-categories',
         [DonationCategoryController::class, 'store']
@@ -129,12 +133,13 @@ Route::middleware('auth')->group(function () {
         ->name('beneficiary-categories.toggle-status');
 
 
-        // ==============================================
-        // CRUD KEGIATAN
-        // ==============================================
+    // ==============================================
+    // CRUD KEGIATAN
+    // ==============================================
 
-        Route::resource('activities', ActivityController::class)
-            ->whereNumber('activity');
+    Route::resource('activities', ActivityController::class)
+        ->whereNumber('activity');
+
 
     // ==============================================
     // LOGOUT
