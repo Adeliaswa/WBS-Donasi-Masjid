@@ -85,8 +85,7 @@
                 <div class="public-hero__image-wrapper">
 
                     <img
-                        src="{{ Vite::asset('resources/images/public/masjid-hero.webp') }}"
-                        alt="Masjid Sabilillah"
+src="{{ asset('images/masjid-hero.webp') }}"                        alt="Masjid Sabilillah"
                         class="public-hero__image"
                         fetchpriority="high"
                     >
