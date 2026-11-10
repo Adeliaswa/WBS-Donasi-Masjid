@@ -10,13 +10,19 @@ class PengurusSeeder extends Seeder
 {
     public function run(): void
     {
-        User::updateOrCreate(
+        $password = env('PENGURUS_PASSWORD');
+
+        if (empty($password)) {
+            throw new \RuntimeException(
+                'PENGURUS_PASSWORD belum diatur.'
+            );
+        }
+
+        User::firstOrCreate(
             ['email' => 'pengurus@sabilillah.id'],
             [
                 'name' => 'Pengurus Masjid Sabilillah',
-                'password' => Hash::make(
-                    env('PENGURUS_PASSWORD', 'Pengurus123')
-                ),
+                'password' => Hash::make($password),
             ]
         );
     }
