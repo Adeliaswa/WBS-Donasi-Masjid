@@ -31,6 +31,7 @@ export default defineConfig({
                 // ==========================================
                 'resources/css/admin-donations.css',
                 'resources/css/admin-donation-form.css',
+                'resources/css/admin-donation-show.css',
                 'resources/css/admin-reports.css',
                 'resources/css/admin-activities.css',
                 'resources/css/admin-activity-form.css',
@@ -40,6 +41,7 @@ export default defineConfig({
                 // CSS PENERIMA MANFAAT
                 // ==========================================
                 'resources/css/admin-beneficiaries.css',
+                'resources/css/admin-beneficiaries-form.css',
                 'resources/css/admin-beneficiaries-show.css',
                 'resources/css/beneficiary-categories.css',
                 'resources/css/beneficiary-category-form.css',

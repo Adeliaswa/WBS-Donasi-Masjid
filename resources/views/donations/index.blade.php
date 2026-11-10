@@ -2,6 +2,9 @@
 @extends('layouts.admin')
 
 @section('title', 'Data Donasi - Admin Masjid Sabilillah')
+@push('scripts')
+    @vite('resources/js/admin-donations.js')
+@endpush
 
 @push('styles')
     @vite('resources/css/admin-donations.css')
@@ -145,6 +148,65 @@
 
     </section>
 
+</div>
+
+{{-- MODAL KONFIRMASI HAPUS DONASI --}}
+<div
+    id="deleteDonationModal"
+    class="donations-delete-modal"
+    aria-hidden="true"
+>
+    <div
+        class="donations-delete-modal__backdrop"
+        data-close-modal
+    ></div>
+
+    <div
+        class="donations-delete-modal__dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="deleteDonationTitle"
+    >
+        <div class="donations-delete-modal__icon">
+            !
+        </div>
+
+        <h2 id="deleteDonationTitle">
+            Hapus Data Donasi?
+        </h2>
+
+        <p>
+            Apakah kamu yakin ingin menghapus data donasi
+            <strong id="deleteDonationName">ini</strong>?
+            Data tidak akan ditampilkan lagi dalam daftar donasi.
+        </p>
+
+        <form
+            id="deleteDonationForm"
+            action="#"
+            method="POST"
+        >
+            @csrf
+            @method('DELETE')
+
+            <div class="donations-delete-modal__actions">
+                <button
+                    type="button"
+                    class="donations-delete-modal__cancel"
+                    data-close-modal
+                >
+                    Batal
+                </button>
+
+                <button
+                    type="submit"
+                    class="donations-delete-modal__confirm"
+                >
+                    Ya, Hapus
+                </button>
+            </div>
+        </form>
+    </div>
 </div>
 
 @endsection
