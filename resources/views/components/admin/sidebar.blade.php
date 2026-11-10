@@ -189,6 +189,59 @@
                 </span>
                 <span class="admin-sidebar__link-text">Data Penyaluran</span>
             </a>
+            
+            {{-- KEGIATAN --}}
+            <a
+                href="{{ route('activities.index') }}"
+                class="admin-sidebar__link {{ request()->routeIs('activities.*') ? 'admin-sidebar__link--active' : '' }}"
+                @if(request()->routeIs('activities.*')) aria-current="page" @endif
+            >
+                <span class="admin-sidebar__link-icon">
+                    <svg viewBox="0 0 24 24" fill="none">
+                        <rect
+                            x="3" y="4" width="18" height="17" rx="2"
+                            stroke="currentColor" stroke-width="1.8"
+                        />
+                        <path
+                            d="M16 2V6M8 2V6M3 10H21"
+                            stroke="currentColor" stroke-width="1.8"
+                            stroke-linecap="round"
+                        />
+                        <path
+                            d="M8 14H11M8 17H15"
+                            stroke="currentColor" stroke-width="1.8"
+                            stroke-linecap="round"
+                        />
+                    </svg>
+                </span>
+
+                <span class="admin-sidebar__link-text">Kegiatan</span>
+            </a>
+
+            {{-- LAPORAN DONASI DAN PENYALURAN --}}
+            <a
+                href="{{ route('reports.index') }}"
+                class="admin-sidebar__link {{ request()->routeIs('reports.*') ? 'admin-sidebar__link--active' : '' }}"
+                @if(request()->routeIs('reports.*')) aria-current="page" @endif
+            >
+                <span class="admin-sidebar__link-icon">
+                    <svg viewBox="0 0 24 24" fill="none">
+                        <path
+                            d="M4 19V5M4 19H21"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                        />
+                        <path
+                            d="M8 16V11M13 16V7M18 16V9"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                        />
+                    </svg>
+                </span>
+                <span class="admin-sidebar__link-text">Laporan Donasi & Penyaluran</span>
+            </a>
 
 
             {{-- KEGIATAN --}}

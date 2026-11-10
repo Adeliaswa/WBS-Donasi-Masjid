@@ -35,6 +35,18 @@ Route::get('/transparansi/pdf/penyaluran', [
     'distributions'
 ])->name('public.reports.pdf.distributions');
 
+Route::get('/transparansi', [PublicReportController::class, 'index'])
+    ->name('public.reports.index');
+
+Route::get('/transparansi/pdf/donasi', [
+    PublicReportPdfController::class,
+    'donations'
+])->name('public.reports.pdf.donations');
+
+Route::get('/transparansi/pdf/penyaluran', [
+    PublicReportPdfController::class,
+    'distributions'
+])->name('public.reports.pdf.distributions');
 
 // ==================================================
 // AUTENTIKASI
@@ -68,6 +80,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])
         ->name('dashboard');
 
+    // ==============================================
+    // LAPORAN DONASI DAN PENYALURAN
+    // ==============================================
+
+    Route::get('/reports', [ReportController::class, 'index'])
+        ->name('reports.index');
 
     // ==============================================
     // LAPORAN DONASI DAN PENYALURAN
@@ -132,6 +150,13 @@ Route::middleware('auth')->group(function () {
         ->whereNumber('beneficiaryCategory')
         ->name('beneficiary-categories.toggle-status');
 
+
+        // ==============================================
+        // CRUD KEGIATAN
+        // ==============================================
+
+        Route::resource('activities', ActivityController::class)
+            ->whereNumber('activity');
 
     // ==============================================
     // CRUD KEGIATAN
