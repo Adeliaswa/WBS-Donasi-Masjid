@@ -12,13 +12,12 @@
     {{-- Poppins dimuat melalui @import di resources/css/app.css. --}}
 
     @vite([
-        'resources/css/app.css',
-        'resources/css/admin-sidebar.css',
-        'resources/css/admin-header.css',
-        'resources/css/admin-footer.css',
-        'resources/css/admin-layout.css',
-        'resources/js/app.js'
-    ])
+    'resources/css/app.css',
+    'resources/css/admin-sidebar.css',
+    'resources/css/admin-footer.css',
+    'resources/css/admin-layout.css',
+    'resources/js/app.js'
+])
 
     @stack('styles')
 </head>
