@@ -87,13 +87,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/reports', [ReportController::class, 'index'])
         ->name('reports.index');
 
-    // ==============================================
-    // LAPORAN DONASI DAN PENYALURAN
-    // ==============================================
-
-    Route::get('/reports', [ReportController::class, 'index'])
-        ->name('reports.index');
-
 
     // ==============================================
     // CRUD DONASI
@@ -157,13 +150,6 @@ Route::middleware('auth')->group(function () {
 
         Route::resource('activities', ActivityController::class)
             ->whereNumber('activity');
-
-    // ==============================================
-    // CRUD KEGIATAN
-    // ==============================================
-
-    Route::resource('activities', ActivityController::class)
-        ->whereNumber('activity');
 
 
     // ==============================================
