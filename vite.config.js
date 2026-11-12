@@ -1,160 +1,143 @@
 
-<section class="public-activities" id="kegiatan">
+import { defineConfig } from 'vite';
+import laravel from 'laravel-vite-plugin';
+import tailwindcss from '@tailwindcss/vite';
 
-    <div class="public-container">
+export default defineConfig({
+    plugins: [
+        laravel({
+            input: [
 
-        <div class="public-section-heading public-section-heading--row">
+                // ==========================================
+                // CSS UTAMA
+                // ==========================================
+                'resources/css/app.css',
 
-            <div>
-                <span class="public-eyebrow">
-                    DOKUMENTASI KEGIATAN
-                </span>
+                // ==========================================
+                // CSS AUTHENTICATION
+                // ==========================================
+                'resources/css/auth.css',
 
-                <h2 class="public-section-title">
-                    Kegiatan Terbaru
-                </h2>
+                // ==========================================
+                // CSS ADMIN
+                // ==========================================
+                'resources/css/admin-sidebar.css',
+                'resources/css/admin-dashboard.css',
+                'resources/css/admin-layout.css',
+                'resources/css/admin-footer.css',
 
-                <p class="public-section-description">
-                    Dokumentasi kegiatan penyaluran bantuan
-                    sosial Masjid Sabilillah.
-                </p>
-            </div>
+                // ==========================================
+                // CSS DONASI
+                // ==========================================
+                'resources/css/admin-donations.css',
+                'resources/css/admin-donation-form.css',
+                'resources/css/admin-donation-show.css',
 
-        </div>
+                // ==========================================
+                // CSS PENERIMA MANFAAT
+                // ==========================================
+                'resources/css/admin-beneficiaries.css',
+                'resources/css/admin-beneficiaries-form.css',
+                'resources/css/admin-beneficiaries-show.css',
+                'resources/css/beneficiary-categories.css',
+                'resources/css/beneficiary-category-form.css',
 
-        @if ($latestActivities->isNotEmpty())
+                // ==========================================
+                // CSS PENYALURAN
+                // ==========================================
+                'resources/css/admin-distributions.css',
+                'resources/css/admin-distribution-form.css',
+                'resources/css/admin-distribution-show.css',
 
-            <div class="public-activities__grid">
+                // ==========================================
+                // CSS KEGIATAN
+                // ==========================================
+                'resources/css/admin-activities.css',
+                'resources/css/admin-activity-form.css',
+                'resources/css/admin-activity-show.css',
 
-                @foreach ($latestActivities as $activity)
+                // ==========================================
+                // CSS LAPORAN
+                // ==========================================
+                'resources/css/admin-reports.css',
 
-                    <article class="public-activity-card">
+                // ==========================================
+                // CSS TRANSPARANSI PUBLIK
+                // ==========================================
+                'resources/css/public/public.css',
+                'resources/css/public/base.css',
+                'resources/css/public/components.css',
+                'resources/css/public/header.css',
+                'resources/css/public/footer.css',
+                'resources/css/public/hero.css',
+                'resources/css/public/home.css',
+                'resources/css/public/reports.css',
+                'resources/css/public/responsive.css',
 
-                        {{-- =====================================
-                             GAMBAR KEGIATAN
-                        ===================================== --}}
+                // ==========================================
+                // JAVASCRIPT UTAMA
+                // ==========================================
+                'resources/js/app.js',
+                'resources/js/bootstrap.js',
 
-                        <div class="public-activity-card__image">
+                // ==========================================
+                // JAVASCRIPT AUTHENTICATION
+                // ==========================================
+                'resources/js/auth.js',
 
-                            @if ($activity->image_path)
+                // ==========================================
+                // JAVASCRIPT ADMIN
+                // ==========================================
+                'resources/js/admin-sidebar.js',
+                'resources/js/admin-dashboard.js',
 
-                                {{-- Gambar dari database --}}
-                                <img
-                                    src="{{ \Illuminate\Support\Facades\Storage::url($activity->image_path) }}"
-                                    alt="Dokumentasi {{ $activity->title }}"
-                                    loading="lazy"
-                                >
+                // ==========================================
+                // JAVASCRIPT DONASI
+                // ==========================================
+                'resources/js/admin-donations.js',
 
-                            @else
+                // ==========================================
+                // JAVASCRIPT PENERIMA MANFAAT
+                // ==========================================
+                'resources/js/admin-beneficiaries-show.js',
+                'resources/js/admin-beneficiaries-form.js',
+                'resources/js/beneficiary-categories.js',
+                'resources/js/beneficiary-category-form.js',
 
-                                {{-- Gambar default dari resources --}}
-                                <img
-                                    src="{{ Vite::asset('resources/images/public/kajian.webp') }}"
-                                    alt="Dokumentasi {{ $activity->title }}"
-                                    loading="lazy"
-                                >
+                // ==========================================
+                // JAVASCRIPT PENYALURAN
+                // ==========================================
+                'resources/js/admin-distributions.js',
 
-                            @endif
+                // ==========================================
+                // JAVASCRIPT TRANSPARANSI PUBLIK
+                // ==========================================
+                'resources/js/public/public.js',
+                'resources/js/public/header.js',
+                'resources/js/public/home.js',
+                'resources/js/public/reports.js',
+                'resources/js/public/charts.js',
+                'resources/js/public/filters.js',
 
-                        </div>
+                // ==========================================
+                // IMAGES PUBLIC
+                // ==========================================
+                'resources/images/public/masjid-hero.webp',
+                'resources/images/public/kajian.webp',
 
-                        {{-- =====================================
-                             INFORMASI KEGIATAN
-                        ===================================== --}}
+            ],
 
-                        <div class="public-activity-card__content">
+            refresh: true,
+        }),
 
-                            <span class="public-activity-card__date">
+        tailwindcss(),
+    ],
 
-                                <svg
-                                    viewBox="0 0 20 20"
-                                    fill="none"
-                                    aria-hidden="true"
-                                >
-                                    <rect
-                                        x="3"
-                                        y="4"
-                                        width="14"
-                                        height="13"
-                                        rx="2"
-                                        stroke="currentColor"
-                                        stroke-width="1.4"
-                                    />
-
-                                    <path
-                                        d="M6 2V6M14 2V6M3 8H17"
-                                        stroke="currentColor"
-                                        stroke-width="1.4"
-                                        stroke-linecap="round"
-                                    />
-                                </svg>
-
-                                {{ $activity->activity_date->translatedFormat('d F Y') }}
-
-                            </span>
-
-                            <h3>
-                                {{ $activity->title }}
-                            </h3>
-
-                            <p>
-                                {{ $activity->description ?: 'Dokumentasi kegiatan sosial Masjid Sabilillah.' }}
-                            </p>
-
-                        </div>
-
-                    </article>
-
-                @endforeach
-
-            </div>
-
-        @else
-
-            {{-- =====================================
-                 EMPTY STATE
-            ===================================== --}}
-
-            <div class="public-empty-state">
-
-                <div class="public-empty-state__icon">
-
-                    <svg
-                        viewBox="0 0 48 48"
-                        fill="none"
-                        aria-hidden="true"
-                    >
-                        <rect
-                            x="7"
-                            y="7"
-                            width="34"
-                            height="34"
-                            rx="5"
-                            stroke="currentColor"
-                            stroke-width="1.7"
-                        />
-
-                        <path
-                            d="M15 17H33M15 24H33M15 31H26"
-                            stroke="currentColor"
-                            stroke-width="1.7"
-                            stroke-linecap="round"
-                        />
-                    </svg>
-
-                </div>
-
-                <h3>Belum Ada Kegiatan</h3>
-
-                <p>
-                    Dokumentasi kegiatan terbaru akan ditampilkan
-                    di halaman ini setelah dipublikasikan.
-                </p>
-
-            </div>
-
-        @endif
-
-    </div>
-
-</section>
+    server: {
+        watch: {
+            ignored: [
+                '**/storage/framework/views/**',
+            ],
+        },
+    },
+});
