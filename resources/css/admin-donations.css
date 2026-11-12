@@ -1281,154 +1281,16 @@
     margin: 0 0 24px;
 }
 
-/* =====================================================
-   20. DELETE DONATION MODAL
-===================================================== */
+/* ==========================================
+   KATEGORI DONASI BARU
+========================================== */
 
-.donations-delete-modal {
-    position: fixed;
-    inset: 0;
-    z-index: 9999;
-
-    display: none;
-    align-items: center;
-    justify-content: center;
-
-    padding: 20px;
-}
-
-.donations-delete-modal.is-open {
+.donation-form-body #newCategoryWrapper:not([hidden]) {
     display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
-.donations-delete-modal__backdrop {
-    position: absolute;
-    inset: 0;
-
-    background: rgba(15, 23, 42, 0.55);
-    backdrop-filter: blur(3px);
-}
-
-.donations-delete-modal__dialog {
-    position: relative;
-    z-index: 1;
-
-    width: 100%;
-    max-width: 420px;
-
-    padding: 30px;
-    border-radius: 18px;
-
-    background: #ffffff;
-    text-align: center;
-
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
-
-    animation: donationModalIn 0.2s ease;
-}
-
-.donations-delete-modal__icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    width: 54px;
-    height: 54px;
-
-    margin: 0 auto 18px;
-    border-radius: 50%;
-
-    background: #fef2f2;
-    color: #dc2626;
-
-    font-size: 28px;
-    font-weight: 700;
-}
-
-.donations-delete-modal__dialog h2 {
-    margin: 0 0 12px;
-
-    color: #294236;
-    font-size: 20px;
-    font-weight: 700;
-}
-
-.donations-delete-modal__dialog p {
-    margin: 0 0 24px;
-
-    color: #64748b;
-    font-size: 14px;
-    line-height: 1.7;
-}
-
-.donations-delete-modal__dialog strong {
-    color: #334155;
-}
-
-.donations-delete-modal__actions {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-}
-
-.donations-delete-modal__actions button {
-    min-height: 42px;
-    padding: 0 20px;
-
-    border: none;
-    border-radius: 9px;
-
-    font-size: 13px;
-    font-weight: 600;
-
-    cursor: pointer;
-    transition: background 0.2s ease;
-}
-
-.donations-delete-modal__cancel {
-    background: #f1f5f9;
-    color: #475569;
-}
-
-.donations-delete-modal__cancel:hover {
-    background: #e2e8f0;
-}
-
-.donations-delete-modal__confirm {
-    background: #dc2626;
-    color: #ffffff;
-}
-
-.donations-delete-modal__confirm:hover {
-    background: #b91c1c;
-}
-
-body.donations-modal-open {
-    overflow: hidden;
-}
-
-@keyframes donationModalIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px) scale(0.98);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-}
-
-@media (max-width: 480px) {
-    .donations-delete-modal__dialog {
-        padding: 24px 20px;
-    }
-
-    .donations-delete-modal__actions {
-        flex-direction: column-reverse;
-    }
-
-    .donations-delete-modal__actions button {
-        width: 100%;
-    }
+.donation-form-body #newCategoryWrapper[hidden] {
+    display: none !important;
 }
