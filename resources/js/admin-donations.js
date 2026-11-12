@@ -1,4 +1,34 @@
+
 document.addEventListener('DOMContentLoaded', () => {
+
+    /* ==========================================
+       TAMBAH KATEGORI DONASI
+    ========================================== */
+
+    const categorySelect = document.getElementById('category');
+    const newCategoryWrapper = document.getElementById('newCategoryWrapper');
+    const newCategoryInput = document.getElementById('new_category');
+
+    if (categorySelect && newCategoryWrapper && newCategoryInput) {
+
+        function toggleNewCategory() {
+            const isOther = categorySelect.value === 'Lainnya';
+
+            newCategoryWrapper.hidden = !isOther;
+            newCategoryInput.required = isOther;
+            newCategoryInput.disabled = !isOther;
+        }
+
+        categorySelect.addEventListener('change', toggleNewCategory);
+
+        toggleNewCategory();
+    }
+
+
+    /* ==========================================
+       MODAL HAPUS DONASI
+    ========================================== */
+
     const modal = document.getElementById('deleteDonationModal');
     const deleteForm = document.getElementById('deleteDonationForm');
     const donationName = document.getElementById('deleteDonationName');
@@ -11,9 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const deleteUrl = button.dataset.deleteUrl;
         const name = button.dataset.donationName || 'ini';
 
-        if (!deleteUrl) {
-            return;
-        }
+        if (!deleteUrl) return;
 
         deleteForm.action = deleteUrl;
         donationName.textContent = name;
@@ -36,9 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     document.querySelectorAll('[data-delete-trigger]').forEach((button) => {
-        button.addEventListener('click', () => {
-            openModal(button);
-        });
+        button.addEventListener('click', () => openModal(button));
     });
 
     modal.querySelectorAll('[data-close-modal]').forEach((button) => {
@@ -50,4 +76,5 @@ document.addEventListener('DOMContentLoaded', () => {
             closeModal();
         }
     });
+
 });
