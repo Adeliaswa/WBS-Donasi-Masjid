@@ -14,6 +14,7 @@
         'resources/css/admin-footer.css',
         'resources/css/admin-donation-form.css',
         'resources/js/app.js',
+        'resources/js/admin-donations.js',
     ])
 </head>
 
